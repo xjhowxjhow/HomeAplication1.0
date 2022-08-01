@@ -1,8 +1,8 @@
 # HomeAplication1.0
-<h3>Primeiro Projeto de interface grafica, Programa Desktop, para gestor de cartões de creditos!</h3>
+<h3>Projeto de interface grafica, Programa Desktop, para gestor de cartões de creditos!</h3>
 
 
-Sobre: Primeiro desafio a realizar fazendo este projeto que uni interface grafica com a Framework PySide2 + Sqlite
+Sobre: Meu Primeiro desafio a realizar fazendo este projeto que uni interface grafica com a Framework PySide2 + Sqlite
 Projeto inicialmente feito para conhecimento e desenvolvimento de estudos Universitario.
 
 Apresentação:
