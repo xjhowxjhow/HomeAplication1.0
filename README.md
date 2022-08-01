@@ -5,7 +5,7 @@
 Sobre: Meu Primeiro desafio a realizar fazendo este projeto que uni interface grafica com a Framework PySide2 + Sqlite
 Projeto inicialmente feito para conhecimento e desenvolvimento de estudos Universitario.
 
-Nota: Aplicação será apenas bem apresentada para monitores com resolução acima de 1500x900
+Nota: Aplicação será apenas bem apresentada para monitores com resolução acima de 1600x900
 
 Apresentação:
 Tela de login:
