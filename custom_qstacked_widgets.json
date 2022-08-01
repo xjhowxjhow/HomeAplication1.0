@@ -1,0 +1,40 @@
+{
+	"QStackedWidget":[
+		{
+			"name":"stacked_configcartao0",
+			"transitionAnimation":[
+				{
+					"fade":[
+						{
+							"active": true,
+							"duration":1000,
+							"easingCurve": "OutBack"
+						}
+					],
+					"slide":[
+						{
+							"active":true,
+							"duration": 1000,
+							"direction": "horizontal",
+							"easingCurve": "OutBack"
+						}
+					]
+				}
+			],
+			"navigation":[
+				{
+					"nextPage":"N",
+					"previousPage": "N",
+					"navigationButtons":[
+						{
+							"compras": "page_extrato",
+							"nova_despesa": "page_new_lancamento",
+							"pushButton_14": "charts_indvidual"
+						}
+					]
+				}
+			]
+	
+		}
+	]
+}
