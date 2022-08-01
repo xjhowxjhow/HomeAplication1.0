@@ -2920,7 +2920,7 @@ class Ui_MainWindow(object):
         self.table_faturas_ind.setVerticalScrollMode(QAbstractItemView.ScrollPerPixel)
         self.table_faturas_ind.setShowGrid(False)
         self.table_faturas_ind.setSortingEnabled(False)
-        self.table_faturas_ind.horizontalHeader().setVisible(False)
+        self.table_faturas_ind.horizontalHeader().setVisible(True)
         self.table_faturas_ind.horizontalHeader().setDefaultSectionSize(189)
         self.table_faturas_ind.verticalHeader().setVisible(False)
 
