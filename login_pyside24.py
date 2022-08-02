@@ -4783,7 +4783,7 @@ class Ui_MainWindow(object):
         self.table_active_cards.setGridStyle(Qt.DashLine)
         self.table_active_cards.setSortingEnabled(False)
         self.table_active_cards.setWordWrap(True)
-        self.table_active_cards.horizontalHeader().setVisible(False)
+        self.table_active_cards.horizontalHeader().setVisible(True)
         self.table_active_cards.horizontalHeader().setCascadingSectionResizes(True)
         self.table_active_cards.horizontalHeader().setDefaultSectionSize(136)
         self.table_active_cards.horizontalHeader().setHighlightSections(True)
