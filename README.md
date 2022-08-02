@@ -14,7 +14,8 @@ Tela de login:
 
 Adicione todos seus Cartões, com uma rapida visualização:
 
-<img src="https://user-images.githubusercontent.com/58306583/182255171-2d790e7f-9df2-4a7e-b2f1-a01def464a93.png" width="800"/>
+<img src="https://user-images.githubusercontent.com/58306583/182276603-3bb158fb-c1b9-45e6-b5bb-3413993cf4f8.png" width="800"/>
+
 
 Visao de dados sobre os gastos individual:
 
@@ -26,7 +27,7 @@ Veja seus extratos:
 
 Veja todas as suas faturas:
 
-<img src="https://user-images.githubusercontent.com/58306583/182255179-9feb9fa5-cbd8-4856-b053-4e0881c794a0.png" width="800"/>
+<img src="https://user-images.githubusercontent.com/58306583/182276636-3fa3091d-d3b7-4f29-9f47-9b09e74d6f4f.png" width="800"/>
 
 Faça lançamentos parcelados/avista:
 
