@@ -121,15 +121,15 @@ class Return_Values_Calcs:
         
         #ARGUMENTS:
         card = 'extrato_cartao_%s'%(id)
-
+        print("card escolhido",card)
         
         #QUERY
-        cursor.execute("SELECT SUM (valor_transacao) FROM "+str(card)+" where strftime('%Y-%m', data_filter) = '"+mes+"' ")
+        cursor.execute("SELECT SUM (valor_transacao) FROM "+str(card)+" where strftime('%Y-%m', data_filter) = '"+mes+"' GROUP BY status_payment  HAVING status_payment = 'pendente' ")
         result=cursor.fetchall()
         
         #NONE:
 
-        if not result[0][0]:
+        if not result:
             format = '0.00'
             
         else:
