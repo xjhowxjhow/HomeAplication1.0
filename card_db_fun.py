@@ -1441,7 +1441,7 @@ class funcoes_cartao(Ui_MainWindow):
                 self.stack_extrato_pages.setCurrentWidget(self.extrato_cards_dbs)
                 
                 
-                for i in dados[0]:
+                for i in dados:
                     rowPosition = self.extrato_cartao_0.rowCount()
                     self.extrato_cartao_0.insertRow(rowPosition)    
 
