@@ -281,7 +281,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         STATUS = TOGLE_STATUS
         duration = 500 
         if STATUS == 80:
-                #TODO IMPORTANTE PARA CADA ANIMAÇÃO SELF.ANIMATION TEM QUE SER DIFERENTE
+                
                 #TODO ANIMAÇÃO EXPANDINDO
                 self.animation = QPropertyAnimation(self.menu, b"minimumWidth")
                 self.animation.setDuration(duration)
