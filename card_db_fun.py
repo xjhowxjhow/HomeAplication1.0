@@ -487,7 +487,7 @@ class funcoes_cartao(Ui_MainWindow):
                     idexdb = 'ids_transation_%s'%(card_delet)
                     idex2 = 'index_cartao_%s'%(card_delet)
 
-                    #TODO 18/06/2022 GERE
+
                     cursor.execute("DROP TABLE IF EXISTS "+str(iddb)+"")
                     cursor.execute("DROP INDEX IF EXISTS "+str(idexdb)+"")
                     cursor.execute("DROP INDEX IF EXISTS "+str(idex2)+"")
@@ -542,7 +542,7 @@ class funcoes_cartao(Ui_MainWindow):
     def adicionar_cartao(self): #T
         def thead(self):
             #TODO INICIO 0.4
-            #todo vai chamar a funcao cartao ativos agopra 15/06
+            #todo vai chamar a funcao cartao ativos
             label_0 = self.lineEdit.text() # nome str
             label_2 = self.lineEdit_2.text() # data str
             label_3_ui = self.lineEdit_3.text() #valor int
@@ -613,7 +613,7 @@ class funcoes_cartao(Ui_MainWindow):
                 cursor.execute("INSERT INTO  card_active (id) VALUES ('"+str(rand_id)+"')")
 
 
-                #todo parei aqui 15/06
+
                 colunas = self.table_active_cards.columnCount()
                 for i in range(colunas):
                     nome_col = [ "nome_cartao", "titular", "limite","final","vencimento"]
@@ -646,7 +646,7 @@ class funcoes_cartao(Ui_MainWindow):
 
 
 
-                #TODO NOVAS ADICOES DE LOOP 21/06
+                #TODO NOVAS ADICOES DE LOOP 
                 funcoes_cartao.creat_new_widget(self,id)
                 funcoes_cartao.hide_show_container(self)
 
@@ -681,7 +681,7 @@ class funcoes_cartao(Ui_MainWindow):
         thread.start()
 
 
-    def _Values_Individual(self): # valor do grafico do extrato esse #TODO ESSE PODE SER INDIVIDUAL #NTS
+    def _Values_Individual(self): # valor do grafico do extrato esse #NTS
         def thead(): 
             a = (os.path.dirname(os.path.realpath(__file__)))
             banco = sqlite3.connect(''+a+'/bando_de_valores.db')
@@ -920,7 +920,7 @@ class funcoes_cartao(Ui_MainWindow):
             self.txt_titular_cartao_0.setAlignment(Qt.AlignCenter)
             self.txt_titular_cartao_0.setWordWrap(False)
 
-            #TODO BOTAO 3 PONTINHOS DE CONFIG PARA IR PARA PAG 2:
+            #TODO BOTAO 3 PONTINHOS DE CONFIG PARA IR PARA PAG 2 OBS: NAO USADO MAIS:
 
             self.config_cartao_0 = QPushButton(self.frame_cartao_0)
 
@@ -1293,7 +1293,7 @@ class funcoes_cartao(Ui_MainWindow):
         def thead():
             cont = self.extrato_cartao_0.rowCount()
             if cont > 0:
-                for i in range (cont): #TODO TERMINAR AQUI AMANHA 24/05
+                for i in range (cont): 
                     if self.extrato_cartao_0.rowCount() >= 0:
                         self.extrato_cartao_0.removeRow(self.extrato_cartao_0.rowCount()-1)
             #VALIDADOR ONMDE VAI EXCOLHER QUAL EXTRATO FOI CHAMADO DE QUAL CARTAO
@@ -1417,7 +1417,7 @@ class funcoes_cartao(Ui_MainWindow):
             # REMOVE LINHAS AUTAIS DO QTALBE
             cont = self.extrato_cartao_0.rowCount()
             if cont > 0:
-                for i in range (cont): #TODO TERMINAR AQUI AMANHA 24/05
+                for i in range (cont): 
                     if self.extrato_cartao_0.rowCount() >= 0:
                         self.extrato_cartao_0.removeRow(self.extrato_cartao_0.rowCount()-1)
             #VALIDADOR ONMDE VAI EXCOLHER QUAL EXTRATO FOI CHAMADO DE QUAL CARTAO
@@ -1472,7 +1472,7 @@ class funcoes_cartao(Ui_MainWindow):
         return self.label_3.setText(captura_str_mes)
         
         
-    def _limite_disponive_usado(self,id): #TODO PAGINA DE EXTRASTO, MOSTRA DETALHES DO CARD
+    def _limite_disponive_usado(self,id): #TODO PAGINA DE EXTRATO, MOSTRA DETALHES DO CARD
         
         #LIMITE CARTAO:
         limite = card_db_test.Ui_db._limite(id)
@@ -1547,7 +1547,7 @@ class funcoes_cartao(Ui_MainWindow):
     
             cont = self.table_faturas_ind.rowCount()
             if cont > 0:
-                for i in range (cont): #TODO TERMINAR AQUI AMANHA 24/05
+                for i in range (cont): 
                     if self.table_faturas_ind.rowCount() >= 0:
                         self.table_faturas_ind.removeRow(self.table_faturas_ind.rowCount()-1)
                 
