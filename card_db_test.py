@@ -392,7 +392,7 @@ class Charts_values:
             cursor.execute("SELECT SUM (valor_transacao) FROM "+str(card)+" where strftime('%Y%m', data_filter) = '"+data_select+"' GROUP BY categoria_transacao  HAVING categoria_transacao = '"+categoria[count]+"'")
             dadoslidos=cursor.fetchall()
             
-            #TODO 26/07 DA PLAY AI PRA VER 
+
             if not dadoslidos:
                 count = count+1
                 
