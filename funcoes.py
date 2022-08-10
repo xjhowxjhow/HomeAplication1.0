@@ -15,8 +15,7 @@ from datetime import date
 
 class funcoes_geral():
     def parcelado(self):
-        #TODO O IF ABAIXO VAI VERIFICAR SE EXITES PAGAMENTO PARCELADO AO CLICAR EM SALVAR E VAI PERGUNTAR SE DESEJA PARCELAR
-        #TODO COLOCAR WHILE TRUE AQUI COM THERAD PRA SEMPRE VERIFICAR SEM PRECISAR CHAMAR FUNCAO AO CLICAR
+        
         if self.tablejaneiro_4.item(0,4).text() == 'PARCELADO':
             pyautogui.alert('DESEJA PARCELAR EM QUANTAS VEZES?')
 
