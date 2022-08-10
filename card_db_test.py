@@ -99,7 +99,7 @@ class Ui_db: # valores fixos
         card = 'extrato_cartao_%s'%(id)
         
         #QUERY:
-        cursor.execute("SELECT * FROM "+str(card)+"  where strftime('%m%Y', data_filter) = '"+mes+"'")
+        cursor.execute("SELECT * FROM "+str(card)+"  where strftime('%m%Y', data_filter) = '"+mes+"' ORDER BY data_filter DESC")
         result = cursor.fetchall()
         
         #QT INDEX LINES:
