@@ -19,9 +19,13 @@ import database
 import effects
 import sys
 import funcoes
+import atexit
+import requests
+
 WINDOW_SIZE = 0
 TOGLE_STATUS = 80
 CARD_SELECTED = 0
+GLOBAL_VERSION = '1.0'
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -33,6 +37,18 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setAttribute(Qt.WA_TranslucentBackground)
         self.setupUi(self)
         self.show()
+        self.ui = Ui_MainWindow()
+        global window_obj
+        window_obj = self.ui
+        
+        
+        #NOTIFICAÇÃO SE CLICADA ACTION
+        tray.messageClicked.connect(lambda: messageClicked(self))
+        action_hide.triggered.connect(lambda: self.hide())
+        action_show.triggered.connect(lambda: self.showNormal())
+        
+        
+        
         self.salvar_4.clicked.connect(lambda:self.close())
         self.exit.clicked.connect(lambda: self.close())
         self.minimize.clicked.connect(lambda: self.showMinimized())
@@ -247,6 +263,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             if (os.path.exists(''+a+'/bando_de_valores.db')):
                 card_db_fun.funcoes_cartao.hide_show_logoff(self)
                 card_db_fun.funcoes_cartao._start_values(self)
+                titulo ='Updates'
+                mensagem = 'Procurando Por Atualização'
+                show_tray_message(self.ui, tray,titulo,mensagem)
+                self.update()
             else:
                 self.CONTAINER_geral.hide()
                 pyautogui.confirm(text='!!ATENÇÃO!!\nBanco de dados nao foi localizado, Por favor Criar arquivo em MENU>CRIAR BANCO DE DADOS',title='BANCO DE DADOS NAO LOCALIZADO', buttons=['OK', 'Cancel'])
@@ -346,13 +366,150 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 y_w = self.offset.y()
                 self.move(x-x_w, y-y_w)
 
+    def update(self):
+        resposta = requests.get('https://raw.githubusercontent.com/xjhowxjhow/HomeAplication1.0/main/version/version.txt')
+        with open ('version.txt','wb') as novo_arquivo:
+            novo_arquivo.write(resposta.content)
+            
 
+        read = open('version.txt','r')
+        acess = read.readlines()
+        split = str(acess[0])
+        version = split.split()[1]
+        # acess[0] = version
+        # acess[1 = notes]
+        global GLOBAL_VERSION
+        act_ver = GLOBAL_VERSION
+        if version== act_ver:
+            titulo = 'Importante'
+            mensagem = 'Nenhuma nova versao encontrada'
+            show_tray_message(window_obj, tray,titulo,mensagem)
+        else:
+            
+            titulo = 'Importante'
+            mensagem = 'Nova versao encontrada clique para detalhes'
+            show_tray_message(window_obj, tray,titulo,mensagem)
 
     def open_webbrowser(self):
         webbrowser.open('https://github.com/xjhowxjhow')
+#######################################################################
+def messageClicked(self):
+    resposta = requests.get('https://raw.githubusercontent.com/xjhowxjhow/HomeAplication1.0/main/version/version.txt')
+    with open ('version.txt','wb') as novo_arquivo:
+        novo_arquivo.write(resposta.content)
+        
+    read = open('version.txt','r')
+    acess = read.readlines()
+    split = str(acess[0])
+    version = split.split()[1]
+    global GLOBAL_VERSION
+    act_ver = GLOBAL_VERSION
+    if version== act_ver:
+        pass
+    else:
+        show_message()
+
+#######################################################################
+# SO VAI APARECER SE TIVER ATUALIZAÇÃO
+#######################################################################
+def show_message():
+    resposta = requests.get('https://raw.githubusercontent.com/xjhowxjhow/HomeAplication1.0/main/version/version.txt')
+    with open ('version.txt','wb') as novo_arquivo:
+        novo_arquivo.write(resposta.content)
+        
+    read = open('version.txt','r')
+    acess = read.readlines()
+    split = str(acess[1])
+    try:
+        resposta = requests.get('https://github.com/xjhowxjhow/HomeAplication1.0/blob/main/version/main.exe?raw=true')
+        with open ('HomeAppold.exe','wb') as novo_arquivo:
+            novo_arquivo.write(resposta.content)
+            
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Information)
+            msg.setWindowIcon(QtGui.QIcon(u":/menu/pngwing.com.png)"))
+        
+            msg.setWindowTitle("Atualização")
+            msg.setText("Nova atualização da aplicação foi encontrada, Clique em sair no icone na barra de tarefas para Sair da aplicação E Aplicar nova versao")
+            msg.setInformativeText("Clique em hide para saber o que mudou")
+            msg.setDetailedText(split)
+            msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+            msg.exec_()
+            button = msg.clickedButton()
+            sb = msg.standardButton(button)
+            if sb == QMessageBox.Yes:
+                exit()
+    except:
+        QMessageBox.information(None,
+                            "Error",
+                            "Falha ao atualizar, por favor, reinicie a aplicação")
+    
+
+
+
+
+#######################################################################
+# Show tray message when action_tray_message tray action is clicked
+#######################################################################
+def show_tray_message(self, tray: QSystemTrayIcon,titulo,mensagem):
+    notificationTitle = titulo
+    notificationMessage =mensagem
+    icon = QIcon(u":/icons/feather/info.svg")
+    duration = 10 * 1000 #3 seconds
+
+    if len(notificationTitle) == 0 or len(notificationMessage) == 0:
+        tray.showMessage("Input Something", "Enter your notification tittle and message", icon, duration)
+    else:
+        tray.showMessage(notificationTitle, notificationMessage, icon, duration)
+
+
+
+
+def exit_handler():
+    try:
+        if os.path.exists('HomeApp.exe'):
+                os.remove('HomeApp.exe')
+        old_name = r"HomeAppold.exe"
+        new_name = r"HomeApp.exe"
+        os.rename(old_name, new_name)
+    except:
+        pass
+
+
+
+            
+atexit.register(exit_handler)
+
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
+    if not QSystemTrayIcon.isSystemTrayAvailable():
+        QMessageBox.critical(None, "System Tray", "System tray was not detected!")
+        sys.exit(1)
+
+
+    app.setQuitOnLastWindowClosed(False)
+
+    tray = QSystemTrayIcon(QIcon(u":/menu/pngwing.com.png"), app)
+    
+    menu = QMenu()
+
+
+    action_hide = QAction("Minimizar Janela")
+    menu.addAction(action_hide)
+
+    action_show = QAction("Mostrar Janela")
+    menu.addAction(action_show)
+
+    action_exit = QAction("Sair")
+    action_exit.triggered.connect(app.exit)
+    menu.addAction(action_exit)
+
+    tray.setToolTip("HomeAplication")
+
+    tray.setContextMenu(menu)
+
+    tray.show()
     mainWin = MainWindow()
     ret = app.exec_()
     sys.exit()
