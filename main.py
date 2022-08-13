@@ -454,7 +454,7 @@ def show_message():
 def show_tray_message(self, tray: QSystemTrayIcon,titulo,mensagem):
     notificationTitle = titulo
     notificationMessage =mensagem
-    icon = QIcon(u":/icons/feather/info.svg")
+    icon = QIcon(u":/icons-cards/src-page-cartoes/urgencia.png")
     duration = 10 * 1000 #3 seconds
 
     if len(notificationTitle) == 0 or len(notificationMessage) == 0:

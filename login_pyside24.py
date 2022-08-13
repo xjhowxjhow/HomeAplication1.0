@@ -10,7 +10,7 @@ class Ui_MainWindow(object):
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(1590, 1000)
         icon1 = QIcon()
-        icon1.addFile(u"C:/Users/Jhonatan Deni/.designer/Jhonatan Deni/.designer/backup/src/home.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon1.addFile(u":/menu/pngwing.com.png", QSize(), QIcon.Normal, QIcon.Off)
         MainWindow.setWindowIcon(icon1)
         MainWindow.setStyleSheet(u"QMainWindow{\n"
 "	\n"
