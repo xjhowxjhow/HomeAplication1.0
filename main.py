@@ -25,7 +25,7 @@ import requests
 WINDOW_SIZE = 0
 TOGLE_STATUS = 80
 CARD_SELECTED = 0
-GLOBAL_VERSION = '1.0'
+GLOBAL_VERSION = '1.1'
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -469,8 +469,8 @@ def exit_handler():
     print("ultima funcao")
     
     a = (os.path.dirname(os.path.realpath(__file__)))
-    if(os.path.exists(''+a+'/HomeApp.exe')):
-        print(a,"ULTIMA FUN dentro do if")
+    if(os.path.exists(''+a+'/update.exe')):
+
         os.remove('HomeApp.exe')
         old_name = r"HomeAppold.exe"
         new_name = r"HomeApp.exe"
