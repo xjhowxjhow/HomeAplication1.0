@@ -466,12 +466,15 @@ def show_tray_message(self, tray: QSystemTrayIcon,titulo,mensagem):
 
 
 def exit_handler():
+    print("ultima funcao")
     
-    if os.path.exists('HomeApp.exe'):
-            os.remove('HomeApp.exe')
-    old_name = r"HomeAppold.exe"
-    new_name = r"HomeApp.exe"
-    os.rename(old_name, new_name)
+    a = (os.path.dirname(os.path.realpath(__file__)))
+    if(os.path.exists(''+a+'/HomeApp.exe')):
+        print(a,"ULTIMA FUN dentro do if")
+        os.remove('HomeApp.exe')
+        old_name = r"HomeAppold.exe"
+        new_name = r"HomeApp.exe"
+        os.rename(old_name, new_name)
     
 
 
