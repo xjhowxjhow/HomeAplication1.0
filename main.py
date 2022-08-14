@@ -473,6 +473,7 @@ def exit_handler():
     if(os.path.exists(''+a+'/update/update.exe')):
         os.startfile(''+a+'/update/update.exe')
         print("sim")
+    sys.exit()
     
 
 
