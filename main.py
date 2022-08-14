@@ -467,13 +467,25 @@ def show_tray_message(self, tray: QSystemTrayIcon,titulo,mensagem):
 
 
 def exit_handler():
-    print("ultima funcao")
+    resposta = requests.get('https://raw.githubusercontent.com/xjhowxjhow/HomeAplication1.0/main/version/version.txt')
+    with open ('version.txt','wb') as novo_arquivo:
+        novo_arquivo.write(resposta.content)
+        
+    read = open('version.txt','r')
+    acess = read.readlines()
+    split = str(acess[0])
+    version = split.split()[1]
+    global GLOBAL_VERSION
+    act_ver = GLOBAL_VERSION
+    if version== act_ver:
+        pass
+    else:
     
-    a = (os.path.dirname(os.path.realpath(__file__)))
-    if(os.path.exists(''+a+'/update/update.exe')):
-        os.startfile(''+a+'/update/update.exe')
-        print("sim")
-    sys.exit()
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        if(os.path.exists(''+a+'/update/update.exe')):
+            os.startfile(''+a+'/update/update.exe')
+            print("sim")
+        sys.exit()
     
 
 
