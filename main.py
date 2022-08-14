@@ -25,7 +25,7 @@ import requests
 WINDOW_SIZE = 0
 TOGLE_STATUS = 80
 CARD_SELECTED = 0
-GLOBAL_VERSION = '1.1'
+GLOBAL_VERSION = '1.0'
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -465,16 +465,14 @@ def show_tray_message(self, tray: QSystemTrayIcon,titulo,mensagem):
 
 
 
+
 def exit_handler():
     print("ultima funcao")
     
     a = (os.path.dirname(os.path.realpath(__file__)))
-    if(os.path.exists(''+a+'/update.exe')):
-
-        os.remove('HomeApp.exe')
-        old_name = r"HomeAppold.exe"
-        new_name = r"HomeApp.exe"
-        os.rename(old_name, new_name)
+    if(os.path.exists(''+a+'/update/update.exe')):
+        os.startfile(''+a+'/update/update.exe')
+        print("sim")
     
 
 
