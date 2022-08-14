@@ -1,2 +1,2 @@
 VERSION: 1.1
-NOTES:TESTE DE NOVA VERSAO 1.1 \n, TESTE DE NOVA VERSAO 1.1, TESTE DE NOVA VERSAO 1.1, TESTE DE NOVA VERSAO 1.1, TESTE DE NOVA VERSAO 1.1, 
+NOTES:  1 - Adicionado Recurso de Update 2 - Compras do extrato agora classificados por mais recentes.
