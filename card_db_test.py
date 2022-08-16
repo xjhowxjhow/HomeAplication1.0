@@ -121,7 +121,6 @@ class Return_Values_Calcs:
         
         #ARGUMENTS:
         card = 'extrato_cartao_%s'%(id)
-        print("card escolhido",card)
         
         #QUERY
         cursor.execute("SELECT SUM (valor_transacao) FROM "+str(card)+" where strftime('%Y-%m', data_filter) = '"+mes+"' GROUP BY status_payment  HAVING status_payment = 'pendente' ")
@@ -431,16 +430,57 @@ class Charts_values:
         else:
             lista_filtrada.append([dadoslidos[0][0]])
 
-            
-
-
-
         return lista_filtrada
         
         
 
+    def _cat_ext_gastos_por_dia(id,mes,ano):
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        #ARGUMENTS:
+        card = 'extrato_cartao_%s'%(id)
+        
+        
+        lista_filtrada =[]
 
 
+                
+        data_select = "%s%s"%(ano,mes)
+        
+        cursor.execute("SELECT categoria_transacao FROM "+str(card)+" where strftime('%Y%m', data_filter) = '"+data_select+"' GROUP BY categoria_transacao")
+        dadoslidos=cursor.fetchall()
+        index = 0
+        for i in dadoslidos:
+            lista_filtrada.append(dadoslidos[index][0])
+            index +=1
+        return lista_filtrada
+    
+    def _count_dias_charts(id,mes,ano):
+            #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        #ARGUMENTS:
+        card = 'extrato_cartao_%s'%(id)
+        
+        
+        lista_filtrada =[]
+
+
+                
+        data_select = "%s%s"%(ano,mes)
+        
+        cursor.execute("SELECT data_filter FROM "+str(card)+" where strftime('%Y%m', data_filter) = '"+data_select+"' GROUP BY data_filter")
+        dadoslidos=cursor.fetchall()
+        index = 0
+        for i in dadoslidos:
+            lista_filtrada.append(dadoslidos[index][0][8:10])
+            index +=1
+        return lista_filtrada
 
 
 

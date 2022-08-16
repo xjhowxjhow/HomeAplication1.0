@@ -25,7 +25,7 @@ import requests
 WINDOW_SIZE = 0
 TOGLE_STATUS = 80
 CARD_SELECTED = 0
-GLOBAL_VERSION = '1.0'
+GLOBAL_VERSION = '1.01'
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -417,9 +417,7 @@ def show_message():
     with open ('version.txt','wb') as novo_arquivo:
         novo_arquivo.write(resposta.content)
         
-    read = open('version.txt','r')
-    acess = read.readlines()
-    split = str(acess[1])
+
     try:
         resposta = requests.get('https://github.com/xjhowxjhow/HomeAplication1.0/blob/main/version/main.exe?raw=true')
         with open ('HomeAppold.exe','wb') as novo_arquivo:
@@ -432,7 +430,8 @@ def show_message():
             msg.setWindowTitle("Atualização")
             msg.setText("Nova atualização da aplicação foi encontrada, Clique em sair no icone na barra de tarefas para Sair da aplicação E Aplicar nova versao")
             msg.setInformativeText("Clique em hide para saber o que mudou")
-            msg.setDetailedText(split)
+            split = open('version.txt','r').read().splitlines()
+            msg.setDetailedText(str(split))
             msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
             msg.exec_()
             button = msg.clickedButton()
@@ -501,7 +500,7 @@ if __name__ == '__main__':
         sys.exit(1)
 
 
-    app.setQuitOnLastWindowClosed(False)
+    app.setQuitOnLastWindowClosed(True)
 
     tray = QSystemTrayIcon(QIcon(u":/menu/pngwing.com.png"), app)
     

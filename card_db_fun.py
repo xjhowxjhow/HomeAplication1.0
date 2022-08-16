@@ -1677,6 +1677,12 @@ class funcoes_cartao(Ui_MainWindow):
             new_string = new_string.replace(',','.')
         return new_string
 
+    def _mes_str_to_int(mes):
+        mes = mes
+        valores = {'Janeiro':'01','Fevereiro':'02','Marco':'03','Abril':'04','Maio':'05','Junho':'06','Julho':'07','Agosto':'08','Setembro':'09','Outubro':'10','Novembro':'11','Dezembro':'12'}
+        captura_int_mes = valores[mes]
+        return captura_int_mes
+
 class Chart_one(Ui_MainWindow):
 
     def _creat_charts(self):
@@ -1913,6 +1919,18 @@ class Chart_one(Ui_MainWindow):
         
     def grafico_3(self):    
         def thead(self):
+            
+
+            id = EXTRATO_ATUAL
+            mes = self.label_3.text()
+            ano = self.label_2.text()
+            mes_convert = funcoes_cartao._mes_str_to_int(mes)
+            
+            
+            
+            valores_index_cat = card_db_test.Charts_values._cat_ext_gastos_por_dia(id,mes_convert,ano)
+
+
             self.set0 = QtCharts.QBarSet("Delivery")
             self.set1 = QtCharts.QBarSet("Apps Transporte")
             self.set2 = QtCharts.QBarSet("Comida")
@@ -1929,39 +1947,63 @@ class Chart_one(Ui_MainWindow):
             self.set13 = QtCharts.QBarSet("Viagem")
             self.set14 = QtCharts.QBarSet("Eletronicos")
             self.set15 = QtCharts.QBarSet("Domesticos")
+            
+            dict_cat={"Delivery":self.set0,\
+                      "Apps Transporte":self.set1,\
+                      "Comida":self.set2,\
+                      "Mercado":self.set3,\
+                      "Lazer":self.set4,\
+                      "Casa":self.set5,\
+                      "Coisas Inuteis":self.set6,\
+                      "Serviços":self.set7,\
+                      "Streaming":self.set8,\
+                      "Urgencia":self.set9,\
+                      "Gatos":self.set10,\
+                      "Dogs":self.set11,\
+                      "Medico":self.set12,\
+                      "Viagem":self.set13,\
+                      "Eletronicos":self.set14,\
+                      "Dometicos":self.set15}
+            
+            
             #VALORES
             ano = self.label_2.text()
             mes = self.label_3.text()
             valores = {'Janeiro':1,'Fevereiro':2,'Marco':3,'Abril':4,'Maio':5,'Junho':6,'Julho':7,'Agosto':8,'Setembro':9,'Outubro':10,'Novembro':11,'Dezembro':12}
             captura_int_mes = valores[mes]
-            dias_mes = calendar.monthrange(int(ano),captura_int_mes)
-            qt_dias =dias_mes[1]
+            
+            #DIAS NO MES NO USE           
+            # dias_mes = calendar.monthrange(int(ano),captura_int_mes)
+            # qt_dias =dias_mes[1]
 
-            count = 0
-
-
-            for i in range(qt_dias):
-                for categoria in range(16):
+            data = card_db_test.Charts_values._count_dias_charts(id,mes_convert,ano)
+            count =0
+            for i in data:
+                for categoria in valores_index_cat:
                     id = EXTRATO_ATUAL
                     mes = self.label_3.text()
                     ano = self.label_2.text()
                     valores = {'Janeiro':'01','Fevereiro':'02','Marco':'03','Abril':'04','Maio':'05','Junho':'06','Julho':'07','Agosto':'08','Setembro':'09','Outubro':'10','Novembro':'11','Dezembro':'12'}
                     captura_int_mes = valores[mes]
-                    dia = i+1
-                    categ = ["Delivery","Apps Transporte","Comida","Mercado","Lazer","Casa","Coisas Inuteis","Serviços","Streaming","Urgencia","Gatos","Dogs","Medico","Viagem","Eletronicos","Domesticos"]
-                    valores = card_db_test.Charts_values._gastos_por_dia(id,dia,captura_int_mes,ano,categ[categoria])
-                    list_cet= [self.set0,self.set1,self.set2,self.set3,self.set4,self.set5,self.set6,self.set7,self.set8,self.set9,self.set10,self.set11,self.set12,self.set13,self.set14,self.set15]
 
-                    list_cet[categoria].append(float(valores[0][0]))
+                    valores = card_db_test.Charts_values._gastos_por_dia(id,data[count],captura_int_mes,ano,categoria)
+                    if not valores:
+                        
+                        pass
+                    else:
+                        dict_cat[categoria].append(float(valores[0][0]))
+                count +=1
+
 
 
     
             self.series = QtCharts.QStackedBarSeries()
 
-            for i in range(16):
-                list_cet= [self.set0,self.set1,self.set2,self.set3,self.set4,self.set5,self.set6,self.set7,self.set8,self.set9,self.set10,self.set11,self.set12,self.set13,self.set14,self.set15]
-                self.series.append(list_cet[i])
-
+      
+            for i in valores_index_cat:
+                self.series.append(dict_cat[i])
+            
+            
     
             self.chart = QtCharts.QChart()
             self.chart.addSeries(self.series)
@@ -1969,13 +2011,12 @@ class Chart_one(Ui_MainWindow):
             self.chart.setAnimationOptions(QtCharts.QChart.SeriesAnimations)
 
             #DATAS
-            categories = []
-            for i in range(qt_dias):
-                categories.append(str(i+1))
-                
+            
+            data = card_db_test.Charts_values._count_dias_charts(id,mes_convert,ano)
+
                 
             axis = QtCharts.QBarCategoryAxis()
-            axis.append(categories)
+            axis.append(data)
             self.chart.createDefaultAxes()
             self.chart.setAxisX(axis, self.series)
             self.chart.setAnimationOptions(QtCharts.QChart.SeriesAnimations)
@@ -2002,7 +2043,6 @@ class Chart_one(Ui_MainWindow):
             self.chart.legend().setFont(font3)
             self.chart.setFont(font3)
             self.chart.setTitleFont(font3)
-            
             list = []
             self.frames = self.frame_chart_date_day
             for i in range(self.frames.count()):
@@ -2025,8 +2065,6 @@ class Chart_one(Ui_MainWindow):
                 self.frame_chart_date_day.addWidget(self.chart_view)
                 pass
         thread = threading.Thread(target=thead(self))
-        thread.start()        
-
-
+        thread.start()     
         
 

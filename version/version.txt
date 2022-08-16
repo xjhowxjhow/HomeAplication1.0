@@ -1,2 +1,7 @@
-VERSION: 1.0
-NOTES:  1 - Adicionado Recurso de Update 2 - Compras do extrato agora classificados por mais recentes.
+VERSION: 1.01
+NOTES:  1 - Adicionado Recurso de Update    2 - Compras do extrato agora classificados por mais recentes.n  UPDATE 16/08: 1 - Correcao de bug exit     app.setQuitOnLastWindowClosed(False) > True 2 - Correcao de Categorias grafico_3 > Apenas visiveis categorias utilizadas3 - Correcao de Categorias grafico_3 > Apenas visiveis dias utilizados
+1 - Adicionado Recurso de Update
+2 - Compras do extrato agora classificados por mais recentes.n
+UPDATE 16/08: 1 - Correcao de bug exit     app.setQuitOnLastWindowClosed(False) > True 
+2 - Correcao de Categorias grafico_3 > Apenas visiveis categorias utilizadas
+3 - Correcao de Categorias grafico_3 > Apenas visiveis dias utilizados
