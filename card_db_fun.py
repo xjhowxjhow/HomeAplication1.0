@@ -1735,10 +1735,11 @@ class Chart_one(Ui_MainWindow):
         self.categoria1.setLabelsPosition(QtCharts.QPieSlice.LabelOutside)
         
         for slice in self.categoria1.slices():
-                slice.setLabel("R${:.2f} {:.2f}%".format(slice.value(),100 * slice.percentage()))
-                slice.setLabelFont(font3)
-                
-        #ATT DESCRIÇÃO
+                slice.setLabel("{categoria} R${:.2f}   {:.2f}%".format(slice.value(),100 * slice.percentage(),categoria=slice.label()))
+                slice.setLabelFont(font3) 
+                slice.setColor(QColor(qRgb(randint(0,255),randint(0,255),randint(0,255))))
+        
+        
 
         index_label = 0
 
@@ -1774,9 +1775,11 @@ class Chart_one(Ui_MainWindow):
 
             self.categoria1.setLabelsVisible(True)
             self.categoria1.setLabelsPosition(QtCharts.QPieSlice.LabelOutside)
-
+            self.categoria1.setHoleSize(0.5)
+            
 
             self.grafico = QtCharts.QChart()
+            
             
             self.grafico.addSeries(self.categoria1)
             self.grafico.setAnimationOptions(QtCharts.QChart.SeriesAnimations)
@@ -1784,12 +1787,10 @@ class Chart_one(Ui_MainWindow):
             self.grafico.setTitle("Gastos por Categoria")
             self.grafico.legend().setVisible(True)
             self.grafico.legend().setAlignment(Qt.AlignBottom)
-
             self.grafico.setTitleFont(font3)
+            
 
-            for slice in self.categoria1.slices():
-                slice.setLabel("R${:.2f} {:.2f}%".format(slice.value(),100 * slice.percentage()))
-                slice.setLabelFont(font3)
+
             
             index_label = 0
             for i in dados[0]:
@@ -1799,6 +1800,12 @@ class Chart_one(Ui_MainWindow):
                 
                 index_label = index_label+1
 
+
+            for slice in self.categoria1.slices():
+                slice.setLabel("{categoria} R${:.2f}   {:.2f}%".format(slice.value(),100 * slice.percentage(),categoria=slice.label()))
+                slice.setLabelFont(font3)
+                slice.setColor(QColor(qRgb(randint(0,255),randint(0,255),randint(0,255))))
+                
             self.grafico.legend().setBackgroundVisible(True)
             
 
@@ -1827,7 +1834,7 @@ class Chart_one(Ui_MainWindow):
                 self.frame_chart_category.addWidget(self.ver_grafico)
                 pass
         thread = threading.Thread(target=thead(self))
-        thread.start()  
+        thread.start() 
 
     def grafico_2(self):
         def thead(self):   

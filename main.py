@@ -25,7 +25,7 @@ import requests
 WINDOW_SIZE = 0
 TOGLE_STATUS = 80
 CARD_SELECTED = 0
-GLOBAL_VERSION = '1.01'
+GLOBAL_VERSION = '1.02'
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -139,14 +139,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
             if obj == self.previus_month and event.type() == QtCore.QEvent.MouseButtonPress:
                 acao = "Previus"
-                effects.Effetc_slides.grid_filter(self,acao)
+                objects = self.page_2
+                effects.Effetc_slides.grid_filter(self,acao,objects)
                 card_db_fun.funcoes_cartao._current_date(self,acao)
                 return card_db_fun.Chart_one.clear(self)
 
             
             if obj == self.next_month and event.type() == QtCore.QEvent.MouseButtonPress:
                 acao = "Next"
-                effects.Effetc_slides.grid_filter(self,acao)
+                objects = self.page_2
+                effects.Effetc_slides.grid_filter(self,acao,objects)
                 card_db_fun.funcoes_cartao._current_date(self,acao)
                 return card_db_fun.Chart_one.clear(self)
             
@@ -181,6 +183,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
             if obj == self.next_month_3 and event.type() == QtCore.QEvent.MouseButtonPress:
                 #TODO  COMPRAS MENU DIREITO
+                objects = self.page_8
+
+                acao = "Next"
+                effects.Effetc_slides.grid_filter(self,acao,objects)
                 card_db_fun.funcoes_cartao._filter_year_faturas(self,"Next")
                 return card_db_fun.funcoes_cartao._faturas(self)
             
@@ -188,6 +194,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
             if obj == self.previus_month_3 and event.type() == QtCore.QEvent.MouseButtonPress:
                 #TODO  COMPRAS MENU DIREITO
+                objects = self.page_8
+                acao = "Previus"
+                effects.Effetc_slides.grid_filter(self,acao,objects)
                 card_db_fun.funcoes_cartao._filter_year_faturas(self,"Previus")
                 return card_db_fun.funcoes_cartao._faturas(self)
             

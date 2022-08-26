@@ -340,12 +340,12 @@ class Effetc_slides(Ui_MainWindow):
         
     
     
-    def grid_filter(self,direction):
+    def grid_filter(self,direction,object):
         btn = direction
-        duration = 1000 #duração animação
+        duration = 600 #duração animação
         geometry = 0
         if btn == "Next":
-            self.animation = QPropertyAnimation(self.page_2, b"maximumWidth")
+            self.animation = QPropertyAnimation(object, b"maximumWidth")
             self.animation.setDuration(duration)
             self.animation.setStartValue(0)
             self.animation.setEndValue(1300)
@@ -354,7 +354,7 @@ class Effetc_slides(Ui_MainWindow):
             
   
         if btn == "Previus":
-            self.animation = QPropertyAnimation(self.page_2, b"maximumWidth")
+            self.animation = QPropertyAnimation(object, b"maximumWidth")
             self.animation.setDuration(duration)
             self.animation.setStartValue(0)
             self.animation.setEndValue(1200)
