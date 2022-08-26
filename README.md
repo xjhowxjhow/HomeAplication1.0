@@ -7,6 +7,8 @@ Projeto inicialmente feito para conhecimento e desenvolvimento de estudos Univer
 
 Video exemplo: https://www.youtube.com/watch?v=ztg2hwXI1_M&t=19s
 
+Site do projeto: https://homeapplication.z13.web.core.windows.net/
+
 Nota: Projeto como foi inicializado com quase nenhum conhecimento na bilioteca, foi construido sobre a resolução 1920x1080, sendo que para uma melhor apresentação do Programa, é recomendado uma resolução minima de 1600x900. 
 
 Espero que sirva para alguma base de conhecimento :)
