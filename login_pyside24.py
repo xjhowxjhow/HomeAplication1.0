@@ -10,7 +10,7 @@ class Ui_MainWindow(object):
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(1590, 1000)
         icon1 = QIcon()
-        icon1.addFile(u":/menu/pngwing.com.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon1.addFile(u"C:/Users/Jhonatan Deni/.designer/Jhonatan Deni/.designer/backup/src/home.png", QSize(), QIcon.Normal, QIcon.Off)
         MainWindow.setWindowIcon(icon1)
         MainWindow.setStyleSheet(u"QMainWindow{\n"
 "	\n"
@@ -192,7 +192,7 @@ class Ui_MainWindow(object):
         self.frame_3.setObjectName(u"frame_3")
         self.frame_3.setMaximumSize(QSize(16777215, 48))
         self.frame_3.setStyleSheet(u"background-image: url();\n"
-"background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(81, 0, 135, 255), stop:0.427447 rgba(41, 61, 132, 235), stop:1 rgba(155, 79, 165, 255));\n"
+"background-color: rgb(54, 54, 54);\n"
 "border-radius:10px;\n"
 "border-image:url();")
         self.frame_3.setFrameShape(QFrame.StyledPanel)
@@ -249,7 +249,7 @@ class Ui_MainWindow(object):
         self.frame_6.setMaximumSize(QSize(16777215, 48))
         self.frame_6.setStyleSheet(u"background-image: url();\n"
 "border-radius:10px;\n"
-"background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(81, 0, 135, 255), stop:0.427447 rgba(41, 61, 132, 235), stop:1 rgba(155, 79, 165, 255));\n"
+"background-color:rgb(54, 54, 54);\n"
 "border-image:url();")
         self.frame_6.setFrameShape(QFrame.StyledPanel)
         self.frame_6.setFrameShadow(QFrame.Raised)
@@ -319,36 +319,32 @@ class Ui_MainWindow(object):
         self.buton_login.setMinimumSize(QSize(100, 60))
         self.buton_login.setMaximumSize(QSize(16777215, 16777215))
         self.buton_login.setFont(font)
-        self.buton_login.setStyleSheet(u"QPushButton{\n"
+        self.buton_login.setStyleSheet(u"\n"
+"\n"
+"QPushButton{\n"
 "	\n"
+"	border-image:url('');\n"
+"	border-radius:10px;\n"
 "	color: rgb(255, 255, 255);\n"
-"	background-image: url();\n"
-"	background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(81, 0, 135, 255), stop:0.427447 rgba(41, 61, 132, 235), stop:1 rgba(155, 79, 165, 255));\n"
-"	border: 0px solid  rgb(0, 0, 0);\n"
-"	border-radius: 10px;\n"
-"	border-image:url();\n"
+"\n"
+"\n"
+"	\n"
+"	background-color: rgb(46, 46, 46);\n"
+"\n"
+"	border: 1px solid  rgb(55, 55, 55);\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
 "	\n"
-" 	\n"
 "	\n"
-"	\n"
-"	\n"
-"	\n"
-"	background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(110, 72, 135, 255), stop:0.429961 rgba(100, 107, 132, 235), stop:1 rgba(162, 135, 165, 255));\n"
-"	border: 0px solid rgb(55, 55, 55);\n"
-"	\n"
+"	background-color: rgb(33, 33, 33);\n"
 "}\n"
-"\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
-" 	\n"
 "	\n"
-"	background-color: rgb(91, 91, 91);\n"
-"	border: 0px solid rgb(55, 55, 55);\n"
-"	\n"
+"	background-color: rgb(46, 46, 46);\n"
+"\n"
 "}")
 
         self.verticalLayout_4.addWidget(self.buton_login)
@@ -504,7 +500,7 @@ class Ui_MainWindow(object):
         self.menu.setObjectName(u"menu")
         self.menu.setMinimumSize(QSize(80, 0))
         self.menu.setMaximumSize(QSize(80, 16777215))
-        self.menu.setStyleSheet(u"background-color: rgb(49, 72, 106);\n"
+        self.menu.setStyleSheet(u"background-color: rgb(45, 45, 45);\n"
 "border-top-right-radius:0px;\n"
 "border-bottom-right-radius:0px;\n"
 "\n"
@@ -1042,7 +1038,7 @@ class Ui_MainWindow(object):
 
         self.stackedWidget_2 = QStackedWidget(self.group)
         self.stackedWidget_2.setObjectName(u"stackedWidget_2")
-        self.stackedWidget_2.setStyleSheet(u"background-color:rgb(25, 37, 55);\n"
+        self.stackedWidget_2.setStyleSheet(u"background-color:rgb(18, 18, 18);\n"
 "border-radius: 10px;")
         self.page_1 = QWidget()
         self.page_1.setObjectName(u"page_1")
@@ -1078,7 +1074,7 @@ class Ui_MainWindow(object):
         self.cartao_options.setObjectName(u"cartao_options")
         self.cartao_options.setMinimumSize(QSize(0, 70))
         self.cartao_options.setMaximumSize(QSize(16777215, 16777215))
-        self.cartao_options.setStyleSheet(u"background-color:rgb(42, 62, 93);\n"
+        self.cartao_options.setStyleSheet(u"background-color:rgb(54, 54, 54);\n"
 "border-radius:none;")
         self.cartao_options.setFrameShape(QFrame.StyledPanel)
         self.cartao_options.setFrameShadow(QFrame.Raised)
@@ -1093,11 +1089,12 @@ class Ui_MainWindow(object):
 "QPushButton{\n"
 "	\n"
 "\n"
+"	border-radius:10px;\n"
+"	color: rgb(255, 255, 255);\n"
 "\n"
-"	border-radius: 10px;\n"
 "\n"
 "	\n"
-"	background-color: rgb(238, 238, 238);\n"
+"	background-color: rgb(46, 46, 46);\n"
 "\n"
 "	border: 1px solid  rgb(55, 55, 55);\n"
 "}\n"
@@ -1105,15 +1102,14 @@ class Ui_MainWindow(object):
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(255, 255, 255);\n"
-"	border: 2px solid  rgb(255, 255, 255);\n"
+"	background-color: rgb(33, 33, 33);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(121, 121, 121);\n"
-"	border: 2px solid  rgb(55, 55, 55);\n"
+"	background-color: rgb(46, 46, 46);\n"
+"\n"
 "}")
         icon13 = QIcon()
         icon13.addFile(u":/backgroud/src-page-cartoes/cards.png", QSize(), QIcon.Normal, QIcon.Off)
@@ -1131,10 +1127,12 @@ class Ui_MainWindow(object):
 "QPushButton{\n"
 "	\n"
 "\n"
-"	border-radius: 10px;\n"
+"	border-radius:10px;\n"
+"	color: rgb(255, 255, 255);\n"
+"\n"
 "\n"
 "	\n"
-"	background-color: rgb(238, 238, 238);\n"
+"	background-color: rgb(46, 46, 46);\n"
 "\n"
 "	border: 1px solid  rgb(55, 55, 55);\n"
 "}\n"
@@ -1142,15 +1140,14 @@ class Ui_MainWindow(object):
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(255, 255, 255);\n"
-"	border: 2px solid  rgb(255, 255, 255);\n"
+"	background-color: rgb(33, 33, 33);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(121, 121, 121);\n"
-"	border: 2px solid  rgb(55, 55, 55);\n"
+"	background-color: rgb(46, 46, 46);\n"
+"\n"
 "}")
         icon14 = QIcon()
         icon14.addFile(u":/backgroud/src-page-cartoes/card_config.png", QSize(), QIcon.Normal, QIcon.Off)
@@ -1304,7 +1301,6 @@ class Ui_MainWindow(object):
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
         self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 440, 870))
         self.verticalLayout_3 = QVBoxLayout(self.scrollAreaWidgetContents_3)
-        self.verticalLayout_3.setSpacing(30)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.scrollArea_4.setWidget(self.scrollAreaWidgetContents_3)
 
@@ -1333,7 +1329,7 @@ class Ui_MainWindow(object):
         self.CONTAINER_geral.setObjectName(u"CONTAINER_geral")
         self.CONTAINER_geral.setMinimumSize(QSize(0, 0))
         self.CONTAINER_geral.setStyleSheet(u"QFrame{\n"
-"	background-color:rgb(49, 72, 106);\n"
+"	background-color:rgb(31, 31, 31);\n"
 "	border-radius: 10px;\n"
 "	border-bottom: 0px solid rgb(45, 45, 68);\n"
 "	border-right: 0px solid rgb(45, 45, 68);\n"
@@ -1420,7 +1416,7 @@ class Ui_MainWindow(object):
         self.container_2.setGeometry(QRect(10, 10, 155, 155))
         self.container_2.setStyleSheet(u"QFrame{\n"
 "	border-radius: 75px;\n"
-"	background-color: rgb(77, 77, 127);\n"
+"	background-color: rgb(54, 54, 54);\n"
 "}")
         self.container_2.setFrameShape(QFrame.NoFrame)
         self.container_2.setFrameShadow(QFrame.Raised)
@@ -1554,7 +1550,10 @@ class Ui_MainWindow(object):
         self.labelTitle_8.setLayoutDirection(Qt.LeftToRight)
         self.labelTitle_8.setAutoFillBackground(False)
         self.labelTitle_8.setStyleSheet(u"background-color: rgba(255, 255, 255, 0);")
-        self.labelTitle_8.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.labelTitle_8.setFrameShape(QFrame.NoFrame)
+        self.labelTitle_8.setFrameShadow(QFrame.Plain)
+        self.labelTitle_8.setScaledContents(False)
+        self.labelTitle_8.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_32.addWidget(self.labelTitle_8)
 
@@ -1562,7 +1561,7 @@ class Ui_MainWindow(object):
         self.labelTitle_10.setObjectName(u"labelTitle_10")
         self.labelTitle_10.setFont(font)
         self.labelTitle_10.setStyleSheet(u"background-color: rgba(255, 255, 255, 0);")
-        self.labelTitle_10.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.labelTitle_10.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_32.addWidget(self.labelTitle_10)
 
@@ -1571,10 +1570,6 @@ class Ui_MainWindow(object):
 
 
         self.verticalLayout_47.addWidget(self.frame_35)
-
-        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Ignored)
-
-        self.verticalLayout_47.addItem(self.verticalSpacer_3)
 
 
         self.horizontalLayout_11.addWidget(self.frame_30)
@@ -1598,20 +1593,18 @@ class Ui_MainWindow(object):
         self.compras.setMinimumSize(QSize(0, 50))
         self.compras.setMaximumSize(QSize(250, 16777215))
         self.compras.setTabletTracking(False)
-        self.compras.setStyleSheet(u"\n"
-"\n"
-"QPushButton{\n"
+        self.compras.setStyleSheet(u"QPushButton{\n"
 "	\n"
 "\n"
 "	border-top-left-radius:10px;\n"
 "	border-bottom-left-radius:10px;\n"
 "	border-top-right-radius:0px;\n"
 "	border-bottom-right-radius:0px;\n"
-"\n"
+"	color: rgb(255, 255, 255);\n"
 "\n"
 "\n"
 "	\n"
-"	background-color: rgb(238, 238, 238);\n"
+"	background-color: rgb(46, 46, 46);\n"
 "\n"
 "	border: 1px solid  rgb(55, 55, 55);\n"
 "}\n"
@@ -1619,15 +1612,14 @@ class Ui_MainWindow(object):
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(255, 255, 255);\n"
-"	border: 2px solid  rgb(255, 255, 255);\n"
+"	background-color: rgb(53, 53, 53);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(121, 121, 121);\n"
-"	border: 2px solid  rgb(55, 55, 55);\n"
+"	background-color: rgb(31, 31, 31);\n"
+"\n"
 "}")
         icon15 = QIcon()
         icon15.addFile(u":/backgroud/src-page-cartoes/shoop.png", QSize(), QIcon.Normal, QIcon.Off)
@@ -1644,28 +1636,22 @@ class Ui_MainWindow(object):
 "\n"
 "QPushButton{\n"
 "	\n"
-"\n"
-"\n"
-"\n"
-"	border-radius:none;\n"
-"	\n"
-"	background-color: rgb(238, 238, 238);\n"
-"\n"
+"	color: rgb(255, 255, 255);\n"
+"	background-color: rgb(46, 46, 46);\n"
 "	border: 1px solid  rgb(55, 55, 55);\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(255, 255, 255);\n"
-"	border: 2px solid  rgb(255, 255, 255);\n"
+"	background-color: rgb(53, 53, 53);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(121, 121, 121);\n"
-"	border: 2px solid  rgb(55, 55, 55);\n"
+"	background-color: rgb(31, 31, 31);\n"
+"\n"
 "}")
         icon16 = QIcon()
         icon16.addFile(u":/backgroud/src-page-cartoes/cart.png", QSize(), QIcon.Normal, QIcon.Off)
@@ -1682,28 +1668,22 @@ class Ui_MainWindow(object):
 "\n"
 "QPushButton{\n"
 "	\n"
-"\n"
-"\n"
-"\n"
-"border-radius:none;\n"
-"	\n"
-"	background-color: rgb(238, 238, 238);\n"
-"\n"
+"	color: rgb(255, 255, 255);\n"
+"	background-color: rgb(46, 46, 46);\n"
 "	border: 1px solid  rgb(55, 55, 55);\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(255, 255, 255);\n"
-"	border: 2px solid  rgb(255, 255, 255);\n"
+"	background-color: rgb(53, 53, 53);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(121, 121, 121);\n"
-"	border: 2px solid  rgb(55, 55, 55);\n"
+"	background-color: rgb(31, 31, 31);\n"
+"\n"
 "}")
         icon17 = QIcon()
         icon17.addFile(u":/backgroud/src-page-cartoes/grafic.png", QSize(), QIcon.Normal, QIcon.Off)
@@ -1719,28 +1699,23 @@ class Ui_MainWindow(object):
         self.faturas.setStyleSheet(u"\n"
 "\n"
 "QPushButton{\n"
-"\n"
-"\n"
-"\n"
-"border-radius:none;\n"
 "	\n"
-"	background-color: rgb(238, 238, 238);\n"
-"\n"
+"	color: rgb(255, 255, 255);\n"
+"	background-color: rgb(46, 46, 46);\n"
 "	border: 1px solid  rgb(55, 55, 55);\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(255, 255, 255);\n"
-"	border: 2px solid  rgb(255, 255, 255);\n"
+"	background-color: rgb(53, 53, 53);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(121, 121, 121);\n"
-"	border: 2px solid  rgb(55, 55, 55);\n"
+"	background-color: rgb(31, 31, 31);\n"
+"\n"
 "}")
         icon18 = QIcon()
         icon18.addFile(u":/backgroud/src-page-cartoes/calendarios.png", QSize(), QIcon.Normal, QIcon.Off)
@@ -1758,14 +1733,13 @@ class Ui_MainWindow(object):
 "QPushButton{\n"
 "	\n"
 "\n"
-"\n"
-"	border-top-left-radius:00px;\n"
-"	border-bottom-left-radius:0px;\n"
 "	border-top-right-radius:10px;\n"
-"	border-bottom-right-radius:10px;\n"
+"	border-bottom-right-radius:10px;;\n"
+"	color: rgb(255, 255, 255);\n"
+"\n"
 "\n"
 "	\n"
-"	background-color: rgb(238, 238, 238);\n"
+"	background-color: rgb(46, 46, 46);\n"
 "\n"
 "	border: 1px solid  rgb(55, 55, 55);\n"
 "}\n"
@@ -1773,15 +1747,14 @@ class Ui_MainWindow(object):
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(255, 255, 255);\n"
-"	border: 2px solid  rgb(255, 255, 255);\n"
+"	background-color: rgb(53, 53, 53);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(121, 121, 121);\n"
-"	border: 2px solid  rgb(55, 55, 55);\n"
+"	background-color: rgb(31, 31, 31);\n"
+"\n"
 "}")
         self.pushButton_12.setIconSize(QSize(30, 30))
 
@@ -1845,7 +1818,8 @@ class Ui_MainWindow(object):
         self.line_d.setStyleSheet(u"border: 0px;\n"
 "\n"
 "color: rgb(255, 255, 255);\n"
-"border-radius:3px;")
+"border-radius:3px;\n"
+"background-color: rgba(255, 255, 255, 30);")
         self.line_d.setMaxLength(2)
         self.line_d.setAlignment(Qt.AlignCenter)
 
@@ -1875,7 +1849,8 @@ class Ui_MainWindow(object):
         self.line_m.setStyleSheet(u"border: 0px;\n"
 "\n"
 "color: rgb(255, 255, 255);\n"
-"border-radius:3px;")
+"border-radius:3px;\n"
+"background-color: rgba(255, 255, 255, 30);")
         self.line_m.setMaxLength(2)
         self.line_m.setAlignment(Qt.AlignCenter)
 
@@ -1906,7 +1881,8 @@ class Ui_MainWindow(object):
         self.line_y.setStyleSheet(u"border: 0px;\n"
 "\n"
 "color: rgb(255, 255, 255);\n"
-"border-radius:3px;")
+"border-radius:3px;\n"
+"background-color: rgba(255, 255, 255, 30);")
         self.line_y.setMaxLength(4)
         self.line_y.setAlignment(Qt.AlignCenter)
 
@@ -2403,7 +2379,7 @@ class Ui_MainWindow(object):
         self.frame_21.setStyleSheet(u"	border-radius: 10px;\n"
 "\n"
 "	\n"
-"	background-color:rgb(25, 37, 55);\n"
+"	background-color:rgb(53, 53, 53);\n"
 "\n"
 "	border: 1px solid  rgb(55, 55, 55);")
         self.frame_21.setFrameShape(QFrame.StyledPanel)
@@ -2420,11 +2396,12 @@ class Ui_MainWindow(object):
 "QPushButton{\n"
 "	\n"
 "\n"
+"	border-radius:10px;\n"
+"	color: rgb(255, 255, 255);\n"
 "\n"
-"	border-radius: 10px;\n"
 "\n"
 "	\n"
-"	background-color: rgb(238, 238, 238);\n"
+"	background-color: rgb(46, 46, 46);\n"
 "\n"
 "	border: 1px solid  rgb(55, 55, 55);\n"
 "}\n"
@@ -2432,15 +2409,14 @@ class Ui_MainWindow(object):
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(255, 255, 255);\n"
-"	border: 2px solid  rgb(255, 255, 255);\n"
+"	background-color: rgb(33, 33, 33);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(121, 121, 121);\n"
-"	border: 2px solid  rgb(55, 55, 55);\n"
+"	background-color: rgb(46, 46, 46);\n"
+"\n"
 "}")
         icon22 = QIcon()
         icon22.addFile(u":/icons-cards/src-page-cartoes/urgencia.png", QSize(), QIcon.Normal, QIcon.Off)
@@ -2458,11 +2434,12 @@ class Ui_MainWindow(object):
 "QPushButton{\n"
 "	\n"
 "\n"
+"	border-radius:10px;\n"
+"	color: rgb(255, 255, 255);\n"
 "\n"
-"	border-radius: 10px;\n"
 "\n"
 "	\n"
-"	background-color: rgb(238, 238, 238);\n"
+"	background-color: rgb(46, 46, 46);\n"
 "\n"
 "	border: 1px solid  rgb(55, 55, 55);\n"
 "}\n"
@@ -2470,15 +2447,14 @@ class Ui_MainWindow(object):
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(255, 255, 255);\n"
-"	border: 2px solid  rgb(255, 255, 255);\n"
+"	background-color: rgb(33, 33, 33);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(121, 121, 121);\n"
-"	border: 2px solid  rgb(55, 55, 55);\n"
+"	background-color: rgb(46, 46, 46);\n"
+"\n"
 "}")
         icon23 = QIcon()
         icon23.addFile(u":/icons-cards/src-page-cartoes/icons8-etiquetas-100.png", QSize(), QIcon.Normal, QIcon.Off)
@@ -2496,11 +2472,12 @@ class Ui_MainWindow(object):
 "QPushButton{\n"
 "	\n"
 "\n"
+"	border-radius:10px;\n"
+"	color: rgb(255, 255, 255);\n"
 "\n"
-"	border-radius: 10px;\n"
 "\n"
 "	\n"
-"	background-color: rgb(238, 238, 238);\n"
+"	background-color: rgb(46, 46, 46);\n"
 "\n"
 "	border: 1px solid  rgb(55, 55, 55);\n"
 "}\n"
@@ -2508,15 +2485,14 @@ class Ui_MainWindow(object):
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(255, 255, 255);\n"
-"	border: 2px solid  rgb(255, 255, 255);\n"
+"	background-color: rgb(33, 33, 33);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(121, 121, 121);\n"
-"	border: 2px solid  rgb(55, 55, 55);\n"
+"	background-color: rgb(46, 46, 46);\n"
+"\n"
 "}")
         icon24 = QIcon()
         icon24.addFile(u":/icons-cards/src-page-cartoes/money.png", QSize(), QIcon.Normal, QIcon.Off)
@@ -2534,11 +2510,12 @@ class Ui_MainWindow(object):
 "QPushButton{\n"
 "	\n"
 "\n"
+"	border-radius:10px;\n"
+"	color: rgb(255, 255, 255);\n"
 "\n"
-"	border-radius: 10px;\n"
 "\n"
 "	\n"
-"	background-color: rgb(238, 238, 238);\n"
+"	background-color: rgb(46, 46, 46);\n"
 "\n"
 "	border: 1px solid  rgb(55, 55, 55);\n"
 "}\n"
@@ -2546,15 +2523,14 @@ class Ui_MainWindow(object):
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(255, 255, 255);\n"
-"	border: 2px solid  rgb(255, 255, 255);\n"
+"	background-color: rgb(33, 33, 33);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(121, 121, 121);\n"
-"	border: 2px solid  rgb(55, 55, 55);\n"
+"	background-color: rgb(46, 46, 46);\n"
+"\n"
 "}")
         icon25 = QIcon()
         icon25.addFile(u":/icons-cards/src-page-cartoes/parcelas.png", QSize(), QIcon.Normal, QIcon.Off)
@@ -2571,9 +2547,12 @@ class Ui_MainWindow(object):
 "QPushButton{\n"
 "	\n"
 "\n"
+"	border-radius:10px;\n"
+"	color: rgb(255, 255, 255);\n"
 "\n"
-"	border-radius: 10px;\n"
-"	background-color: rgb(238, 238, 238);\n"
+"\n"
+"	\n"
+"	background-color: rgb(46, 46, 46);\n"
 "\n"
 "	border: 1px solid  rgb(55, 55, 55);\n"
 "}\n"
@@ -2581,15 +2560,14 @@ class Ui_MainWindow(object):
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(255, 255, 255);\n"
-"	border: 2px solid  rgb(255, 255, 255);\n"
+"	background-color: rgb(33, 33, 33);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(121, 121, 121);\n"
-"	border: 2px solid  rgb(55, 55, 55);\n"
+"	background-color: rgb(46, 46, 46);\n"
+"\n"
 "}")
         icon26 = QIcon()
         icon26.addFile(u":/icons-cards/src-page-cartoes/datase.png", QSize(), QIcon.Normal, QIcon.Off)
@@ -2658,7 +2636,8 @@ class Ui_MainWindow(object):
         self.datails_fatura_card_2.setMaximumSize(QSize(16777215, 80))
         self.datails_fatura_card_2.setStyleSheet(u"border-radius: 0px;\n"
 "border-bottom:0px;\n"
-"border-right: 0px;")
+"border-right: 0px;\n"
+"background-color: rgba(255, 255, 255, 30); ")
         self.datails_fatura_card_2.setFrameShape(QFrame.StyledPanel)
         self.datails_fatura_card_2.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_40 = QHBoxLayout(self.datails_fatura_card_2)
@@ -2678,7 +2657,7 @@ class Ui_MainWindow(object):
         self.name_bank_2.setObjectName(u"name_bank_2")
         self.name_bank_2.setStyleSheet(u"border-bottom: 0px;\n"
 "border: 0px;\n"
-"\n"
+"background-color: none; \n"
 "color:rgb(255, 255, 255);\n"
 "")
 
@@ -2695,6 +2674,7 @@ class Ui_MainWindow(object):
 "border-right: 1px solid rgb(45, 45, 68);\n"
 "border-left: 0px solid rgb(45, 45, 68);\n"
 "color:rgb(255, 255, 255);\n"
+"background-color: none; \n"
 "")
         self.set_limite_card_2.setFrameShape(QFrame.StyledPanel)
         self.set_limite_card_2.setFrameShadow(QFrame.Raised)
@@ -2717,6 +2697,8 @@ class Ui_MainWindow(object):
         self.label_28.setFont(font)
         self.label_28.setStyleSheet(u"border-bottom: 0px;\n"
 "border: 0px;\n"
+"\n"
+"\n"
 "border-radius:3px;")
         self.label_28.setAlignment(Qt.AlignCenter)
 
@@ -2732,6 +2714,7 @@ class Ui_MainWindow(object):
 "border-right: 1px solid rgb(45, 45, 68);\n"
 "border-left: 0px solid rgb(45, 45, 68);\n"
 "color:rgb(255, 255, 255);\n"
+"background-color: none; \n"
 "")
         self.set_disponivel_cars_2.setFrameShape(QFrame.StyledPanel)
         self.set_disponivel_cars_2.setFrameShadow(QFrame.Raised)
@@ -2753,6 +2736,8 @@ class Ui_MainWindow(object):
         self.label_30.setFont(font)
         self.label_30.setStyleSheet(u"border-bottom: 0px;\n"
 "border: 0px;\n"
+"\n"
+"\n"
 "border-radius:3px;")
         self.label_30.setAlignment(Qt.AlignCenter)
 
@@ -2768,6 +2753,7 @@ class Ui_MainWindow(object):
 "border-right: 1px solid rgb(45, 45, 68);\n"
 "border-left: 0px solid rgb(45, 45, 68);\n"
 "color:rgb(255, 255, 255);\n"
+"background-color: none; \n"
 "")
         self.set_fechamento_2.setFrameShape(QFrame.StyledPanel)
         self.set_fechamento_2.setFrameShadow(QFrame.Raised)
@@ -2789,6 +2775,8 @@ class Ui_MainWindow(object):
         self.label_32.setFont(font)
         self.label_32.setStyleSheet(u"border-bottom: 0px;\n"
 "border: 0px;\n"
+"\n"
+"\n"
 "border-radius:3px;")
         self.label_32.setAlignment(Qt.AlignCenter)
 
@@ -2801,9 +2789,10 @@ class Ui_MainWindow(object):
         self.set_vencimento_2.setObjectName(u"set_vencimento_2")
         self.set_vencimento_2.setStyleSheet(u"border-radius: 0px;\n"
 "border-bottom: 0px solid rgb(45, 45, 68);\n"
-"border-right: 0px solid rgb(45, 45, 68);\n"
+"border-right: 1px solid rgb(45, 45, 68);\n"
 "border-left: 0px solid rgb(45, 45, 68);\n"
 "color:rgb(255, 255, 255);\n"
+"background-color: none; \n"
 "")
         self.set_vencimento_2.setFrameShape(QFrame.StyledPanel)
         self.set_vencimento_2.setFrameShadow(QFrame.Raised)
@@ -2824,6 +2813,8 @@ class Ui_MainWindow(object):
         self.label_34.setFont(font)
         self.label_34.setStyleSheet(u"border-bottom: 0px;\n"
 "border: 0px;\n"
+"\n"
+"\n"
 "border-radius:3px;")
         self.label_34.setAlignment(Qt.AlignCenter)
 
@@ -2873,7 +2864,7 @@ class Ui_MainWindow(object):
         font1.setWeight(3)
         self.table_faturas_ind.setFont(font1)
         self.table_faturas_ind.setStyleSheet(u"QWidget {\n"
-"	background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(81, 0, 135, 255), stop:0.427447 rgba(41, 61, 132, 235), stop:1 rgba(155, 79, 165, 255));\n"
+"	\n"
 "    color: #fffff8;\n"
 "\n"
 "\n"
@@ -2881,7 +2872,7 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "QHeaderView::section {\n"
-"    background-color: #b55ed3;\n"
+"    background-color: rgb(53, 53, 53);\n"
 "    font-size: 11;\n"
 "	border:none;\n"
 "	width:45px;\n"
@@ -2915,14 +2906,21 @@ class Ui_MainWindow(object):
         self.table_faturas_ind.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.table_faturas_ind.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
         self.table_faturas_ind.setAlternatingRowColors(False)
+        self.table_faturas_ind.setSelectionMode(QAbstractItemView.ExtendedSelection)
         self.table_faturas_ind.setIconSize(QSize(45, 40))
         self.table_faturas_ind.setTextElideMode(Qt.ElideLeft)
         self.table_faturas_ind.setVerticalScrollMode(QAbstractItemView.ScrollPerPixel)
         self.table_faturas_ind.setShowGrid(False)
         self.table_faturas_ind.setSortingEnabled(False)
         self.table_faturas_ind.horizontalHeader().setVisible(True)
+        self.table_faturas_ind.horizontalHeader().setCascadingSectionResizes(True)
         self.table_faturas_ind.horizontalHeader().setDefaultSectionSize(189)
+        self.table_faturas_ind.horizontalHeader().setHighlightSections(True)
+        self.table_faturas_ind.horizontalHeader().setProperty("showSortIndicator", False)
+        self.table_faturas_ind.horizontalHeader().setStretchLastSection(True)
         self.table_faturas_ind.verticalHeader().setVisible(False)
+        self.table_faturas_ind.verticalHeader().setCascadingSectionResizes(False)
+        self.table_faturas_ind.verticalHeader().setStretchLastSection(False)
 
         self.verticalLayout_52.addWidget(self.table_faturas_ind)
 
@@ -2944,7 +2942,7 @@ class Ui_MainWindow(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 140, 469))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, -2, 942, 469))
         self.verticalLayout_72 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_72.setSpacing(0)
         self.verticalLayout_72.setObjectName(u"verticalLayout_72")
@@ -3030,6 +3028,8 @@ class Ui_MainWindow(object):
 "font: 25 12pt \"Microsoft YaHei Light\";\n"
 "color: rgb(255, 255, 255);\n"
 "border-radius:3px;")
+        self.comboBox_2.setInsertPolicy(QComboBox.InsertAtBottom)
+        self.comboBox_2.setSizeAdjustPolicy(QComboBox.AdjustToContentsOnFirstShow)
 
         self.verticalLayout_80.addWidget(self.comboBox_2)
 
@@ -3198,10 +3198,12 @@ class Ui_MainWindow(object):
 "QPushButton{\n"
 "	\n"
 "\n"
+"	border-radius:10px;\n"
+"	color: rgb(255, 255, 255);\n"
 "\n"
-"	border-radius: 10px;\n"
-"   	background-color: rgb(255, 255, 255);\n"
 "\n"
+"	\n"
+"	background-color: rgb(46, 46, 46);\n"
 "\n"
 "	border: 1px solid  rgb(55, 55, 55);\n"
 "}\n"
@@ -3209,16 +3211,20 @@ class Ui_MainWindow(object):
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(255, 255, 255);\n"
-"	border: 2px solid  rgb(255, 255, 255);\n"
+"	background-color: rgb(53, 53, 53);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(121, 121, 121);\n"
-"	border: 2px solid  rgb(55, 55, 55);\n"
+"	background-color: rgb(31, 31, 31);\n"
+"\n"
 "}")
+        self.pushButton_17.setCheckable(False)
+        self.pushButton_17.setChecked(False)
+        self.pushButton_17.setAutoExclusive(False)
+        self.pushButton_17.setAutoDefault(False)
+        self.pushButton_17.setFlat(False)
 
         self.horizontalLayout_12.addWidget(self.pushButton_17)
 
@@ -3479,7 +3485,7 @@ class Ui_MainWindow(object):
         self.frame_18.setObjectName(u"frame_18")
         self.frame_18.setMinimumSize(QSize(120, 67))
         self.frame_18.setMaximumSize(QSize(16777215, 67))
-        self.frame_18.setStyleSheet(u"background-color:rgb(25, 37, 55);\n"
+        self.frame_18.setStyleSheet(u"\n"
 "border-radius:10px;")
         self.frame_18.setFrameShape(QFrame.StyledPanel)
         self.frame_18.setFrameShadow(QFrame.Raised)
@@ -3497,12 +3503,12 @@ class Ui_MainWindow(object):
 "QPushButton{\n"
 "	\n"
 "\n"
-"\n"
-"	border-radius: 10px;\n"
-"   	\n"
+"	border-radius:10px;\n"
 "	color: rgb(255, 255, 255);\n"
-"	background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0.00398406 rgba(117, 160, 215, 255), stop:0.250614 rgba(0, 109, 187, 242), stop:0.641278 rgba(34, 121, 152, 159), stop:0.644963 rgba(34, 121, 152, 159), stop:1 rgba(106, 151, 221, 255));\n"
 "\n"
+"\n"
+"	\n"
+"	background-color: rgb(46, 46, 46);\n"
 "\n"
 "	border: 1px solid  rgb(55, 55, 55);\n"
 "}\n"
@@ -3510,16 +3516,14 @@ class Ui_MainWindow(object):
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(255, 255, 255);\n"
-"	\n"
-"	background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0.00398406 rgba(150, 167, 190, 255), stop:0.250614 rgba(74, 140, 187, 242), stop:0.641278 rgba(92, 136, 152, 159), stop:0.644963 rgba(34, 121, 152, 159), stop:1 rgba(172, 191, 221, 255));\n"
+"	background-color: rgb(53, 53, 53);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(121, 121, 121);\n"
-"	border: 2px solid  rgb(55, 55, 55);\n"
+"	background-color: rgb(31, 31, 31);\n"
+"\n"
 "}")
 
         self.horizontalLayout_13.addWidget(self.lanca)
@@ -3535,11 +3539,12 @@ class Ui_MainWindow(object):
 "QPushButton{\n"
 "	\n"
 "\n"
+"	border-radius:10px;\n"
+"	color: rgb(255, 255, 255);\n"
 "\n"
-"	border-radius: 10px;\n"
-"   	\n"
-"	background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0.00398406 rgba(215, 138, 117, 255), stop:0.250614 rgba(187, 0, 0, 242), stop:0.619799 rgba(152, 34, 34, 159), stop:0.644963 rgba(152, 34, 34, 159), stop:1 rgba(221, 106, 106, 255));\n"
-"   color:rgb(255, 255, 255);\n"
+"\n"
+"	\n"
+"	background-color: rgb(46, 46, 46);\n"
 "\n"
 "	border: 1px solid  rgb(55, 55, 55);\n"
 "}\n"
@@ -3547,16 +3552,14 @@ class Ui_MainWindow(object):
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0.00398406 rgba(215, 168, 156, 255), stop:0.250614 rgba(187, 125, 125, 242), stop:0.619799 rgba(152, 108, 108, 159), stop:0.644963 rgba(152, 97, 97, 159), stop:1 rgba(221, 168, 168, 255));\n"
-"\n"
-"\n"
+"	background-color: rgb(53, 53, 53);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(121, 121, 121);\n"
-"	border: 2px solid  rgb(55, 55, 55);\n"
+"	background-color: rgb(31, 31, 31);\n"
+"\n"
 "}")
 
         self.horizontalLayout_13.addWidget(self.cancela_lanca)
@@ -3575,225 +3578,161 @@ class Ui_MainWindow(object):
         self.stacked_configcartao0.addWidget(self.page_new_lancamento)
         self.charts_indvidual = QWidget()
         self.charts_indvidual.setObjectName(u"charts_indvidual")
-        self.verticalLayout_12 = QVBoxLayout(self.charts_indvidual)
-        self.verticalLayout_12.setSpacing(0)
-        self.verticalLayout_12.setObjectName(u"verticalLayout_12")
-        self.verticalLayout_12.setContentsMargins(0, 5, 0, 0)
-        self.scrolcharts = QScrollArea(self.charts_indvidual)
-        self.scrolcharts.setObjectName(u"scrolcharts")
-        self.scrolcharts.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
-        self.scrolcharts.setWidgetResizable(True)
-        self.chatsscrroo = QWidget()
-        self.chatsscrroo.setObjectName(u"chatsscrroo")
-        self.chatsscrroo.setGeometry(QRect(0, 0, 266, 700))
-        self.chatsscrroo.setMinimumSize(QSize(0, 700))
-        self.verticalLayout_20 = QVBoxLayout(self.chatsscrroo)
-        self.verticalLayout_20.setSpacing(0)
-        self.verticalLayout_20.setObjectName(u"verticalLayout_20")
-        self.verticalLayout_20.setContentsMargins(0, 0, 0, 0)
-        self.frame_2 = QFrame(self.chatsscrroo)
-        self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setMinimumSize(QSize(0, 0))
-        self.frame_2.setStyleSheet(u"QFrame{\n"
-"\n"
-"	border-radius: 10px;\n"
-"	border-bottom: 4px solid rgb(45, 45, 68);\n"
-"	border-right: 4px solid rgb(45, 45, 68);\n"
-"	border:none;\n"
-"\n"
-"}")
-        self.frame_2.setFrameShape(QFrame.StyledPanel)
-        self.frame_2.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_8 = QVBoxLayout(self.frame_2)
-        self.verticalLayout_8.setSpacing(0)
-        self.verticalLayout_8.setObjectName(u"verticalLayout_8")
-        self.verticalLayout_8.setContentsMargins(0, 0, 0, 0)
-        self.frame_11 = QFrame(self.frame_2)
-        self.frame_11.setObjectName(u"frame_11")
-        self.frame_11.setMinimumSize(QSize(0, 0))
-        self.frame_11.setStyleSheet(u"border-radius:10px;")
-        self.frame_11.setFrameShape(QFrame.StyledPanel)
-        self.frame_11.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_24 = QHBoxLayout(self.frame_11)
-        self.horizontalLayout_24.setSpacing(20)
+        self.horizontalLayout_24 = QHBoxLayout(self.charts_indvidual)
         self.horizontalLayout_24.setObjectName(u"horizontalLayout_24")
-        self.horizontalLayout_24.setContentsMargins(0, -1, -1, -1)
-        self.label = QLabel(self.frame_11)
-        self.label.setObjectName(u"label")
-        self.label.setFont(font)
-        self.label.setStyleSheet(u"border-image: url(:/charts_back/card_back/smma.jpg);\n"
-"\n"
-"")
-
-        self.horizontalLayout_24.addWidget(self.label)
-
-        self.baner = QFrame(self.frame_11)
-        self.baner.setObjectName(u"baner")
-        self.baner.setEnabled(True)
-        self.baner.setMinimumSize(QSize(0, 0))
-        self.baner.setMaximumSize(QSize(16777215, 16777215))
-        self.baner.setAutoFillBackground(False)
-        self.baner.setStyleSheet(u"border-image: url(:/charts_back/card_back/\u2014Pngtree\u20142 5d stereoscopic business cartoon_928799.jpg);\n"
-"border-radius:10px;")
-        self.baner.setFrameShape(QFrame.StyledPanel)
-        self.baner.setFrameShadow(QFrame.Raised)
-
-        self.horizontalLayout_24.addWidget(self.baner)
-
-
-        self.verticalLayout_8.addWidget(self.frame_11)
-
-        self.tabWidget = QTabWidget(self.frame_2)
+        self.tabWidget = QTabWidget(self.charts_indvidual)
         self.tabWidget.setObjectName(u"tabWidget")
         self.tabWidget.setMinimumSize(QSize(0, 0))
         self.tabWidget.setMaximumSize(QSize(16777215, 16777215))
         self.tabWidget.setFont(font)
+        self.tabWidget.setLayoutDirection(Qt.LeftToRight)
         self.tabWidget.setStyleSheet(u"QTabWidget::tab-bar {\n"
 "  background: gray;\n"
+"\n"
 "\n"
 "}\n"
 "\n"
 "QTabBar::tab {\n"
-"  background: rgb(134, 134, 191);\n"
-"  color: black;\n"
+"  background: rgb(46, 46, 46);\n"
+"  color: rgb(255, 255, 255);\n"
 "  padding: 10px;\n"
+"\n"
 " }\n"
 "\n"
 " QTabBar::tab:selected {\n"
-"  background: rgb(179, 178, 253)  ;\n"
+"  background:rgb(53, 53, 53);\n"
+"  color: rgb(255, 255, 255);\n"
 " }\n"
 "\n"
 "QTabWidget::pane { border-top-left-radius:0px; border-top-right-radius:0px;}")
-        self.tab = QWidget()
-        self.tab.setObjectName(u"tab")
-        self.tab.setMaximumSize(QSize(16777215, 16777215))
-        self.tab.setStyleSheet(u"")
-        self.verticalLayout_14 = QVBoxLayout(self.tab)
-        self.verticalLayout_14.setSpacing(0)
-        self.verticalLayout_14.setObjectName(u"verticalLayout_14")
-        self.verticalLayout_14.setContentsMargins(0, 0, 10, 0)
-        self.chart_main_category = QFrame(self.tab)
+        self.tabWidget.setTabPosition(QTabWidget.North)
+        self.tabWidget.setTabShape(QTabWidget.Rounded)
+        self.tabWidget.setElideMode(Qt.ElideMiddle)
+        self.tabWidget.setDocumentMode(False)
+        self.tabWidget.setTabsClosable(False)
+        self.tabWidget.setMovable(True)
+        self.tabWidget.setTabBarAutoHide(True)
+        self.tab_7 = QWidget()
+        self.tab_7.setObjectName(u"tab_7")
+        self.tab_7.setMaximumSize(QSize(16777215, 16777215))
+        self.tab_7.setStyleSheet(u"")
+        self.verticalLayout_69 = QVBoxLayout(self.tab_7)
+        self.verticalLayout_69.setSpacing(0)
+        self.verticalLayout_69.setObjectName(u"verticalLayout_69")
+        self.verticalLayout_69.setContentsMargins(0, 0, 10, 0)
+        self.chart_main_category = QFrame(self.tab_7)
         self.chart_main_category.setObjectName(u"chart_main_category")
         self.chart_main_category.setStyleSheet(u"border-radius:10px;")
         self.chart_main_category.setFrameShape(QFrame.StyledPanel)
         self.chart_main_category.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_17 = QVBoxLayout(self.chart_main_category)
-        self.verticalLayout_17.setSpacing(0)
-        self.verticalLayout_17.setObjectName(u"verticalLayout_17")
-        self.verticalLayout_17.setContentsMargins(0, 0, 0, 0)
-        self.frame_19 = QFrame(self.chart_main_category)
-        self.frame_19.setObjectName(u"frame_19")
-        self.frame_19.setStyleSheet(u"border-top-left-radius:0px;\n"
+        self.verticalLayout_70 = QVBoxLayout(self.chart_main_category)
+        self.verticalLayout_70.setSpacing(0)
+        self.verticalLayout_70.setObjectName(u"verticalLayout_70")
+        self.verticalLayout_70.setContentsMargins(0, 0, 0, 0)
+        self.frame_28 = QFrame(self.chart_main_category)
+        self.frame_28.setObjectName(u"frame_28")
+        self.frame_28.setStyleSheet(u"border-top-left-radius:0px;\n"
 "border-top-right-radius:0px;\n"
-"background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(81, 139, 135, 255), stop:0.427447 rgba(41, 138, 132, 255), stop:1 rgba(155, 119, 165, 255));")
-        self.frame_19.setFrameShape(QFrame.StyledPanel)
-        self.frame_19.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_21 = QVBoxLayout(self.frame_19)
-        self.verticalLayout_21.setSpacing(0)
-        self.verticalLayout_21.setObjectName(u"verticalLayout_21")
-        self.verticalLayout_21.setContentsMargins(0, 0, 0, 0)
+"background-color: ")
+        self.frame_28.setFrameShape(QFrame.StyledPanel)
+        self.frame_28.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_74 = QVBoxLayout(self.frame_28)
+        self.verticalLayout_74.setSpacing(0)
+        self.verticalLayout_74.setObjectName(u"verticalLayout_74")
+        self.verticalLayout_74.setContentsMargins(0, 0, 0, 0)
         self.frame_chart_category = QVBoxLayout()
         self.frame_chart_category.setObjectName(u"frame_chart_category")
 
-        self.verticalLayout_21.addLayout(self.frame_chart_category)
+        self.verticalLayout_74.addLayout(self.frame_chart_category)
 
 
-        self.verticalLayout_17.addWidget(self.frame_19)
+        self.verticalLayout_70.addWidget(self.frame_28)
 
 
-        self.verticalLayout_14.addWidget(self.chart_main_category)
+        self.verticalLayout_69.addWidget(self.chart_main_category)
 
-        self.tabWidget.addTab(self.tab, "")
-        self.tab_2 = QWidget()
-        self.tab_2.setObjectName(u"tab_2")
-        self.tab_2.setStyleSheet(u"")
-        self.verticalLayout_22 = QVBoxLayout(self.tab_2)
-        self.verticalLayout_22.setSpacing(0)
-        self.verticalLayout_22.setObjectName(u"verticalLayout_22")
-        self.verticalLayout_22.setContentsMargins(0, 0, 10, 0)
-        self.chart_main_date = QFrame(self.tab_2)
-        self.chart_main_date.setObjectName(u"chart_main_date")
-        self.chart_main_date.setStyleSheet(u"border-radius:10px;")
-        self.chart_main_date.setFrameShape(QFrame.StyledPanel)
-        self.chart_main_date.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_15 = QVBoxLayout(self.chart_main_date)
-        self.verticalLayout_15.setSpacing(0)
-        self.verticalLayout_15.setObjectName(u"verticalLayout_15")
-        self.verticalLayout_15.setContentsMargins(0, 0, 0, 0)
-        self.frame_15 = QFrame(self.chart_main_date)
-        self.frame_15.setObjectName(u"frame_15")
-        self.frame_15.setStyleSheet(u"border-top-left-radius:0px;\n"
-"border-top-right-radius:0px;\n"
-"\n"
-"background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(81, 139, 135, 255), stop:0.427447 rgba(41, 138, 132, 255), stop:1 rgba(155, 119, 165, 255))\n"
-"")
-        self.frame_15.setFrameShape(QFrame.StyledPanel)
-        self.frame_15.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_18 = QVBoxLayout(self.frame_15)
-        self.verticalLayout_18.setSpacing(0)
-        self.verticalLayout_18.setObjectName(u"verticalLayout_18")
-        self.verticalLayout_18.setContentsMargins(0, 0, 0, 0)
-        self.frame_chart_date_day = QVBoxLayout()
-        self.frame_chart_date_day.setObjectName(u"frame_chart_date_day")
-
-        self.verticalLayout_18.addLayout(self.frame_chart_date_day)
-
-
-        self.verticalLayout_15.addWidget(self.frame_15)
-
-
-        self.verticalLayout_22.addWidget(self.chart_main_date)
-
-        self.tabWidget.addTab(self.tab_2, "")
-        self.tab_3 = QWidget()
-        self.tab_3.setObjectName(u"tab_3")
-        self.verticalLayout_23 = QVBoxLayout(self.tab_3)
-        self.verticalLayout_23.setSpacing(0)
-        self.verticalLayout_23.setObjectName(u"verticalLayout_23")
-        self.verticalLayout_23.setContentsMargins(0, 0, 10, 0)
-        self.chart_main_evolution = QFrame(self.tab_3)
+        self.tabWidget.addTab(self.tab_7, icon23, "")
+        self.tab_8 = QWidget()
+        self.tab_8.setObjectName(u"tab_8")
+        self.verticalLayout_86 = QVBoxLayout(self.tab_8)
+        self.verticalLayout_86.setSpacing(0)
+        self.verticalLayout_86.setObjectName(u"verticalLayout_86")
+        self.verticalLayout_86.setContentsMargins(0, 0, 10, 0)
+        self.chart_main_evolution = QFrame(self.tab_8)
         self.chart_main_evolution.setObjectName(u"chart_main_evolution")
         self.chart_main_evolution.setStyleSheet(u"border-radius:10px;")
         self.chart_main_evolution.setFrameShape(QFrame.StyledPanel)
         self.chart_main_evolution.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_16 = QVBoxLayout(self.chart_main_evolution)
-        self.verticalLayout_16.setSpacing(0)
-        self.verticalLayout_16.setObjectName(u"verticalLayout_16")
-        self.verticalLayout_16.setContentsMargins(0, 0, 0, 0)
-        self.frame_16 = QFrame(self.chart_main_evolution)
-        self.frame_16.setObjectName(u"frame_16")
-        self.frame_16.setStyleSheet(u"border-top-left-radius:0px;\n"
+        self.verticalLayout_87 = QVBoxLayout(self.chart_main_evolution)
+        self.verticalLayout_87.setSpacing(0)
+        self.verticalLayout_87.setObjectName(u"verticalLayout_87")
+        self.verticalLayout_87.setContentsMargins(0, 0, 0, 0)
+        self.frame_33 = QFrame(self.chart_main_evolution)
+        self.frame_33.setObjectName(u"frame_33")
+        self.frame_33.setStyleSheet(u"border-top-left-radius:0px;\n"
 "border-top-right-radius:0px;\n"
-"background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(81, 139, 135, 255), stop:0.427447 rgba(41, 138, 132, 255), stop:1 rgba(155, 119, 165, 255))\n"
-"\n"
 "")
-        self.frame_16.setFrameShape(QFrame.StyledPanel)
-        self.frame_16.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_19 = QVBoxLayout(self.frame_16)
-        self.verticalLayout_19.setSpacing(0)
-        self.verticalLayout_19.setObjectName(u"verticalLayout_19")
-        self.verticalLayout_19.setContentsMargins(0, 0, 0, 0)
+        self.frame_33.setFrameShape(QFrame.StyledPanel)
+        self.frame_33.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_88 = QVBoxLayout(self.frame_33)
+        self.verticalLayout_88.setSpacing(0)
+        self.verticalLayout_88.setObjectName(u"verticalLayout_88")
+        self.verticalLayout_88.setContentsMargins(0, 0, 0, 0)
         self.frame_chart_evolution_fat = QVBoxLayout()
         self.frame_chart_evolution_fat.setObjectName(u"frame_chart_evolution_fat")
 
-        self.verticalLayout_19.addLayout(self.frame_chart_evolution_fat)
+        self.verticalLayout_88.addLayout(self.frame_chart_evolution_fat)
 
 
-        self.verticalLayout_16.addWidget(self.frame_16)
+        self.verticalLayout_87.addWidget(self.frame_33)
 
 
-        self.verticalLayout_23.addWidget(self.chart_main_evolution)
+        self.verticalLayout_86.addWidget(self.chart_main_evolution)
 
-        self.tabWidget.addTab(self.tab_3, "")
+        icon27 = QIcon()
+        icon27.addFile(u":/icons-cards/src-page-cartoes/null.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.tabWidget.addTab(self.tab_8, icon27, "")
+        self.tab_9 = QWidget()
+        self.tab_9.setObjectName(u"tab_9")
+        self.tab_9.setStyleSheet(u"")
+        self.verticalLayout_89 = QVBoxLayout(self.tab_9)
+        self.verticalLayout_89.setSpacing(0)
+        self.verticalLayout_89.setObjectName(u"verticalLayout_89")
+        self.verticalLayout_89.setContentsMargins(0, 0, 10, 0)
+        self.chart_main_date = QFrame(self.tab_9)
+        self.chart_main_date.setObjectName(u"chart_main_date")
+        self.chart_main_date.setStyleSheet(u"border-radius:10px;")
+        self.chart_main_date.setFrameShape(QFrame.StyledPanel)
+        self.chart_main_date.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_90 = QVBoxLayout(self.chart_main_date)
+        self.verticalLayout_90.setSpacing(0)
+        self.verticalLayout_90.setObjectName(u"verticalLayout_90")
+        self.verticalLayout_90.setContentsMargins(0, 0, 0, 0)
+        self.frame_36 = QFrame(self.chart_main_date)
+        self.frame_36.setObjectName(u"frame_36")
+        self.frame_36.setStyleSheet(u"border-top-left-radius:0px;\n"
+"border-top-right-radius:0px;\n"
+"")
+        self.frame_36.setFrameShape(QFrame.StyledPanel)
+        self.frame_36.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_91 = QVBoxLayout(self.frame_36)
+        self.verticalLayout_91.setSpacing(0)
+        self.verticalLayout_91.setObjectName(u"verticalLayout_91")
+        self.verticalLayout_91.setContentsMargins(0, 0, 0, 0)
+        self.frame_chart_date_day = QVBoxLayout()
+        self.frame_chart_date_day.setObjectName(u"frame_chart_date_day")
 
-        self.verticalLayout_8.addWidget(self.tabWidget)
+        self.verticalLayout_91.addLayout(self.frame_chart_date_day)
 
 
-        self.verticalLayout_20.addWidget(self.frame_2)
+        self.verticalLayout_90.addWidget(self.frame_36)
 
-        self.scrolcharts.setWidget(self.chatsscrroo)
 
-        self.verticalLayout_12.addWidget(self.scrolcharts)
+        self.verticalLayout_89.addWidget(self.chart_main_date)
+
+        self.tabWidget.addTab(self.tab_9, icon26, "")
+
+        self.horizontalLayout_24.addWidget(self.tabWidget)
 
         self.stacked_configcartao0.addWidget(self.charts_indvidual)
 
@@ -3821,6 +3760,7 @@ class Ui_MainWindow(object):
         self.detalhes_cartao.addWidget(self.detalhes_cartaoPage1)
         self.dashboard_cards = QWidget()
         self.dashboard_cards.setObjectName(u"dashboard_cards")
+        self.dashboard_cards.setStyleSheet(u"background-color: rgb(149, 172, 255);")
         self.verticalLayout_32 = QVBoxLayout(self.dashboard_cards)
         self.verticalLayout_32.setObjectName(u"verticalLayout_32")
         self.top_mainsd = QFrame(self.dashboard_cards)
@@ -4233,12 +4173,12 @@ class Ui_MainWindow(object):
         __qtablewidgetitem27.setTextAlignment(Qt.AlignCenter);
         __qtablewidgetitem27.setFlags(Qt.NoItemFlags);
         self.tableWidget.setItem(0, 4, __qtablewidgetitem27)
-        icon27 = QIcon()
-        icon27.addFile(u":/backgroud/src-page-cartoes/money2.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon28 = QIcon()
+        icon28.addFile(u":/backgroud/src-page-cartoes/money2.png", QSize(), QIcon.Normal, QIcon.Off)
         __qtablewidgetitem28 = QTableWidgetItem()
         __qtablewidgetitem28.setCheckState(Qt.Unchecked);
         __qtablewidgetitem28.setTextAlignment(Qt.AlignCenter);
-        __qtablewidgetitem28.setIcon(icon27);
+        __qtablewidgetitem28.setIcon(icon28);
         self.tableWidget.setItem(0, 5, __qtablewidgetitem28)
         __qtablewidgetitem29 = QTableWidgetItem()
         __qtablewidgetitem29.setTextAlignment(Qt.AlignCenter);
@@ -4263,7 +4203,7 @@ class Ui_MainWindow(object):
         __qtablewidgetitem34 = QTableWidgetItem()
         __qtablewidgetitem34.setCheckState(Qt.Unchecked);
         __qtablewidgetitem34.setTextAlignment(Qt.AlignCenter);
-        __qtablewidgetitem34.setIcon(icon27);
+        __qtablewidgetitem34.setIcon(icon28);
         self.tableWidget.setItem(1, 5, __qtablewidgetitem34)
         self.tableWidget.setObjectName(u"tableWidget")
         sizePolicy3 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
@@ -4446,7 +4386,7 @@ class Ui_MainWindow(object):
         self.scrollArea_5.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 602, 318))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 1486, 870))
         self.horizontalLayout_20 = QHBoxLayout(self.scrollAreaWidgetContents_5)
         self.horizontalLayout_20.setObjectName(u"horizontalLayout_20")
         self.frame_9 = QFrame(self.scrollAreaWidgetContents_5)
@@ -4454,10 +4394,10 @@ class Ui_MainWindow(object):
         self.frame_9.setMinimumSize(QSize(502, 300))
         self.frame_9.setMaximumSize(QSize(500, 400))
         self.frame_9.setStyleSheet(u"QFrame{\n"
-"	background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(81, 0, 135, 255), stop:0.427447 rgba(41, 61, 132, 235), stop:1 rgba(155, 79, 165, 255));\n"
+"	background-color: rgb(33, 33, 33);\n"
 "	border-radius: 10px;\n"
-"	border-bottom: 4px solid rgb(45, 45, 68);\n"
-"	border-right: 4px solid rgb(45, 45, 68);\n"
+"	border-bottom: 4px solid rgb(45, 45, 45);\n"
+"	border-right: 4px solid rgb(45, 45, 45);\n"
 "\n"
 "}")
         self.frame_9.setFrameShape(QFrame.StyledPanel)
@@ -4510,7 +4450,7 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "QFrame:hover{\n"
-"border: 3px solid  rgb(55, 50,50);\n"
+"border: 3px solid  rgb(55, 50,5 0);\n"
 "\n"
 "}")
         self.frameadc.setFrameShape(QFrame.StyledPanel)
@@ -4724,22 +4664,30 @@ class Ui_MainWindow(object):
         self.table_active_cards.setHorizontalHeaderItem(3, __qtablewidgetitem38)
         __qtablewidgetitem39 = QTableWidgetItem()
         self.table_active_cards.setHorizontalHeaderItem(4, __qtablewidgetitem39)
+        if (self.table_active_cards.rowCount() < 1):
+            self.table_active_cards.setRowCount(1)
+        __qtablewidgetitem40 = QTableWidgetItem()
+        self.table_active_cards.setVerticalHeaderItem(0, __qtablewidgetitem40)
+        __qtablewidgetitem41 = QTableWidgetItem()
+        self.table_active_cards.setItem(0, 0, __qtablewidgetitem41)
+        __qtablewidgetitem42 = QTableWidgetItem()
+        self.table_active_cards.setItem(0, 1, __qtablewidgetitem42)
         self.table_active_cards.setObjectName(u"table_active_cards")
         self.table_active_cards.setMinimumSize(QSize(0, 0))
         self.table_active_cards.setMaximumSize(QSize(704, 500))
         self.table_active_cards.setTabletTracking(False)
         self.table_active_cards.setStyleSheet(u"QWidget {\n"
-"	background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(81, 0, 135, 255), stop:0.427447 rgba(41, 61, 132, 235), stop:1 rgba(155, 79, 165, 255));\n"
-"    color: #fffff8;\n"
-"\n"
-"	border-bottom: 4px solid rgb(45, 45, 68);\n"
-"	border-right: 4px solid rgb(45, 45, 68);\n"
+"	background-color: rgb(33, 33, 33);\n"
+"	border-bottom: 4px solid rgb(45, 45, 45);\n"
+"	border-right: 4px solid rgb(45, 45, 45);\n"
 "\n"
 "}\n"
 "\n"
 "QHeaderView::section {\n"
-"    background-color: #b55ed3;\n"
+"    background-color: rgb(46, 46, 46);\n"
 "    font-size: 14pt;\n"
+"	\n"
+"	color: rgb(255, 255, 255);\n"
 "\n"
 "\n"
 "	letter-spacing:0px;\n"
@@ -4757,6 +4705,7 @@ class Ui_MainWindow(object):
 " 	padding: 10px\n"
 "\n"
 "\n"
+"\n"
 "}\n"
 "\n"
 "QTableWidget QTableCornerButton::section {\n"
@@ -4767,6 +4716,7 @@ class Ui_MainWindow(object):
 "QTableView:item {\n"
 "  border: 0px;\n"
 "  padding: 0px 10px;\n"
+"  color: rgb(255, 255, 255);\n"
 "}\n"
 "\n"
 "")
@@ -4884,9 +4834,9 @@ class Ui_MainWindow(object):
         self.pushButton_4.setObjectName(u"pushButton_4")
         self.pushButton_4.setFont(font)
         self.pushButton_4.setStyleSheet(u"color: rgb(255, 255, 255);")
-        icon28 = QIcon()
-        icon28.addFile(u":/dev/dev/devs.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.pushButton_4.setIcon(icon28)
+        icon29 = QIcon()
+        icon29.addFile(u":/dev/dev/devs.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.pushButton_4.setIcon(icon29)
         self.pushButton_4.setIconSize(QSize(40, 40))
 
         self.verticalLayout_58.addWidget(self.pushButton_4)
@@ -4894,9 +4844,9 @@ class Ui_MainWindow(object):
         self.pushButton_5 = QPushButton(self.frame_23)
         self.pushButton_5.setObjectName(u"pushButton_5")
         self.pushButton_5.setStyleSheet(u"color: rgb(255, 255, 255);")
-        icon29 = QIcon()
-        icon29.addFile(u":/dev/dev/academy.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.pushButton_5.setIcon(icon29)
+        icon30 = QIcon()
+        icon30.addFile(u":/dev/dev/academy.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.pushButton_5.setIcon(icon30)
         self.pushButton_5.setIconSize(QSize(40, 40))
 
         self.verticalLayout_58.addWidget(self.pushButton_5)
@@ -4930,9 +4880,9 @@ class Ui_MainWindow(object):
 "	background-color: rgb(121, 121, 121);\n"
 "	border: 2px solid  rgb(55, 55, 55);\n"
 "}")
-        icon30 = QIcon()
-        icon30.addFile(u":/dev/dev/git.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.pushButton_6.setIcon(icon30)
+        icon31 = QIcon()
+        icon31.addFile(u":/dev/dev/git.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.pushButton_6.setIcon(icon31)
         self.pushButton_6.setIconSize(QSize(40, 40))
 
         self.verticalLayout_58.addWidget(self.pushButton_6)
@@ -5051,7 +5001,8 @@ class Ui_MainWindow(object):
         self.extrat_meses.setCurrentIndex(1)
         self.stacked_configcartao0.setCurrentIndex(0)
         self.stack_extrato_pages.setCurrentIndex(0)
-        self.tabWidget.setCurrentIndex(2)
+        self.pushButton_17.setDefault(False)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -5071,7 +5022,7 @@ class Ui_MainWindow(object):
         self.enter_pass.setPlaceholderText(QCoreApplication.translate("MainWindow", u"   Senha", None))
         self.checkBox.setText(QCoreApplication.translate("MainWindow", u"Lembrar senha", None))
         self.buton_login.setText(QCoreApplication.translate("MainWindow", u"Entrar", None))
-        self.credits.setText(QCoreApplication.translate("MainWindow", u"   Home Aplication Ver: 1.0", None))
+        self.credits.setText(QCoreApplication.translate("MainWindow", u"   Home Application Ver: 1.0", None))
         self.minimize.setText("")
         self.maxmize.setText("")
         self.exit.setText("")
@@ -5109,10 +5060,16 @@ class Ui_MainWindow(object):
         self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"Procurar  ", None))
         self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"Voltar", None))
         self.previus_month.setText(QCoreApplication.translate("MainWindow", u" Previus ", None))
+#if QT_CONFIG(shortcut)
+        self.previus_month.setShortcut(QCoreApplication.translate("MainWindow", u"Left", None))
+#endif // QT_CONFIG(shortcut)
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Novembro", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"de", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"2022", None))
         self.next_month.setText(QCoreApplication.translate("MainWindow", u" Next", None))
+#if QT_CONFIG(shortcut)
+        self.next_month.setShortcut(QCoreApplication.translate("MainWindow", u"Right", None))
+#endif // QT_CONFIG(shortcut)
         self.previus_month_3.setText(QCoreApplication.translate("MainWindow", u" Previus ", None))
         self.label_35.setText(QCoreApplication.translate("MainWindow", u"Ano", None))
         self.label_10.setText(QCoreApplication.translate("MainWindow", u"2022", None))
@@ -5215,10 +5172,9 @@ class Ui_MainWindow(object):
 
         self.lanca.setText(QCoreApplication.translate("MainWindow", u"OK", None))
         self.cancela_lanca.setText(QCoreApplication.translate("MainWindow", u"Cancelar", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" color:#ffffff;\">Ol\u00e1, Bem vindo ao seu Dashboard</span></p><p align=\"center\"><br/><br/></p><p align=\"center\"><span style=\" font-size:11pt; color:#ffffff;\">Aqui encontrar\u00e1 seus graficos por categoria, </span></p><p align=\"center\"><span style=\" font-size:11pt; color:#ffffff;\">selecione o tipo que deseja verificar</span></p></body></html>", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("MainWindow", u"Grafico de gastos neste cart\u00e3o por Categoria", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Grafico de gastos neste cart\u00e3o por Data", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("MainWindow", u"Evolu\u00e7\u00e3o de faturas", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_7), QCoreApplication.translate("MainWindow", u"Grafico de gastos neste cart\u00e3o por Categoria", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_8), QCoreApplication.translate("MainWindow", u"Evolu\u00e7\u00e3o de faturas", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_9), QCoreApplication.translate("MainWindow", u"Grafico de gastos neste cart\u00e3o por Data", None))
         self.label_8.setText(QCoreApplication.translate("MainWindow", u"Faturas do cart\u00e3o", None))
         self.previus_month_2.setText(QCoreApplication.translate("MainWindow", u" Previus ", None))
         self.label_9.setText(QCoreApplication.translate("MainWindow", u"2022", None))
@@ -5303,6 +5259,17 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem37.setText(QCoreApplication.translate("MainWindow", u"Final do cartao", None));
         ___qtablewidgetitem38 = self.table_active_cards.horizontalHeaderItem(4)
         ___qtablewidgetitem38.setText(QCoreApplication.translate("MainWindow", u"Vencimento", None));
+        ___qtablewidgetitem39 = self.table_active_cards.verticalHeaderItem(0)
+        ___qtablewidgetitem39.setText(QCoreApplication.translate("MainWindow", u"as", None));
+
+        __sortingEnabled1 = self.table_active_cards.isSortingEnabled()
+        self.table_active_cards.setSortingEnabled(False)
+        ___qtablewidgetitem40 = self.table_active_cards.item(0, 0)
+        ___qtablewidgetitem40.setText(QCoreApplication.translate("MainWindow", u"as", None));
+        ___qtablewidgetitem41 = self.table_active_cards.item(0, 1)
+        ___qtablewidgetitem41.setText(QCoreApplication.translate("MainWindow", u"as", None));
+        self.table_active_cards.setSortingEnabled(__sortingEnabled1)
+
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"PAGE3", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"PAGE4", None))
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"PAGE5", None))

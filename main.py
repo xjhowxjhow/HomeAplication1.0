@@ -25,7 +25,7 @@ import requests
 WINDOW_SIZE = 0
 TOGLE_STATUS = 80
 CARD_SELECTED = 0
-GLOBAL_VERSION = '1.02'
+GLOBAL_VERSION = '1.03'
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):

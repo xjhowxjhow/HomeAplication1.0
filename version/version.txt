@@ -1,2 +1,2 @@
-VERSION: 1.02
-NOTES:  1- Correção de bugs e corrigido cores grafico1
+VERSION: 1.03
+NOTES:  1- Correcao de bugs e corrigido cores grafico1, layout dark theme
