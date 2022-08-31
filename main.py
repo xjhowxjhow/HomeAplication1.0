@@ -1,3 +1,4 @@
+from cmath import exp
 from PySide2.QtCore import *
 from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2.QtCore import (QCoreApplication, QPropertyAnimation, QDate, QDateTime, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
@@ -25,10 +26,10 @@ import requests
 WINDOW_SIZE = 0
 TOGLE_STATUS = 80
 CARD_SELECTED = 0
-GLOBAL_VERSION = '1.03'
+GLOBAL_VERSION = '1.04'
 
 
-class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
+class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
     stackSignal = Signal() 
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
@@ -56,13 +57,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.pushButton_7.clicked.connect(lambda:self.pop_error.hide())
         self.pop_error.hide()
         self.pop_error_cartao.hide()
-        self.frame_31.hide()
+        
         self.buton_login.clicked.connect(self.campo_de_verificacao)
         self.pushButton.clicked.connect(self.toggleMenu)
         self.salvar_6.clicked.connect(lambda:database.salva_dados.testedb(self))
         self.salvar_5.clicked.connect(self.desloga)
-
-
 
         
 
@@ -73,6 +72,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.extrato_cartao_0.setColumnHidden(7, True) # COLUNA ID OCULTADA
         self.extrato_cartao_0.setColumnHidden(8, True) # SOMA DATA PARA FILTRO OCULTADA
         self.extrato_cartao_0.setColumnHidden(9, True) # STATUS DO PAGAMENTO PARA FILTRO OCULTADA
+        self.table_faturas_ind_3.setColumnHidden(3, True) # COLUNA ID OCULTADA
+        self.table_active_cards.setColumnHidden(6, True) # COLUNA ID OCULTADA
+        self.table_faturas_ind_3.horizontalHeader().setVisible(True)
+        self.table_faturas_ind.horizontalHeader().setVisible(True)
+        self.table_active_cards.horizontalHeader().setVisible(True)
+        self.table_faturas_ind_3.horizontalHeader().setDefaultSectionSize(310)
+        self.table_active_cards.horizontalHeader().setDefaultSectionSize(145)
+        
+        
+        
         
         self.extrat_meses.setTransitionDirection(QtCore.Qt.Horizontal)
         self.extrat_meses.setTransitionSpeed(500)
@@ -82,6 +91,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.grid.clicked.connect(lambda:self.stackedWidget_3.setCurrentWidget(self.page))
         self.grid_2.clicked.connect(lambda:self.stackedWidget_3.setCurrentWidget(self.page2))
         effects.Effetc_slides.grid_cards(self)
+        effects.Effetc_slides._conent_geral_cards(self)
         
         self.add_card_3.clicked.connect(lambda:card_db_fun.funcoes_cartao.adicionar_cartao(self))
         self.remover_card_3.clicked.connect(lambda:card_db_fun.funcoes_cartao.destroy_frame_card(self))
@@ -89,8 +99,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.pushButton_6.clicked.connect(self.open_webbrowser)
         self.pushButton_17.clicked.connect(lambda:card_db_fun.funcoes_cartao.today(self))
        
+        # TIMERS
         
+        # self.timer.timeout.connect(card_db_fun.funcoes_cartao._clock_page_cards(self))
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(lambda:card_db_fun.funcoes_cartao._clock_page_cards(self))
+        self.timer.start(1000)
 
+        
+        card_db_fun.Main_page_Cards._itemlist_metas(self)
         #FILTRO DE EVENTOS#
         
         self.pushButton_8.installEventFilter(self)
@@ -114,7 +131,18 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.next_month_3.installEventFilter(self)
         self.previus_month_3.installEventFilter(self)
         self.pushButton_14.installEventFilter(self)
+        self.back_main_dash.installEventFilter(self)
+        self.pushButton_20.installEventFilter(self)
+        self.hide_cards_main.installEventFilter(self)
+        self.show_cards_main.installEventFilter(self)
+        self.hide_cards_det.installEventFilter(self)
+        self.show_cards_det.installEventFilter(self)
+        self.table_faturas_ind_3.installEventFilter(self)
+        self.listWidget.installEventFilter(self)
+        self.table_active_cards.installEventFilter(self)
+        self.pushButton_23.installEventFilter(self)
         
+
     
     def eventFilter(self, obj, event):
             if obj == self.pushButton_8 and event.type() == QtCore.QEvent.MouseButtonPress:
@@ -206,6 +234,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 card_db_fun.funcoes_cartao._pagar_fatura(self)
                 card_db_fun.funcoes_cartao._faturas(self)
                 card_db_fun.funcoes_cartao._current_date(self,"none")
+                card_db_fun.Main_page_Cards._top_main_values_update(self)
+                card_db_fun.Main_page_Cards._middle_main_values_update(self)
                 return card_db_fun.funcoes_cartao._Values_Individual(self)
             
             if obj == self.filter_dates_btn and event.type() == QtCore.QEvent.MouseButtonPress:
@@ -232,8 +262,59 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 btn = "config"
                 return effects.Effetc_slides.grid_lateral_menu(self,btn)
             
+            if obj == self.back_main_dash and event.type() == QtCore.QEvent.MouseButtonPress:
+                
+                return self.detalhes_cartao.setCurrentWidget(self.dashboard_cards)
+                
+            
+            if obj == self.pushButton_20 and event.type() == QtCore.QEvent.MouseButtonPress:
+                
+                return self.detalhes_cartao.setCurrentWidget(self.detalhes_cartaoPage1)
             
             
+            #todo Animation cards grid
+            if obj == self.hide_cards_main and event.type() == QtCore.QEvent.MouseButtonPress:
+                return effects.Effetc_slides._hide_group_cards(self)
+            if obj == self.hide_cards_det and event.type() == QtCore.QEvent.MouseButtonPress:
+                return effects.Effetc_slides._hide_group_cards(self)
+
+            if obj == self.table_faturas_ind_3 and event.type() == QtCore.Qt.LeftButton or event.type() == QtCore.Qt.RightButton: 
+                try:
+                    self.table_faturas_ind_3.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+                    linha = self.table_faturas_ind_3.currentRow()
+                    id = self.table_faturas_ind_3.item(linha,3).text()
+                    card_db_fun.Main_page_Cards._table_main_values_update(self,id)
+                except:
+                    a = (os.path.dirname(os.path.realpath(__file__))) #TEMPORARIO APENAS PARA CONSERTAR DBS ATUAIS
+                    if (os.path.exists(''+a+'/bando_de_valores.db')):
+                        card_db_fun.funcoes_cartao.update_temp_version_table(self)
+                    else:
+                        pass
+            if obj == self.listWidget and event.type() == QtCore.Qt.LeftButton or event.type() == QtCore.Qt.RightButton: 
+                try:
+                    currentcate = self.listWidget.currentItem().text()
+                    card_db_fun.Main_page_Cards._categoria_metas(self,currentcate)
+                except:
+                    pass
+
+            if obj == self.table_active_cards and event.type() == QtWidgets.QAbstractItemView.SelectRows:
+                try:
+                    self.table_active_cards.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+                    linha = self.table_active_cards.currentRow()
+                    id = self.table_active_cards.item(linha,6).text()
+                    card_db_fun.funcoes_cartao.style_config_card_talbe_slected(self,id)
+                    
+                except:
+                    pass
+                
+            if obj == self.pushButton_23 and event.type() == QtCore.QEvent.MouseButtonPress:
+                try:
+                    card_db_fun.funcoes_cartao._update_cards_config(self)
+                    card_db_fun.funcoes_cartao._update_table_config(self)
+                except:
+                    pass
+        # self.hide_cards_det.installEventFilter(self)
+        # self.show_cards_det.installEventFilter(self)
             return super(MainWindow,self).eventFilter(obj, event)
 
         
@@ -276,6 +357,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 mensagem = 'Procurando Por Atualização'
                 show_tray_message(self.ui, tray,titulo,mensagem)
                 self.update()
+                try:
+                    card_db_fun.funcoes_cartao.group_main(self)
+
+                except:
+                    pass
             else:
                 self.CONTAINER_geral.hide()
                 pyautogui.confirm(text='!!ATENÇÃO!!\nBanco de dados nao foi localizado, Por favor Criar arquivo em MENU>CRIAR BANCO DE DADOS',title='BANCO DE DADOS NAO LOCALIZADO', buttons=['OK', 'Cancel'])
@@ -286,13 +372,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.lineEdit_3.textChanged.connect(lambda:card_db_fun.funcoes_cartao.raname_value(self)) 
             self.lineEdit_2.textChanged.connect(lambda:card_db_fun.funcoes_cartao.raname_date(self)) 
             funcoes.funcoes_geral.data_e_hora(self)
+            
 
 
 
         if self.checkBox.isChecked():
             text = text + "  Usuario salvo"
             Aparecer_menssagem(text)
-
 
     #TODO APOS CHECK LOGIN, ABRE A MAIN:
     def shows(self):
@@ -426,7 +512,9 @@ def show_message():
     with open ('version.txt','wb') as novo_arquivo:
         novo_arquivo.write(resposta.content)
         
-
+    read = open('version.txt','r')
+    acess = read.readlines()
+    split = str(acess[1])
     try:
         resposta = requests.get('https://github.com/xjhowxjhow/HomeAplication1.0/blob/main/version/main.exe?raw=true')
         with open ('HomeAppold.exe','wb') as novo_arquivo:
@@ -439,8 +527,7 @@ def show_message():
             msg.setWindowTitle("Atualização")
             msg.setText("Nova atualização da aplicação foi encontrada, Clique em sair no icone na barra de tarefas para Sair da aplicação E Aplicar nova versao")
             msg.setInformativeText("Clique em hide para saber o que mudou")
-            split = open('version.txt','r').read().splitlines()
-            msg.setDetailedText(str(split))
+            msg.setDetailedText(split)
             msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
             msg.exec_()
             button = msg.clickedButton()
@@ -492,7 +579,6 @@ def exit_handler():
         a = (os.path.dirname(os.path.realpath(__file__)))
         if(os.path.exists(''+a+'/update/update.exe')):
             os.startfile(''+a+'/update/update.exe')
-            print("sim")
         sys.exit()
     
 
@@ -510,12 +596,8 @@ if __name__ == '__main__':
 
 
     app.setQuitOnLastWindowClosed(True)
-
     tray = QSystemTrayIcon(QIcon(u":/menu/pngwing.com.png"), app)
-    
     menu = QMenu()
-
-
     action_hide = QAction("Minimizar Janela")
     menu.addAction(action_hide)
 

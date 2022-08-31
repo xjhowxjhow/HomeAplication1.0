@@ -1,3 +1,5 @@
+from ctypes import util
+from operator import index
 from re import S
 import sqlite3
 from PySide2.QtCore import *
@@ -73,6 +75,19 @@ class Ui_db: # valores fixos
         
         #RETURN:
         return result[0][0]
+    def _fechamento(id):
+            
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        #QUERY
+        cursor.execute("SELECT fechamento FROM card_active WHERE id = "+str(id)+" ")
+        result = cursor.fetchall()
+
+        #RETURN:
+        return result[0][0]
      
     def _cartao(id):
         
@@ -121,6 +136,7 @@ class Return_Values_Calcs:
         
         #ARGUMENTS:
         card = 'extrato_cartao_%s'%(id)
+
         
         #QUERY
         cursor.execute("SELECT SUM (valor_transacao) FROM "+str(card)+" where strftime('%Y-%m', data_filter) = '"+mes+"' GROUP BY status_payment  HAVING status_payment = 'pendente' ")
@@ -474,6 +490,7 @@ class Charts_values:
                 
         data_select = "%s%s"%(ano,mes)
         
+        # cursor.execute("SELECT SUM (valor_transacao) FROM "+str(card)+" where strftime('%Y%m%d', data_filter) = '"+data_select+"' GROUP BY categoria_transacao  HAVING categoria_transacao = '"+categoria+"'")
         cursor.execute("SELECT data_filter FROM "+str(card)+" where strftime('%Y%m', data_filter) = '"+data_select+"' GROUP BY data_filter")
         dadoslidos=cursor.fetchall()
         index = 0
@@ -484,3 +501,274 @@ class Charts_values:
 
 
 
+class Main_page_values:
+    
+    def _cards_ids_all():
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        #ARGUMENTS:
+        
+        
+        #QUERY:
+        cursor.execute("SELECT id FROM card_active")
+        result = cursor.fetchall()
+        return result
+    
+    def _cards_names_all():
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        #ARGUMENTS:
+        
+        
+        #QUERY:
+        cursor.execute("SELECT id FROM card_active")
+        result = cursor.fetchall()
+        return result
+    
+    def _limite_all():
+        
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        #ARGUMENTS:
+        limite = []
+        cards_active = Main_page_values._cards_ids_all()
+        
+        #QUEDY:
+        index = 0
+        for i in cards_active:
+            card = 'extrato_cartao_%s'%(cards_active[index][0])
+
+            cursor.execute("SELECT limite FROM card_active WHERE id = "+str(cards_active[index][0])+" ")
+            result = cursor.fetchall()
+
+            #NONE:
+
+            if not result:
+                format = '0'
+
+            else:
+
+            #FORMAT TO FLOAT-STRING:
+                format = result[0][0]
+                format=("{:.2f}".format(format))
+            index +=1
+            limite.append(float(format))
+        
+        #RETURN:
+        soma = sum(limite)
+        return str(soma)
+    
+    def _limite_utilizado_all():
+        
+        
+        
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        #ARGUMENTS:
+        utilizado = []
+        cards_active = Main_page_values._cards_ids_all()
+        
+        #QUEDY:
+        index = 0
+        for i in cards_active:
+            card = 'extrato_cartao_%s'%(cards_active[index][0])
+            #QUERY:
+            cursor.execute("SELECT SUM (valor_transacao) FROM "+str(card)+" GROUP BY status_payment  HAVING status_payment = 'pendente'  ")
+            result = cursor.fetchall()
+            
+            #NONE:
+
+            if not result:
+                format = '0'
+
+            else:
+
+            #FORMAT TO FLOAT-STRING:
+                format = result[0][0]
+                format=("{:.2f}".format(format))
+            index +=1
+            utilizado.append(float(format))
+
+        #RETURN:
+        soma = sum(utilizado)
+        
+        format = soma
+        format=("{:.2f}".format(format))
+        
+        return str(format)
+    def _limite_disponivel_all():
+        #CONNECT DB
+    
+        
+        
+        
+        
+        utilizado = Main_page_values._limite_utilizado_all()
+        limite = Main_page_values._limite_all()
+        
+        # ARGS:
+        
+        
+        
+        #OPERATION:
+        
+        result = float(limite) - float(utilizado)
+
+        #FORMAT:
+        format = result
+        format=("{:.2f}".format(format))
+            #FORMAT TO FLOAT-STRING:
+
+  
+        
+        #RETURN:
+        return str(format)
+    def _porcentagem_utilizada_all(): # TODO Calculo
+        
+        #CONNECT DB
+        limite = Main_page_values._limite_all()
+        utilizado = Main_page_values._limite_utilizado_all()
+
+        #OPERATION:
+        result = float(utilizado)*100/float(limite)
+        
+        #FORMAT TO FLOAT-STRING:
+        # result=("{:.2f}".format(result))
+        
+        #RETURN:
+        return int(result)
+    
+    
+    def _fatura_atual_all(anomes):
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        #ARGUMENTS:
+        lista_de_faturas = []
+        cards = Main_page_values._cards_ids_all()
+        index = 0
+        for i in cards:
+            card = 'extrato_cartao_%s'%(cards[index][0])
+
+
+            #QUERY
+            cursor.execute("SELECT SUM (valor_transacao) FROM "+str(card)+" where strftime('%Y-%m', data_filter) = '"+anomes+"' GROUP BY status_payment  HAVING status_payment = 'pendente' ")
+            result=cursor.fetchall()
+
+            #NONE:
+
+            if not result:
+                format = '0.00'
+                lista_de_faturas.append(float(format))
+
+            else:
+
+            #FORMAT TO FLOAT-STRING:
+                format = result[0][0]
+                format=("{:.2f}".format(format))
+                lista_de_faturas.append(float(format))
+            index +=1
+        #RETURN:
+        soma = sum(lista_de_faturas)
+        format = soma
+        format=("{:.2f}".format(format))
+        
+        return str(format)
+        
+        
+        
+        
+    def _todas_faturas_all(id,ano):
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        #ARGUMENTS:
+        card = 'extrato_cartao_%s'%(id)
+        
+        
+        lista_meses= []
+
+        mes = '01'
+        ano = ano
+        janeiro = 0
+
+        
+
+      
+        
+        for i in range(12):
+            nome_mes = i+1
+            if  janeiro > 0:
+                add = 1
+            else:
+                add = 0
+                
+            format_date = datetime.strptime(mes+ano, '%m%Y')
+            date = format_date.date()
+            soma_mes = relativedelta(months=+add)
+            result= date + soma_mes
+            ab = str(result)
+            ano = ab[0:4]
+            mes =  ab[5:7]
+            filter = "%s-%s"%(ano,mes)
+            janeiro = janeiro +1
+            
+        #QUERY
+            #apenas pendente             cursor.execute("SELECT SUM (valor_transacao) FROM "+str(card)+"  where strftime('%Y-%m', data_filter) = '"+filter+"' GROUP BY status_payment  HAVING status_payment = 'pendente' ") #TODO Carrega FINAL_CARTAO DB e seta
+
+            cursor.execute("SELECT SUM (valor_transacao) FROM "+str(card)+"  where strftime('%Y-%m', data_filter) = '"+filter+"'") #TODO Carrega FINAL_CARTAO DB e seta
+            result = cursor.fetchall()
+            lista_meses.append(result[0][0])
+            invert = {'01':'Janeiro','02':'Fevereiro','03':'Marco','04':'Abril','05':'Maio','06':'Junho','07':'Julho','08':'Agosto','09':'Setembro','10':'Outubro','11':'Novembro','12':'Dezembro'}
+
+
+        #QT INDEX LINES:
+        lines = len(result)
+        
+        #RETURN:
+        return lista_meses
+
+
+
+
+
+class update_values:
+    
+    def update_cards_config(id,ti,li,fi,ve,fe):
+
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        #ARGUMENTS:
+        tabela ="card_active"
+        colunas = ["titular","limite","final","vencimento","fechamento"]
+        valuess = [ti,li,fi,ve,fe]
+        for i in range(len(colunas)):
+            cursor.execute("UPDATE "+str(tabela)+" SET "+str(colunas[i])+" = '"+str(valuess[i])+"' WHERE id = '"+str(id)+"'")
+            banco.commit()
+        banco.commit()
+        banco.close()
+        
+        #RETURN:
+        return True
+        
+    
+        

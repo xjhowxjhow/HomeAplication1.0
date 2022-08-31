@@ -19,7 +19,7 @@ class salva_dados:
                 pyautogui.alert('Banco de dados nao encontrado Criando no diretorio raiz favor aguarde')
                 banco=sqlite3.connect(''+a+'/bando_de_valores.db')
                 cursor=banco.cursor()
-                cursor.execute("CREATE TABLE IF NOT EXISTS card_active (id INTEGER,nome_cartao text,titular text,limite REAL,final INTEGER,vencimento text)")
+                cursor.execute("CREATE TABLE IF NOT EXISTS card_active (id INTEGER,nome_cartao text,titular text,limite REAL,final INTEGER,vencimento text,fechamento text)")
                 banco.close()
                 pyautogui.alert('Banco de dados Criado no diretorio raiz')
                 pyautogui.alert('Agora adicione seus cartoes na No botao acima')

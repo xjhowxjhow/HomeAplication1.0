@@ -11,6 +11,7 @@ from login_pyside24 import *
 
 EXPAND_CARD = 80;
 EXPAND_CARD2 = 80;
+HIDE_CARDS = 0;
 
 
 class efeitos_geral(Ui_MainWindow):
@@ -299,7 +300,12 @@ class Effetc_slides(Ui_MainWindow):
         self.stackedWidget_3.setTransitionSpeed(250)
         self.stackedWidget_3.setTransitionEasingCurve(QtCore.QEasingCurve.InExpo)
         self.stackedWidget_3.setSlideTransition(True)
-        
+    
+    def _conent_geral_cards(self):
+        self.detalhes_cartao.setTransitionDirection(QtCore.Qt.Horizontal)
+        self.detalhes_cartao.setTransitionSpeed(250)
+        self.detalhes_cartao.setTransitionEasingCurve(QtCore.QEasingCurve.InExpo)
+        self.detalhes_cartao.setSlideTransition(True)
 
     def grid_lateral_menu(self,botao):
         
@@ -344,11 +350,13 @@ class Effetc_slides(Ui_MainWindow):
         btn = direction
         duration = 600 #duração animação
         geometry = 0
+        
+        withs = self.extrat_meses.frameGeometry().width()
         if btn == "Next":
             self.animation = QPropertyAnimation(object, b"maximumWidth")
             self.animation.setDuration(duration)
             self.animation.setStartValue(0)
-            self.animation.setEndValue(1300)
+            self.animation.setEndValue(withs)
             self.animation.setEasingCurve(QEasingCurve.OutExpo)
             self.animation.start()
             
@@ -357,7 +365,7 @@ class Effetc_slides(Ui_MainWindow):
             self.animation = QPropertyAnimation(object, b"maximumWidth")
             self.animation.setDuration(duration)
             self.animation.setStartValue(0)
-            self.animation.setEndValue(1200)
+            self.animation.setEndValue(withs)
             self.animation.setEasingCurve(QEasingCurve.OutExpo)
             self.animation.start()
         
@@ -368,3 +376,65 @@ class Effetc_slides(Ui_MainWindow):
         self.stack_extrato_pages.setTransitionSpeed(200)
         self.stack_extrato_pages.setTransitionEasingCurve(QtCore.QEasingCurve.OutExpo)
         self.stack_extrato_pages.setSlideTransition(True)
+        
+        
+    
+    def _hide_group_cards(self):
+
+        duration = 600 #duração animação
+        geometry = 0
+        object = self.content_cartao
+        global HIDE_CARDS
+        
+        
+        if HIDE_CARDS == 1:
+            self.animation = QPropertyAnimation(object, b"maximumWidth")
+            self.animation.setDuration(duration)
+            self.animation.setStartValue(0)
+            self.animation.setEndValue(440)
+            self.animation.setEasingCurve(QEasingCurve.OutExpo)
+            self.animation.start()
+            HIDE_CARDS = 0
+            icon = QIcon()
+            icon.addFile(u":/backgroud/src-page-cartoes/back.png", QSize(), QIcon.Normal, QIcon.Off)
+            self.hide_cards_main.setIcon(icon)
+            self.hide_cards_det.setIcon(icon)
+
+            
+  
+        else:
+            self.animation = QPropertyAnimation(object, b"maximumWidth")
+            self.animation.setDuration(duration)
+            self.animation.setStartValue(440)
+            self.animation.setEndValue(0)
+            self.animation.setEasingCurve(QEasingCurve.OutExpo)
+            self.animation.start()
+            HIDE_CARDS = 1
+            icon14 = QIcon()
+            icon14.addFile(u":/backgroud/src-page-cartoes/next.png", QSize(), QIcon.Normal, QIcon.Off)
+            self.hide_cards_main.setIcon(icon14)
+            self.hide_cards_det.setIcon(icon14)
+
+    def _icon_main(self,id):
+    
+        if id == 'C6':
+            icon = "url(:/menu/c6.jpg)"
+            return icon
+        if id == 'NUBANK':   
+            icon = "url(:/menu/nu-icon.png)"
+            return icon
+        if id == 'BTG':
+            icon = "url(:/menu/btg-icon.png)"
+            return icon
+        if id == 'SANTANDER':
+            icon = "url(:/menu/santander-icon.png)"
+            return icon
+        if id == 'ITAU':
+            icon = "url(:/menu/itau-icon.png)"
+            return icon
+        if id == 'BRADESCO':
+            icon = "url(:/menu/bradesco-icon.png)"
+            return icon
+        if id == 'CAIXA ECONOMICA':
+            icon = "url(:/menu/caixa-icon.png)"
+            return icon

@@ -9,6 +9,7 @@ import threading
 import card_db_test
 import calendar
 import locale
+import emoji
 from PySide2.QtCore import *
 from PySide2 import QtWidgets
 from PySide2.QtGui import *
@@ -33,7 +34,26 @@ EXTRATO_ATUAL = 0;
 
 
 class funcoes_cartao(Ui_MainWindow):    
+    def _clock_page_cards(self): #NT
+        current_time = QDateTime.currentDateTime()
+        label_time = current_time.toString('dd/MM/yyyy hh:mm:ss')
+        self.label_38.setText(label_time)
+        current_time = QTime.currentTime()
+        conditions= int(current_time.toString('hh'))
+        
+        if conditions  > 0 and conditions < 4:
+            self.label_36.setText("Olá, Boa noite"+emoji.emojize(" :noite_estrelada:", language="pt"))
+            self.frame_34.setStyleSheet(u"background-image: url(:/time/menu/night.png);background-repeat:no-repeat;background-position:center;")
 
+        elif conditions  > 4 and conditions < 12:
+            self.label_36.setText("Olá, Bom dia"+emoji.emojize(" :praia_e_guarda-sol:", language="pt"))
+            self.frame_34.setStyleSheet(u"background-image: url(:/time/menu/day.png);background-repeat:no-repeat;background-position:center;")
+        elif conditions >= 12 and conditions < 18:
+            self.label_36.setText("Olá, Boa tarde"+emoji.emojize(" :nuvem:", language="pt"))
+            self.frame_34.setStyleSheet(u"background-image: url(:/time/menu/tarde.png);background-repeat:no-repeat;background-position:center;")
+        elif conditions >= 18 and conditions < 24:
+            self.label_36.setText("Olá, Boa noite"+emoji.emojize(" :noite_estrelada:", language="pt"))
+            self.frame_34.setStyleSheet(u"background-image: url(:/time/menu/night.png);background-repeat:no-repeat;background-position:center;")
 
     def _start_values(self): 
         def thead():
@@ -55,6 +75,7 @@ class funcoes_cartao(Ui_MainWindow):
             mes = funcoes_cartao._mes(self)
             
             
+            
             for i in range(indexdb): 
 
                 #CAPTURA VALOR DAS COMPRAS TOTAL   
@@ -63,13 +84,13 @@ class funcoes_cartao(Ui_MainWindow):
 
                 #LIMITE UTILIZADO :
                 limite_utilizado = card_db_test.Return_Values_Calcs._limite_utilizado(listdb)
-                self.labelTitle_8.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt; font-weight:600; color:#5c9bcf;\">Limite Utilizado:</span></p><p><span style=\" font-size:11pt; font-weight:600; color:#5c9bcf;\">R$"+str(limite_utilizado)+"</span></p></body></html>", None))
+                self.labelTitle_8.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt; color:#5c9bcf;\">Limite Utilizado:</span></p><p><span style=\" font-size:11pt; font-weight:600; color:#5c9bcf;\">R$"+str(limite_utilizado)+"</span></p></body></html>", None))
 
 
                 #LIMITE DISPONIVEL 
 
                 limite_disponivel= card_db_test.Return_Values_Calcs._limite_disponivel(listdb)
-                self.labelTitle_10.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt; font-weight:600; color:#00aa00;\">Limite Disponivel</span></p><p><span style=\" font-size:11pt; font-weight:600; color:#00aa00;\">R$"+str(limite_disponivel)+"</span></p></body></html>", None))
+                self.labelTitle_10.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt; color:#00aa00;\">Limite Disponivel</span></p><p><span style=\" font-size:11pt; font-weight:600; color:#00aa00;\">R$"+str(limite_disponivel)+"</span></p></body></html>", None))
                 
                 
                 for val in range (2):
@@ -77,6 +98,16 @@ class funcoes_cartao(Ui_MainWindow):
                     #SETA FATURA CARTAO E LIMITE DISPONIVEL
                     card_info = ['valor_faturaatual_cartao_','valor_limitedisponivel_cartao_']
                     fatura_atual = card_db_test.Return_Values_Calcs._fatural_atual(listdb,mes)
+                    if float(fatura_atual) == 0:
+                        mes2 = funcoes_cartao._mes_add_2(self)
+                        fatura_atual = card_db_test.Return_Values_Calcs._fatural_atual(listdb,mes2)
+
+                        if float(fatura_atual) == 0:
+                            mes = funcoes_cartao._mes(self)
+                            fatura_atual = card_db_test.Return_Values_Calcs._fatural_atual(listdb,mes)
+
+                            
+                            
                     limite_disponivel= card_db_test.Return_Values_Calcs._limite_disponivel(listdb)
 
                     text = [(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"justify\"><span style=\" font-size:20pt; font-weight:600; color:#ffffff\">R$"+str(fatura_atual)+"</span></p></body></html>", None)),
@@ -121,6 +152,8 @@ class funcoes_cartao(Ui_MainWindow):
 
     def _addRow(self): #TODO ADICIONA NOVA LINHA NO EXTRATO CARTAO #NTS
         def thead(self):
+            global EXTRATO_ATUAL
+            card = EXTRATO_ATUAL
             label_0 = self.lineEdit.text() # nome str
             label_2 = self.lineEdit_2.text() # data str
             label_3_ui = self.lineEdit_3.text() #valor int
@@ -160,27 +193,46 @@ class funcoes_cartao(Ui_MainWindow):
                 data_transacao_original = self.lineEdit_2.text() # para ui
                 bug_fix = 0
                 index_parcelas = 0
-                
+
                 
                 data_transacao_original = funcoes_cartao._data_br_to_eng(self,data_transacao_original)
                 data_transacao = funcoes_cartao._data_br_to_eng(self,data_transacao)
                 
+
                 
+                fechamento = card_db_test.Ui_db._fechamento(card)
+                vs_data_transacao = data_transacao_original[8:10]
                 
-                
+                proximo_fat = 1
+                parcelado_prox_fatura = False
+                #FECHAMENTO  AQ
+                if vs_data_transacao >= fechamento: 
+                    proximo_fat = 2 # lança no proximo fat
+                    parcelado_prox_fatura = True
+
+                else:
+                    proximo_fat = 1 #lança normalmente fatura ainda nao fechada
+                    parcelado_prox_fatura = False
+
                 rand_id = randint(0, 999999) # ID DA COMPRA
                 
-                
+                ind= 2
+
                 for i in range(int(parcelas)):
                     
                     soma_data = data_transacao
 
                     
-
+                    if parcelado_prox_fatura == True and ind == 2:
+                        proximo_fat = ind
+                        ind = ind -1
+                    else:
+                        proximo_fat = 1
+                    
                     data_e_hora_em_texto = soma_data
                     format_date = datetime.strptime(data_e_hora_em_texto, '%Y-%m-%d')
                     date = format_date.date()
-                    soma_mes = relativedelta(months=+1)
+                    soma_mes = relativedelta(months=+proximo_fat)
                     ab= date + soma_mes
                     data_transacao = str(ab)
                     soma_data =str(ab)
@@ -209,20 +261,19 @@ class funcoes_cartao(Ui_MainWindow):
         
                     self.extrato_cartao_0.setItem(rowPosition , 1, QtWidgets.QTableWidgetItem(categoria_transacao))
                     self.extrato_cartao_0.setItem(rowPosition , 2, QtWidgets.QTableWidgetItem(nome_transacao))
-                    self.extrato_cartao_0.setItem(rowPosition , 3, QtWidgets.QTableWidgetItem(data_transacao_original)) # data original para ui
+                    self.extrato_cartao_0.setItem(rowPosition , 3, QtWidgets.QTableWidgetItem(data_transacao_original)) # data original para ui dia da compra
                     self.extrato_cartao_0.setItem(rowPosition , 4, QtWidgets.QTableWidgetItem(operacao))
                     self.extrato_cartao_0.setItem(rowPosition , 5, QtWidgets.QTableWidgetItem(str(qt_parcel)))
                     self.extrato_cartao_0.setItem(rowPosition , 6, QtWidgets.QTableWidgetItem(str(valor)))
                     self.extrato_cartao_0.setItem(rowPosition , 7, QtWidgets.QTableWidgetItem(str(rand_id)))
-                    self.extrato_cartao_0.setItem(rowPosition , 8, QtWidgets.QTableWidgetItem(soma_data)) # data somada para filtros
+                    self.extrato_cartao_0.setItem(rowPosition , 8, QtWidgets.QTableWidgetItem(soma_data)) # data somada para filtros dia que cai na fatura
                     self.extrato_cartao_0.setItem(rowPosition , 9, QtWidgets.QTableWidgetItem(stats_payment))
                     
                     
                     
 
                     # TODO COPIA DE FUNÇÃO SALVA EXTRATO
-                    global EXTRATO_ATUAL
-                    card = EXTRATO_ATUAL
+
                     
                     iddb = 'extrato_cartao_%s (id)'%(card)
                     db = 'extrato_cartao_%s'%(card)
@@ -260,6 +311,8 @@ class funcoes_cartao(Ui_MainWindow):
                 funcoes_cartao.carrega_extrato_mes(self,str(today))
                 funcoes_cartao._Values_Individual(self)
                 funcoes_cartao.icontable_extrato(self)
+                Main_page_Cards._top_main_values_update(self)
+                Main_page_Cards._middle_main_values_update(self)
 
                 try:
                     self.grafico_categoria.setParent(None)
@@ -269,6 +322,19 @@ class funcoes_cartao(Ui_MainWindow):
 
         thread = threading.Thread(target=thead(self))
         thread.start()
+
+
+    def _update_cards_config(self):
+
+        li =self.adclimite.text()
+        ti =self.adctitular.text()
+        fi= self.adcfinal.text()
+        ve =self.adcvencimento.text()
+        fe = self.adcfechamento.text()
+        linha = self.table_active_cards.currentRow()
+        id = self.table_active_cards.item(linha,6).text()
+
+        card_db_test.update_values.update_cards_config(id,ti,li,fi,ve,fe)
 
 
     def icontable_extrato(self): # TODO MUDA ICONES QTABLEWIDGET
@@ -423,31 +489,58 @@ class funcoes_cartao(Ui_MainWindow):
                 dadoslidos = cursor.fetchall()
 
 
-                nome_col = ["nome_cartao","titular","limite","final","vencimento"]
+                nome_col = ["nome_cartao","titular","limite","final","vencimento","fechamento","id"]
 
-
-                index: int = 0
+                index = 0
                 for linha in dadoslidos:
-
 
                     rowPosition = self.table_active_cards.rowCount()
                     self.table_active_cards.insertRow(rowPosition)
-                    
 
-                    lista = []
-                    for col in range(0,5):
+
+                    for col in range(7):
                         cursor = banco.cursor()
-                        cursor.execute("SELECT "+str(nome_col[col])+" FROM card_active")
+                        cursor.execute("SELECT "+str(nome_col[col])+" FROM card_active WHERE id = "+str(linha[0]))
                         dadoslidos2 = cursor.fetchall()
-                        lista.append(dadoslidos2[index][0])
-                        self.table_active_cards.setItem(index, col, QtWidgets.QTableWidgetItem(str(dadoslidos2[index][0]))) 
 
-                    index = index+1
+                        self.table_active_cards.setItem(index, col, QtWidgets.QTableWidgetItem(str(dadoslidos2[0][0]))) 
+                    index +=1
             except:
                 pass
         thread = threading.Thread(target=thead(self))
         thread.start()
 
+    def _update_table_config(self):
+        def thead():
+            try:
+                a = (os.path.dirname(os.path.realpath(__file__)))            
+                banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+
+
+                cursor = banco.cursor()
+                cursor.execute("SELECT id FROM card_active") 
+                dadoslidos = cursor.fetchall()
+
+
+                nome_col = ["nome_cartao","titular","limite","final","vencimento","fechamento","id"]
+
+                index = 0
+                for linha in dadoslidos:
+
+                    
+
+
+                    for col in range(7):
+                        cursor = banco.cursor()
+                        cursor.execute("SELECT "+str(nome_col[col])+" FROM card_active WHERE id = "+str(linha[0]))
+                        dadoslidos2 = cursor.fetchall()
+
+                        self.table_active_cards.setItem(index, col, QtWidgets.QTableWidgetItem(str(dadoslidos2[0][0]))) 
+                    index +=1
+            except:
+                pass
+        thread = threading.Thread(target=thead())
+        thread.start()
 
     def destroy_frame_card(self): #NA PAG2 de config, ao remover um card, REMOVE DO DB, E REMOVE FRAME PAG 1 #T
         def thead(self):
@@ -524,6 +617,10 @@ class funcoes_cartao(Ui_MainWindow):
             else:
                 pyautogui.confirm(text='Nenhum cartão localizado ou Selecionado', title='Alerta', buttons=['OK'])
                 pass
+            try:
+                funcoes_cartao.group_main(self)
+            except:
+                pass
         thread = threading.Thread(target=thead(self))
         thread.start()
 
@@ -553,6 +650,7 @@ class funcoes_cartao(Ui_MainWindow):
             limite = self.adclimite.text()
             final = self.adcfinal.text()
             vencimento = self.adcvencimento.text()
+            fehcamento = self.adcfechamento.text()
             
             if (titular== '') and (limite== '')  and (final== '') and (vencimento== ''):
                 pyautogui.confirm(text='Não foi preenchido os campos: Titular, Limite, Final do cartao e Vencimento ', title='Lançamento incorreto!', buttons=['OK', 'Cancel'])
@@ -581,11 +679,10 @@ class funcoes_cartao(Ui_MainWindow):
                 self.table_active_cards.insertRow(rowPosition)
                 colunas = self.table_active_cards.columnCount()
                 cartao_selected = self.select_card.currentText()
-
+                rand_id = randint(0, 999999) 
                 for i in range(colunas):
 
-                    labels = [self.select_card.currentText(),self.adctitular.text(),self.adclimite.text(),self.adcfinal.text(),self.adcvencimento.text()]
-
+                    labels = [self.select_card.currentText(),self.adctitular.text(),self.adclimite.text(),self.adcfinal.text(),self.adcvencimento.text(),self.adcfechamento.text(),str(rand_id)]
                     self.table_active_cards.setItem(rowPosition , i, QtWidgets.QTableWidgetItem(labels[i]))
 
                     #TODO AGORA VAI SALVAR NO DB
@@ -605,7 +702,7 @@ class funcoes_cartao(Ui_MainWindow):
                 #AQUI CRIA O ID DE ACORDO COM A QUANTIDADE DE CARTOES
 
 
-                rand_id = randint(0, 999999) 
+
 
 
 
@@ -616,9 +713,11 @@ class funcoes_cartao(Ui_MainWindow):
 
                 colunas = self.table_active_cards.columnCount()
                 for i in range(colunas):
-                    nome_col = [ "nome_cartao", "titular", "limite","final","vencimento"]
+
+                    nome_col = ["nome_cartao", "titular", "limite","final","vencimento","fechamento","id"]
 
                     cardsrow= self.table_active_cards.item(rowPosition,i).text()
+
                     # cursor.execute("UPDATE card_active SET nome_cartao = '"+str()+"' WHERE id = '"+str(sla)+"'")
                     cursor.execute("UPDATE card_active SET "+str(nome_col[i])+" = '"+str(cardsrow)+"' WHERE id = '"+str(rand_id)+"'")
                     banco.commit()
@@ -677,149 +776,124 @@ class funcoes_cartao(Ui_MainWindow):
                     self.botoes[0].setText(text_fimal)
                 except:
                     pass
+                
+                try:
+                    funcoes_cartao.group_main(self)
+                except:
+                     pass  
         thread = threading.Thread(target=thead(self))
         thread.start()
 
 
     def _Values_Individual(self): # valor do grafico do extrato esse #NTS
-        def thead(): 
-            a = (os.path.dirname(os.path.realpath(__file__)))
-            banco = sqlite3.connect(''+a+'/bando_de_valores.db')
-            cursor = banco.cursor()
-            global EXTRATO_ATUAL 
-            id =EXTRATO_ATUAL
-            mes = funcoes_cartao._mes(self)
-            
-            
-            #TODO CAPTURA FATURA MES:
-            
-            fatura_atual = card_db_test.Return_Values_Calcs._fatural_atual(id,mes)
-            
+        # def thead(): 
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        global EXTRATO_ATUAL 
+        id =EXTRATO_ATUAL
+        mes = funcoes_cartao._mes(self)
+        
+        
+        #TODO CAPTURA FATURA MES:
+        
+        fatura_atual = card_db_test.Return_Values_Calcs._fatural_atual(id,mes)
+        if float(fatura_atual) == 0:
+            mes2 = funcoes_cartao._mes_add_2(self)
+            fatura_atual = card_db_test.Return_Values_Calcs._fatural_atual(id,mes2)
 
-            #TODO PEGAR TOTAL UTILIZADO:
-            
-            limite_utilizado = card_db_test.Return_Values_Calcs._limite_utilizado(id)
-            
-            #TODO CAPTURA LIMITE DISPONIVEL:
-            
-            limite_disponivel = card_db_test.Return_Values_Calcs._limite_disponivel(id)
-            
-            
-            #TODO CAPTURA PORCETAGEM UTILIZADA:
-            
-            porcentagem_utilizada = card_db_test.Return_Values_Calcs._porcentagem_utilizada(id)
-            
-            # SETA PORCENTAGEM:
-            
-            self.labelPercentage_2.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:20pt;\">"+porcentagem_utilizada+"</span><span style=\" font-size:20pt; vertical-align:super;\">%</span></p></body></html>", None))
-            
-            #MUDA PROGRESS BAR :
-            bar = ("{:.0f}".format(float(porcentagem_utilizada))) #TODO Pega o porcetual sem ponto 
-            fix= int(bar) #todo FIX para caso nao seja dezena o valor e bugar a barra 
-            if fix >= 100:
-                bar = "99"
-            if fix <= 9:
-                bar = ("0{:.0f}".format(float(porcentagem_utilizada)))
-            self.circularProgress_2.setStyleSheet(u"QFrame{\n"
-            "	border-radius: 85px;\n"
-            "	background-color: qconicalgradient(cx:0.5, cy:0.5, angle:90, stop:0."+bar+"1 rgba(255, 0, 127, 0), stop:0."+bar+"0 rgba(85, 170, 255, 255));\n"
-            "}")
-            
-            #muda limite barra
-            try:
-                setbarra = int(bar) 
-                usado=setbarra/100*750
-                #todo muda tamnho da barra limite usado
-                self.usado.setMaximumSize(QSize(usado, 16777215))
-                if fix > 80:
-                    pass
+            if float(fatura_atual) == 0:
+                mes = funcoes_cartao._mes(self)
+                fatura_atual = card_db_test.Return_Values_Calcs._fatural_atual(id,mes)
 
-                    
-            except:
-                pass
+        #TODO PEGAR TOTAL UTILIZADO:
+        
+        limite_utilizado = card_db_test.Return_Values_Calcs._limite_utilizado(id)
+        
+        #TODO CAPTURA LIMITE DISPONIVEL:
+        
+        limite_disponivel = card_db_test.Return_Values_Calcs._limite_disponivel(id)
+        
+        
+        #TODO CAPTURA PORCETAGEM UTILIZADA:
+        
+        porcentagem_utilizada = card_db_test.Return_Values_Calcs._porcentagem_utilizada(id)
+        # SETA PORCENTAGEM:
+        
+        self.labelPercentage_2.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:20pt;\">"+porcentagem_utilizada+"</span><span style=\" font-size:20pt; vertical-align:super;\">%</span></p></body></html>", None))
+        
+        #MUDA PROGRESS BAR :
+        bar = ("{:.0f}".format(float(porcentagem_utilizada))) #TODO Pega o porcetual sem ponto 
+        fix= int(bar) #todo FIX para caso nao seja dezena o valor e bugar a barra 
+        if fix >= 100:
+            bar = "99"
+        if fix <= 9:
+            bar = ("0{:.0f}".format(float(porcentagem_utilizada)))
+        self.circularProgress_2.setStyleSheet(u"QFrame{\n"
+        "	border-radius: 85px;\n"
+        "	background-color: qconicalgradient(cx:0.5, cy:0.5, angle:90, stop:0."+bar+"1 rgba(255, 0, 127, 0), stop:0."+bar+"0 rgba(85, 170, 255, 255));\n"
+        "}")
+        try:
             
-            try:
-                
+            #TODO LIMITE TOTAL
+            #todo VALORE RESTANTE
+            for val in range (2):
+                card_info = ['valor_faturaatual_cartao_','valor_limitedisponivel_cartao_']
+                text = [(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"justify\"><span style=\" font-size:20pt; font-weight:600; color:#ffffff\">R$"+str(fatura_atual)+"</span></p></body></html>", None)),
+                        (QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"justify\"><span style=\" font-weight:600; color:#ffffff;\">R$"+str(limite_disponivel)+"</span></p></body></html>", None))]
+                self.botoes = self.findChildren(QLabel , str(card_info[val]+id))
+                self.botoes[0].setText(text[val])
+        except:
+            pass
+        
+        try:
+            self.progressbar_indvidual.setValue(int(bar))
+        except:
+            pass
+        
+        id =int(EXTRATO_ATUAL)
+        funcoes_cartao._limite_disponive_usado(self,id)
 
-                #TODO LIMITE TOTAL
-
-                #todo VALORE RESTANTE
-
-
-                for val in range (2):
-                    card_info = ['valor_faturaatual_cartao_','valor_limitedisponivel_cartao_']
-                    text = [(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"justify\"><span style=\" font-size:20pt; font-weight:600; color:#ffffff\">R$"+str(fatura_atual)+"</span></p></body></html>", None)),
-                            (QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"justify\"><span style=\" font-weight:600; color:#ffffff;\">R$"+str(limite_disponivel)+"</span></p></body></html>", None))]
-                    self.botoes = self.findChildren(QLabel , str(card_info[val]+id))
-                    self.botoes[0].setText(text[val])
-
-            except:
-                pass
-
-            id =int(EXTRATO_ATUAL)
-            funcoes_cartao._limite_disponive_usado(self,id)
-
-
-        thread = threading.Thread(target=thead)
-        thread.start()
 
 
     def remove_compra(self): #NAO TINHA THEAD 
-        def thead():
-
-            global EXTRATO_ATUAL
-            id_fatura =EXTRATO_ATUAL
 
 
-            extrato_card_selected ='extrato_cartao_'+EXTRATO_ATUAL
+        global EXTRATO_ATUAL
+        id_fatura =EXTRATO_ATUAL
+        extrato_card_selected ='extrato_cartao_'+EXTRATO_ATUAL
+            #CAPTURA VALOR DAS COMPRAS TOTAL   
+        listdb= extrato_card_selected
+        linha_selecionada = self.extrato_cartao_0.currentRow()
+        
+        id_remove = self.extrato_cartao_0.item(int(linha_selecionada),7).text()
+        self.extrato_cartao_0.removeRow(linha_selecionada)
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        lista_ids_active = []
+        
+        cursor.execute("SELECT * FROM '"+str(listdb)+"'") 
+        dadoslidos = cursor.fetchall()
+        inde = 0
+        for i in  dadoslidos:
+            lista_ids_active.append(dadoslidos[inde])
+            inde = inde +1
+        #pega o id 
+        cursor.execute("DELETE FROM '"+str(listdb)+"' WHERE id = "+str(id_remove)+"")
+        banco.commit()
+        banco.close()
+        
+        funcoes_cartao._Values_Individual(self)
+        Main_page_Cards._top_main_values_update(self)
+        Main_page_Cards._middle_main_values_update(self)
 
+        
+        try:
+            self.grafico_categoria.setParent(None)
+        except:
+            pass
 
-
-                #CAPTURA VALOR DAS COMPRAS TOTAL   
-            listdb= extrato_card_selected
-
-
-            linha_selecionada = self.extrato_cartao_0.currentRow()
-            
-
-
-            id_remove = self.extrato_cartao_0.item(int(linha_selecionada),7).text()
-
-            self.extrato_cartao_0.removeRow(linha_selecionada)
-
-
-            a = (os.path.dirname(os.path.realpath(__file__)))
-            banco = sqlite3.connect(''+a+'/bando_de_valores.db')
-            cursor = banco.cursor()
-
-            lista_ids_active = []
-            
-            cursor.execute("SELECT * FROM '"+str(listdb)+"'") 
-
-            dadoslidos = cursor.fetchall()
-
-            inde = 0
-            for i in  dadoslidos:
-                lista_ids_active.append(dadoslidos[inde])
-                inde = inde +1
-
-
-
-
-            #pega o id 
-            cursor.execute("DELETE FROM '"+str(listdb)+"' WHERE id = "+str(id_remove)+"")
-            banco.commit()
-            banco.close()
-            
-            funcoes_cartao._Values_Individual(self)
-            
-
-            try:
-                self.grafico_categoria.setParent(None)
-            except:
-                pass
-        thread = threading.Thread(target=thead)
-        thread.start()
 
 
     def retorna_style_card(): #NT
@@ -1183,6 +1257,9 @@ class funcoes_cartao(Ui_MainWindow):
         if "ver_compras_cartao_" in self.functio[0]:
             a = (os.path.dirname(os.path.realpath(__file__)))
             if (os.path.exists(''+a+'/bando_de_valores.db')):
+                if self.detalhes_cartao.currentIndex() == 1:
+                    self.detalhes_cartao.setCurrentIndex(0)
+                
                 global EXTRATO_ATUAL
                 EXTRATO_ATUAL = index
                 execut = lambda:effects.efeitos_geral.expandecomprascartao(self)
@@ -1207,6 +1284,7 @@ class funcoes_cartao(Ui_MainWindow):
                         self.creat_eraser[tres].setParent(None)
                 except:
                     pass
+                return 0
             else:
                 pass
 
@@ -1287,6 +1365,38 @@ class funcoes_cartao(Ui_MainWindow):
         self.logoadc.setStyleSheet(u"border: 0px;\n"
                                     "background-image: "+style[2]+";\n"
                                     "")
+
+    def style_config_card_talbe_slected(self,id):
+    
+        selected = card_db_test.Ui_db._cartao(id)
+        
+        style = effects.efeitos_geral.style_sheet_config(self,selected)
+        
+        self.frameadc.setStyleSheet(u"QFrame{background-color: "+style[0]+";\n"
+                                     "border-radius: 10px;\n"
+                                     "border: 3px solid  rgb(0, 0, 0);\n"
+                                     "border:0px;\n"
+                                     "}\n"
+                                     "\n"
+                                     "QFrame:hover{\n"
+                                     "border: 3px solid  "+style[1]+";\n"
+                                     "\n"
+                                     "}")
+        self.logoadc.setStyleSheet(u"border: 0px;\n"
+                                    "background-image: "+style[2]+";\n"
+                                    "")
+        titular = card_db_test.Ui_db._titular(id)
+        final_cartao = card_db_test.Ui_db._final_cartao(id)
+        limite = card_db_test.Ui_db._limite(id)
+        vencimento = card_db_test.Ui_db._vencimento(id)
+        fechamento = card_db_test.Ui_db._fechamento(id)
+
+        self.adclimite.setText(limite)
+        self.adctitular.setText(titular)
+        self.adcfinal.setText(str(final_cartao))
+        self.adcvencimento.setText(str(vencimento))
+        self.adcfechamento.setText(str(fechamento))
+        
 
 
     def carrega_extrato_mes(self, mes): #NTS
@@ -1479,14 +1589,15 @@ class funcoes_cartao(Ui_MainWindow):
         self.label_28.setText('R$'+limite)
         #VENCIMENTO:
         vencimento = card_db_test.Ui_db._vencimento(id)
-        self.label_32.setText('Todo dia '+str(vencimento))
+        fechamento = card_db_test.Ui_db._fechamento(id)
+        self.label_32.setText('Todo dia '+str(fechamento))
         self.label_34.setText('Todo dia '+str(vencimento))
         #LIMITE UTILIZADO :
         limite_utilizado = card_db_test.Return_Values_Calcs._limite_utilizado(id)
-        self.labelTitle_8.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt; font-weight:600; color:#5c9bcf;\">Limite Utilizado:</span></p><p><span style=\" font-size:11pt; font-weight:600; color:#5c9bcf;\">R$"+str(limite_utilizado)+"</span></p></body></html>", None))
+        self.labelTitle_8.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt; color:#5c9bcf;\">Limite Utilizado:</span></p><p><span style=\" font-size:14pt;  color:#5c9bcf;\">R$"+str(limite_utilizado)+"</span></p></body></html>", None))
         #LIMITE DISPONIVEL
         limite_disponivel= card_db_test.Return_Values_Calcs._limite_disponivel(id)
-        self.labelTitle_10.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt; font-weight:600; color:#00aa00;\">Limite Disponivel</span></p><p><span style=\" font-size:11pt; font-weight:600; color:#00aa00;\">R$"+str(limite_disponivel)+"</span></p></body></html>", None))
+        self.labelTitle_10.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt; color:#00aa00;\">Limite Disponivel</span></p><p><span style=\" font-size:14pt;  color:#00aa00;\">R$"+str(limite_disponivel)+"</span></p></body></html>", None))
         self.label_30.setText('R$'+limite_disponivel)
         #NOME DO CARTAO:
         nome = card_db_test.Ui_db._cartao(id)
@@ -1507,6 +1618,15 @@ class funcoes_cartao(Ui_MainWindow):
         mes = '%s-%s'%(ano,mesf)
         return mes
     
+    def _mes_add_2(self): #TODO SOMA 2 MESES A DATA ATUAL
+        today = date.today()
+        soma_mes = relativedelta(months=+2)
+        mes= today + soma_mes
+        mes = str(mes)
+        ano = mes[0:4]
+        mesf = mes[5:7]
+        mes = '%s-%s'%(ano,mesf)
+        return mes
     
     def _mes2(self): #sempre retora proximo mes e ano atual 082022
         today = date.today()
@@ -1516,6 +1636,48 @@ class funcoes_cartao(Ui_MainWindow):
         ano = mes[0:4]
         mesf = mes[5:7]
         mes = '%s%s'%(mesf,ano)
+        return mes
+    
+    def _mes_apenas(self): #sempre retora proximo mes atual 082022
+        today = date.today()
+        soma_mes = relativedelta(months=+1)
+        mes= today + soma_mes
+        mes = str(mes)
+        ano = mes[0:4]
+        mesf = mes[5:7]
+        mes = '%s'%(mesf)
+        
+        return mes
+    def _mes_apenas_str(self): #sempre retora proximo mes em TEXTO JANEIROEX
+        today = date.today()
+        soma_mes = relativedelta(months=+1)
+        mes= today + soma_mes
+        mes = str(mes)
+        ano = mes[0:4]
+        mesf = mes[5:7]
+        mes = '%s'%(mesf)
+        dict = {'01':'Janeiro','02':'Fevereiro','03':'Marco','04':'Abril','05':'Maio','06':'Junho','07':'Julho','08':'Agosto','09':'Setembro','10':'Outubro','11':'Novembro','12':'Dezembro'}
+        mes = dict[mes]
+        return mes
+    
+    def _mes_apenas_str_2(self): #sempre retora proximos 2 mes em TEXTO JANEIROEX
+        today = date.today()
+        soma_mes = relativedelta(months=+2)
+        mes= today + soma_mes
+        mes = str(mes)
+        ano = mes[0:4]
+        mesf = mes[5:7]
+        mes = '%s'%(mesf)
+        dict = {'01':'Janeiro','02':'Fevereiro','03':'Marco','04':'Abril','05':'Maio','06':'Junho','07':'Julho','08':'Agosto','09':'Setembro','10':'Outubro','11':'Novembro','12':'Dezembro'}
+        mes = dict[mes]
+        return mes
+    def _ano_apenas(self): #sempre ano atual 082022
+        today = date.today()
+        soma_mes = relativedelta(months=+1)
+        mes= today + soma_mes
+        mes = str(mes)
+        ano = mes[0:4]
+        mes = '%s'%(ano)
         return mes
 
 
@@ -1676,13 +1838,38 @@ class funcoes_cartao(Ui_MainWindow):
             new_string = new_string.replace(x, '')
             new_string = new_string.replace(',','.')
         return new_string
-
+    
+    
+    
     def _mes_str_to_int(mes):
         mes = mes
+
         valores = {'Janeiro':'01','Fevereiro':'02','Marco':'03','Abril':'04','Maio':'05','Junho':'06','Julho':'07','Agosto':'08','Setembro':'09','Outubro':'10','Novembro':'11','Dezembro':'12'}
         captura_int_mes = valores[mes]
         return captura_int_mes
 
+
+    def update_temp_version_table(self):
+        
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        #QUERY
+        cursor.execute("ALTER TABLE card_active ADD COLUMN fechamento text")
+        result = cursor.fetchall()
+        
+        #RETURN:
+        return result[0][0]
+
+    def group_main(self):
+
+        Main_page_Cards._top_main_values_update(self)
+        Main_page_Cards._middle_main_values_update(self)
+        Main_page_Cards._fatura_atual_all(self)
+        Main_page_Cards._main_chart_all_faturas(self)
+        
 class Chart_one(Ui_MainWindow):
 
     def _creat_charts(self):
@@ -1834,7 +2021,7 @@ class Chart_one(Ui_MainWindow):
                 self.frame_chart_category.addWidget(self.ver_grafico)
                 pass
         thread = threading.Thread(target=thead(self))
-        thread.start() 
+        thread.start()  
 
     def grafico_2(self):
         def thead(self):   
@@ -1937,7 +2124,9 @@ class Chart_one(Ui_MainWindow):
             
             valores_index_cat = card_db_test.Charts_values._cat_ext_gastos_por_dia(id,mes_convert,ano)
 
-
+            
+            
+            
             self.set0 = QtCharts.QBarSet("Delivery")
             self.set1 = QtCharts.QBarSet("Apps Transporte")
             self.set2 = QtCharts.QBarSet("Comida")
@@ -1978,11 +2167,11 @@ class Chart_one(Ui_MainWindow):
             mes = self.label_3.text()
             valores = {'Janeiro':1,'Fevereiro':2,'Marco':3,'Abril':4,'Maio':5,'Junho':6,'Julho':7,'Agosto':8,'Setembro':9,'Outubro':10,'Novembro':11,'Dezembro':12}
             captura_int_mes = valores[mes]
-            
-            #DIAS NO MES NO USE           
-            # dias_mes = calendar.monthrange(int(ano),captura_int_mes)
-            # qt_dias =dias_mes[1]
+            dias_mes = calendar.monthrange(int(ano),captura_int_mes)
+            qt_dias =dias_mes[1]
 
+            
+            # ['01', '04', '05', '06', '08', '11', '12', '13']
             data = card_db_test.Charts_values._count_dias_charts(id,mes_convert,ano)
             count =0
             for i in data:
@@ -2005,10 +2194,13 @@ class Chart_one(Ui_MainWindow):
 
     
             self.series = QtCharts.QStackedBarSeries()
+            
+            
 
       
             for i in valores_index_cat:
                 self.series.append(dict_cat[i])
+                
             
             
     
@@ -2072,6 +2264,262 @@ class Chart_one(Ui_MainWindow):
                 self.frame_chart_date_day.addWidget(self.chart_view)
                 pass
         thread = threading.Thread(target=thead(self))
-        thread.start()     
+        thread.start()
         
 
+                
+class Main_page_Cards(Ui_MainWindow):
+    
+    
+    def _top_main_values_update(self):
+        def thead():
+            # barra
+            #LIMITE UTILIZADO :
+            limite_utilizado = card_db_test.Main_page_values._limite_utilizado_all()
+            self.labelTitle_12.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt;  color:#5c9bcf;\">Limite Utilizado:</span></p><p><span style=\" font-size:14pt; color:#5c9bcf;\">R$"+str(limite_utilizado)+"</span></p></body></html>", None))
+
+            #LIMITE DISPONIVEL
+            limite_disponivel= card_db_test.Main_page_values._limite_disponivel_all()
+            self.labelTitle_13.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt;  color:#00aa00;\">Limite Disponivel</span></p><p><span style=\" font-size:14pt; color:#00aa00;\">R$"+str(limite_disponivel)+"</span></p></body></html>", None))
+
+            #PROGRESS BAR: 
+            #PORCENTAGEM UTILIZADO
+            porcentagem = card_db_test.Main_page_values._porcentagem_utilizada_all()
+            self.progressBar.setValue(porcentagem)
+        thread = threading.Thread(target=thead())
+        thread.start()
+
+    
+    def _middle_main_values_update(self):
+        def thead():
+            
+            cont = self.table_faturas_ind_3.rowCount()
+            if cont > 0:
+                for i in range (cont): 
+                    if self.table_faturas_ind_3.rowCount() >= 0:
+                        self.table_faturas_ind_3.removeRow(self.table_faturas_ind_3.rowCount()-1)
+
+            ids_cards = card_db_test.Main_page_values._cards_ids_all()
+            mes = funcoes_cartao._mes_apenas(self)
+            ano = funcoes_cartao._ano_apenas(self)
+            mes_com_ano = funcoes_cartao._mes(self)
+
+
+
+            index = 0
+            for i in ids_cards:
+
+                rowPosition = self.table_faturas_ind_3.rowCount()
+                self.table_faturas_ind_3.insertRow(rowPosition)
+
+                nome = card_db_test.Ui_db._cartao(ids_cards[index][0])
+                situacao_fatura = card_db_test.Return_Values_Calcs._status_fatura(ids_cards[index][0],mes,ano)
+                valor_da_fatrura = card_db_test.Return_Values_Calcs._fatural_atual(ids_cards[index][0],mes_com_ano)
+
+                self.table_faturas_ind_3.setItem(index,0,QTableWidgetItem(nome))
+                self.table_faturas_ind_3.setItem(index,1,QTableWidgetItem(situacao_fatura))
+                self.table_faturas_ind_3.setItem(index,2,QTableWidgetItem(valor_da_fatrura))
+                self.table_faturas_ind_3.setItem(index,3,QTableWidgetItem(str(ids_cards[index][0])))
+
+                for colunas in range(3):
+                    item = self.table_faturas_ind_3.item(index, colunas)
+                    item.setTextAlignment(Qt.AlignCenter)
+                    item.setFlags(Qt.ItemIsEnabled | Qt.ItemIsSelectable)
+                index +=1
+        thread = threading.Thread(target=thead())
+        thread.start()
+    
+    def _table_main_values_update(self,id):
+        def thead():
+            nome = card_db_test.Ui_db._titular(id)
+            limite = card_db_test.Ui_db._limite(id)
+            vencimento = card_db_test.Ui_db._vencimento(id)
+            fechamento = card_db_test.Ui_db._fechamento(id)
+            cartao_ico = card_db_test.Ui_db._cartao(id)
+
+            self.name_bank_4.setText(nome)
+            self.label_50.setText(limite)
+            self.label_54.setText(fechamento)
+            self.label_56.setText(vencimento)
+
+            styler = effects.Effetc_slides._icon_main(self,cartao_ico)
+
+            self.icon_4.setStyleSheet(u"border-bottom: 0px;\n"
+            "border-radius: 5px;\n"
+            "border-image: "+styler+"")
+        thread = threading.Thread(target=thead())
+        thread.start()
+    
+    def _itemlist_metas(self):
+        def thead():
+            qt_categoria = self.comboBox_2.count()-1
+            for i in range(qt_categoria):
+                self.listWidget.addItem(QListWidgetItem(self.comboBox_2.itemText(i+1)))
+        thread = threading.Thread(target=thead())
+        thread.start()
+    def _categoria_metas(self,categoria):
+        
+        
+        self.label.setText(QCoreApplication.translate("MainWindow", u"Limite de gastos em: " + categoria, None))
+        list_icon_name = ["delivery","appstrans","comida","mercado","lazer","icons8-casa-96","inuteis","servicos","streaming","urgencia","gatos","dogs","medico","viagem","eletronico","domesticos"]
+        icones=["Delivery",
+                "Apps Transporte",
+                "Comida",
+                "Mercado",
+                "Lazer",
+                "Casa",
+                "Coisas Inuteis",
+                "Serviços",
+                "Streaming",
+                "Urgencia",
+                "Gatos",
+                "Dogs",
+                "Medico",
+                "Viagem",
+                "Eletronicos",
+                "Domesticos"]
+        index = icones.index(categoria)
+
+        self.frame.setStyleSheet(u"background-image: url(:/icons-cards/src-page-cartoes/"+list_icon_name[index]+".png); background-repeat: no-repeat; background-position: center;")
+
+    def _fatura_atual_all(self):
+        def thead():
+            anomes = funcoes_cartao._mes(self)
+            all_soma_faturas = card_db_test.Main_page_values._fatura_atual_all(anomes)
+            mes = funcoes_cartao._mes_apenas_str(self)
+            if float(all_soma_faturas) == 0:
+                anomes= funcoes_cartao._mes_add_2(self)
+                all_soma_faturas = card_db_test.Main_page_values._fatura_atual_all(anomes)
+                mes = funcoes_cartao._mes_apenas_str_2(self)
+            
+            
+            
+            self.label_39.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" color:#aa55ff;\">Fatura de: "+mes+" </span></p><p align=\"center\"><span style=\" color:#aa55ff;\">R$"+str(all_soma_faturas)+"</span></p></body></html>", None))
+        thread = threading.Thread(target=thead())
+        thread.start()
+
+
+    def _main_chart_all_faturas(self):
+        
+        def thead(self):   
+            id = '284261'
+            ano = self.label_2.text()
+            # self.layout = QVBoxLayout(self)
+
+            #limitado a 10 cards 
+            self.set0 = QtCharts.QSplineSeries()
+            self.set1 = QtCharts.QSplineSeries()
+            self.set2 = QtCharts.QSplineSeries()
+            self.set3 = QtCharts.QSplineSeries()
+            self.set4 = QtCharts.QSplineSeries()
+            self.set5 = QtCharts.QSplineSeries()
+            self.set6 = QtCharts.QSplineSeries()
+            self.set7 = QtCharts.QSplineSeries()
+            self.set8 = QtCharts.QSplineSeries()
+            self.set9 = QtCharts.QSplineSeries()
+            
+            
+            list_bar_series = [self.set0,self.set1,self.set2,self.set3,self.set4,self.set5,self.set6,self.set7,self.set8,self.set9]
+
+            all_ids = card_db_test.Main_page_values._cards_ids_all() #get all ids
+
+            index_ids = 0
+            for ids in all_ids:
+                
+
+                todas_as_faturas = card_db_test.Return_Values_Calcs._todas_faturas(all_ids[index_ids][0],ano)
+                index = 0
+                filter_list = []
+                for i in todas_as_faturas:
+                    
+                    if not  todas_as_faturas[index]:
+                        filter_list.append(0)
+                    else:
+                        filter_list.append(int(todas_as_faturas[index]))
+                    index = index+1
+                index_mes = 0
+
+                for mes in range(12):
+                    list_bar_series[index_ids].append(index_mes,filter_list[index_mes])
+                    index_mes = index_mes+1
+
+                index_ids +=1
+
+
+
+            self.chart = QtCharts.QChart()
+            
+            for i in range(len(all_ids)):
+                self.chart.addSeries(list_bar_series[i])
+                
+                
+            self.chart.setTitle("Todas as Faturas")
+            self.chart.setAnimationOptions(QtCharts.QChart.SeriesAnimations)
+
+
+            categories = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun","Jul","Ago","Set","Out","Nov","Dez"]
+            axis = QtCharts.QBarCategoryAxis()
+            axis.append(categories)
+            # axisY = QValueAxis()
+            axis.setLinePenColor(QColor(Qt.red))
+     
+
+            self.chart.createDefaultAxes()
+            self.chart.setAxisX(axis, self.set0)
+            
+
+            self.chart.legend().setVisible(True)
+            self.chart.legend().setAlignment(Qt.AlignBottom)
+
+
+            
+            
+            for i in range (len(all_ids)):
+                nome_card = card_db_test.Ui_db._cartao(all_ids[i][0])
+                titular = card_db_test.Ui_db._titular(all_ids[i][0])
+                self.chart.legend().markers(list_bar_series[i])[0].setLabel(str(nome_card+" - "+titular))
+
+            
+
+            self.chart_view = QtCharts.QChartView(self.chart)
+            self.chart_view.setRenderHint(QPainter.Antialiasing)
+            self.chart_view.chart().setTheme(QtCharts.QChart.ChartThemeBlueCerulean)
+            
+            font3 = QFont()
+            font3.setFamily(u"Bahnschrift Light Condensed")
+            font3.setPointSize(12)
+            font3.setBold(False)
+            font3.setItalic(False)
+            font3.setWeight(3)
+
+            self.chart.legend().setFont(font3)
+            self.chart.setFont(font3)
+            self.chart.setTitleFont(font3)
+            
+            
+            
+
+            list = []
+            self.frames = self.chart_evolution_all
+            for i in range(self.frames.count()):
+                a = self.frames.itemAt(i).widget().objectName()
+                list.append(a)
+            count = len(list)
+            if count ==0:
+
+                self.chart_evolution_all.addWidget(self.chart_view)
+
+
+
+            else:
+                while self.chart_evolution_all.count():
+                
+                    child = self.chart_evolution_all.takeAt(0)
+                    childWidget = child.widget()
+                    if childWidget:
+                        childWidget.setParent(None)
+
+                self.chart_evolution_all.addWidget(self.chart_view)
+                pass
+        thread = threading.Thread(target=thead(self))
+        thread.start() 
