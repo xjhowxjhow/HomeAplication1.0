@@ -1849,19 +1849,7 @@ class funcoes_cartao(Ui_MainWindow):
         return captura_int_mes
 
 
-    def update_temp_version_table(self):
-        
-        #CONNECT DB
-        a = (os.path.dirname(os.path.realpath(__file__)))
-        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
-        cursor = banco.cursor()
-        
-        #QUERY
-        cursor.execute("ALTER TABLE card_active ADD COLUMN fechamento text")
-        result = cursor.fetchall()
-        
-        #RETURN:
-        return result[0][0]
+
 
     def group_main(self):
 

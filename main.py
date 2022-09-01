@@ -26,7 +26,7 @@ import requests
 WINDOW_SIZE = 0
 TOGLE_STATUS = 80
 CARD_SELECTED = 0
-GLOBAL_VERSION = '1.04'
+GLOBAL_VERSION = '1.05'
 
 
 class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
@@ -285,10 +285,6 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                     id = self.table_faturas_ind_3.item(linha,3).text()
                     card_db_fun.Main_page_Cards._table_main_values_update(self,id)
                 except:
-                    a = (os.path.dirname(os.path.realpath(__file__))) #TEMPORARIO APENAS PARA CONSERTAR DBS ATUAIS
-                    if (os.path.exists(''+a+'/bando_de_valores.db')):
-                        card_db_fun.funcoes_cartao.update_temp_version_table(self)
-                    else:
                         pass
             if obj == self.listWidget and event.type() == QtCore.Qt.LeftButton or event.type() == QtCore.Qt.RightButton: 
                 try:
