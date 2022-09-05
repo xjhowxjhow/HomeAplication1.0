@@ -84,13 +84,13 @@ class funcoes_cartao(Ui_MainWindow):
 
                 #LIMITE UTILIZADO :
                 limite_utilizado = card_db_test.Return_Values_Calcs._limite_utilizado(listdb)
-                self.labelTitle_8.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt; color:#5c9bcf;\">Limite Utilizado:</span></p><p><span style=\" font-size:11pt; font-weight:600; color:#5c9bcf;\">R$"+str(limite_utilizado)+"</span></p></body></html>", None))
+                self.labelTitle_8.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt; color:#ffffff;\">Limite Utilizado:</span></p><p><span style=\" font-size:11pt; font-weight:600; color:#ffffff;\">R$"+str(limite_utilizado)+"</span></p></body></html>", None))
 
 
                 #LIMITE DISPONIVEL 
 
                 limite_disponivel= card_db_test.Return_Values_Calcs._limite_disponivel(listdb)
-                self.labelTitle_10.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt; color:#00aa00;\">Limite Disponivel</span></p><p><span style=\" font-size:11pt; font-weight:600; color:#00aa00;\">R$"+str(limite_disponivel)+"</span></p></body></html>", None))
+                self.labelTitle_10.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt; color:#ffffff;\">Limite Disponivel</span></p><p><span style=\" font-size:11pt; font-weight:600; color:#ffffff;\">R$"+str(limite_disponivel)+"</span></p></body></html>", None))
                 
                 
                 for val in range (2):
@@ -166,10 +166,15 @@ class funcoes_cartao(Ui_MainWindow):
            
             elif (label_0== '') or (label_2== '')  or (label_3_ui== '') :
                 pyautogui.confirm(text='Esta faltando campos: \nNome, Valor ou Data esta em branco! ', title='Lançamento incorreto!', buttons=['OK', 'Cancel'])
-                
-            elif bool(re.search(r'\d', str(label_3_ui))) == False:
+
+            elif funcoes_cartao._validador_int(label_3_ui) == False:
+
                 pyautogui.confirm(text='Valor invalido', title='Invalido!', buttons=['OK', 'Cancel'])
-            
+            elif funcoes_cartao._validador_data(self,label_2) == False:
+
+                pyautogui.confirm(text='Data invalida', title='Invalido!', buttons=['OK', 'Cancel'])
+                
+                
             else:
                 
                 PARCELADO = False
@@ -1594,10 +1599,10 @@ class funcoes_cartao(Ui_MainWindow):
         self.label_34.setText('Todo dia '+str(vencimento))
         #LIMITE UTILIZADO :
         limite_utilizado = card_db_test.Return_Values_Calcs._limite_utilizado(id)
-        self.labelTitle_8.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt; color:#5c9bcf;\">Limite Utilizado:</span></p><p><span style=\" font-size:14pt;  color:#5c9bcf;\">R$"+str(limite_utilizado)+"</span></p></body></html>", None))
+        self.labelTitle_8.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt; color:#ffffff;\">Limite Utilizado:</span></p><p><span style=\" font-size:14pt;  color:#ffffff;\">R$"+str(limite_utilizado)+"</span></p></body></html>", None))
         #LIMITE DISPONIVEL
         limite_disponivel= card_db_test.Return_Values_Calcs._limite_disponivel(id)
-        self.labelTitle_10.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt; color:#00aa00;\">Limite Disponivel</span></p><p><span style=\" font-size:14pt;  color:#00aa00;\">R$"+str(limite_disponivel)+"</span></p></body></html>", None))
+        self.labelTitle_10.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt; color:#ffffff;\">Limite Disponivel</span></p><p><span style=\" font-size:14pt;  color:#ffffff;\">R$"+str(limite_disponivel)+"</span></p></body></html>", None))
         self.label_30.setText('R$'+limite_disponivel)
         #NOME DO CARTAO:
         nome = card_db_test.Ui_db._cartao(id)
@@ -1696,7 +1701,7 @@ class funcoes_cartao(Ui_MainWindow):
         #GET NAME:
         name = card_db_test.Ui_db._cartao(id)
         #SET TEXT:
-        self.labelTitle_2.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:13pt; font-weight:600; color:#9b9bff;\">"+name+"</span></p></body></html>", None))
+        self.labelTitle_2.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:13pt; font-weight:600; color:#ffffff;\">"+name+"</span></p></body></html>", None))
 
     def _faturas(self):
         def thead(self):
@@ -1820,6 +1825,24 @@ class funcoes_cartao(Ui_MainWindow):
         mes=data_br[3:5]
         ano=data_br[6:10]
         return  "%s-%s-%s"%(ano,mes,dia)
+    
+    def _validador_data(self,data):
+        a = funcoes_cartao._data_br_to_eng(self,data)
+        
+        if a == 'None':
+            return False
+        try:
+            format_date = datetime.strptime(a, '%Y-%m-%d')
+            year = format_date.year
+            if year< 2010:
+                 pyautogui.confirm('Ano menor que 2010 inválido, nao é possivel lançar abaixo de 2010')
+                 return False
+            else:
+                return True
+                 
+                
+        except:
+            return False
 
     def _usd_to_brl(self,valor):
         valor = valor 
@@ -1839,7 +1862,9 @@ class funcoes_cartao(Ui_MainWindow):
             new_string = new_string.replace(',','.')
         return new_string
     
-    
+    def _validador_int(value):
+        value = re.sub('[.,]', '', value)
+        return value.isdigit()
     
     def _mes_str_to_int(mes):
         mes = mes
@@ -2264,11 +2289,11 @@ class Main_page_Cards(Ui_MainWindow):
             # barra
             #LIMITE UTILIZADO :
             limite_utilizado = card_db_test.Main_page_values._limite_utilizado_all()
-            self.labelTitle_12.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt;  color:#5c9bcf;\">Limite Utilizado:</span></p><p><span style=\" font-size:14pt; color:#5c9bcf;\">R$"+str(limite_utilizado)+"</span></p></body></html>", None))
+            self.labelTitle_12.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt;  color:#ffffff;\">Limites Utilizados:</span></p><p><span style=\" font-size:14pt; color:#ffffff;\">R$"+str(limite_utilizado)+"</span></p></body></html>", None))
 
             #LIMITE DISPONIVEL
             limite_disponivel= card_db_test.Main_page_values._limite_disponivel_all()
-            self.labelTitle_13.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt;  color:#00aa00;\">Limite Disponivel</span></p><p><span style=\" font-size:14pt; color:#00aa00;\">R$"+str(limite_disponivel)+"</span></p></body></html>", None))
+            self.labelTitle_13.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt;  color:#ffffff;\">Limites Disponiveis</span></p><p><span style=\" font-size:14pt; color:#ffffff;\">R$"+str(limite_disponivel)+"</span></p></body></html>", None))
 
             #PROGRESS BAR: 
             #PORCENTAGEM UTILIZADO
@@ -2382,7 +2407,7 @@ class Main_page_Cards(Ui_MainWindow):
             
             
             
-            self.label_39.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" color:#aa55ff;\">Fatura de: "+mes+" </span></p><p align=\"center\"><span style=\" color:#aa55ff;\">R$"+str(all_soma_faturas)+"</span></p></body></html>", None))
+            self.label_39.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" color:#ffffff;\">Faturas de: "+mes+" </span></p><p align=\"center\"><span style=\" color:#ffffff;\">R$"+str(all_soma_faturas)+"</span></p></body></html>", None))
         thread = threading.Thread(target=thead())
         thread.start()
 
