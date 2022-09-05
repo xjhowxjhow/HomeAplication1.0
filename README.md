@@ -25,7 +25,11 @@ Adicione todos seus Cartões, com uma rapida visualização:
 
 Visao de dados sobre os gastos individual:
 
-https://user-images.githubusercontent.com/58306583/182255175-cded62ef-caeb-4b61-a1dd-e94f8f8bae06.mp4
+
+https://user-images.githubusercontent.com/58306583/188502048-ce2f74d5-19c6-4eb4-b993-c1f50045e236.mp4
+
+
+
 
 Veja seus extratos:
 
