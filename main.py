@@ -11,6 +11,7 @@ from card_db_fun import Chart_one
 from datetime import datetime
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import card_db_fun
+import home_db_fun
 import pyautogui
 import database
 import webbrowser
@@ -48,6 +49,45 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         action_hide.triggered.connect(lambda: self.hide())
         action_show.triggered.connect(lambda: self.showNormal())
         
+        #FONTE DA TABELA MENU
+        self.font = QFont()
+        self.font.setFamily(u"Bahnschrift Light Condensed")
+        self.font.setPointSize(14)
+        
+        #CONFIGURANDO A TABELA
+        self.table = self.tableWidget
+        self.table.verticalHeader().setVisible(False)
+        self.table.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.table.setColumnWidth(0, 25)
+        self.table.setColumnWidth(4, 200)
+        self.table.setColumnWidth(5, 250)
+        self.table.setColumnWidth(6, 200)
+        self.table.verticalHeader().setDefaultSectionSize(50)
+        self.table.setFont(self.font)
+        self.table.horizontalHeaderItem(0).setFlags(QtCore.Qt.ItemIsEnabled|QtCore.Qt.ItemIsSelectable)
+        self.table.horizontalHeaderItem(2).setFlags(QtCore.Qt.ItemIsEnabled|QtCore.Qt.ItemIsSelectable)
+        self.table.setStyleSheet("QWidget { color: #fffff8; border-radius:0px; } QHeaderView::section { background-color: rgb(53, 53, 53); border:none; width:45px; height: 50px; border-radius:0px; } QTableWidget { gridline-color: #fffff8; border-radius:0px; border-radius:0px; } QTableWidget QTableCornerButton::section { background-color: #646464; border-radius:0px; } QTableView:item { border-bottom: 0.5px solid qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 0), stop:0.45677 rgba(0, 0, 0, 0), stop:0.479846 rgba(255, 255, 255, 255), stop:0.50571 rgba(239, 236, 55, 0), stop:1 rgba(239, 236, 55, 0)); border-radius:0px; } QTableView::item:selected{ background-color:rgba(255, 255, 255,30); color: rgb(255, 255, 255); }")
+        self.table.horizontalHeader().sectionClicked.connect(self.filtro_table_header)
+        
+        
+        
+        #CONFIGURANDO CONTA SE TIVER CARDAO DE CREDITO
+        self.comboBox_24.currentIndexChanged.connect(lambda:home_db_fun.mainpage._event_change_stakecard(self))
+        self.comboBox_25.currentIndexChanged.connect(lambda:home_db_fun.mainpage._categorias_entra_said(self))
+        self.comboBox_22.currentIndexChanged.connect(lambda:home_db_fun.Combobox_startup.show_programar_date(self))
+        self.comboBox_23.currentIndexChanged.connect(lambda:home_db_fun.Combobox_startup.show_recorrencia_options(self))
+        self.comboBox_23.currentIndexChanged.connect(lambda:home_db_fun.Combobox_startup.show_recorrencia_options(self))
+        self.comboBox_26.currentIndexChanged.connect(lambda:home_db_fun.Combobox_startup.show_set_dia_recorrencia(self))
+        
+        #PDF VIWER:
+        self.listWidget_2.itemDoubleClicked.connect(lambda:home_db_fun.mainpage.open_pdf(self))
+        #OCULTOS AS COLUNAS E BOTOES TABELA MENU
+        
+        
+        self.frame_if_card_main.hide()
+        self.label_if_card.hide()
+        self.frame_options_pdf.hide()
+
         
         
         self.salvar_4.clicked.connect(lambda:self.close())
@@ -63,6 +103,8 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.salvar_6.clicked.connect(lambda:database.salva_dados.testedb(self))
         self.salvar_5.clicked.connect(self.desloga)
 
+        # print(self.comboBox_2.count()-1)
+        # print(self.comboBox_2.itemText(1))
         
 
         self.nova_despesa.clicked.connect(lambda:self.stacked_configcartao0.setCurrentWidget(self.page_new_lancamento))
@@ -76,9 +118,13 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.table_active_cards.setColumnHidden(6, True) # COLUNA ID OCULTADA
         self.table_faturas_ind_3.horizontalHeader().setVisible(True)
         self.table_faturas_ind.horizontalHeader().setVisible(True)
+        # self.table.setColumnHidden(1, True) # COLUNA ID BANK OCULTADA
+        # self.table.setColumnHidden(2, True) # COLUNA ID COMPRA OCULTADA
         self.table_active_cards.horizontalHeader().setVisible(True)
+        self.table_active_banks.horizontalHeader().setVisible(True)
         self.table_faturas_ind_3.horizontalHeader().setDefaultSectionSize(310)
         self.table_active_cards.horizontalHeader().setDefaultSectionSize(145)
+        self.table.horizontalHeader().setVisible(True)
         
         
         
@@ -141,7 +187,12 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.listWidget.installEventFilter(self)
         self.table_active_cards.installEventFilter(self)
         self.pushButton_23.installEventFilter(self)
-        
+        self.table.installEventFilter(self)
+        self.add_bank.installEventFilter(self)
+        self.add_lancamento_btn.installEventFilter(self)
+        self.previus_month_2.installEventFilter(self)
+        self.next_month_2.installEventFilter(self)
+
 
     
     def eventFilter(self, obj, event):
@@ -285,6 +336,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                     id = self.table_faturas_ind_3.item(linha,3).text()
                     card_db_fun.Main_page_Cards._table_main_values_update(self,id)
                 except:
+
                         pass
             if obj == self.listWidget and event.type() == QtCore.Qt.LeftButton or event.type() == QtCore.Qt.RightButton: 
                 try:
@@ -309,8 +361,46 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                     card_db_fun.funcoes_cartao._update_table_config(self)
                 except:
                     pass
-        # self.hide_cards_det.installEventFilter(self)
-        # self.show_cards_det.installEventFilter(self)
+
+            if obj == self.table and event.type() == QtWidgets.QAbstractItemView.SelectRows:
+                current_row = self.table.currentRow()
+                current_column = self.table.currentColumn()
+                print(current_row,current_column)
+                
+                self.textEdit.setText(home_db_fun.mainpage.rand_text(self))
+                
+                self.frame_options_pdf.hide()
+
+                if self.table.item(current_row, 4).text() == "streaming":
+                    self.frame_if_card_main.show()
+                    self.label_if_card.show()
+                    self.icon_if_card.setStyleSheet(u"background-image:url(:/menu/c6.jpg);background-position: center;background-repeat:no-repeat;")
+
+                else:
+                    self.frame_if_card_main.hide()
+                    self.label_if_card.hide()
+
+            if obj == self.add_bank and event.type() == QtCore.QEvent.MouseButtonPress:
+                
+                return home_db_fun.mainpage._add_bank(self)
+
+            if obj ==self.add_lancamento_btn and event.type() == QtCore.QEvent.MouseButtonPress:
+                
+                return home_db_fun.mainpage._new_lancamento(self)
+            
+            # TODO EXTRATO MENU PRINCIPAL
+            
+            
+            if obj == self.previus_month_2 and event.type() == QtCore.QEvent.MouseButtonPress:
+                action = "Previus"
+                home_db_fun.Dates_end_times.methodo_date_extrato(self,action)
+                return home_db_fun.mainpage.load_extrato_filter(self)
+                
+            if obj == self.next_month_2 and event.type() == QtCore.QEvent.MouseButtonPress:
+                action = "Next"
+                home_db_fun.Dates_end_times.methodo_date_extrato(self,action)
+                return home_db_fun.mainpage.load_extrato_filter(self)
+
             return super(MainWindow,self).eventFilter(obj, event)
 
         
@@ -355,9 +445,11 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                 self.update()
                 try:
                     card_db_fun.funcoes_cartao.group_main(self)
-
+                    
                 except:
                     pass
+                # home_db_fun.Set_values_startup.set_values_table_bank(self)
+                home_db_fun.Group.execs(self)
             else:
                 self.CONTAINER_geral.hide()
                 pyautogui.confirm(text='!!ATENÇÃO!!\nBanco de dados nao foi localizado, Por favor Criar arquivo em MENU>CRIAR BANCO DE DADOS',title='BANCO DE DADOS NAO LOCALIZADO', buttons=['OK', 'Cancel'])
@@ -385,6 +477,47 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
     def desloga(self):
         self.stackedWidget.setCurrentIndex(0)
         self.texto_error.setText("Sistema Deslogado, Até Mais!")
+
+
+
+    def filtro_table_header(self, logicalIndex):
+        #FUNCAO TEMPORARIO AQUI DPS PARA HOME DB FUN
+        icon4 = QIcon()
+        
+        if logicalIndex >1:
+        
+            if self.table.horizontalHeaderItem(logicalIndex).data(256) == "DOW":
+                item = self.table.horizontalHeaderItem(logicalIndex)
+                icon4.addFile(u":/main_menutable/main_page_tables/decrecente.png", QSize(), QIcon.Normal, QIcon.Off)
+                self.table.horizontalHeaderItem(logicalIndex).setData(256, "UP")
+                item.setIcon(icon4)
+
+            else:
+                item = self.table.horizontalHeaderItem(logicalIndex)
+                icon4.addFile(u":/main_menutable/main_page_tables/ascendente.png", QSize(), QIcon.Normal, QIcon.Off)
+                self.table.horizontalHeaderItem(logicalIndex).setData(256, "DOW")
+                item.setIcon(icon4)
+        else:
+            
+            if self.table.cellWidget(0, 0).isChecked() ==False:
+                row_count = self.table.rowCount()
+                item = self.table.horizontalHeaderItem(logicalIndex)
+                icon4.addFile(u":/main_menutable/main_page_tables/checked.png", QSize(), QIcon.Normal, QIcon.Off)
+                item.setIcon(icon4)
+                for i in range(row_count):
+                    self.table.cellWidget(i, 0).setChecked(True)
+            else:
+                row_count = self.table.rowCount()
+                item = self.table.horizontalHeaderItem(logicalIndex)
+                icon4.addFile(u":/main_menutable/main_page_tables/unchecked.png", QSize(), QIcon.Normal, QIcon.Off)
+                item.setIcon(icon4)
+                for i in range(row_count):
+                    self.table.cellWidget(i, 0).setChecked(False)
+
+            
+        return True
+
+
 
     #TODO TESTE ANIMCAÇÃO MENU EXPANDIDO
     def toggleMenu(self):
@@ -575,6 +708,7 @@ def exit_handler():
         a = (os.path.dirname(os.path.realpath(__file__)))
         if(os.path.exists(''+a+'/update/update.exe')):
             os.startfile(''+a+'/update/update.exe')
+            print("sim")
         sys.exit()
     
 

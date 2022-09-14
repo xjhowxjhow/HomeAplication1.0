@@ -1884,7 +1884,7 @@ class funcoes_cartao(Ui_MainWindow):
         Main_page_Cards._main_chart_all_faturas(self)
         
 class Chart_one(Ui_MainWindow):
-
+    
     def _creat_charts(self):
         def thead(self):
             list = []
@@ -1951,6 +1951,7 @@ class Chart_one(Ui_MainWindow):
     def grafico_1(self):    
         def thead(self):
 
+                
 
             id = EXTRATO_ATUAL
             mes = self.label_3.text()
@@ -2011,7 +2012,8 @@ class Chart_one(Ui_MainWindow):
 
             self.ver_grafico = QtCharts.QChartView(self.grafico)
             self.ver_grafico.setRenderHint(QPainter.Antialiasing)
-
+            
+            
 
             list = []
             self.frames = self.frame_chart_category
@@ -2038,6 +2040,14 @@ class Chart_one(Ui_MainWindow):
 
     def grafico_2(self):
         def thead(self):   
+            
+            font3 = QFont()
+            font3.setFamily(u"Bahnschrift Light Condensed")
+            font3.setPointSize(12)
+            font3.setBold(False)
+            font3.setItalic(False)
+            font3.setWeight(3)
+            
             id = EXTRATO_ATUAL
             ano = self.label_2.text()
             # self.layout = QVBoxLayout(self)
@@ -2051,13 +2061,20 @@ class Chart_one(Ui_MainWindow):
                 if not  todas_as_faturas[index]:
                     filter_list.append(0)
                 else:
-                    filter_list.append(int(todas_as_faturas[index]))
+                    filter_list.append(todas_as_faturas[index])
                 index = index+1
             index_mes = 0
 
             for mes in range(12):
                 self.set0.append(index_mes,filter_list[index_mes])
+                self.set0.setPointLabelsVisible(True)
+                self.set0.setPointLabelsFormat("@yPoint")
+                self.set0.setPointLabelsFont(font3)
+                self.set0.setPointsVisible(True)
+
+                
                 index_mes = index_mes+1
+
 
 
 
@@ -2084,13 +2101,7 @@ class Chart_one(Ui_MainWindow):
             self.chart_view = QtCharts.QChartView(self.chart)
             self.chart_view.setRenderHint(QPainter.Antialiasing)
             self.chart_view.chart().setTheme(QtCharts.QChart.ChartThemeBlueCerulean)
-            
-            font3 = QFont()
-            font3.setFamily(u"Bahnschrift Light Condensed")
-            font3.setPointSize(12)
-            font3.setBold(False)
-            font3.setItalic(False)
-            font3.setWeight(3)
+            self.chart.axisY().setGridLineVisible(False)
 
             self.chart.legend().setFont(font3)
             self.chart.setFont(font3)
@@ -2197,12 +2208,12 @@ class Chart_one(Ui_MainWindow):
 
                     valores = card_db_test.Charts_values._gastos_por_dia(id,data[count],captura_int_mes,ano,categoria)
                     if not valores:
-                        
                         pass
                     else:
                         dict_cat[categoria].append(float(valores[0][0]))
+                   
                 count +=1
-
+                print(count)
 
 
     
@@ -2213,6 +2224,7 @@ class Chart_one(Ui_MainWindow):
       
             for i in valores_index_cat:
                 self.series.append(dict_cat[i])
+                
                 
             
             
@@ -2239,7 +2251,8 @@ class Chart_one(Ui_MainWindow):
     
             self.chart_view = QtCharts.QChartView(self.chart)
             self.chart_view.setRenderHint(QPainter.Antialiasing)
-            
+
+
 
         
 
@@ -2289,11 +2302,11 @@ class Main_page_Cards(Ui_MainWindow):
             # barra
             #LIMITE UTILIZADO :
             limite_utilizado = card_db_test.Main_page_values._limite_utilizado_all()
-            self.labelTitle_12.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt;  color:#ffffff;\">Limites Utilizados:</span></p><p><span style=\" font-size:14pt; color:#ffffff;\">R$"+str(limite_utilizado)+"</span></p></body></html>", None))
+            self.labelTitle_12.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt;  color:#5c9bcf;\">Limite Utilizado:</span></p><p><span style=\" font-size:14pt; color:#5c9bcf;\">R$"+str(limite_utilizado)+"</span></p></body></html>", None))
 
             #LIMITE DISPONIVEL
             limite_disponivel= card_db_test.Main_page_values._limite_disponivel_all()
-            self.labelTitle_13.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt;  color:#ffffff;\">Limites Disponiveis</span></p><p><span style=\" font-size:14pt; color:#ffffff;\">R$"+str(limite_disponivel)+"</span></p></body></html>", None))
+            self.labelTitle_13.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt;  color:#00aa00;\">Limite Disponivel</span></p><p><span style=\" font-size:14pt; color:#00aa00;\">R$"+str(limite_disponivel)+"</span></p></body></html>", None))
 
             #PROGRESS BAR: 
             #PORCENTAGEM UTILIZADO
@@ -2317,7 +2330,7 @@ class Main_page_Cards(Ui_MainWindow):
             ano = funcoes_cartao._ano_apenas(self)
             mes_com_ano = funcoes_cartao._mes(self)
 
-
+            print(mes)
 
             index = 0
             for i in ids_cards:
@@ -2356,7 +2369,7 @@ class Main_page_Cards(Ui_MainWindow):
             self.label_56.setText(vencimento)
 
             styler = effects.Effetc_slides._icon_main(self,cartao_ico)
-
+            print(styler)
             self.icon_4.setStyleSheet(u"border-bottom: 0px;\n"
             "border-radius: 5px;\n"
             "border-image: "+styler+"")
@@ -2407,7 +2420,7 @@ class Main_page_Cards(Ui_MainWindow):
             
             
             
-            self.label_39.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" color:#ffffff;\">Faturas de: "+mes+" </span></p><p align=\"center\"><span style=\" color:#ffffff;\">R$"+str(all_soma_faturas)+"</span></p></body></html>", None))
+            self.label_39.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" color:#aa55ff;\">Fatura de: "+mes+" </span></p><p align=\"center\"><span style=\" color:#aa55ff;\">R$"+str(all_soma_faturas)+"</span></p></body></html>", None))
         thread = threading.Thread(target=thead())
         thread.start()
 
@@ -2418,7 +2431,19 @@ class Main_page_Cards(Ui_MainWindow):
             id = '284261'
             ano = self.label_2.text()
             # self.layout = QVBoxLayout(self)
-
+            font3 = QFont()
+            font3.setFamily(u"Bahnschrift Light Condensed")
+            font3.setPointSize(12)
+            font3.setBold(False)
+            font3.setItalic(False)
+            font3.setWeight(3)
+            
+            font4 = QFont()
+            font4.setFamily(u"Bahnschrift Light Condensed")
+            font4.setPointSize(14)
+            font4.setBold(False)
+            font4.setItalic(False)
+            font4.setWeight(5)
             #limitado a 10 cards 
             self.set0 = QtCharts.QSplineSeries()
             self.set1 = QtCharts.QSplineSeries()
@@ -2439,7 +2464,7 @@ class Main_page_Cards(Ui_MainWindow):
             index_ids = 0
             for ids in all_ids:
                 
-
+                print("xaryh",ids[0])
                 todas_as_faturas = card_db_test.Return_Values_Calcs._todas_faturas(all_ids[index_ids][0],ano)
                 index = 0
                 filter_list = []
@@ -2448,14 +2473,26 @@ class Main_page_Cards(Ui_MainWindow):
                     if not  todas_as_faturas[index]:
                         filter_list.append(0)
                     else:
-                        filter_list.append(int(todas_as_faturas[index]))
+                        filter_list.append(todas_as_faturas[index])
                     index = index+1
                 index_mes = 0
-
+                print("filter_list",filter_list)
                 for mes in range(12):
                     list_bar_series[index_ids].append(index_mes,filter_list[index_mes])
-                    index_mes = index_mes+1
+                    list_bar_series[index_ids].setPointLabelsVisible(True)
+                    list_bar_series[index_ids].setPointLabelsFormat("@yPoint")
+                    list_bar_series[index_ids].setPointLabelsColor(Qt.black)
+                    list_bar_series[index_ids].setPointLabelsFont(font3)
+                    list_bar_series[index_ids].setPointsVisible(True)
 
+
+                    
+    
+                    
+                    
+
+                    index_mes = index_mes+1
+                print(index_mes,index_ids)
                 index_ids +=1
 
 
@@ -2468,23 +2505,29 @@ class Main_page_Cards(Ui_MainWindow):
                 
             self.chart.setTitle("Todas as Faturas")
             self.chart.setAnimationOptions(QtCharts.QChart.SeriesAnimations)
+            
 
 
             categories = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun","Jul","Ago","Set","Out","Nov","Dez"]
             axis = QtCharts.QBarCategoryAxis()
             axis.append(categories)
+
             # axisY = QValueAxis()
             axis.setLinePenColor(QColor(Qt.red))
+            
      
 
             self.chart.createDefaultAxes()
             self.chart.setAxisX(axis, self.set0)
             
+   
 
             self.chart.legend().setVisible(True)
             self.chart.legend().setAlignment(Qt.AlignBottom)
-
-
+            # self.chart.axisX().setGridLineVisible(False)
+            self.chart.axisY().setGridLineVisible(False)
+            self.chart.axisX().setLabelsFont(font3)
+            self.chart.axisY().setLabelsFont(font3)
             
             
             for i in range (len(all_ids)):
@@ -2498,12 +2541,7 @@ class Main_page_Cards(Ui_MainWindow):
             self.chart_view.setRenderHint(QPainter.Antialiasing)
             self.chart_view.chart().setTheme(QtCharts.QChart.ChartThemeBlueCerulean)
             
-            font3 = QFont()
-            font3.setFamily(u"Bahnschrift Light Condensed")
-            font3.setPointSize(12)
-            font3.setBold(False)
-            font3.setItalic(False)
-            font3.setWeight(3)
+
 
             self.chart.legend().setFont(font3)
             self.chart.setFont(font3)

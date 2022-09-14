@@ -20,8 +20,24 @@ class salva_dados:
                 banco=sqlite3.connect(''+a+'/bando_de_valores.db')
                 cursor=banco.cursor()
                 cursor.execute("CREATE TABLE IF NOT EXISTS card_active (id INTEGER,nome_cartao text,titular text,limite REAL,final INTEGER,vencimento text,fechamento text)")
+                
+                #TABLE CONTAS BANCARIAS
+                cursor.execute("CREATE TABLE IF NOT EXISTS contas_bancarias(id int,saldo_inicial text,nome_banco text,agencia int,num_conta int,titular text, cartao_credito_id text)")
+                #CONFIGURACOES DE CONTAS
+                cursor.execute("CREATE TABLE IF NOT EXISTS config_contas(conta_padrao_bank int)")
+                
+                
+                #NOVO LANÇAMENTO
+                cursor.execute("CREATE TABLE IF NOT EXISTS new_lancamento (id_lancamento int,id_bank int,data_lancamento text,categoria text,pagamento text,valor int,tipo text,descricao text)")
+                #LANCAMENTO VENCIMENTO
+                cursor.execute("CREATE TABLE IF NOT EXISTS status_lancamento  (id_lancamento int,id_bank int,vencimento text,status_pago text)")
+                #LANÇAMENTO RECORRENTE
+                cursor.execute("CREATE TABLE IF NOT EXISTS config_lancamento(id_lancamento int,id_bank int,recorrente text,recorrente_m_d_s_y text,recorrente_dia text,anexo text)")
+                #SETS PRIORIDADE
+                cursor.execute("CREATE TABLE IF NOT EXISTS prioridade_value(id_lancamento int,id_bank int,prioridade text)")
+                
                 banco.close()
                 pyautogui.alert('Banco de dados Criado no diretorio raiz')
-                pyautogui.alert('Agora adicione seus cartoes na No botao acima')
+
                 
                 break 

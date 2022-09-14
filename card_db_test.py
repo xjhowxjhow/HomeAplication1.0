@@ -85,7 +85,7 @@ class Ui_db: # valores fixos
         #QUERY
         cursor.execute("SELECT fechamento FROM card_active WHERE id = "+str(id)+" ")
         result = cursor.fetchall()
-
+        print(result,"db_test valu fechamento")
         #RETURN:
         return result[0][0]
      
@@ -136,7 +136,7 @@ class Return_Values_Calcs:
         
         #ARGUMENTS:
         card = 'extrato_cartao_%s'%(id)
-
+        print("card escolhido",card)
         
         #QUERY
         cursor.execute("SELECT SUM (valor_transacao) FROM "+str(card)+" where strftime('%Y-%m', data_filter) = '"+mes+"' GROUP BY status_payment  HAVING status_payment = 'pendente' ")
@@ -549,7 +549,7 @@ class Main_page_values:
 
             cursor.execute("SELECT limite FROM card_active WHERE id = "+str(cards_active[index][0])+" ")
             result = cursor.fetchall()
-
+            print(result)
             #NONE:
 
             if not result:
@@ -663,12 +663,12 @@ class Main_page_values:
         index = 0
         for i in cards:
             card = 'extrato_cartao_%s'%(cards[index][0])
-
+            print("card escolhido",card)
 
             #QUERY
             cursor.execute("SELECT SUM (valor_transacao) FROM "+str(card)+" where strftime('%Y-%m', data_filter) = '"+anomes+"' GROUP BY status_payment  HAVING status_payment = 'pendente' ")
             result=cursor.fetchall()
-
+            print("result",result)
             #NONE:
 
             if not result:
@@ -751,7 +751,7 @@ class Main_page_values:
 class update_values:
     
     def update_cards_config(id,ti,li,fi,ve,fe):
-
+        print("teste",id,ti,li,fi,ve,fe)
         #CONNECT DB
         a = (os.path.dirname(os.path.realpath(__file__)))
         banco = sqlite3.connect(''+a+'/bando_de_valores.db')
@@ -772,3 +772,26 @@ class update_values:
         
     
         
+# ['01', '04', '05', '06', '08', '11', '12', '13']
+# id = '284261'
+# mes= '08'
+# # dia ='1'
+# ano = '2022'
+# # a = Return_Values_Calcs._fatural_atual(id,mes)
+# # print(a)
+
+# a = Main_page_values._cards_ids_all()
+# print(a)
+
+
+# all_ids = Main_page_values._cards_ids_all() #get all i
+# index_ids = 0
+# for ids in all_ids:
+
+#     todas_as_faturas = Return_Values_Calcs._todas_faturas(ids[0],ano)
+
+#     print(all_ids[0][0])
+id = '508241'
+mes_y  = '2022-09'
+a = Return_Values_Calcs._fatural_atual(id,mes_y)
+print(a)
