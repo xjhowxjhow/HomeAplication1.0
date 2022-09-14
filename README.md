@@ -20,24 +20,32 @@ Tela de login:
 
 Adicione todos seus Cartões, com uma rapida visualização:
 
-<img src="https://user-images.githubusercontent.com/58306583/182276603-3bb158fb-c1b9-45e6-b5bb-3413993cf4f8.png" width="800"/>
+
+<img src="https://user-images.githubusercontent.com/58306583/188502233-f5a15a63-60bf-4617-845e-1e1ad68989d7.png" width="800"/>
 
 
 Visao de dados sobre os gastos individual:
 
-https://user-images.githubusercontent.com/58306583/182255175-cded62ef-caeb-4b61-a1dd-e94f8f8bae06.mp4
+
+https://user-images.githubusercontent.com/58306583/188502048-ce2f74d5-19c6-4eb4-b993-c1f50045e236.mp4
+
+
+
 
 Veja seus extratos:
 
-<img src="https://user-images.githubusercontent.com/58306583/182255178-da89fd80-32a6-48c1-b929-ca9f63e91a4f.png" width="800"/>
+
+<img src="https://user-images.githubusercontent.com/58306583/188502275-27de63ca-20d3-4365-9b14-a574feed6f14.png" width="800"/>
 
 Veja todas as suas faturas:
 
-<img src="https://user-images.githubusercontent.com/58306583/182276636-3fa3091d-d3b7-4f29-9f47-9b09e74d6f4f.png" width="800"/>
+
+<img src="https://user-images.githubusercontent.com/58306583/188502295-923c92f6-8c96-490e-9d87-f4f94e059006.png" width="800"/>
+
 
 Faça lançamentos parcelados/avista:
 
-<img src="https://user-images.githubusercontent.com/58306583/182255180-6f8645f7-81d5-48cc-a386-467c2090e4d3.png" width="800"/>
 
+<img src="https://user-images.githubusercontent.com/58306583/188502333-333637a6-e94b-4c58-a68d-83673cb2864f.png" width="800"/>
 
 
