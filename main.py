@@ -43,6 +43,20 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         global window_obj
         window_obj = self.ui
         
+
+        #SOMBRAS PARA FRAMES
+        shadow = QGraphicsDropShadowEffect(self)
+        shadow.setBlurRadius(15)
+
+        shadow.setColor(QColor(0, 0, 0, 60))
+      
+        
+        self.scrollArea_9.setGraphicsEffect(shadow)
+        shadow2 = QGraphicsDropShadowEffect(self)
+        shadow2.setBlurRadius(20)
+
+        self.scrollAreaWidgetContents_2.setGraphicsEffect(shadow2)
+        
         
         #NOTIFICAÇÃO SE CLICADA ACTION
         tray.messageClicked.connect(lambda: messageClicked(self))

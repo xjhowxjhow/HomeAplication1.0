@@ -1,13 +1,10 @@
 
 
 
-from os import remove
+import datetime
+from datetime import datetime
 
 
-value = '500.00'
+current_mes = datetime.now().month
 
-format_value = value.replace('.', '')
-print(format_value)
-    
-    
-
+print(current_mes)

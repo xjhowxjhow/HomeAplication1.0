@@ -180,27 +180,13 @@ class Add_values:
         #tipo
         #descricao
         
-        return_all_recorrentes = Return_Values_Conditions.return_lancamentos_recorretes()
-        
-        for i in range(len(return_all_recorrentes)):
-            verify_if_exist = Return_Values_Conditions._veryfi_if_exists_recorrent(return_all_recorrentes[i][0],ano,mes)
-            if not verify_if_exist:
-                print('nao existe,add novo lançamento')
-            else:
-                pass
-
-        
-        #CONNECT DB
         a = (os.path.dirname(os.path.realpath(__file__)))
         banco = sqlite3.connect(''+a+'/bando_de_valores.db')
         cursor = banco.cursor()
-        #CREATE INDEX
         
-        #INSERT ID
-        id = id_lancamento
-        
-        banco.commit()
-        banco.close()
+        return_all_recorrentes = Return_Values_Conditions.return_lancamentos_recorretes()
+
+
         return True
 
 class Return_values:
@@ -349,7 +335,6 @@ class Return_Values_Conditions:
                     SELECT  new_lancamento.id_lancamento,\
                             new_lancamento.id_bank,\
                             new_lancamento.tipo,\
-                            new_lancamento.data_lancamento,\
                             prioridade_value.prioridade,\
                             new_lancamento.categoria,\
                             new_lancamento.pagamento,\
@@ -373,7 +358,7 @@ class Return_Values_Conditions:
     
 
 
-    def _veryfi_if_exists_recorrent(id,ano,mes): #VERIFICA SE NO MES DO FILTRO DO EXTRATO JA EXISTE NO DB UM LANÇAMENTO RECORRENTE NA MESMA DATA 
+
         #id_lancamento
         #data_lancamento
         #recorrente_m_d_s_y
@@ -385,18 +370,32 @@ class Return_Values_Conditions:
         cursor = banco.cursor()
         
         cursor.execute("\
-            SELECT  new_lancamento.id_lancamento,\
-                    new_lancamento.data_lancamento,\
-                    config_lancamento.recorrente_m_d_s_y,\
-                    config_lancamento.recorrente_dia\
-            FROM new_lancamento\
-            INNER JOIN config_lancamento\
-            ON new_lancamento.id_lancamento = config_lancamento.id_lancamento\
-            WHERE new_lancamento.id_lancamento = '"+id+"' AND strftime('%Y-%m', new_lancamento.data_lancamento) = '"+str(ano)+"-"+str(mes)+"'")
-                    
-                    
-                    
-a = Return_Values_Conditions.return_lancamentos_recorretes()
-for i in range(len(a)):
-    print(a[i][0])
-    
+                        SELECT  new_lancamento.id_lancamento,\
+                                new_lancamento.data_lancamento,\
+                                config_lancamento.recorrente_m_d_s_y,\
+                                config_lancamento.recorrente_dia\
+                        FROM new_lancamento\
+                        INNER JOIN config_lancamento\
+                        ON new_lancamento.id_lancamento = config_lancamento.id_lancamento\
+                        WHERE new_lancamento.id_lancamento = '"+id+"' AND strftime('%Y-%m', new_lancamento.data_lancamento) = '"+str(ano)+"-"+str(mes)+"'")
+        dados = cursor.fetchall()
+        return dados
+
+
+
+    def _retur_data_recorrente_mes(id):
+        #id_lancamento
+        #data_lancamento
+        #recorrente_m_d_s_y
+        #recorrente_dia
+        
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        cursor.execute("SELECT config_lancamento.recorrente_dia FROM config_lancamento WHERE id_lancamento = '"+id+"'")
+        dados = cursor.fetchall()
+        return dados[0][0]
+# ano = '2022'
+# mes = '10'

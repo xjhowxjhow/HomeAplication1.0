@@ -1415,8 +1415,11 @@ class Ui_MainWindow(object):
 "border-image:none;\n"
 "background-color: rgba(255, 255, 255, 30); \n"
 "color: rgb(255, 255, 255);")
-        self.frame_51.setFrameShape(QFrame.StyledPanel)
+        self.frame_51.setFrameShape(QFrame.WinPanel)
         self.frame_51.setFrameShadow(QFrame.Raised)
+        self.frame_51.setFrameStyle(QFrame.WinPanel|QFrame.Raised)
+        self.frame_51.setLineWidth(3)
+        self.frame_51.setMidLineWidth(3)
         self.frame_97 = QFrame(self.frame_51)
         self.frame_97.setObjectName(u"frame_97")
         self.frame_97.setGeometry(QRect(10, 10, 51, 51))
