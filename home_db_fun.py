@@ -420,7 +420,7 @@ class mainpage(Ui_MainWindow):
         ids = card_db_test.Main_page_values._cards_ids_all()
         print("COUNT IDSSS-----------",len(ids))
 
-        # TODO LANCAMENTO DE FATURAS CARTOES
+        # LANCAMENTO DE FATURAS CARTOES:
         if not ids:
             pass
         else:
@@ -594,10 +594,14 @@ class mainpage(Ui_MainWindow):
                 self.table.setItem(row_count, 10, QTableWidgetItem(str("R$%s"%return_saldo)))
                 self.table.item(row_count,10).setTextAlignment(Qt.AlignCenter)
 
+        # LACAMENTO RECORRENTES:
+
+
+
+
+        # LANÇAMENTOS DE CONTAS :
         mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
         ano = self.label_72.text()
-
-        
         dados = home_db_query.Return_Values_Conditions.return_lancamentos_month(ano,mes) #LINHAS DA TABELA
 
         if not dados:

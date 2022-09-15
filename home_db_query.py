@@ -169,7 +169,39 @@ class Add_values:
         banco.close()
         return True     
 
+    def _add_recorrent(ano,mes):
+        #PRA VIR AQUI TEM QUE TER UM ID LANÇAMENTO E VIR COM O MES E ANO DO FILTRO DA TABELA
+        # id_lancamento
+        #id_bank
+        #data_lancamento
+        #categoria
+        #pagamento
+        #valor
+        #tipo
+        #descricao
+        
+        return_all_recorrentes = Return_Values_Conditions.return_lancamentos_recorretes()
+        
+        for i in range(len(return_all_recorrentes)):
+            verify_if_exist = Return_Values_Conditions._veryfi_if_exists_recorrent(return_all_recorrentes[i][0],ano,mes)
+            if not verify_if_exist:
+                print('nao existe,add novo lançamento')
+            else:
+                pass
 
+        
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        #CREATE INDEX
+        
+        #INSERT ID
+        id = id_lancamento
+        
+        banco.commit()
+        banco.close()
+        return True
 
 class Return_values:
     
@@ -294,7 +326,9 @@ class Return_Values_Conditions:
         banco.close()
         return result
 
-    def return_lancamentos_previus_month():
+    
+
+    def return_lancamentos_recorretes():
         #CONNECT DB
         a = (os.path.dirname(os.path.realpath(__file__)))
         banco = sqlite3.connect(''+a+'/bando_de_valores.db')
@@ -311,10 +345,58 @@ class Return_Values_Conditions:
         # 9 = STATUS                                table status_lancamento
         # 10 = SALDO                                table contas_bancarias ainda nao
         
-      
+        cursor.execute("\
+                    SELECT  new_lancamento.id_lancamento,\
+                            new_lancamento.id_bank,\
+                            new_lancamento.tipo,\
+                            new_lancamento.data_lancamento,\
+                            prioridade_value.prioridade,\
+                            new_lancamento.categoria,\
+                            new_lancamento.pagamento,\
+                            new_lancamento.valor,\
+                            status_lancamento.status_pago,\
+                    		config_lancamento.recorrente_m_d_s_y,\
+                    		config_lancamento.recorrente_dia\
+                    FROM new_lancamento\
+                    INNER JOIN prioridade_value\
+                    ON new_lancamento.id_lancamento = prioridade_value.id_lancamento\
+                    INNER JOIN status_lancamento\
+                    ON new_lancamento.id_lancamento = status_lancamento.id_lancamento\
+                    INNER JOIN config_lancamento\
+                    ON new_lancamento.id_lancamento = config_lancamento.id_lancamento\
+                    WHERE config_lancamento.recorrente_m_d_s_y = 'Mes'\
+                    ORDER BY status_lancamento.status_pago DESC")
         
         result = cursor.fetchall()
         banco.close()
         return result
     
 
+
+    def _veryfi_if_exists_recorrent(id,ano,mes): #VERIFICA SE NO MES DO FILTRO DO EXTRATO JA EXISTE NO DB UM LANÇAMENTO RECORRENTE NA MESMA DATA 
+        #id_lancamento
+        #data_lancamento
+        #recorrente_m_d_s_y
+        #recorrente_dia
+        
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        cursor.execute("\
+            SELECT  new_lancamento.id_lancamento,\
+                    new_lancamento.data_lancamento,\
+                    config_lancamento.recorrente_m_d_s_y,\
+                    config_lancamento.recorrente_dia\
+            FROM new_lancamento\
+            INNER JOIN config_lancamento\
+            ON new_lancamento.id_lancamento = config_lancamento.id_lancamento\
+            WHERE new_lancamento.id_lancamento = '"+id+"' AND strftime('%Y-%m', new_lancamento.data_lancamento) = '"+str(ano)+"-"+str(mes)+"'")
+                    
+                    
+                    
+a = Return_Values_Conditions.return_lancamentos_recorretes()
+for i in range(len(a)):
+    print(a[i][0])
+    
