@@ -12,6 +12,7 @@ from datetime import datetime
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import card_db_fun
 import home_db_fun
+import home_db_query
 import pyautogui
 import database
 import webbrowser
@@ -23,6 +24,7 @@ import sys
 import funcoes
 import atexit
 import requests
+
 
 WINDOW_SIZE = 0
 TOGLE_STATUS = 80
@@ -379,13 +381,14 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
             if obj == self.table and event.type() == QtWidgets.QAbstractItemView.SelectRows:
                 current_row = self.table.currentRow()
                 current_column = self.table.currentColumn()
-                print(current_row,current_column)
+                id = self.table.item(current_row, 1).text()
                 
-                self.textEdit.setText(home_db_fun.mainpage.rand_text(self))
+                #CHAMA QUERY PARA PEGAR A DESCRCAO DO LANÇAMENTO
+                validador = home_db_fun.Descricao_lancamento.set_descricao_lancamento(self,id)
                 
                 self.frame_options_pdf.hide()
 
-                if self.table.item(current_row, 4).text() == "streaming":
+                if validador== "fatura":
                     self.frame_if_card_main.show()
                     self.label_if_card.show()
                     self.icon_if_card.setStyleSheet(u"background-image:url(:/menu/c6.jpg);background-position: center;background-repeat:no-repeat;")

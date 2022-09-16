@@ -45,10 +45,16 @@ class mainpage(Ui_MainWindow):
         id_bank = self.comboBox_11.currentText() # ID DA CONTA BANCO PARA DEBITO
         tipo = self.comboBox_25.currentText() #Entrada ou Saida
         
-        data_lancamento = self.lancamento_programado_2.text()
+        
+        if self.comboBox_22.currentText() == 'Sim':
+            data_lancamento = self.lancamento_programado_2.text() # NAO PROGRAMADO JA FOI RECEBIDO
+            status_pago = 'pago'
+        else:
+            data_lancamento = self.lancamento_programado.text() # PROGRAMADO NAO FOI RECEBIDO
+        
+
         format_data_lancamento = datetime.strptime(data_lancamento, '%d/%m/%Y').strftime('%Y-%m-%d')
         data_lancamento = format_data_lancamento
-        
         
         categoria = self.comboBox_21.currentText()
         pagamento = self.comboBox_27.currentText()
@@ -58,6 +64,8 @@ class mainpage(Ui_MainWindow):
         
         #EXECUTE QUERY
         home_db_query.Add_values._add_new_lancamento(id_lancamento,dados)
+        
+        
         # TABLE config_lancamento
         id_lancamento_config_lancamento =id_lancamento
         id_bank = self.comboBox_11.currentText() # ID DA CONTA BANCO PARA DEBITO
@@ -87,7 +95,11 @@ class mainpage(Ui_MainWindow):
         else:
             vencimento = self.lancamento_programado.text() # PROGRAMADO NAO FOI RECEBIDO
             status_pago = 'pendente'
-        dados_status = [id_bank, vencimento,status_pago]
+            
+        format_data_lancamento = datetime.strptime(vencimento, '%d/%m/%Y').strftime('%Y-%m-%d')
+        print("format_data_lancamento: ",format_data_lancamento)
+            
+        dados_status = [id_bank,format_data_lancamento,status_pago]
         #EXECUTE QUERY
         home_db_query.Add_values._status_lancamento(id_lancamento_status,dados_status)
         
@@ -108,165 +120,171 @@ class mainpage(Ui_MainWindow):
         #EXECUTE QUERY
         home_db_query.Add_values._prioridade_value(id_lancamentoprioridade, dados_prioridade)
 
-        #ADD TO TABLE LANCAMENTO
-        rowPosition = self.table.rowCount()
-        self.table.insertRow(rowPosition)
 
-        #LEGENDA:
-        # 0 = CHECKBOX
-        # 1 = ID_LANCAMENTO
-        # 2 = ID_CONTA / ID_CARTAO / ID BANK
-        # 3 = TIPO: ENTRADA / SAIDA
-        # 4 = DATA DO LANÇAMENTO
-        # 5 = PRIORIDADE 
-        # 6 = CATEGORIA
-        # 7 = METODO DE PAGAMENTO
-        # 8 = VALOR
-        # 9 = STATUS
-        # 10 = SALDO
+        if self.comboBox_23.currentText() == 'Sim':
+            Set_values_startup.load_table_fluxo_caixa(self)
+            self.chart_gastos_all_2.setCurrentWidget(self.page_Tabe_main1)
+        else:
 
-        i = rowPosition
-            
-        # 0 = CHECKBOX:
-        
-        self.widget_item = QWidget()
-        self.layout = QHBoxLayout()
-        self.chebox = QCheckBox()
-        self.chebox.setObjectName(u"chebox")
-        self.chebox.setText(u"")
-        self.chebox.setGeometry(QRect(0, 0, 40, 40))
-        self.chebox.setChecked(False)
-        self.chebox.setStyleSheet(u"background-color: rgba(255, 255, 255,0); margin-left:10px; \n")
-        self.layout.setAlignment(Qt.AlignCenter)
-        self.layout.addWidget(self.chebox)
-        self.widget_item.setLayout(self.layout)
-        self.table.setCellWidget(i, 0, self.chebox)
+            #ADD TO TABLE LANCAMENTO
+            rowPosition = self.table.rowCount()
+            self.table.insertRow(rowPosition)
 
-        
-        # 1 = ID_LANCAMENTO
+            #LEGENDA:
+            # 0 = CHECKBOX
+            # 1 = ID_LANCAMENTO
+            # 2 = ID_CONTA / ID_CARTAO / ID BANK
+            # 3 = TIPO: ENTRADA / SAIDA
+            # 4 = DATA DO LANÇAMENTO
+            # 5 = PRIORIDADE 
+            # 6 = CATEGORIA
+            # 7 = METODO DE PAGAMENTO
+            # 8 = VALOR
+            # 9 = STATUS
+            # 10 = SALDO
 
-        self.table.setItem(i, 1, QTableWidgetItem(str(id_lancamento)))
-        
-        # 2 = ID_CONTA / ID_CARTAO / ID BANK
-        
+            i = rowPosition
 
-        self.table.setItem(i, 2, QTableWidgetItem(str(id_bank)))
-        
-        # 3 = TIPO: ENTRADA / SAIDA
+            # 0 = CHECKBOX:
 
-        self.table.setItem(i, 3, QTableWidgetItem(str(tipo)))
-        
-        
-        
-        # 4 = DATA DO LANÇAMENTO 
-        self.dateedit = QtWidgets.QDateEdit(calendarPopup=True)
-        self.dateedit.setDateTime(QtCore.QDateTime.currentDateTime()) # MUDAR DPOIS
-        self.dateedit.calendarWidget().setGridVisible(True)
-        self.dateedit.calendarWidget().setFirstDayOfWeek(Qt.Monday)
-        self.dateedit.calendarWidget().setStyleSheet("QCalendarWidget QToolButton { color: white; font-size: 12px; icon-size: 20px, 20px; background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); } QCalendarWidget QMenu { left: 20px; color: white; font-size: 14px; background-color: rgb(100, 100, 100); } QCalendarWidget QSpinBox { font-size: 14px; color: white; background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); selection-background-color: rgb(136, 136, 136); selection-color: rgb(255, 255, 255); } QCalendarWidget QSpinBox::up-button { subcontrol-origin: border;  subcontrol-position: top right;  width:65px; } QCalendarWidget QSpinBox::down-button {subcontrol-origin: border; subcontrol-position: bottom right;  width:65px;} QCalendarWidget QSpinBox::up-arrow { width:56px;  height:56px; } QCalendarWidget QSpinBox::down-arrow { width:56px;  height:56px; } /* header row */ QCalendarWidget QWidget { alternate-background-color: rgb(128, 128, 128); } /* normal days */ QCalendarWidget QAbstractItemView:enabled { font-size: 14px; color: rgb(180, 180, 180); background-color: black; selection-background-color: rgb(64, 64, 64); selection-color: rgb(0, 255, 0); } /* days in other months */ /* navigation bar */ QCalendarWidget QWidget#qt_calendar_navigationbar { background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); } QCalendarWidget QAbstractItemView:disabled { color: rgb(64, 64, 64);}")
-
-        self.table.setCellWidget(i, 4, self.dateedit)
-        
-        # 5 = PRIORIDDE 
+            self.widget_item = QWidget()
+            self.layout = QHBoxLayout()
+            self.chebox = QCheckBox()
+            self.chebox.setObjectName(u"chebox")
+            self.chebox.setText(u"")
+            self.chebox.setGeometry(QRect(0, 0, 40, 40))
+            self.chebox.setChecked(False)
+            self.chebox.setStyleSheet(u"background-color: rgba(255, 255, 255,0); margin-left:10px; \n")
+            self.layout.setAlignment(Qt.AlignCenter)
+            self.layout.addWidget(self.chebox)
+            self.widget_item.setLayout(self.layout)
+            self.table.setCellWidget(i, 0, self.chebox)
 
 
-        self.table.setItem(i, 5, QTableWidgetItem(str(prioridade)))
-        backgroud = '#00ff00'
-        if prioridade == 'baixo':
-            backgroud = '#ff0000'
-        elif prioridade == 'medio':
-            backgroud = '#ffa500'
-        elif prioridade == 'alto':
+            # 1 = ID_LANCAMENTO
+
+            self.table.setItem(i, 1, QTableWidgetItem(str(id_lancamento)))
+
+            # 2 = ID_CONTA / ID_CARTAO / ID BANK
+
+
+            self.table.setItem(i, 2, QTableWidgetItem(str(id_bank)))
+
+            # 3 = TIPO: ENTRADA / SAIDA
+
+            self.table.setItem(i, 3, QTableWidgetItem(str(tipo)))
+
+
+
+            # 4 = DATA DO LANÇAMENTO 
+            self.dateedit = QtWidgets.QDateEdit(calendarPopup=True)
+            self.dateedit.setDateTime(QtCore.QDateTime.currentDateTime()) # MUDAR DPOIS
+            self.dateedit.calendarWidget().setGridVisible(True)
+            self.dateedit.calendarWidget().setFirstDayOfWeek(Qt.Monday)
+            self.dateedit.calendarWidget().setStyleSheet("QCalendarWidget QToolButton { color: white; font-size: 12px; icon-size: 20px, 20px; background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); } QCalendarWidget QMenu { left: 20px; color: white; font-size: 14px; background-color: rgb(100, 100, 100); } QCalendarWidget QSpinBox { font-size: 14px; color: white; background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); selection-background-color: rgb(136, 136, 136); selection-color: rgb(255, 255, 255); } QCalendarWidget QSpinBox::up-button { subcontrol-origin: border;  subcontrol-position: top right;  width:65px; } QCalendarWidget QSpinBox::down-button {subcontrol-origin: border; subcontrol-position: bottom right;  width:65px;} QCalendarWidget QSpinBox::up-arrow { width:56px;  height:56px; } QCalendarWidget QSpinBox::down-arrow { width:56px;  height:56px; } /* header row */ QCalendarWidget QWidget { alternate-background-color: rgb(128, 128, 128); } /* normal days */ QCalendarWidget QAbstractItemView:enabled { font-size: 14px; color: rgb(180, 180, 180); background-color: black; selection-background-color: rgb(64, 64, 64); selection-color: rgb(0, 255, 0); } /* days in other months */ /* navigation bar */ QCalendarWidget QWidget#qt_calendar_navigationbar { background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); } QCalendarWidget QAbstractItemView:disabled { color: rgb(64, 64, 64);}")
+
+            self.table.setCellWidget(i, 4, self.dateedit)
+
+            # 5 = PRIORIDDE 
+
+
+            self.table.setItem(i, 5, QTableWidgetItem(str(prioridade)))
             backgroud = '#00ff00'
-        
-        self.table.setItem(i, 5, QTableWidgetItem(str(prioridade)))
-        self.table.item(i,5).setTextAlignment(Qt.AlignCenter)
+            if prioridade == 'baixo':
+                backgroud = '#ff0000'
+            elif prioridade == 'medio':
+                backgroud = '#ffa500'
+            elif prioridade == 'alto':
+                backgroud = '#00ff00'
 
-        
-        self.frame = QFrame()
-        self.frame.setObjectName(u"frame")
-        self.frame.setMaximumSize(QSize(7, 16777215))
-        self.frame.setStyleSheet(u"background-color:"+backgroud+"; border-radius:3px; margin:7px;")
-        self.table.setCellWidget(i, 5, self.frame)
-        
-        
-        # 6 = CATEGORIA
-
-        
-        list_icon = ["delivery","appstrans","comida","mercado","lazer","icons8-casa-96","inuteis","servicos","streaming","urgencia","gatos","dogs","medico","viagem","eletronico","domesticos"]
-        icone = QFrame()
-        icone.setMaximumSize(QSize(35, 35))
-        icone.setStyleSheet(u"background-color:rgba(255,255,255,0);border-image: url(:/icons-cards/src-page-cartoes/"+list_icon[randint(0,10)]+".png);\n"
-            "\n"
-            "\n"
-            "background-position: center;\n"
-            "\n"
-            "background-repeat:no-repeat;")
-        self.table.setItem(i, 6, QTableWidgetItem(str(categoria)))
-        self.table.item(i,6).setTextAlignment(Qt.AlignCenter)
-        self.table.setCellWidget(i, 6, icone)
-        
-   
-
-        # 7 = METODO DE PAGAMENTO
-
-        #todo mudar aqui dps
-
-        if tipo == 'Entrada':
-            color_label = '#00ff00'
-        else:
-            color_label = '#ff000'
-
-            
-        self.label = QLabel()
-        self.label.setStyleSheet(u"background-color:rgb(101, 53, 145);border-radius:3px; margin:7px;")
-        self.label.setObjectName(u"label")
-        font = QFont()
-        font.setFamily(u"Bahnschrift Light Condensed")
-        font.setPointSize(14)
-        self.label.setFont(font)
-        self.label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\";color:"+color_label+";\">"+pagamento+"</span></p></body></html>", None))
-        self.table.setCellWidget(i, 7, self.label)
-        
-        
-        #/PAGAM
+            self.table.setItem(i, 5, QTableWidgetItem(str(prioridade)))
+            self.table.item(i,5).setTextAlignment(Qt.AlignCenter)
 
 
+            self.frame = QFrame()
+            self.frame.setObjectName(u"frame")
+            self.frame.setMaximumSize(QSize(7, 16777215))
+            self.frame.setStyleSheet(u"background-color:"+backgroud+"; border-radius:3px; margin:7px;")
+            self.table.setCellWidget(i, 5, self.frame)
 
 
-        # 8 = VALOR
+            # 6 = CATEGORIA
 
-        
-        self.table.setItem(i, 8, QTableWidgetItem(str("R$%s"%valor)))
-        self.table.item(i,8).setTextAlignment(Qt.AlignCenter)
-        
-        
-        
-        
-        # 9 = STATUS
 
-        
-        self.pushButton_pago = QPushButton()
-        self.pushButton_pago.setObjectName(u"pagobuto")
-        self.pushButton_pago.setGeometry(QRect(140, 180, 61, 31))
-           
+            list_icon = ["delivery","appstrans","comida","mercado","lazer","icons8-casa-96","inuteis","servicos","streaming","urgencia","gatos","dogs","medico","viagem","eletronico","domesticos"]
+            icone = QFrame()
+            icone.setMaximumSize(QSize(35, 35))
+            icone.setStyleSheet(u"background-color:rgba(255,255,255,0);border-image: url(:/icons-cards/src-page-cartoes/"+list_icon[randint(0,10)]+".png);\n"
+                "\n"
+                "\n"
+                "background-position: center;\n"
+                "\n"
+                "background-repeat:no-repeat;")
+            self.table.setItem(i, 6, QTableWidgetItem(str(categoria)))
+            self.table.item(i,6).setTextAlignment(Qt.AlignCenter)
+            self.table.setCellWidget(i, 6, icone)
 
-        if status_pago == 'pago':
-            
-            self.pushButton_pago.setStyleSheet("QPushButton{margin:10px;border-radius:3px;background-color: rgb(86, 202, 164);border: 1px solid  rgb(55, 55, 55);}QPushButton:hover{background-color: rgb(65, 160, 88);border: 2px solid  rgb(255, 255, 255);}QPushButton:pressed{background-color: rgb(65, 160, 88);border: 2px solid  rgb(55, 55, 55);}")
-            self.pushButton_pago.setText("Pago")
-        else:
-            self.pushButton_pago.setStyleSheet("QPushButton{margin:10px;border-radius:3px;background-color: rgb(214, 154, 90);border: 1px solid  rgb(55, 55, 55);}QPushButton:hover{background-color: rgb(163, 117, 68);border: 2px solid  rgb(255, 255, 255);}QPushButton:pressed{background-color: rgb(163, 117, 68) ;border: 2px solid  rgb(55, 55, 55);}")
-            self.pushButton_pago.setText("Pendene")
+    
 
-            
-        self.pushButton_pago.setFont(self.font)
-        self.table.setCellWidget(i, 9, self.pushButton_pago)
+            # 7 = METODO DE PAGAMENTO
 
-        # 10 = SALDO
-        return_saldo = home_db_query.Return_values.return_saldo()
-        self.table.setItem(i, 10, QTableWidgetItem(str("R$%s"%return_saldo)))
-        self.table.item(i,10).setTextAlignment(Qt.AlignCenter)
+            #todo mudar aqui dps
+
+            if tipo == 'Entrada':
+                color_label = '#00ff00'
+            else:
+                color_label = '#ff000'
+
+
+            self.label = QLabel()
+            self.label.setStyleSheet(u"background-color:rgb(101, 53, 145);border-radius:3px; margin:7px;")
+            self.label.setObjectName(u"label")
+            font = QFont()
+            font.setFamily(u"Bahnschrift Light Condensed")
+            font.setPointSize(14)
+            self.label.setFont(font)
+            self.label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\";color:"+color_label+";\">"+pagamento+"</span></p></body></html>", None))
+            self.table.setCellWidget(i, 7, self.label)
+
+
+            #/PAGAM
+
+
+
+
+            # 8 = VALOR
+
+
+            self.table.setItem(i, 8, QTableWidgetItem(str("R$%s"%valor)))
+            self.table.item(i,8).setTextAlignment(Qt.AlignCenter)
+
+
+
+
+            # 9 = STATUS
+
+
+            self.pushButton_pago = QPushButton()
+            self.pushButton_pago.setObjectName(u"pagobuto")
+            self.pushButton_pago.setGeometry(QRect(140, 180, 61, 31))
+
+
+            if status_pago == 'pago':
+
+                self.pushButton_pago.setStyleSheet("QPushButton{margin:10px;border-radius:3px;background-color: rgb(86, 202, 164);border: 1px solid  rgb(55, 55, 55);}QPushButton:hover{background-color: rgb(65, 160, 88);border: 2px solid  rgb(255, 255, 255);}QPushButton:pressed{background-color: rgb(65, 160, 88);border: 2px solid  rgb(55, 55, 55);}")
+                self.pushButton_pago.setText("Pago")
+            else:
+                self.pushButton_pago.setStyleSheet("QPushButton{margin:10px;border-radius:3px;background-color: rgb(214, 154, 90);border: 1px solid  rgb(55, 55, 55);}QPushButton:hover{background-color: rgb(163, 117, 68);border: 2px solid  rgb(255, 255, 255);}QPushButton:pressed{background-color: rgb(163, 117, 68) ;border: 2px solid  rgb(55, 55, 55);}")
+                self.pushButton_pago.setText("Pendene")
+
+
+            self.pushButton_pago.setFont(self.font)
+            self.table.setCellWidget(i, 9, self.pushButton_pago)
+
+            # 10 = SALDO
+            return_saldo = home_db_query.Return_values.return_saldo()
+            self.table.setItem(i, 10, QTableWidgetItem(str("R$%s"%return_saldo)))
+            self.table.item(i,10).setTextAlignment(Qt.AlignCenter)
         
 
 
@@ -354,9 +372,8 @@ class mainpage(Ui_MainWindow):
             self.comboBox_27.addItems(metodos_pagamento_saida)
 
     def open_pdf(self):
-        
         return self.frame_options_pdf.show()
-        
+
     def change_color(self):
         rand_color = randint(0,255), randint(0,255), randint(0,255)
         # self.s.setStyleSheet("background-color: rgb(0, 0, 0)")
@@ -404,7 +421,7 @@ class mainpage(Ui_MainWindow):
             for i in range (cont): 
                 if self.table.rowCount() >= 0:
                     self.table.removeRow(self.table.rowCount()-1)
-        
+
         #LEGENDA:
         # 0 = CHECKBOX
         # 1 = ID_LANCAMENTO
@@ -605,8 +622,6 @@ class mainpage(Ui_MainWindow):
         current_mes_local = datetime.now().month
         if not dados:
             pass
-        elif current_mes_local == current_mes:
-            pass #FUNCIUONA SE O LANÇAMENTO JA TIVER NO DB  CORRIGIR DPS
         else:
             for i in range(len(dados)):
                 row_count = self.table.rowCount()
@@ -737,7 +752,15 @@ class mainpage(Ui_MainWindow):
 
 
                 # 9 = STATUS
-                status = dados[i][7]
+                
+                mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
+                ano = self.label_72.text()
+                
+                if not home_db_query.Return_Values_Conditions._verifi_pago_recorrente(str(dados[i][0]),mes,ano):
+                    status = 'Pendente'
+                else:
+                    status = dados[i][7]
+                
 
                 self.pushButton_pago = QPushButton()
                 self.pushButton_pago.setObjectName(u"pagobuto")
@@ -760,9 +783,6 @@ class mainpage(Ui_MainWindow):
                 return_saldo = home_db_query.Return_values.return_saldo()
                 self.table.setItem(row_count, 10, QTableWidgetItem(str("R$%s"%return_saldo)))
                 self.table.item(row_count,10).setTextAlignment(Qt.AlignCenter)
-
-    
-
 
         # LANÇAMENTOS DE CONTAS :
         
@@ -811,8 +831,10 @@ class mainpage(Ui_MainWindow):
 
 
                 # 4 = DATA DO LANÇAMENTO 
+                data_lancamento = dados[i][3]
+                convert_d_m_y  = '%s-%s-%s'%(data_lancamento[8:10],data_lancamento[5:7],data_lancamento[0:4])
                 self.dateedit = QtWidgets.QDateEdit(calendarPopup=True)
-                self.dateedit.setDateTime(QtCore.QDateTime.currentDateTime()) # MUDAR DPOIS
+                self.dateedit.setDate(QtCore.QDate.fromString(convert_d_m_y, "dd-MM-yyyy"))
                 self.dateedit.calendarWidget().setGridVisible(True)
                 self.dateedit.calendarWidget().setFirstDayOfWeek(Qt.Monday)
                 self.dateedit.calendarWidget().setStyleSheet("QCalendarWidget QToolButton { color: white; font-size: 12px; icon-size: 20px, 20px; background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); } QCalendarWidget QMenu { left: 20px; color: white; font-size: 14px; background-color: rgb(100, 100, 100); } QCalendarWidget QSpinBox { font-size: 14px; color: white; background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); selection-background-color: rgb(136, 136, 136); selection-color: rgb(255, 255, 255); } QCalendarWidget QSpinBox::up-button { subcontrol-origin: border;  subcontrol-position: top right;  width:65px; } QCalendarWidget QSpinBox::down-button {subcontrol-origin: border; subcontrol-position: bottom right;  width:65px;} QCalendarWidget QSpinBox::up-arrow { width:56px;  height:56px; } QCalendarWidget QSpinBox::down-arrow { width:56px;  height:56px; } /* header row */ QCalendarWidget QWidget { alternate-background-color: rgb(128, 128, 128); } /* normal days */ QCalendarWidget QAbstractItemView:enabled { font-size: 14px; color: rgb(180, 180, 180); background-color: black; selection-background-color: rgb(64, 64, 64); selection-color: rgb(0, 255, 0); } /* days in other months */ /* navigation bar */ QCalendarWidget QWidget#qt_calendar_navigationbar { background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); } QCalendarWidget QAbstractItemView:disabled { color: rgb(64, 64, 64); }")
@@ -923,7 +945,7 @@ class mainpage(Ui_MainWindow):
 
         
 
-        
+
 
 class Dates_end_times(Ui_MainWindow):
     def current_date_extrato(self):
@@ -1012,10 +1034,7 @@ class Set_values_startup(Ui_MainWindow):
             print("COMBOBOX",formats)
             self.comboBox_11.addItem(formats)
             
-
-
-        
-    def load_table_fluxo_caixa(self): #SEMPRE 2º DEPOIS DE load_faturas_table_fluxo CONTAS 
+    def load_table_fluxo_caixa(self): 
         self.table = self.tableWidget
 
         cont = self.table.rowCount()
@@ -1253,8 +1272,10 @@ class Set_values_startup(Ui_MainWindow):
 
 
                 # 4 = DATA DO LANÇAMENTO 
+                data = dados[i][3]
+                covert_d_m_a = '%s-%s-%s'%(data[8:10],data[5:7],data[0:4])
                 self.dateedit = QtWidgets.QDateEdit(calendarPopup=True)
-                self.dateedit.setDateTime(QtCore.QDateTime.currentDateTime()) # MUDAR DPOIS
+                self.dateedit.setDate(QtCore.QDate.fromString(covert_d_m_a, "dd-MM-yyyy")) # MUDAR DPOIS
                 self.dateedit.calendarWidget().setGridVisible(True)
                 self.dateedit.calendarWidget().setFirstDayOfWeek(Qt.Monday)
                 self.dateedit.calendarWidget().setStyleSheet("QCalendarWidget QToolButton { color: white; font-size: 12px; icon-size: 20px, 20px; background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); } QCalendarWidget QMenu { left: 20px; color: white; font-size: 14px; background-color: rgb(100, 100, 100); } QCalendarWidget QSpinBox { font-size: 14px; color: white; background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); selection-background-color: rgb(136, 136, 136); selection-color: rgb(255, 255, 255); } QCalendarWidget QSpinBox::up-button { subcontrol-origin: border;  subcontrol-position: top right;  width:65px; } QCalendarWidget QSpinBox::down-button {subcontrol-origin: border; subcontrol-position: bottom right;  width:65px;} QCalendarWidget QSpinBox::up-arrow { width:56px;  height:56px; } QCalendarWidget QSpinBox::down-arrow { width:56px;  height:56px; } /* header row */ QCalendarWidget QWidget { alternate-background-color: rgb(128, 128, 128); } /* normal days */ QCalendarWidget QAbstractItemView:enabled { font-size: 14px; color: rgb(180, 180, 180); background-color: black; selection-background-color: rgb(64, 64, 64); selection-color: rgb(0, 255, 0); } /* days in other months */ /* navigation bar */ QCalendarWidget QWidget#qt_calendar_navigationbar { background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); } QCalendarWidget QAbstractItemView:disabled { color: rgb(64, 64, 64); }")
@@ -1364,17 +1385,6 @@ class Set_values_startup(Ui_MainWindow):
         
         
 
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
 class Combobox_startup(Ui_MainWindow):
 
     def default_combox_hidem(self):
@@ -1423,3 +1433,24 @@ class Combobox_startup(Ui_MainWindow):
             self.frame_recorrente_config_date.hide()
         else:
             self.frame_recorrente_config_date.hide()
+            
+            
+            
+
+
+class Descricao_lancamento(Ui_MainWindow):
+    def set_descricao_lancamento(self,id):
+        
+        if home_db_query.Return_Values_Conditions._verify_id_is_credit_card(id) == True:
+            self.textEdit.setText("Fatura")
+            
+            return "fatura"
+        elif home_db_query.Return_Values_Conditions._verify_id_is_credit_card(id) == False:
+            descricao = home_db_query.Return_Values_Conditions._return_descricao(id)
+            if not descricao:
+                self.textEdit.setText("Sem descriçao")
+                return 'n/d'
+            self.textEdit.setText(descricao)
+        else:
+            self.textEdit.setText("Sem descriçao")
+            return "n/d"

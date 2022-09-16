@@ -268,11 +268,9 @@ class Return_values:
         return result[0][0]
 
 
-
-
 class Return_Values_Conditions:
     
-    def return_lancamentos_month(ano,mes):
+    def return_lancamentos_month(ano,mes): # TODO RETONA COMPRAS NAO RECORRENTES
         #CONNECT DB
         a = (os.path.dirname(os.path.realpath(__file__)))
         banco = sqlite3.connect(''+a+'/bando_de_valores.db')
@@ -298,13 +296,16 @@ class Return_Values_Conditions:
                                 new_lancamento.categoria,\
                                 new_lancamento.pagamento,\
                                 new_lancamento.valor,\
-                                status_lancamento.status_pago\
+                                status_lancamento.status_pago,\
+                                config_lancamento.recorrente\
                         FROM new_lancamento\
                         INNER JOIN prioridade_value\
                         ON new_lancamento.id_lancamento = prioridade_value.id_lancamento\
                         INNER JOIN status_lancamento\
                         ON new_lancamento.id_lancamento = status_lancamento.id_lancamento\
-                        WHERE strftime('%Y-%m', new_lancamento.data_lancamento) = '"+str(ano)+"-"+str(mes)+"'\
+                        INNER JOIN config_lancamento\
+                        ON new_lancamento.id_lancamento = config_lancamento.id_lancamento\
+                        WHERE strftime('%Y-%m', new_lancamento.data_lancamento) = '"+str(ano)+"-"+str(mes)+"' AND config_lancamento.recorrente = 'Não'\
                         ORDER BY status_lancamento.status_pago DESC")
 
         
@@ -397,5 +398,63 @@ class Return_Values_Conditions:
         cursor.execute("SELECT config_lancamento.recorrente_dia FROM config_lancamento WHERE id_lancamento = '"+id+"'")
         dados = cursor.fetchall()
         return dados[0][0]
-# ano = '2022'
-# mes = '10'
+
+
+    def _verifi_pago_recorrente(id,mes,ano):
+        #id_lancamento
+        #data_lancamento
+        #recorrente_m_d_s_y
+        #recorrente_dia
+        
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        cursor.execute("\
+            SELECT status_lancamento.status_pago\
+            FROM status_lancamento\
+            WHERE status_lancamento.id_lancamento = '"+id+"' AND strftime('%Y-%m', status_lancamento.vencimento) = '"+str(ano)+"-"+str(mes)+"'")
+        dados = cursor.fetchall()
+        if not dados:
+            return False
+        return dados
+
+    def _return_descricao(id):
+        #id_lancamento
+        #data_lancamento
+        #recorrente_m_d_s_y
+        #recorrente_dia
+        
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        cursor.execute("SELECT new_lancamento.descricao FROM new_lancamento WHERE id_lancamento = '"+id+"'")
+        dados = cursor.fetchall()
+        return dados[0][0]
+    
+    def _verify_id_is_credit_card(id):
+        #id_lancamento
+        #data_lancamento
+        #recorrente_m_d_s_y
+        #recorrente_dia
+        
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        cursor.execute("SELECT card_active.id FROM card_active WHERE id = '"+id+"'")
+        dados = cursor.fetchall()
+        if not dados:
+            return False
+        else:
+            return True
+
+        
+ano = '2022'
+mes = '09'
+a = Return_Values_Conditions.return_lancamentos_month(ano,mes)
+print(a)
