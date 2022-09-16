@@ -453,7 +453,12 @@ class Return_Values_Conditions:
         else:
             return True
 
-        
+    
+
+
+    
+    
+    
 ano = '2022'
 mes = '09'
 a = Return_Values_Conditions.return_lancamentos_month(ano,mes)

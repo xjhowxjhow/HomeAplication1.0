@@ -1,4 +1,5 @@
 from cmath import exp
+from turtle import home
 from PySide2.QtCore import *
 from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2.QtCore import (QCoreApplication, QPropertyAnimation, QDate, QDateTime, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
@@ -389,9 +390,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                 self.frame_options_pdf.hide()
 
                 if validador== "fatura":
-                    self.frame_if_card_main.show()
-                    self.label_if_card.show()
-                    self.icon_if_card.setStyleSheet(u"background-image:url(:/menu/c6.jpg);background-position: center;background-repeat:no-repeat;")
+                    home_db_fun.Descricao_lancamento.set_icon_desc(self,id)
 
                 else:
                     self.frame_if_card_main.hide()

@@ -482,9 +482,11 @@ class mainpage(Ui_MainWindow):
                 
                 date_ven = card_db_test.Ui_db._vencimento(ids[i][0])
                 mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
+                ano = self.label_72.text()
+                print("anoooo",ano)
                 #TODO LOGICA %S CONSULTA DB DIA VENCIMENTO , MES E ANO ATUAL
                 #M D Y
-                vencimento = "%s-%s-%s"%(date_ven,mes,Dates_end_times.current_date_extrato(self)[0])
+                vencimento = "%s-%s-%s"%(date_ven,mes,ano)
                 print("VENCIMENTO",vencimento)
                 self.dateedit = QtWidgets.QDateEdit(calendarPopup=True)
                 self.dateedit.setDate(QtCore.QDate.fromString(vencimento, "dd-MM-yyyy")) #NAO SEI SE TA CERTO
@@ -1110,7 +1112,7 @@ class Set_values_startup(Ui_MainWindow):
                 #TODO LOGICA %S CONSULTA DB DIA VENCIMENTO , MES E ANO ATUAL
                 #M D Y
                 vencimento = "%s-%s-%s"%(date_ven,mes,ano)
-                print("VENCIMENTO",vencimento)
+                print("VENCIMENTO CARTAO DE CREDITO",vencimento)
                 self.dateedit = QtWidgets.QDateEdit(calendarPopup=True)
                 self.dateedit.setDate(QtCore.QDate.fromString(vencimento, "dd-MM-yyyy")) #NAO SEI SE TA CERTO
                 self.dateedit.calendarWidget().setGridVisible(True)
@@ -1454,3 +1456,11 @@ class Descricao_lancamento(Ui_MainWindow):
         else:
             self.textEdit.setText("Sem descriçao")
             return "n/d"
+        
+    def set_icon_desc(self,id):
+        card =  card_db_test.Ui_db._cartao(id)
+        return_icon = effects.efeitos_geral.style_sheet_card_icon(self,card)
+        
+        self.frame_if_card_main.show()
+        self.label_if_card.show()
+        return self.icon_if_card.setStyleSheet(u"background-image:"+return_icon+";background-position: center;background-repeat:no-repeat;")
