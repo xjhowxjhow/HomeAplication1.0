@@ -746,8 +746,6 @@ class Main_page_values:
 
 
 
-
-
 class update_values:
     
     def update_cards_config(id,ti,li,fi,ve,fe):
@@ -791,7 +789,6 @@ class update_values:
 #     todas_as_faturas = Return_Values_Calcs._todas_faturas(ids[0],ano)
 
 #     print(all_ids[0][0])
-# id = '508241'
+# id = '936038'
 # mes_y  = '2022-09'
 # a = Return_Values_Calcs._fatural_atual(id,mes_y)
-# print(a)
