@@ -2059,6 +2059,10 @@ class Ui_MainWindow(object):
         self.page_11.setObjectName(u"page_11")
         self.horizontalLayout_108 = QHBoxLayout(self.page_11)
         self.horizontalLayout_108.setObjectName(u"horizontalLayout_108")
+        self.horizontalSpacer_27 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_108.addItem(self.horizontalSpacer_27)
+
         self.previus_month_2 = QPushButton(self.page_11)
         self.previus_month_2.setObjectName(u"previus_month_2")
         self.previus_month_2.setMinimumSize(QSize(80, 0))
@@ -2089,10 +2093,6 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_108.addWidget(self.previus_month_2)
 
-        self.horizontalSpacer_27 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.horizontalLayout_108.addItem(self.horizontalSpacer_27)
-
         self.label_67 = QLabel(self.page_11)
         self.label_67.setObjectName(u"label_67")
         self.label_67.setMinimumSize(QSize(80, 0))
@@ -2118,10 +2118,6 @@ class Ui_MainWindow(object):
 "background-color: rgba(255, 255, 255, 0); ")
 
         self.horizontalLayout_108.addWidget(self.label_72)
-
-        self.horizontalSpacer_28 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.horizontalLayout_108.addItem(self.horizontalSpacer_28)
 
         self.next_month_2 = QPushButton(self.page_11)
         self.next_month_2.setObjectName(u"next_month_2")
@@ -2150,6 +2146,10 @@ class Ui_MainWindow(object):
         self.next_month_2.setIcon(icon16)
 
         self.horizontalLayout_108.addWidget(self.next_month_2)
+
+        self.horizontalSpacer_28 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_108.addItem(self.horizontalSpacer_28)
 
         self.extrat_meses_2.addWidget(self.page_11)
         self.page_12 = QWidget()
@@ -10730,8 +10730,8 @@ class Ui_MainWindow(object):
         self.stackedWidget.setCurrentIndex(0)
         self.stackedWidget_2.setCurrentIndex(0)
         self.detalhes_cartao_2.setCurrentIndex(0)
-        self.extrat_meses_2.setCurrentIndex(2)
-        self.chart_gastos_all_2.setCurrentIndex(3)
+        self.extrat_meses_2.setCurrentIndex(1)
+        self.chart_gastos_all_2.setCurrentIndex(0)
         self.stacked_configcartao0_2.setCurrentIndex(0)
         self.stack_extrato_pages_2.setCurrentIndex(0)
         self.pushButton_25.setDefault(False)
