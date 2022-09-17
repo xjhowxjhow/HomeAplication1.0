@@ -1,9 +1,7 @@
 
 
-import datetime
-from datetime import datetime
+val = 0
+val2 =0
 
-
-current_mes = datetime.now().month
-
-print(current_mes)
+operacao = float(val) - float(val2)
+print(operacao)

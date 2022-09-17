@@ -209,7 +209,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.add_lancamento_btn.installEventFilter(self)
         self.previus_month_2.installEventFilter(self)
         self.next_month_2.installEventFilter(self)
-
+        self.paga_fatura_3.installEventFilter(self)
 
     
     def eventFilter(self, obj, event):
@@ -382,19 +382,21 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
             if obj == self.table and event.type() == QtWidgets.QAbstractItemView.SelectRows:
                 current_row = self.table.currentRow()
                 current_column = self.table.currentColumn()
-                id = self.table.item(current_row, 1).text()
-                
-                #CHAMA QUERY PARA PEGAR A DESCRCAO DO LANÇAMENTO
-                validador = home_db_fun.Descricao_lancamento.set_descricao_lancamento(self,id)
-                
-                self.frame_options_pdf.hide()
+                try:
+                    id = self.table.item(current_row, 1).text()
 
-                if validador== "fatura":
-                    home_db_fun.Descricao_lancamento.set_icon_desc(self,id)
+                    #CHAMA QUERY PARA PEGAR A DESCRCAO DO LANÇAMENTO
+                    validador = home_db_fun.Descricao_lancamento.set_descricao_lancamento(self,id)
 
-                else:
-                    self.frame_if_card_main.hide()
-                    self.label_if_card.hide()
+                    self.frame_options_pdf.hide()
+
+                    if validador== "fatura":
+                        home_db_fun.Descricao_lancamento.set_icon_desc(self,id)
+                    else:
+                        self.frame_if_card_main.hide()
+                        self.label_if_card.hide()
+                except:
+                    pass
 
             if obj == self.add_bank and event.type() == QtCore.QEvent.MouseButtonPress:
                 
@@ -416,6 +418,10 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                 action = "Next"
                 home_db_fun.Dates_end_times.methodo_date_extrato(self,action)
                 return home_db_fun.mainpage.load_extrato_filter(self)
+
+            if obj == self.paga_fatura_3 and event.type() == QtCore.QEvent.MouseButtonPress:
+                return home_db_fun.Pagamento._pagar_lancamento(self)
+                
 
             return super(MainWindow,self).eventFilter(obj, event)
 
@@ -598,13 +604,16 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
 
     #MOVE JANELA
     def mouseMoveEvent(self, event):
-        if WINDOW_SIZE == 0:
-            x=event.globalX()
-            y=event.globalY()
-            if self.offset.y() <25:
-                x_w = self.offset.x()
-                y_w = self.offset.y()
-                self.move(x-x_w, y-y_w)
+        try:
+            if WINDOW_SIZE == 0:
+                x=event.globalX()
+                y=event.globalY()
+                if self.offset.y() <25:
+                    x_w = self.offset.x()
+                    y_w = self.offset.y()
+                    self.move(x-x_w, y-y_w)
+        except:
+            pass
 
     def update(self):
         resposta = requests.get('https://raw.githubusercontent.com/xjhowxjhow/HomeAplication1.0/main/version/version.txt')

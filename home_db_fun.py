@@ -29,7 +29,15 @@ from random import randint
 from login_pyside24 import Ui_MainWindow
 from PySide2.QtCharts import QtCharts
 
-
+class Group:
+    def execs(self):
+        Dates_end_times.set_text_extrato_startup(self)
+        Set_values_startup._set_Saldo(self)
+        Set_values_startup.set_values_table_bank(self)
+        Set_values_startup.set_banks_combobox_new_lan(self)
+        Set_values_startup.load_table_fluxo_caixa(self)
+        Combobox_startup.default_combox_hidem(self)
+        
 
 class mainpage(Ui_MainWindow):
 
@@ -295,6 +303,15 @@ class mainpage(Ui_MainWindow):
             self.table.setItem(i, 10, QTableWidgetItem(str("R$%s"%return_saldo)))
             self.table.item(i,10).setTextAlignment(Qt.AlignCenter)
         
+        #UPDATE SALDO SE FOR JA PAGO/RECEBIDO
+        if status_pago == 'pago':
+            if tipo == 'Entrada':
+                home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Entrada')
+            else:
+                home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Saida')
+        Set_values_startup.load_table_fluxo_caixa(self)
+        self.chart_gastos_all_2.setCurrentWidget(self.page_Tabe_main1)
+        Set_values_startup._set_Saldo(self)
 
 
     #EVENTS FOR BUTTONS
@@ -1037,13 +1054,7 @@ class Dates_end_times(Ui_MainWindow):
         label_string_ano.setText(str(ano))
 
 
-class Group:
-    def execs(self):
-        Dates_end_times.set_text_extrato_startup(self)
-        Set_values_startup.set_values_table_bank(self)
-        Set_values_startup.set_banks_combobox_new_lan(self)
-        Set_values_startup.load_table_fluxo_caixa(self)
-        Combobox_startup.default_combox_hidem(self)
+
         
         
 class Set_values_startup(Ui_MainWindow):
@@ -1443,7 +1454,10 @@ class Set_values_startup(Ui_MainWindow):
                 self.table.setItem(row_count, 10, QTableWidgetItem(str("R$%s"%return_saldo)))
                 self.table.item(row_count,10).setTextAlignment(Qt.AlignCenter)
         
-        
+    def _set_Saldo(self):
+        self.label_70.setText("R$%s"%home_db_query.Saldos.Set_saldo_inicial())
+        self.label_70.setWordWrap(True)
+        self.label_70.setTextInteractionFlags(Qt.NoTextInteraction)
 
 class Combobox_startup(Ui_MainWindow):
 
@@ -1524,3 +1538,62 @@ class Descricao_lancamento(Ui_MainWindow):
         self.frame_if_card_main.show()
         self.label_if_card.show()
         return self.icon_if_card.setStyleSheet(u"background-image:"+return_icon+";background-position: center;background-repeat:no-repeat;")
+
+
+
+class Pagamento(Ui_MainWindow):
+
+    def _pagar_lancamento(self):
+        current_row = self.table.currentRow()
+        id_lancamento = self.table.item(current_row,1).text()
+        id_bank = self.table.item(current_row,2).text()
+        #VERIFICAR SE JA ESTA PAGO
+        pago = home_db_query.Verify_status_payment.return_status_p_pago(id_lancamento,id_bank)
+        
+        # VERIFICA SE LANCAMENTO É RECORRENTE 
+        reco = home_db_query.Return_Values_Conditions._return_if_recorrente(id_lancamento)
+        #VERIFICA SE LANCAMENTO RECORRENTE DE ACORDO COM O MES DA TABLE JA FOI PAGO
+        ano = self.label_72.text()
+        mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
+        
+        pago_recorrente = home_db_query.Return_Values_Conditions._verifi_pago_recorrente(id_lancamento,mes,ano)
+        
+        if reco == True:
+            if pago_recorrente == False:
+            #MENSAGEM BOX
+                print("Lancamento recorrente, deseja pagar todos os lançamentos?")
+                home_db_query.Add_values._add_new_lancamento_recorrente(id_lancamento,id_bank,mes,ano)
+                home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Saida')
+                Set_values_startup._set_Saldo(self)
+                mainpage.load_extrato_filter(self)
+                #TEMQ FAZER A VALIDADAO POR DATA DO LKANCAMENTO
+                
+            else:
+                msg = QMessageBox()
+                msg.setWindowTitle("Erro")
+                msg.setText("Lançamento já pago")
+                msg.setIcon(QMessageBox.Critical)
+                msg.exec_()
+        else:
+            if pago == False:
+                id_lancamento = self.table.item(current_row,1).text()
+                id_bank = self.table.item(current_row,2).text()
+                home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Saida')
+                Set_values_startup._set_Saldo(self)
+                mainpage.load_extrato_filter(self)
+                #MENSAGEM BOX
+                msg = QMessageBox()
+                msg.setWindowTitle("Sucesso")
+                msg.setText("Lançamento pago com sucesso")
+                msg.setIcon(QMessageBox.Information)
+                msg.exec_()
+                
+            else:
+                msg = QMessageBox()
+                msg.setWindowTitle("Erro")
+                msg.setText("Lançamento já pago")
+                msg.setIcon(QMessageBox.Critical)
+                msg.exec_()
+
+            
+        return True

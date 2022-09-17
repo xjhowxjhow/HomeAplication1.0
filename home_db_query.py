@@ -129,8 +129,6 @@ class Add_values:
         banco = sqlite3.connect(''+a+'/bando_de_valores.db')
         cursor = banco.cursor()
         
-        #CREATE INDEX
-        cursor.execute("CREATE UNIQUE INDEX IF NOT EXISTS idx_status_lancamento ON status_lancamento(id_lancamento)")
         
         #INSERT ID
         id = id_lancamento
@@ -189,6 +187,26 @@ class Add_values:
 
         return True
 
+    def _add_new_lancamento_recorrente(id_lancamento,id_bank,mes,ano):
+            
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        #TABLE status_lancamento
+        #id_lancamento
+        #id_bank
+        #vencimento
+        #status_pago
+        
+        #VERIFI_DATA_RECORRENCIA
+        dia_reco = Return_Values_Conditions._retur_data_recorrente_mes(id_lancamento)
+        fomrt_date = str(ano)+'-'+str(mes)+'-'+str(dia_reco)
+        cursor.execute("INSERT INTO status_lancamento (id_lancamento,id_bank,vencimento,status_pago) VALUES ('"+str(id_lancamento)+"','"+str(id_bank)+"','"+str(fomrt_date)+"','pago')")
+        banco.commit()
+        banco.close()
+        return True
 class Return_values:
     
     def return_banks_active():
@@ -313,8 +331,6 @@ class Return_Values_Conditions:
         banco.close()
         return result
 
-    
-
     def return_lancamentos_recorretes():
         #CONNECT DB
         a = (os.path.dirname(os.path.realpath(__file__)))
@@ -333,7 +349,7 @@ class Return_Values_Conditions:
         # 10 = SALDO                                table contas_bancarias ainda nao
         
         cursor.execute("\
-                    SELECT  new_lancamento.id_lancamento,\
+                    SELECT DISTINCT new_lancamento.id_lancamento,\
                             new_lancamento.id_bank,\
                             new_lancamento.tipo,\
                             prioridade_value.prioridade,\
@@ -382,6 +398,20 @@ class Return_Values_Conditions:
         dados = cursor.fetchall()
         return dados
 
+    def _return_if_recorrente(id):
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        cursor.execute("\
+                        SELECT  config_lancamento.recorrente\
+                        FROM config_lancamento\
+                        WHERE config_lancamento.id_lancamento = '"+id+"'")
+        dados = cursor.fetchall()
+        if dados[0][0] == 'Não':
+            return False
+        else:   
+            return True
 
 
     def _retur_data_recorrente_mes(id):
@@ -416,9 +446,14 @@ class Return_Values_Conditions:
             FROM status_lancamento\
             WHERE status_lancamento.id_lancamento = '"+id+"' AND strftime('%Y-%m', status_lancamento.vencimento) = '"+str(ano)+"-"+str(mes)+"'")
         dados = cursor.fetchall()
+        print(dados)
         if not dados:
             return False
-        return dados
+        elif dados[0][0] == 'pendente':
+            return False
+        else:
+            return True
+
 
     def _return_descricao(id):
         #id_lancamento
@@ -459,7 +494,116 @@ class Return_Values_Conditions:
     
     
     
-ano = '2022'
-mes = '09'
-a = Return_Values_Conditions.return_lancamentos_month(ano,mes)
-print(a)
+class Saldos:
+
+    def Set_saldo_inicial():
+
+        
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        #SELECT DEFAULT BANK
+        cursor.execute("SELECT config_contas.conta_padrao_bank FROM config_contas")
+        conta_padrao = cursor.fetchall()
+        
+        #SELECT SALDO INICIAL
+        cursor.execute("SELECT contas_bancarias.saldo_inicial FROM contas_bancarias WHERE id = '"+str(conta_padrao[0][0])+"'")
+        saldo_inicial = cursor.fetchall()
+        saldo_inicial = saldo_inicial[0][0]
+        print("ERRORR SALDO INCIALÇ",saldo_inicial)
+
+
+       
+        return saldo_inicial
+    
+
+    def _pagar_lancamento(id,id_bank,tipo):
+        #id_lancamento
+        #ID_BANK
+        #TIPO_E_S
+        #VALOR
+        #DATA DE PAGAMENTO
+        #SALDO_ATUAL
+        
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+
+        print("-------------------------")
+ 
+        #GET SALDO ATUAL
+        cursor.execute("SELECT contas_bancarias.saldo_inicial FROM contas_bancarias WHERE id = '"+str(id_bank)+"'")
+        saldo_inicial = cursor.fetchall()
+        saldo_inicial = saldo_inicial[0][0]
+        print(saldo_inicial)
+        #GET VALOR DO LANÇAMENTO
+        cursor.execute("SELECT new_lancamento.valor FROM new_lancamento WHERE id_lancamento = '"+str(id)+"'")
+        
+        valor_lancamento = cursor.fetchall()
+        valor_lancamento = valor_lancamento[0][0]
+
+        #OPERACAO PARA SALDO ATUAL
+        if tipo == "Entrada":
+            saldo_atual = float(saldo_inicial) + (valor_lancamento)
+        else:
+            saldo_atual = float(saldo_inicial) - float(valor_lancamento)
+        
+        # SELECT DADOS DO LANÇAMENTO E INSERT IN NEW_LANCAMENTO
+        cursor.execute("INSERT INTO pagamentos_saldo (id_lancamento,id_bank,tipo_e_s,valor,data_pagamento,saldo_atual)\
+                        SELECT new_lancamento.id_lancamento,\
+                               new_lancamento.id_bank,\
+                               new_lancamento.tipo,\
+                               new_lancamento.valor,\
+                               DateTime('now'),\
+                               "+str(saldo_atual)+"\
+                        FROM new_lancamento \
+                        WHERE new_lancamento.id_lancamento = '"+str(id)+"' AND new_lancamento.id_bank = '"+str(id_bank)+"'")
+        banco.commit()
+
+        # UPDATE SALDO ATUAL
+        cursor.execute("UPDATE contas_bancarias SET saldo_inicial = '"+str(saldo_atual)+"' WHERE id = '"+str(id_bank)+"'")
+        banco.commit()
+        
+        #UPDATE STATUS DO LANÇAMENTO
+        cursor.execute("UPDATE status_lancamento SET status_pago = 'pago' WHERE id_lancamento = '"+str(id)+"' AND status_lancamento.id_bank = '"+str(id_bank)+"'")
+
+        print("-------------------------")
+        banco.commit()
+        banco.close()
+        return True
+    
+    
+        
+
+
+class Verify_status_payment:
+    
+    def return_status_p_pago(id,id_bank):
+        #id_lancamento
+        #data_lancamento
+        #recorrente_m_d_s_y
+        #recorrente_dia
+        
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        cursor.execute("SELECT status_lancamento.status_pago FROM status_lancamento WHERE status_lancamento.id_lancamento = '"+str(id)+"' AND status_lancamento.id_bank = '"+str(id_bank)+"'")
+        dados = cursor.fetchall()
+        print("STATUS PAGO",dados)
+        if dados[0][0] == 'pago':
+            return True
+        else:
+            return False
+        
+
+a=Return_Values_Conditions.return_lancamentos_recorretes()
+
+for row in a:
+    print(row)
+
+        
