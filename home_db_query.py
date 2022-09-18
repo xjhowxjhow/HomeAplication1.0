@@ -550,7 +550,8 @@ class Saldos:
             saldo_atual = float(saldo_inicial) + (valor_lancamento)
         else:
             saldo_atual = float(saldo_inicial) - float(valor_lancamento)
-        
+        print(tipo,"-",valor_lancamento,"=",saldo_atual)
+        print(saldo_atual,"SALTDO TIOI")
         # SELECT DADOS DO LANÇAMENTO E INSERT IN NEW_LANCAMENTO
         cursor.execute("INSERT INTO pagamentos_saldo (id_lancamento,id_bank,tipo_e_s,valor,data_pagamento,saldo_atual)\
                         SELECT new_lancamento.id_lancamento,\
@@ -601,9 +602,22 @@ class Verify_status_payment:
             return False
         
 
-a=Return_Values_Conditions.return_lancamentos_recorretes()
-
-for row in a:
-    print(row)
+    def verify_type_lanca(id):
+        #id_lancamento
+        #data_lancamento
+        #recorrente_m_d_s_y
+        #recorrente_dia
+        
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        cursor.execute("SELECT new_lancamento.tipo FROM new_lancamento WHERE new_lancamento.id_lancamento = '"+str(id)+"'")
+        dados = cursor.fetchall()
+        if dados[0][0] == 'Entrada':
+            return True
+        else:
+            return False
 
         

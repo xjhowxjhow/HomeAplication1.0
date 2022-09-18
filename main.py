@@ -382,8 +382,12 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
             if obj == self.table and event.type() == QtWidgets.QAbstractItemView.SelectRows:
                 current_row = self.table.currentRow()
                 current_column = self.table.currentColumn()
+                id = self.table.item(current_row, 1).text()
+                #PRINT CELL WIDGET TEXT
+                
                 try:
-                    id = self.table.item(current_row, 1).text()
+                    #SE FOR ENTRADA MUDA TEXTO BOTAO PAGAMENTO
+                    home_db_fun.Descricao_lancamento.Change_text_btn_pagar_receber(self,id)
 
                     #CHAMA QUERY PARA PEGAR A DESCRCAO DO LANÇAMENTO
                     validador = home_db_fun.Descricao_lancamento.set_descricao_lancamento(self,id)
@@ -420,7 +424,11 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                 return home_db_fun.mainpage.load_extrato_filter(self)
 
             if obj == self.paga_fatura_3 and event.type() == QtCore.QEvent.MouseButtonPress:
-                return home_db_fun.Pagamento._pagar_lancamento(self)
+                if self.paga_fatura_3.text() == "Pagar":
+                    return home_db_fun.Pagamento._pagar_lancamento(self)
+                else:
+                    return home_db_fun.Pagamento._receber_lancamento(self)
+                 
                 
 
             return super(MainWindow,self).eventFilter(obj, event)
