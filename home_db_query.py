@@ -253,7 +253,7 @@ class Return_values:
         # cursor.execute("SELECT new_lancamento.id_lancamento,new_lancamento.id_bank,new_lancamento.tipo,new_lancamento.data_lancamento,prioridade_value.prioridade,new_lancamento.categoria,new_lancamento.pagamento,new_lancamento.valor,status_lancamento.status_pago,contas_bancarias.saldo_inicial FROM new_lancamento INNER JOIN prioridade_value ON new_lancamento.id_lancamento = prioridade_value.id_lancamento INNER JOIN status_lancamento ON new_lancamento.id_lancamento = status_lancamento.id_lancamento INNER JOIN contas_bancarias ON new_lancamento.id_conta = contas_bancarias.id")
         
         cursor.execute("\
-                     SELECT new_lancamento.id_lancamento, \
+                     SELECT DISTINCT new_lancamento.id_lancamento, \
                             new_lancamento.id_bank, \
                             new_lancamento.tipo, \
                             new_lancamento.data_lancamento, \
@@ -348,26 +348,42 @@ class Return_Values_Conditions:
         # 9 = STATUS                                table status_lancamento
         # 10 = SALDO                                table contas_bancarias ainda nao
         
+        # cursor.execute("\
+        #             SELECT DISTINCT new_lancamento.id_lancamento,\
+        #                     new_lancamento.id_bank,\
+        #                     new_lancamento.tipo,\
+        #                     prioridade_value.prioridade,\
+        #                     new_lancamento.categoria,\
+        #                     new_lancamento.pagamento,\
+        #                     new_lancamento.valor,\
+        #                     status_lancamento.status_pago,\
+        #             		config_lancamento.recorrente_m_d_s_y,\
+        #             		config_lancamento.recorrente_dia\
+        #             FROM new_lancamento\
+        #             INNER JOIN prioridade_value\
+        #             ON new_lancamento.id_lancamento = prioridade_value.id_lancamento\
+        #             INNER JOIN status_lancamento\
+        #             ON new_lancamento.id_lancamento = status_lancamento.id_lancamento\
+        #             INNER JOIN config_lancamento\
+        #             ON new_lancamento.id_lancamento = config_lancamento.id_lancamento\
+        #             WHERE config_lancamento.recorrente_m_d_s_y = 'Mes'\
+        #             ORDER BY status_lancamento.status_pago DESC")
         cursor.execute("\
-                    SELECT DISTINCT new_lancamento.id_lancamento,\
-                            new_lancamento.id_bank,\
-                            new_lancamento.tipo,\
-                            prioridade_value.prioridade,\
-                            new_lancamento.categoria,\
-                            new_lancamento.pagamento,\
-                            new_lancamento.valor,\
-                            status_lancamento.status_pago,\
-                    		config_lancamento.recorrente_m_d_s_y,\
-                    		config_lancamento.recorrente_dia\
-                    FROM new_lancamento\
-                    INNER JOIN prioridade_value\
-                    ON new_lancamento.id_lancamento = prioridade_value.id_lancamento\
-                    INNER JOIN status_lancamento\
-                    ON new_lancamento.id_lancamento = status_lancamento.id_lancamento\
-                    INNER JOIN config_lancamento\
-                    ON new_lancamento.id_lancamento = config_lancamento.id_lancamento\
-                    WHERE config_lancamento.recorrente_m_d_s_y = 'Mes'\
-                    ORDER BY status_lancamento.status_pago DESC")
+                        SELECT DISTINCT new_lancamento.id_lancamento,\
+                                new_lancamento.id_bank,\
+                                new_lancamento.tipo,\
+                                prioridade_value.prioridade,\
+                                new_lancamento.categoria,\
+                                new_lancamento.pagamento,\
+                                new_lancamento.valor,\
+                        		config_lancamento.recorrente_m_d_s_y,\
+                        		config_lancamento.recorrente_dia\
+                        FROM new_lancamento\
+                        INNER JOIN prioridade_value\
+                        ON new_lancamento.id_lancamento = prioridade_value.id_lancamento\
+                        INNER JOIN config_lancamento\
+                        ON new_lancamento.id_lancamento = config_lancamento.id_lancamento\
+                        WHERE config_lancamento.recorrente_m_d_s_y = 'Mes'")
         
         result = cursor.fetchall()
         banco.close()
@@ -519,7 +535,7 @@ class Saldos:
         return saldo_inicial
     
 
-    def _pagar_lancamento(id,id_bank,tipo):
+    def _pagar_lancamento(id,id_bank,tipo,ano,mes):
         #id_lancamento
         #ID_BANK
         #TIPO_E_S
@@ -569,7 +585,7 @@ class Saldos:
         banco.commit()
         
         #UPDATE STATUS DO LANÇAMENTO
-        cursor.execute("UPDATE status_lancamento SET status_pago = 'pago' WHERE id_lancamento = '"+str(id)+"' AND status_lancamento.id_bank = '"+str(id_bank)+"'")
+        cursor.execute("UPDATE status_lancamento SET status_pago = 'pago' WHERE id_lancamento = '"+str(id)+"' AND status_lancamento.id_bank = '"+str(id_bank)+"'AND strftime('%Y-%m',status_lancamento.vencimento) = '"+str(ano)+"-"+str(mes)+"'")
 
         print("-------------------------")
         banco.commit()
@@ -596,7 +612,7 @@ class Verify_status_payment:
         cursor.execute("SELECT status_lancamento.status_pago FROM status_lancamento WHERE status_lancamento.id_lancamento = '"+str(id)+"' AND status_lancamento.id_bank = '"+str(id_bank)+"'")
         dados = cursor.fetchall()
         print("STATUS PAGO",dados)
-        if dados[0][0] == 'pago':
+        if not dados or dados[0][0] == 'pago':
             return True
         else:
             return False
@@ -621,3 +637,6 @@ class Verify_status_payment:
             return False
 
         
+        
+a= Return_Values_Conditions.return_lancamentos_recorretes()
+print(a)

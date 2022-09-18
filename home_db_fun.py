@@ -35,7 +35,7 @@ class Group:
         Set_values_startup._set_Saldo(self)
         Set_values_startup.set_values_table_bank(self)
         Set_values_startup.set_banks_combobox_new_lan(self)
-        Set_values_startup.load_table_fluxo_caixa(self)
+        mainpage.load_extrato_filter(self)
         Combobox_startup.default_combox_hidem(self)
         
 
@@ -110,8 +110,11 @@ class mainpage(Ui_MainWindow):
             
         dados_status = [id_bank,format_data_lancamento,status_pago]
         #EXECUTE QUERY
-        home_db_query.Add_values._status_lancamento(id_lancamento_status,dados_status)
-        
+        if self.comboBox_23.currentText() == 'Não':
+            
+            home_db_query.Add_values._status_lancamento(id_lancamento_status,dados_status)
+        else:
+            pass
         
         
         #TABLE_PRIORIDADE VALOR:
@@ -131,7 +134,7 @@ class mainpage(Ui_MainWindow):
 
 
         if self.comboBox_23.currentText() == 'Sim':
-            Set_values_startup.load_table_fluxo_caixa(self)
+            mainpage.load_extrato_filter(self)
             self.chart_gastos_all_2.setCurrentWidget(self.page_Tabe_main1)
         else:
 
@@ -309,7 +312,7 @@ class mainpage(Ui_MainWindow):
                 home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Entrada')
             else:
                 home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Saida')
-        Set_values_startup.load_table_fluxo_caixa(self)
+        mainpage.load_extrato_filter(self)
         self.chart_gastos_all_2.setCurrentWidget(self.page_Tabe_main1)
         Set_values_startup._set_Saldo(self)
 
@@ -808,11 +811,12 @@ class mainpage(Ui_MainWindow):
                 
                 mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
                 ano = self.label_72.text()
+                vali_status = home_db_query.Return_Values_Conditions._verifi_pago_recorrente(str(dados[i][0]),mes,ano)
                 
-                if not home_db_query.Return_Values_Conditions._verifi_pago_recorrente(str(dados[i][0]),mes,ano):
-                    status = 'Pendente'
+                if vali_status == True:
+                    status = 'pago'
                 else:
-                    status = dados[i][7]
+                    status = 'pendente'
                 
 
                 self.pushButton_pago = QPushButton()
@@ -1568,7 +1572,7 @@ class Pagamento(Ui_MainWindow):
             #MENSAGEM BOX
                 print("Lancamento recorrente, deseja pagar todos os lançamentos?")
                 home_db_query.Add_values._add_new_lancamento_recorrente(id_lancamento,id_bank,mes,ano)
-                home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Saida')
+                home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Saida',ano,mes)
                 Set_values_startup._set_Saldo(self)
                 mainpage.load_extrato_filter(self)
                 #TEMQ FAZER A VALIDADAO POR DATA DO LKANCAMENTO
@@ -1583,7 +1587,7 @@ class Pagamento(Ui_MainWindow):
             if pago == False:
                 id_lancamento = self.table.item(current_row,1).text()
                 id_bank = self.table.item(current_row,2).text()
-                home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Saida')
+                home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Saida',ano,mes)
                 Set_values_startup._set_Saldo(self)
                 mainpage.load_extrato_filter(self)
                 #MENSAGEM BOX
@@ -1623,7 +1627,7 @@ class Pagamento(Ui_MainWindow):
             #MENSAGEM BOX
                 print("Lancamento recorrente, deseja receber todos os lançamentos?")
                 home_db_query.Add_values._add_new_lancamento_recorrente(id_lancamento,id_bank,mes,ano)
-                home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Entrada')
+                home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Entrada',ano,mes)
                 Set_values_startup._set_Saldo(self)
                 mainpage.load_extrato_filter(self)
                 #TEMQ FAZER A VALIDADAO POR DATA DO LKANCAMENTO
