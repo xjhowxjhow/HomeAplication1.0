@@ -68,8 +68,10 @@ class mainpage(Ui_MainWindow):
         categoria = self.comboBox_21.currentText()
         pagamento = self.comboBox_27.currentText()
         valor = self.lineEdit_13.text()
+        brl_usd = Convert_Moedas._brl_to_usd(self,valor)
         descricao = self.lineEdit_11.text()
-        dados = [id_bank, data_lancamento, categoria, pagamento, valor,tipo, descricao]
+        
+        dados = [id_bank, data_lancamento, categoria, pagamento, brl_usd,tipo, descricao]
         
         #EXECUTE QUERY
         home_db_query.Add_values._add_new_lancamento(id_lancamento,dados)
@@ -121,9 +123,11 @@ class mainpage(Ui_MainWindow):
         id_lancamentoprioridade = id_lancamento
         id_bank = self.comboBox_11.currentText() # ID DA CONTA BANCO PARA DEBITO
         prioridade = ''
-        if int(valor) >1000:
+        brl_usd = Convert_Moedas._brl_to_usd(self,valor)
+        
+        if float(brl_usd) >1000.00:
             prioridade = 'alto'
-        elif int(valor) >500:
+        elif float(brl_usd) >500.00:
             prioridade = 'medio'
         else:
             prioridade = 'baixo'
@@ -133,185 +137,15 @@ class mainpage(Ui_MainWindow):
         home_db_query.Add_values._prioridade_value(id_lancamentoprioridade, dados_prioridade)
 
 
-        if self.comboBox_23.currentText() == 'Sim':
-            mainpage.load_extrato_filter(self)
-            self.chart_gastos_all_2.setCurrentWidget(self.page_Tabe_main1)
-        else:
-
-            #ADD TO TABLE LANCAMENTO
-            rowPosition = self.table.rowCount()
-            self.table.insertRow(rowPosition)
-
-            #LEGENDA:
-            # 0 = CHECKBOX
-            # 1 = ID_LANCAMENTO
-            # 2 = ID_CONTA / ID_CARTAO / ID BANK
-            # 3 = TIPO: ENTRADA / SAIDA
-            # 4 = DATA DO LANÇAMENTO
-            # 5 = PRIORIDADE 
-            # 6 = CATEGORIA
-            # 7 = METODO DE PAGAMENTO
-            # 8 = VALOR
-            # 9 = STATUS
-            # 10 = SALDO
-
-            i = rowPosition
-
-            # 0 = CHECKBOX:
-
-            self.widget_item = QWidget()
-            self.layout = QHBoxLayout()
-            self.chebox = QCheckBox()
-            self.chebox.setObjectName(u"chebox")
-            self.chebox.setText(u"")
-            self.chebox.setGeometry(QRect(0, 0, 40, 40))
-            self.chebox.setChecked(False)
-            self.chebox.setStyleSheet(u"background-color: rgba(255, 255, 255,0); margin-left:10px; \n")
-            self.layout.setAlignment(Qt.AlignCenter)
-            self.layout.addWidget(self.chebox)
-            self.widget_item.setLayout(self.layout)
-            self.table.setCellWidget(i, 0, self.chebox)
-
-
-            # 1 = ID_LANCAMENTO
-
-            self.table.setItem(i, 1, QTableWidgetItem(str(id_lancamento)))
-
-            # 2 = ID_CONTA / ID_CARTAO / ID BANK
-
-
-            self.table.setItem(i, 2, QTableWidgetItem(str(id_bank)))
-
-            # 3 = TIPO: ENTRADA / SAIDA
-
-            self.table.setItem(i, 3, QTableWidgetItem(str(tipo)))
-
-
-
-            # 4 = DATA DO LANÇAMENTO 
-            self.dateedit = QtWidgets.QDateEdit(calendarPopup=True)
-            self.dateedit.setDateTime(QtCore.QDateTime.currentDateTime()) # MUDAR DPOIS
-            self.dateedit.calendarWidget().setGridVisible(True)
-            self.dateedit.calendarWidget().setFirstDayOfWeek(Qt.Monday)
-            self.dateedit.calendarWidget().setStyleSheet("QCalendarWidget QToolButton { color: white; font-size: 12px; icon-size: 20px, 20px; background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); } QCalendarWidget QMenu { left: 20px; color: white; font-size: 14px; background-color: rgb(100, 100, 100); } QCalendarWidget QSpinBox { font-size: 14px; color: white; background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); selection-background-color: rgb(136, 136, 136); selection-color: rgb(255, 255, 255); } QCalendarWidget QSpinBox::up-button { subcontrol-origin: border;  subcontrol-position: top right;  width:65px; } QCalendarWidget QSpinBox::down-button {subcontrol-origin: border; subcontrol-position: bottom right;  width:65px;} QCalendarWidget QSpinBox::up-arrow { width:56px;  height:56px; } QCalendarWidget QSpinBox::down-arrow { width:56px;  height:56px; } /* header row */ QCalendarWidget QWidget { alternate-background-color: rgb(128, 128, 128); } /* normal days */ QCalendarWidget QAbstractItemView:enabled { font-size: 14px; color: rgb(180, 180, 180); background-color: black; selection-background-color: rgb(64, 64, 64); selection-color: rgb(0, 255, 0); } /* days in other months */ /* navigation bar */ QCalendarWidget QWidget#qt_calendar_navigationbar { background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); } QCalendarWidget QAbstractItemView:disabled { color: rgb(64, 64, 64);}")
-
-            self.table.setCellWidget(i, 4, self.dateedit)
-
-            # 5 = PRIORIDDE 
-
-
-            self.table.setItem(i, 5, QTableWidgetItem(str(prioridade)))
-            backgroud = '#00ff00'
-            if prioridade == 'baixo':
-                backgroud = '#ff0000'
-            elif prioridade == 'medio':
-                backgroud = '#ffa500'
-            elif prioridade == 'alto':
-                backgroud = '#00ff00'
-
-            self.table.setItem(i, 5, QTableWidgetItem(str(prioridade)))
-            self.table.item(i,5).setTextAlignment(Qt.AlignCenter)
-
-
-            self.frame = QFrame()
-            self.frame.setObjectName(u"frame")
-            self.frame.setMaximumSize(QSize(7, 16777215))
-            self.frame.setStyleSheet(u"background-color:"+backgroud+"; border-radius:3px; margin:7px;")
-            self.table.setCellWidget(i, 5, self.frame)
-
-
-            # 6 = CATEGORIA
-
-
-            list_icon = ["delivery","appstrans","comida","mercado","lazer","icons8-casa-96","inuteis","servicos","streaming","urgencia","gatos","dogs","medico","viagem","eletronico","domesticos"]
-            icone = QFrame()
-            icone.setMaximumSize(QSize(35, 35))
-            icone.setStyleSheet(u"background-color:rgba(255,255,255,0);border-image: url(:/icons-cards/src-page-cartoes/"+list_icon[randint(0,10)]+".png);\n"
-                "\n"
-                "\n"
-                "background-position: center;\n"
-                "\n"
-                "background-repeat:no-repeat;")
-            self.table.setItem(i, 6, QTableWidgetItem(str(categoria)))
-            self.table.item(i,6).setTextAlignment(Qt.AlignCenter)
-            self.table.setCellWidget(i, 6, icone)
-
-    
-
-            # 7 = METODO DE PAGAMENTO
-
-            #todo mudar aqui dps
-
-            if tipo == 'Entrada':
-                color_label = '#00ff00'
-            else:
-                color_label = '#ff000'
-
-
-            self.label = QLabel()
-            self.label.setStyleSheet(u"background-color:rgb(101, 53, 145);border-radius:3px; margin:7px;")
-            self.label.setObjectName(u"label")
-            font = QFont()
-            font.setFamily(u"Bahnschrift Light Condensed")
-            font.setPointSize(14)
-            self.label.setFont(font)
-            self.label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\";color:"+color_label+";\">"+pagamento+"</span></p></body></html>", None))
-            self.table.setCellWidget(i, 7, self.label)
-
-
-            #/PAGAM
-
-
-
-
-            # 8 = VALOR
-                # 8 = VALOR
-
-            if tipo == 'Entrada':
-                valor_str = "+ R$ "+str(valor)
-                color_label = '#00ff00'
-            else:
-                valor_str = "- R$ "+str(valor)
-                color_label = '#ff0000'
-            self.table.setItem(i, 8, QTableWidgetItem(str(valor_str)))
-            self.table.item(i,8).setTextAlignment(Qt.AlignCenter)
-            self.table.item(i,8).setTextColor(QColor(color_label))
-
-
-
-
-
-            # 9 = STATUS
-
-
-            self.pushButton_pago = QPushButton()
-            self.pushButton_pago.setObjectName(u"pagobuto")
-            self.pushButton_pago.setGeometry(QRect(140, 180, 61, 31))
-
-
-            if status_pago == 'pago':
-
-                self.pushButton_pago.setStyleSheet("QPushButton{margin:10px;border-radius:3px;background-color: rgb(86, 202, 164);border: 1px solid  rgb(55, 55, 55);}QPushButton:hover{background-color: rgb(65, 160, 88);border: 2px solid  rgb(255, 255, 255);}QPushButton:pressed{background-color: rgb(65, 160, 88);border: 2px solid  rgb(55, 55, 55);}")
-                self.pushButton_pago.setText("Pago")
-            else:
-                self.pushButton_pago.setStyleSheet("QPushButton{margin:10px;border-radius:3px;background-color: rgb(214, 154, 90);border: 1px solid  rgb(55, 55, 55);}QPushButton:hover{background-color: rgb(163, 117, 68);border: 2px solid  rgb(255, 255, 255);}QPushButton:pressed{background-color: rgb(163, 117, 68) ;border: 2px solid  rgb(55, 55, 55);}")
-                self.pushButton_pago.setText("Pendene")
-
-
-            self.pushButton_pago.setFont(self.font)
-            self.table.setCellWidget(i, 9, self.pushButton_pago)
-
-            # 10 = SALDO
-            return_saldo = home_db_query.Return_values.return_saldo()
-            self.table.setItem(i, 10, QTableWidgetItem(str("R$%s"%return_saldo)))
-            self.table.item(i,10).setTextAlignment(Qt.AlignCenter)
-        
         #UPDATE SALDO SE FOR JA PAGO/RECEBIDO
         if status_pago == 'pago':
+            format_date = datetime.strptime(data_lancamento, '%Y-%m-%d').strftime('%d/%m/%Y')
+            get_ano = datetime.strptime(format_date, '%d/%m/%Y').strftime('%Y')
+            get_mes = datetime.strptime(format_date, '%d/%m/%Y').strftime('%m')
             if tipo == 'Entrada':
-                home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Entrada')
+                home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Entrada',get_ano,get_mes)
             else:
-                home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Saida')
+                home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Saida',get_ano,get_mes)
         mainpage.load_extrato_filter(self)
         self.chart_gastos_all_2.setCurrentWidget(self.page_Tabe_main1)
         Set_values_startup._set_Saldo(self)
@@ -614,6 +448,8 @@ class mainpage(Ui_MainWindow):
 
 
                     valor = card_db_test.Return_Values_Calcs._fatural_atual(ids[i][0],format)
+                    usd_to_brl = Convert_Moedas._usd_to_brl(self,valor)
+                    valor = usd_to_brl
                     # 8 = VALOR
                     if entra_saida == 'Entrada':
                         format_valor = "+ R$ %s"%(valor)
@@ -792,12 +628,13 @@ class mainpage(Ui_MainWindow):
 
                 # 8 = VALOR
                 valor = dados[i][6]
-                
+                usd_to_brl = Convert_Moedas._usd_to_brl(self,valor)
+                valor = usd_to_brl
                 if entra_saida == 'Entrada':
-                    format_valor = "+ R$ %s"%(valor)
+                    format_valor = "+ %s"%(valor)
                     color_label = '#00ff00'
                 else:  
-                    format_valor = "- R$ %s"%(valor)
+                    format_valor = "- %s"%(valor)
                     color_label = '#ff0000'
 
                 self.table.setItem(row_count, 8, QTableWidgetItem(str(format_valor)))
@@ -838,7 +675,8 @@ class mainpage(Ui_MainWindow):
 
                 # 10 = SALDO
                 return_saldo = home_db_query.Return_values.return_saldo()
-                self.table.setItem(row_count, 10, QTableWidgetItem(str("R$%s"%return_saldo)))
+                saldo_brl = Convert_Moedas._usd_to_brl(self,return_saldo)
+                self.table.setItem(row_count, 10, QTableWidgetItem(str("%s"%saldo_brl)))
                 self.table.item(row_count,10).setTextAlignment(Qt.AlignCenter)
 
         # LANÇAMENTOS DE CONTAS :
@@ -967,6 +805,7 @@ class mainpage(Ui_MainWindow):
 
                 # 8 = VALOR
                 valor = dados[i][7]
+                usd_to_brl = Convert_Moedas._usd_to_brl(self,valor)
                 if entra_saida == 'Entrada':
                     format_valor = "+ R$ %s"%(valor)
                     color_label = '#00ff00'
@@ -1003,7 +842,8 @@ class mainpage(Ui_MainWindow):
 
                 # 10 = SALDO
                 return_saldo = home_db_query.Return_values.return_saldo()
-                self.table.setItem(row_count, 10, QTableWidgetItem(str("R$%s"%return_saldo)))
+                usd_to_brl = Convert_Moedas._usd_to_brl(self,return_saldo)
+                self.table.setItem(row_count, 10, QTableWidgetItem(str("%s"%usd_to_brl)))
                 self.table.item(row_count,10).setTextAlignment(Qt.AlignCenter)
             
 
@@ -1083,14 +923,16 @@ class Set_values_startup(Ui_MainWindow):
     def set_banks_combobox_new_lan(self):
         
         dados = home_db_query.Return_values.banks_active_id()
-        
-        
-        for i in range(len(dados)):
-            print("COMBOBOX",dados[i][0])
-            # formats = "ID - %s Bank - %s"%(dados[i][0],dados[i][1])
-            formats = "%s"%str(dados[i][0])
-            print("COMBOBOX",formats)
-            self.comboBox_11.addItem(formats)
+        combo = self.comboBox_11
+        if combo.count() > 0:
+            pass
+        else:
+            for i in range(len(dados)):
+                print("COMBOBOX",dados[i][0])
+                # formats = "ID - %s Bank - %s"%(dados[i][0],dados[i][1])
+                formats = "%s"%str(dados[i][0])
+                print("COMBOBOX",formats)
+                self.comboBox_11.addItem(formats)
             
     def load_table_fluxo_caixa(self): 
         self.table = self.tableWidget
@@ -1459,7 +1301,10 @@ class Set_values_startup(Ui_MainWindow):
                 self.table.item(row_count,10).setTextAlignment(Qt.AlignCenter)
         
     def _set_Saldo(self):
-        self.label_70.setText("R$%s"%home_db_query.Saldos.Set_saldo_inicial())
+        valor = home_db_query.Saldos.Set_saldo_inicial()
+        usd_to_brl = Convert_Moedas._usd_to_brl(self,valor)
+        valor = usd_to_brl
+        self.label_70.setText("%s"%valor)
         self.label_70.setWordWrap(True)
         self.label_70.setTextInteractionFlags(Qt.NoTextInteraction)
 
@@ -1661,3 +1506,20 @@ class Pagamento(Ui_MainWindow):
 
             
         return True
+
+
+
+class Convert_Moedas(Ui_MainWindow):
+    def _usd_to_brl(self,valor):
+        valor = float(valor) 
+        locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+        valor = locale.currency(valor, grouping=True, symbol=True)
+        return ('%s' % valor)
+    
+    def _brl_to_usd(self,valor):
+        new_string = valor
+        to_remove = "."
+        for x in to_remove:
+            new_string = new_string.replace(x, '')
+            new_string = new_string.replace(',','.')
+        return new_string
