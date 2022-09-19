@@ -630,7 +630,7 @@ class mainpage(Ui_MainWindow):
 
 
                 self.label = QLabel()
-                self.label.setStyleSheet(u"background-color:rgb(101, 53, 145);border-radius:3px; margin:7px;")
+                self.label.setStyleSheet(u"background-color:rgba(101, 53, 145);border-radius:3px; margin:7px;")
                 self.label.setObjectName(u"label")
                 font = QFont()
                 font.setFamily(u"Bahnschrift Light Condensed")
@@ -810,11 +810,11 @@ class mainpage(Ui_MainWindow):
                 if entra_saida == 'Entrada':
                     color_label = '#00ff00'
                 else:
-                    color_label = '#ff0000'
+                    color_label = '#ffffff'
 
 
                 self.label = QLabel()
-                self.label.setStyleSheet(u"background-color:rgb(101, 53, 145);border-radius:3px; margin:7px;")
+                self.label.setStyleSheet(u"background-color:rgb(75, 79, 167);border-radius:3px; margin:7px;")
                 self.label.setObjectName(u"label")
                 font = QFont()
                 font.setFamily(u"Bahnschrift Light Condensed")

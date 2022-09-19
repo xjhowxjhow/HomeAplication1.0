@@ -2302,11 +2302,11 @@ class Main_page_Cards(Ui_MainWindow):
             # barra
             #LIMITE UTILIZADO :
             limite_utilizado = card_db_test.Main_page_values._limite_utilizado_all()
-            self.labelTitle_12.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt;  color:#5c9bcf;\">Limite Utilizado:</span></p><p><span style=\" font-size:14pt; color:#5c9bcf;\">R$"+str(limite_utilizado)+"</span></p></body></html>", None))
+            self.labelTitle_12.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt;  color:#ffffff;\">Limite Utilizado:</span></p><p><span style=\" font-size:16pt; color:#ffffff;\">R$"+str(limite_utilizado)+"</span></p></body></html>", None))
 
             #LIMITE DISPONIVEL
             limite_disponivel= card_db_test.Main_page_values._limite_disponivel_all()
-            self.labelTitle_13.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt;  color:#00aa00;\">Limite Disponivel</span></p><p><span style=\" font-size:14pt; color:#00aa00;\">R$"+str(limite_disponivel)+"</span></p></body></html>", None))
+            self.labelTitle_13.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt;  color:#ffffff;\">Limite Disponivel</span></p><p><span style=\" font-size:16pt; color:#ffffff;\">R$"+str(limite_disponivel)+"</span></p></body></html>", None))
 
             #PROGRESS BAR: 
             #PORCENTAGEM UTILIZADO
@@ -2420,7 +2420,8 @@ class Main_page_Cards(Ui_MainWindow):
             
             
             
-            self.label_39.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" color:#aa55ff;\">Fatura de: "+mes+" </span></p><p align=\"center\"><span style=\" color:#aa55ff;\">R$"+str(all_soma_faturas)+"</span></p></body></html>", None))
+            self.label_39.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" color:#ffffff;\">Faturas de: </span></p><p align=\"center\"><span style=\" font-size:16pt; color:#ffffff;\">R$"+all_soma_faturas+"</span></p></body></html>", None))
+
         thread = threading.Thread(target=thead())
         thread.start()
 
