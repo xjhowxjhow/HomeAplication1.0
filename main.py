@@ -75,18 +75,32 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.table = self.tableWidget
         self.table.verticalHeader().setVisible(False)
         self.table.setSelectionBehavior(QAbstractItemView.SelectRows)
-        self.table.setColumnWidth(0, 25)
-        self.table.setColumnWidth(4, 200)
-        self.table.setColumnWidth(5, 250)
-        self.table.setColumnWidth(6, 200)
+
         self.table.verticalHeader().setDefaultSectionSize(50)
         self.table.setFont(self.font)
         self.table.horizontalHeaderItem(0).setFlags(QtCore.Qt.ItemIsEnabled|QtCore.Qt.ItemIsSelectable)
         self.table.horizontalHeaderItem(2).setFlags(QtCore.Qt.ItemIsEnabled|QtCore.Qt.ItemIsSelectable)
         self.table.setStyleSheet("QWidget { color: #fffff8; border-radius:0px; } QHeaderView::section { background-color: rgb(53, 53, 53); border:none; width:45px; height: 50px; border-radius:0px; } QTableWidget { gridline-color: #fffff8; border-radius:0px; border-radius:0px; } QTableWidget QTableCornerButton::section { background-color: #646464; border-radius:0px; } QTableView:item { border-bottom: 0.5px solid qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 0), stop:0.45677 rgba(0, 0, 0, 0), stop:0.479846 rgba(255, 255, 255, 255), stop:0.50571 rgba(239, 236, 55, 0), stop:1 rgba(239, 236, 55, 0)); border-radius:0px; } QTableView::item:selected{ background-color:rgba(255, 255, 255,30); color: rgb(255, 255, 255); }")
         self.table.horizontalHeader().sectionClicked.connect(self.filtro_table_header)
+        #HIDDEN TABELA
+        self.table.setColumnHidden(1, True)
+        self.table.setColumnHidden(2, True)
+
         
-        
+        self.table.setColumnHidden(4, True)
+        #TAMANHO DAS COLUNAS
+        #CHECK
+        self.table.setColumnWidth(0, 25)
+        #COLUNA ICONE
+        self.table.setColumnWidth(3, 60)
+        #COLUNA DATA
+        self.table.setColumnWidth(5, 100)
+        #COLUNA PRIORIDADE
+        self.table.setColumnWidth(6, 150)
+        #COLUNA CATEGORIA
+        self.table.setColumnWidth(7, 170)
+        #COLUNA PAGAMENTO:
+        self.table.setColumnWidth(8, 150)
         
         #CONFIGURANDO CONTA SE TIVER CARDAO DE CREDITO
         self.comboBox_24.currentIndexChanged.connect(lambda:home_db_fun.mainpage._event_change_stakecard(self))
@@ -382,10 +396,11 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
             if obj == self.table and event.type() == QtWidgets.QAbstractItemView.SelectRows:
                 current_row = self.table.currentRow()
                 current_column = self.table.currentColumn()
-                id = self.table.item(current_row, 1).text()
+                
                 #PRINT CELL WIDGET TEXT
                 
                 try:
+                    id = self.table.item(current_row, 1).text()
                     #SE FOR ENTRADA MUDA TEXTO BOTAO PAGAMENTO
                     home_db_fun.Descricao_lancamento.Change_text_btn_pagar_receber(self,id)
 

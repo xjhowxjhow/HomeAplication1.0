@@ -289,14 +289,15 @@ class mainpage(Ui_MainWindow):
         # 0 = CHECKBOX
         # 1 = ID_LANCAMENTO
         # 2 = ID_CONTA / ID_CARTAO / ID BANK
-        # 3 = TIPO: ENTRADA / SAIDA
-        # 4 = DATA DO LANÇAMENTO
-        # 5 = PRIORIDADE 
-        # 6 = CATEGORIA
-        # 7 = METODO DE PAGAMENTO
-        # 8 = VALOR
-        # 9 = STATUS
-        # 10 = SALDO
+        # 3 = ICON_BANK
+        # 4 = TIPO: ENTRADA / SAIDA
+        # 5 = DATA DO LANÇAMENTO
+        # 6 = PRIORIDADE 
+        # 7 = CATEGORIA
+        # 8 = METODO DE PAGAMENTO
+        # 9 = VALOR
+        # 10 = STATUS
+        # 11 = SALDO
         ids = card_db_test.Main_page_values._cards_ids_all()
         print("COUNT IDSSS-----------",len(ids))
         
@@ -346,9 +347,17 @@ class mainpage(Ui_MainWindow):
                     print("ID_CONTA",id_conta)
                     # 3 = TIPO: ENTRADA / SAIDA
                     entra_saida = 'SAIDA'
-                    self.table.setItem(row_count, 3, QTableWidgetItem(str(entra_saida)))
+                    self.table.setItem(row_count, 4, QTableWidgetItem(str(entra_saida)))
                     print("ENTRA_SAIDA",entra_saida)
 
+                    #icone BANK
+                    icon = QIcon()
+                    name_bank = card_db_test.Ui_db._cartao(str(id_conta))
+                    style_icon_URL = effects.Effetc_slides._icon_main_pacth(self,name_bank)
+
+
+                    icon.addFile(style_icon_URL, QSize(), QIcon.Normal, QIcon.Off)
+                    self.table.setItem(row_count, 3, QTableWidgetItem(icon, ""))
 
                     # 4 = DATA DO LANÇAMENTO 
                     # VENCIMENTO DA FATURA
@@ -367,7 +376,7 @@ class mainpage(Ui_MainWindow):
                     self.dateedit.calendarWidget().setFirstDayOfWeek(Qt.Monday)
                     self.dateedit.calendarWidget().setStyleSheet("QCalendarWidget QToolButton { color: white; font-size: 12px; icon-size: 20px, 20px; background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); } QCalendarWidget QMenu { left: 20px; color: white; font-size: 14px; background-color: rgb(100, 100, 100); } QCalendarWidget QSpinBox { font-size: 14px; color: white; background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); selection-background-color: rgb(136, 136, 136); selection-color: rgb(255, 255, 255); } QCalendarWidget QSpinBox::up-button { subcontrol-origin: border;  subcontrol-position: top right;  width:65px; } QCalendarWidget QSpinBox::down-button {subcontrol-origin: border; subcontrol-position: bottom right;  width:65px;} QCalendarWidget QSpinBox::up-arrow { width:56px;  height:56px; } QCalendarWidget QSpinBox::down-arrow { width:56px;  height:56px; } /* header row */ QCalendarWidget QWidget { alternate-background-color: rgb(128, 128, 128); } /* normal days */ QCalendarWidget QAbstractItemView:enabled { font-size: 14px; color: rgb(180, 180, 180); background-color: black; selection-background-color: rgb(64, 64, 64); selection-color: rgb(0, 255, 0); } /* days in other months */ /* navigation bar */ QCalendarWidget QWidget#qt_calendar_navigationbar { background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); } QCalendarWidget QAbstractItemView:disabled { color: rgb(64, 64, 64); }")
 
-                    self.table.setCellWidget(row_count, 4, self.dateedit)
+                    self.table.setCellWidget(row_count, 5, self.dateedit)
 
                     # 5 = PRIORIDADE 
 
@@ -393,15 +402,15 @@ class mainpage(Ui_MainWindow):
                         text_priori = 'Alto'
                         backgroud = '#00ff00' 
 
-                    self.table.setItem(row_count, 5, QTableWidgetItem(str(text_priori)))
-                    self.table.item(row_count,5).setTextAlignment(Qt.AlignCenter)
+                    self.table.setItem(row_count, 6, QTableWidgetItem(str(text_priori)))
+                    self.table.item(row_count,6).setTextAlignment(Qt.AlignCenter)
 
 
                     self.frame = QFrame()
                     self.frame.setObjectName(u"frame")
                     self.frame.setMaximumSize(QSize(7, 16777215))
                     self.frame.setStyleSheet(u"background-color:"+backgroud+"; border-radius:3px; margin:7px;")
-                    self.table.setCellWidget(row_count, 5, self.frame)
+                    self.table.setCellWidget(row_count, 6, self.frame)
 
 
                     # 6 = CATEGORIA
@@ -416,9 +425,9 @@ class mainpage(Ui_MainWindow):
                         "background-position: center;\n"
                         "\n"
                         "background-repeat:no-repeat;")
-                    self.table.setItem(row_count, 6, QTableWidgetItem(str(cate)))
-                    self.table.item(row_count,6).setTextAlignment(Qt.AlignCenter)
-                    self.table.setCellWidget(row_count, 6, icone)
+                    self.table.setItem(row_count, 7, QTableWidgetItem(str(cate)))
+                    self.table.item(row_count,7).setTextAlignment(Qt.AlignCenter)
+                    self.table.setCellWidget(row_count, 7, icone)
 
 
 
@@ -440,7 +449,7 @@ class mainpage(Ui_MainWindow):
                     font.setPointSize(14)
                     self.label.setFont(font)
                     self.label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\";color:"+color_label+";\">"+metodo+"</span></p></body></html>", None))
-                    self.table.setCellWidget(row_count, 7, self.label)
+                    self.table.setCellWidget(row_count, 8, self.label)
 
 
                     #/PAGAMENTO
@@ -459,9 +468,9 @@ class mainpage(Ui_MainWindow):
                         color_label = '#ff0000'
                     
                     print(valor,"VALOR'")
-                    self.table.setItem(row_count, 8, QTableWidgetItem(str(format_valor)))
-                    self.table.item(row_count,8).setTextAlignment(Qt.AlignCenter)
-                    self.table.item(row_count,8).setTextColor(QColor(color_label))
+                    self.table.setItem(row_count, 9, QTableWidgetItem(str(format_valor)))
+                    self.table.item(row_count,9).setTextAlignment(Qt.AlignCenter)
+                    self.table.item(row_count,9).setTextColor(QColor(color_label))
 
 
 
@@ -488,12 +497,13 @@ class mainpage(Ui_MainWindow):
 
 
                     self.pushButton_pago.setFont(self.font)
-                    self.table.setCellWidget(row_count, 9, self.pushButton_pago)
+                    self.table.setCellWidget(row_count, 10, self.pushButton_pago)
 
                     # 10 = SALDO
+                    
                     return_saldo = home_db_query.Return_values.return_saldo()
-                    self.table.setItem(row_count, 10, QTableWidgetItem(str("R$%s"%return_saldo)))
-                    self.table.item(row_count,10).setTextAlignment(Qt.AlignCenter)
+                    self.table.setItem(row_count, 11, QTableWidgetItem(str("R$%s"%return_saldo)))
+                    self.table.item(row_count,11).setTextAlignment(Qt.AlignCenter)
 
         # LACAMENTO RECORRENTES:
 
@@ -539,10 +549,19 @@ class mainpage(Ui_MainWindow):
 
                 # 3 = TIPO: ENTRADA / SAIDA
                 entra_saida = dados[i][2]
-                self.table.setItem(row_count, 3, QTableWidgetItem(str(entra_saida)))
+                self.table.setItem(row_count, 4, QTableWidgetItem(str(entra_saida)))
+
+                #4 ICONE
+                icon = QIcon()
+                name_bank = home_db_query.Return_Values_Conditions._return_name_bank(str(id_conta))
+                style_icon_URL = effects.Effetc_slides._icon_main_pacth(self,name_bank)
 
 
-
+                icon.addFile(style_icon_URL, QSize(), QIcon.Normal, QIcon.Off)
+                self.table.setItem(row_count, 3, QTableWidgetItem(icon, ""))
+                
+                
+                
                 # 4 = DATA DO LANÇAMENTO 
                 date_ven = home_db_query.Return_Values_Conditions._retur_data_recorrente_mes(str(dados[i][0]))
                 print(date_ven,"DATA VENCIMENTO RECORRENTE")
@@ -557,12 +576,12 @@ class mainpage(Ui_MainWindow):
                 self.dateedit.calendarWidget().setFirstDayOfWeek(Qt.Monday)
                 self.dateedit.calendarWidget().setStyleSheet("QCalendarWidget QToolButton { color: white; font-size: 12px; icon-size: 20px, 20px; background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); } QCalendarWidget QMenu { left: 20px; color: white; font-size: 14px; background-color: rgb(100, 100, 100); } QCalendarWidget QSpinBox { font-size: 14px; color: white; background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); selection-background-color: rgb(136, 136, 136); selection-color: rgb(255, 255, 255); } QCalendarWidget QSpinBox::up-button { subcontrol-origin: border;  subcontrol-position: top right;  width:65px; } QCalendarWidget QSpinBox::down-button {subcontrol-origin: border; subcontrol-position: bottom right;  width:65px;} QCalendarWidget QSpinBox::up-arrow { width:56px;  height:56px; } QCalendarWidget QSpinBox::down-arrow { width:56px;  height:56px; } /* header row */ QCalendarWidget QWidget { alternate-background-color: rgb(128, 128, 128); } /* normal days */ QCalendarWidget QAbstractItemView:enabled { font-size: 14px; color: rgb(180, 180, 180); background-color: black; selection-background-color: rgb(64, 64, 64); selection-color: rgb(0, 255, 0); } /* days in other months */ /* navigation bar */ QCalendarWidget QWidget#qt_calendar_navigationbar { background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); } QCalendarWidget QAbstractItemView:disabled { color: rgb(64, 64, 64); }")
 
-                self.table.setCellWidget(row_count, 4, self.dateedit)
+                self.table.setCellWidget(row_count, 5, self.dateedit)
 
                 # 5 = PRIORIDADE 
 
                 priori = dados[i][3]
-                self.table.setItem(row_count, 5, QTableWidgetItem(str(priori)))
+                self.table.setItem(row_count, 6, QTableWidgetItem(str(priori)))
                 backgroud = '#00ff00'
                 if priori == 'baixo':
                     backgroud = '#ff0000'
@@ -571,15 +590,15 @@ class mainpage(Ui_MainWindow):
                 elif priori == 'alto':
                     backgroud = '#00ff00'
 
-                self.table.setItem(row_count, 5, QTableWidgetItem(str(priori)))
-                self.table.item(row_count,5).setTextAlignment(Qt.AlignCenter)
+                self.table.setItem(row_count, 6, QTableWidgetItem(str(priori)))
+                self.table.item(row_count,6).setTextAlignment(Qt.AlignCenter)
 
 
                 self.frame = QFrame()
                 self.frame.setObjectName(u"frame")
                 self.frame.setMaximumSize(QSize(7, 16777215))
                 self.frame.setStyleSheet(u"background-color:"+backgroud+"; border-radius:3px; margin:7px;")
-                self.table.setCellWidget(row_count, 5, self.frame)
+                self.table.setCellWidget(row_count, 6, self.frame)
 
 
                 # 6 = CATEGORIA
@@ -594,9 +613,9 @@ class mainpage(Ui_MainWindow):
                     "background-position: center;\n"
                     "\n"
                     "background-repeat:no-repeat;")
-                self.table.setItem(row_count, 6, QTableWidgetItem(str(cate)))
-                self.table.item(row_count,6).setTextAlignment(Qt.AlignCenter)
-                self.table.setCellWidget(row_count, 6, icone)
+                self.table.setItem(row_count, 7, QTableWidgetItem(str(cate)))
+                self.table.item(row_count,7).setTextAlignment(Qt.AlignCenter)
+                self.table.setCellWidget(row_count, 7, icone)
 
 
 
@@ -618,7 +637,7 @@ class mainpage(Ui_MainWindow):
                 font.setPointSize(14)
                 self.label.setFont(font)
                 self.label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\";color:"+color_label+";\">"+metodo+"</span></p></body></html>", None))
-                self.table.setCellWidget(row_count, 7, self.label)
+                self.table.setCellWidget(row_count, 8, self.label)
 
 
                 #/PAGAMENTO
@@ -637,9 +656,9 @@ class mainpage(Ui_MainWindow):
                     format_valor = "- %s"%(valor)
                     color_label = '#ff0000'
 
-                self.table.setItem(row_count, 8, QTableWidgetItem(str(format_valor)))
-                self.table.item(row_count,8).setTextAlignment(Qt.AlignCenter)
-                self.table.item(row_count,8).setTextColor(QColor(color_label))
+                self.table.setItem(row_count, 9, QTableWidgetItem(str(format_valor)))
+                self.table.item(row_count,9).setTextAlignment(Qt.AlignCenter)
+                self.table.item(row_count,9).setTextColor(QColor(color_label))
 
 
 
@@ -671,13 +690,13 @@ class mainpage(Ui_MainWindow):
 
 
                 self.pushButton_pago.setFont(self.font)
-                self.table.setCellWidget(row_count, 9, self.pushButton_pago)
+                self.table.setCellWidget(row_count, 10, self.pushButton_pago)
 
                 # 10 = SALDO
                 return_saldo = home_db_query.Return_values.return_saldo()
                 saldo_brl = Convert_Moedas._usd_to_brl(self,return_saldo)
-                self.table.setItem(row_count, 10, QTableWidgetItem(str("%s"%saldo_brl)))
-                self.table.item(row_count,10).setTextAlignment(Qt.AlignCenter)
+                self.table.setItem(row_count, 11, QTableWidgetItem(str("%s"%saldo_brl)))
+                self.table.item(row_count,11).setTextAlignment(Qt.AlignCenter)
 
         # LANÇAMENTOS DE CONTAS :
         
@@ -721,10 +740,17 @@ class mainpage(Ui_MainWindow):
 
                 # 3 = TIPO: ENTRADA / SAIDA
                 entra_saida = dados[i][2]
-                self.table.setItem(row_count, 3, QTableWidgetItem(str(entra_saida)))
+                self.table.setItem(row_count, 4, QTableWidgetItem(str(entra_saida)))
+
+                # 4 = ICONE
+
+                icon = QIcon()
+                name_bank = home_db_query.Return_Values_Conditions._return_name_bank(str(id_conta))
+                style_icon_URL = effects.Effetc_slides._icon_main_pacth(self,name_bank)
 
 
-
+                icon.addFile(style_icon_URL, QSize(), QIcon.Normal, QIcon.Off)
+                self.table.setItem(row_count, 3, QTableWidgetItem(icon, ""))
                 # 4 = DATA DO LANÇAMENTO 
                 data_lancamento = dados[i][3]
                 convert_d_m_y  = '%s-%s-%s'%(data_lancamento[8:10],data_lancamento[5:7],data_lancamento[0:4])
@@ -734,12 +760,12 @@ class mainpage(Ui_MainWindow):
                 self.dateedit.calendarWidget().setFirstDayOfWeek(Qt.Monday)
                 self.dateedit.calendarWidget().setStyleSheet("QCalendarWidget QToolButton { color: white; font-size: 12px; icon-size: 20px, 20px; background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); } QCalendarWidget QMenu { left: 20px; color: white; font-size: 14px; background-color: rgb(100, 100, 100); } QCalendarWidget QSpinBox { font-size: 14px; color: white; background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); selection-background-color: rgb(136, 136, 136); selection-color: rgb(255, 255, 255); } QCalendarWidget QSpinBox::up-button { subcontrol-origin: border;  subcontrol-position: top right;  width:65px; } QCalendarWidget QSpinBox::down-button {subcontrol-origin: border; subcontrol-position: bottom right;  width:65px;} QCalendarWidget QSpinBox::up-arrow { width:56px;  height:56px; } QCalendarWidget QSpinBox::down-arrow { width:56px;  height:56px; } /* header row */ QCalendarWidget QWidget { alternate-background-color: rgb(128, 128, 128); } /* normal days */ QCalendarWidget QAbstractItemView:enabled { font-size: 14px; color: rgb(180, 180, 180); background-color: black; selection-background-color: rgb(64, 64, 64); selection-color: rgb(0, 255, 0); } /* days in other months */ /* navigation bar */ QCalendarWidget QWidget#qt_calendar_navigationbar { background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); } QCalendarWidget QAbstractItemView:disabled { color: rgb(64, 64, 64); }")
 
-                self.table.setCellWidget(row_count, 4, self.dateedit)
+                self.table.setCellWidget(row_count, 5, self.dateedit)
 
                 # 5 = PRIORIDADE 
 
                 priori = dados[i][4]
-                self.table.setItem(row_count, 5, QTableWidgetItem(str(priori)))
+                self.table.setItem(row_count, 6, QTableWidgetItem(str(priori)))
                 backgroud = '#00ff00'
                 if priori == 'baixo':
                     backgroud = '#ff0000'
@@ -748,15 +774,15 @@ class mainpage(Ui_MainWindow):
                 elif priori == 'alto':
                     backgroud = '#00ff00'
 
-                self.table.setItem(row_count, 5, QTableWidgetItem(str(priori)))
-                self.table.item(row_count,5).setTextAlignment(Qt.AlignCenter)
+                self.table.setItem(row_count, 6, QTableWidgetItem(str(priori)))
+                self.table.item(row_count,6).setTextAlignment(Qt.AlignCenter)
 
 
                 self.frame = QFrame()
                 self.frame.setObjectName(u"frame")
                 self.frame.setMaximumSize(QSize(7, 16777215))
                 self.frame.setStyleSheet(u"background-color:"+backgroud+"; border-radius:3px; margin:7px;")
-                self.table.setCellWidget(row_count, 5, self.frame)
+                self.table.setCellWidget(row_count, 6, self.frame)
 
 
                 # 6 = CATEGORIA
@@ -771,9 +797,9 @@ class mainpage(Ui_MainWindow):
                     "background-position: center;\n"
                     "\n"
                     "background-repeat:no-repeat;")
-                self.table.setItem(row_count, 6, QTableWidgetItem(str(cate)))
-                self.table.item(row_count,6).setTextAlignment(Qt.AlignCenter)
-                self.table.setCellWidget(row_count, 6, icone)
+                self.table.setItem(row_count, 7, QTableWidgetItem(str(cate)))
+                self.table.item(row_count,7).setTextAlignment(Qt.AlignCenter)
+                self.table.setCellWidget(row_count, 7, icone)
 
 
 
@@ -795,7 +821,7 @@ class mainpage(Ui_MainWindow):
                 font.setPointSize(14)
                 self.label.setFont(font)
                 self.label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\";color:"+color_label+";\">"+metodo+"</span></p></body></html>", None))
-                self.table.setCellWidget(row_count, 7, self.label)
+                self.table.setCellWidget(row_count, 8, self.label)
 
 
                 #/PAGAMENTO
@@ -813,9 +839,9 @@ class mainpage(Ui_MainWindow):
                     format_valor = "- R$ %s"%(valor)
                     color_label = '#ff0000'
 
-                self.table.setItem(row_count, 8, QTableWidgetItem(str(format_valor)))
-                self.table.item(row_count,8).setTextAlignment(Qt.AlignCenter)
-                self.table.item(row_count,8).setTextColor(QColor(color_label))
+                self.table.setItem(row_count, 9, QTableWidgetItem(str(format_valor)))
+                self.table.item(row_count,9).setTextAlignment(Qt.AlignCenter)
+                self.table.item(row_count,9).setTextColor(QColor(color_label))
 
 
 
@@ -838,13 +864,13 @@ class mainpage(Ui_MainWindow):
 
 
                 self.pushButton_pago.setFont(self.font)
-                self.table.setCellWidget(row_count, 9, self.pushButton_pago)
+                self.table.setCellWidget(row_count, 10, self.pushButton_pago)
 
                 # 10 = SALDO
                 return_saldo = home_db_query.Return_values.return_saldo()
                 usd_to_brl = Convert_Moedas._usd_to_brl(self,return_saldo)
-                self.table.setItem(row_count, 10, QTableWidgetItem(str("%s"%usd_to_brl)))
-                self.table.item(row_count,10).setTextAlignment(Qt.AlignCenter)
+                self.table.setItem(row_count, 11, QTableWidgetItem(str("%s"%usd_to_brl)))
+                self.table.item(row_count,11).setTextAlignment(Qt.AlignCenter)
             
 
         

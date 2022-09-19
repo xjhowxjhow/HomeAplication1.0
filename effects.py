@@ -438,3 +438,27 @@ class Effetc_slides(Ui_MainWindow):
         if id == 'CAIXA ECONOMICA':
             icon = "url(:/menu/caixa-icon.png)"
             return icon
+
+    def _icon_main_pacth(self,id):
+    
+        if id == 'C6':
+            icon = ":/menu/c6.jpg"
+            return icon
+        if id == 'NUBANK':   
+            icon = ":/menu/nu-icon.png"
+            return icon
+        if id == 'BTG':
+            icon = ":/menu/btg-icon.png"
+            return icon
+        if id == 'SANTANDER':
+            icon = ":/menu/santander-icon.png"
+            return icon
+        if id == 'ITAU':
+            icon = ":/menu/itau-icon.png"
+            return icon
+        if id == 'BRADESCO':
+            icon = ":/menu/bradesco-icon.png"
+            return icon
+        if id == 'CAIXA ECONOMICA':
+            icon = ":/menu/caixa-icon.png"
+            return icon

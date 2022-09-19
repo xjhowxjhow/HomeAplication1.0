@@ -51,6 +51,7 @@ class Add_values:
                     cursor.execute("UPDATE "+tabelas_db[i]+" SET "+coluns[i][j]+" = '"+str(data[i][j])+"' WHERE id = '"+str(id)+"'")
             banco.commit()
             banco.close()
+            
             #RETURN:
             return True
     
@@ -505,7 +506,17 @@ class Return_Values_Conditions:
             return True
 
     
-
+    def _return_name_bank(id):
+ 
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        cursor.execute("SELECT contas_bancarias.nome_banco FROM contas_bancarias  WHERE id = '"+id+"'")
+        dados = cursor.fetchall()
+        return dados[0][0]
+    
 
     
     
@@ -569,15 +580,19 @@ class Saldos:
         print(tipo,"-",valor_lancamento,"=",saldo_atual)
         print(saldo_atual,"SALTDO TIOI")
         # SELECT DADOS DO LANÇAMENTO E INSERT IN NEW_LANCAMENTO
-        cursor.execute("INSERT INTO pagamentos_saldo (id_lancamento,id_bank,tipo_e_s,valor,data_pagamento,saldo_atual)\
+        cursor.execute("INSERT INTO pagamentos_saldo (id_lancamento,id_bank,tipo_e_s,valor,ref_vencimento,data_pagamento,saldo_atual)\
                         SELECT new_lancamento.id_lancamento,\
                                new_lancamento.id_bank,\
                                new_lancamento.tipo,\
                                new_lancamento.valor,\
+                               status_lancamento.vencimento,\
                                DateTime('now'),\
                                "+str(saldo_atual)+"\
                         FROM new_lancamento \
-                        WHERE new_lancamento.id_lancamento = '"+str(id)+"' AND new_lancamento.id_bank = '"+str(id_bank)+"'")
+                        INNER JOIN status_lancamento\
+                        ON new_lancamento.id_lancamento = status_lancamento.id_lancamento\
+                        WHERE new_lancamento.id_lancamento = '"+str(id)+"' AND new_lancamento.id_bank = '"+str(id_bank)+"'\
+                        AND strftime('%Y-%m', status_lancamento.vencimento) = '"+str(ano)+"-"+str(mes)+"'")
         banco.commit()
 
         # UPDATE SALDO ATUAL
@@ -638,5 +653,41 @@ class Verify_status_payment:
 
         
         
-a= Return_Values_Conditions.return_lancamentos_recorretes()
-print(a)
+
+
+#union
+# SELECT  new_lancamento.id_lancamento,
+#         new_lancamento.id_bank,
+#         new_lancamento.tipo,
+#         new_lancamento.data_lancamento,
+#         prioridade_value.prioridade,
+#         new_lancamento.categoria,
+#         new_lancamento.pagamento,
+#         new_lancamento.valor,
+#         status_lancamento.status_pago,
+#         config_lancamento.recorrente
+# FROM new_lancamento
+# INNER JOIN prioridade_value
+# ON new_lancamento.id_lancamento = prioridade_value.id_lancamento
+# INNER JOIN status_lancamento
+# ON new_lancamento.id_lancamento = status_lancamento.id_lancamento
+# INNER JOIN config_lancamento
+# ON new_lancamento.id_lancamento = config_lancamento.id_lancamento
+# WHERE strftime('%Y-%m', new_lancamento.data_lancamento) = '2022-09' AND config_lancamento.recorrente = 'Não'
+# UNION
+# SELECT DISTINCT new_lancamento.id_lancamento,
+#         new_lancamento.id_bank,
+#         new_lancamento.tipo,
+# 		new_lancamento.data_lancamento,
+#         prioridade_value.prioridade,
+#         new_lancamento.categoria,
+#         new_lancamento.pagamento,
+#         new_lancamento.valor,
+# 		config_lancamento.recorrente_m_d_s_y,
+# 		config_lancamento.recorrente_dia
+# FROM new_lancamento
+# INNER JOIN prioridade_value
+# ON new_lancamento.id_lancamento = prioridade_value.id_lancamento
+# INNER JOIN config_lancamento
+# ON new_lancamento.id_lancamento = config_lancamento.id_lancamento
+# WHERE config_lancamento.recorrente_m_d_s_y = 'Mes'
