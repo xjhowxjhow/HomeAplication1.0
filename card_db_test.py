@@ -359,7 +359,7 @@ class Return_Values_Calcs:
         #QUERY
         cursor.execute("SELECT (status_payment) FROM "+str(card)+"  where strftime('%Y%m', data_filter) = '"+data_select+"' GROUP BY status_payment  HAVING status_payment = 'pendente'") #TODO Carrega FINAL_CARTAO DB e seta
         result = cursor.fetchall()
-
+        print("RESULTADO",result)
         try:
             if result[0][0] == 'pendente':
                 return 'pendente'

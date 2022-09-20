@@ -1533,8 +1533,40 @@ class Pagamento(Ui_MainWindow):
             
         return True
 
-
-
+    def _pagar_fatura(self):
+        current_row = self.table.currentRow()
+        id_bank = self.table.item(current_row,2).text()
+        mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
+        ano = self.label_72.text()
+        verifi_if_pago = card_db_test.Return_Values_Calcs._status_fatura(id_bank,mes,ano)
+        print("PASDA",verifi_if_pago)
+        if verifi_if_pago == 'pendente':
+            home_db_query.Saldos._pagar_fatura(id_bank,mes,ano)
+            card_db_test.Return_Values_Calcs._pagar_fatura(id_bank,mes,ano)
+            Set_values_startup._set_Saldo(self)
+            mainpage.load_extrato_filter(self)
+            msg = QMessageBox()
+            msg.setWindowTitle("Sucesso")
+            msg.setText("Fatura paga com sucesso")
+            msg.setIcon(QMessageBox.Information)
+            msg.exec_()
+        elif verifi_if_pago == 'pago':
+            msg = QMessageBox()
+            msg.setWindowTitle("Erro")
+            msg.setText("Fatura já paga")
+            msg.setIcon(QMessageBox.Critical)
+            msg.exec_()
+        elif verifi_if_pago == 'proximas':
+            msg = QMessageBox()
+            msg.setWindowTitle("Erro")
+            msg.setText("Fatura ainda não venceu Ou nao existe Valor")
+            msg.setIcon(QMessageBox.Critical)
+            msg.exec_()
+     
+            
+        #BANCO DIFERENTE N TA DESCONTADO GERANDO ERRO DPS CORRIGIR
+        
+        
 class Convert_Moedas(Ui_MainWindow):
     def _usd_to_brl(self,valor):
         valor = float(valor) 

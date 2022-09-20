@@ -38,6 +38,7 @@ class funcoes_cartao(Ui_MainWindow):
         current_time = QDateTime.currentDateTime()
         label_time = current_time.toString('dd/MM/yyyy hh:mm:ss')
         self.label_38.setText(label_time)
+        self.label_42.setText(label_time)
         current_time = QTime.currentTime()
         conditions= int(current_time.toString('hh'))
         

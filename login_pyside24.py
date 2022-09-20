@@ -1396,12 +1396,14 @@ class Ui_MainWindow(object):
 
         self.label_41 = QLabel(self.welcome_2)
         self.label_41.setObjectName(u"label_41")
+        self.label_41.setStyleSheet(u"background-color:rgba(255,255,255,0);")
         self.label_41.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_37.addWidget(self.label_41)
 
         self.label_42 = QLabel(self.welcome_2)
         self.label_42.setObjectName(u"label_42")
+        self.label_42.setStyleSheet(u"background-color:rgba(255,255,255,0);")
         self.label_42.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_37.addWidget(self.label_42)
@@ -9057,12 +9059,14 @@ class Ui_MainWindow(object):
 
         self.label_36 = QLabel(self.welcome)
         self.label_36.setObjectName(u"label_36")
+        self.label_36.setStyleSheet(u"background-color:rgba(255,255,255,0);")
         self.label_36.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_18.addWidget(self.label_36)
 
         self.label_38 = QLabel(self.welcome)
         self.label_38.setObjectName(u"label_38")
+        self.label_38.setStyleSheet(u"background-color:rgba(255,255,255,0);")
         self.label_38.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_18.addWidget(self.label_38)

@@ -1,5 +1,6 @@
 from ctypes import util
 from operator import index
+from random import randint
 from re import S
 import sqlite3
 from PySide2.QtCore import *
@@ -11,6 +12,7 @@ from dateutil.relativedelta import relativedelta
 from datetime import datetime
 from datetime import date 
 import calendar
+import card_db_test
 
 
 
@@ -608,7 +610,57 @@ class Saldos:
         return True
     
     
+    def _pagar_fatura(id_bank,mes,ano):
+        #id_lancamento
+        #ID_BANK
+        #TIPO_E_S
+        #VALOR
+        #DATA DE PAGAMENTO
+        #SALDO_ATUAL
         
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+
+        print("-------------------------")
+ 
+        #GET SALDO ATUAL
+        cursor.execute("SELECT contas_bancarias.saldo_inicial FROM contas_bancarias WHERE id = '"+str(id_bank)+"'")
+        saldo_inicial = cursor.fetchall()
+        saldo_inicial = saldo_inicial[0][0]
+        print(saldo_inicial)
+        #GET VALOR DA FATURA
+        format_anomes = str(ano)+"-"+str(mes)
+        valor_fatu = card_db_test.Return_Values_Calcs._fatural_atual(id_bank,format_anomes)
+        print("VALOR DA FATURA",valor_fatu)
+
+
+        #OPERACAO PARA SALDO ATUAL
+
+        saldo_atual = float(saldo_inicial) - float(valor_fatu)
+        print(ano,mes)
+        ref = "fatura-ref "+str(mes)+"/"+str(ano)
+        id_fatura = randint(100000,999999)
+        return_vencimento = card_db_test.Ui_db._vencimento(id_bank)
+        ref_mes = str(ano)+"-"+str(mes)+"-"+str(return_vencimento)
+        # SELECT DADOS DO LANÇAMENTO E INSERT IN NEW_LANCAMENTO
+        cursor.execute("INSERT INTO pagamentos_saldo (id_lancamento,id_bank,tipo_e_s,valor,ref_vencimento,data_pagamento,saldo_atual)\
+                        VALUES ('"+str(id_fatura)+"','"+str(id_bank)+"','"+str(ref)+"','"+str(valor_fatu)+"','"+str(ref_mes)+"',DateTime('now'),'"+str(saldo_atual)+"')")
+        banco.commit()
+
+        # UPDATE SALDO ATUAL
+        cursor.execute("UPDATE contas_bancarias SET saldo_inicial = '"+str(saldo_atual)+"' WHERE id = '"+str(id_bank)+"'")
+        banco.commit()
+        
+        #UPDATE STATUS DO LANÇAMENTO
+        cursor.execute("UPDATE status_lancamento SET status_pago = 'pago' WHERE id_lancamento = '"+str(id)+"' AND status_lancamento.id_bank = '"+str(id_bank)+"'AND strftime('%Y-%m',status_lancamento.vencimento) = '"+str(ano)+"-"+str(mes)+"'")
+
+        print("-------------------------")
+        banco.commit()
+        banco.close()
+        return True
+
 
 
 class Verify_status_payment:

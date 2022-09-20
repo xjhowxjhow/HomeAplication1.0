@@ -439,8 +439,14 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                 return home_db_fun.mainpage.load_extrato_filter(self)
 
             if obj == self.paga_fatura_3 and event.type() == QtCore.QEvent.MouseButtonPress:
+                current_row = self.table.currentRow()
+
                 if self.paga_fatura_3.text() == "Pagar":
-                    return home_db_fun.Pagamento._pagar_lancamento(self)
+                    
+                    if self.table.item(current_row, 7).text() == "Fatura":
+                        return home_db_fun.Pagamento._pagar_fatura(self)
+                    else:
+                        return home_db_fun.Pagamento._pagar_lancamento(self)
                 else:
                     return home_db_fun.Pagamento._receber_lancamento(self)
                  
