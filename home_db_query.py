@@ -288,7 +288,38 @@ class Return_values:
         banco.close()
         return result[0][0]
 
+    def return_saldo_banks(id_bank):
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        cursor.execute("SELECT saldo_inicial FROM contas_bancarias WHERE id = '"+str(id_bank)+"'")
+        result = cursor.fetchall()
+        banco.close()
+        print("???",result)
+        if not result:
+            print("retornou none")
+            return None
+  
+        else:
+            print("retornou valor")
+            return result[0][0]
 
+    def _return_default_bank():
+        #id_lancamento
+        #data_lancamento
+        #recorrente_m_d_s_y
+        #recorrente_dia
+        
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        cursor.execute("SELECT config_contas.conta_padrao_bank FROM config_contas")
+        dados = cursor.fetchall()
+        return dados[0][0]
 class Return_Values_Conditions:
     
     def return_lancamentos_month(ano,mes): # TODO RETONA COMPRAS NAO RECORRENTES
@@ -520,7 +551,7 @@ class Return_Values_Conditions:
         return dados[0][0]
     
 
-    
+
     
     
 class Saldos:
@@ -541,7 +572,7 @@ class Saldos:
         cursor.execute("SELECT contas_bancarias.saldo_inicial FROM contas_bancarias WHERE id = '"+str(conta_padrao[0][0])+"'")
         saldo_inicial = cursor.fetchall()
         saldo_inicial = saldo_inicial[0][0]
-        print("ERRORR SALDO INCIALÇ",saldo_inicial)
+
 
 
        
@@ -632,7 +663,7 @@ class Saldos:
         print(saldo_inicial)
         #GET VALOR DA FATURA
         format_anomes = str(ano)+"-"+str(mes)
-        valor_fatu = card_db_test.Return_Values_Calcs._fatural_atual(id_bank,format_anomes)
+        valor_fatu = card_db_test.Return_Values_Calcs._valor_fatura(id_bank,mes,ano)
         print("VALOR DA FATURA",valor_fatu)
 
 
@@ -686,60 +717,61 @@ class Verify_status_payment:
         
 
     def verify_type_lanca(id):
-        #id_lancamento
-        #data_lancamento
-        #recorrente_m_d_s_y
-        #recorrente_dia
-        
-        #CONNECT DB
+
         a = (os.path.dirname(os.path.realpath(__file__)))
         banco = sqlite3.connect(''+a+'/bando_de_valores.db')
         cursor = banco.cursor()
         
         cursor.execute("SELECT new_lancamento.tipo FROM new_lancamento WHERE new_lancamento.id_lancamento = '"+str(id)+"'")
         dados = cursor.fetchall()
-        if dados[0][0] == 'Entrada':
+        print("TIPO LANÇAMENTO",dados)
+        if not dados:
+            return "fatura"
+        elif dados[0][0] == "Entrada":
+            return True
+        elif dados[0][0] == "Saida":
+            return False
+        else:
+            return "fatura"
+        # if dados[0][0] == 'Entrada':
+        #     return True
+        # elif dados[0][0] == 'Saida':
+        #     return False
+        # elif dados[0][0] == None or dados[0][0] == '' or dados[0][0] == ' ' or dados[0][0] == '[]':
+        #     print("ERRO AO VERIFICAR TIPO DE LANÇAMENTO")
+
+
+        
+        
+
+class Return_values_configs:
+    def _update_default_h_s_z(value):
+        
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        verifica_se_existe = cursor.execute("SELECT hide_show_zeros_faturas FROM config_aplicacao")
+        verifica_se_existe = cursor.fetchall() 
+        print(verifica_se_existe)
+        if verifica_se_existe:
+            cursor.execute("UPDATE config_aplicacao SET hide_show_zeros_faturas = '"+str(value)+"'")
+            banco.commit()
+            banco.close()
             return True
         else:
-            return False
+            cursor.execute("INSERT INTO config_aplicacao (hide_show_zeros_faturas) VALUES ('"+str(value)+"')")
+            banco.commit()
+            banco.close()
+            return True
 
-        
-        
 
-
-#union
-# SELECT  new_lancamento.id_lancamento,
-#         new_lancamento.id_bank,
-#         new_lancamento.tipo,
-#         new_lancamento.data_lancamento,
-#         prioridade_value.prioridade,
-#         new_lancamento.categoria,
-#         new_lancamento.pagamento,
-#         new_lancamento.valor,
-#         status_lancamento.status_pago,
-#         config_lancamento.recorrente
-# FROM new_lancamento
-# INNER JOIN prioridade_value
-# ON new_lancamento.id_lancamento = prioridade_value.id_lancamento
-# INNER JOIN status_lancamento
-# ON new_lancamento.id_lancamento = status_lancamento.id_lancamento
-# INNER JOIN config_lancamento
-# ON new_lancamento.id_lancamento = config_lancamento.id_lancamento
-# WHERE strftime('%Y-%m', new_lancamento.data_lancamento) = '2022-09' AND config_lancamento.recorrente = 'Não'
-# UNION
-# SELECT DISTINCT new_lancamento.id_lancamento,
-#         new_lancamento.id_bank,
-#         new_lancamento.tipo,
-# 		new_lancamento.data_lancamento,
-#         prioridade_value.prioridade,
-#         new_lancamento.categoria,
-#         new_lancamento.pagamento,
-#         new_lancamento.valor,
-# 		config_lancamento.recorrente_m_d_s_y,
-# 		config_lancamento.recorrente_dia
-# FROM new_lancamento
-# INNER JOIN prioridade_value
-# ON new_lancamento.id_lancamento = prioridade_value.id_lancamento
-# INNER JOIN config_lancamento
-# ON new_lancamento.id_lancamento = config_lancamento.id_lancamento
-# WHERE config_lancamento.recorrente_m_d_s_y = 'Mes'
+    
+    
+    def _return_default_h_s_z():
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        cursor.execute("SELECT config_aplicacao.hide_show_zeros_faturas FROM config_aplicacao")
+        dados = cursor.fetchall()
+        banco.close()
+        return dados[0][0]

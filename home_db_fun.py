@@ -108,15 +108,16 @@ class mainpage(Ui_MainWindow):
             status_pago = 'pendente'
             
         format_data_lancamento = datetime.strptime(vencimento, '%d/%m/%Y').strftime('%Y-%m-%d')
-        print("format_data_lancamento: ",format_data_lancamento)
+        print("format_data_lancamento: AND STATUS ",format_data_lancamento,status_pago)
             
         dados_status = [id_bank,format_data_lancamento,status_pago]
         #EXECUTE QUERY
-        if self.comboBox_23.currentText() == 'Não':
+     
             
-            home_db_query.Add_values._status_lancamento(id_lancamento_status,dados_status)
-        else:
-            pass
+        home_db_query.Add_values._status_lancamento(id_lancamento_status,dados_status)
+            
+            #TODO
+
         
         
         #TABLE_PRIORIDADE VALOR:
@@ -144,8 +145,11 @@ class mainpage(Ui_MainWindow):
             get_mes = datetime.strptime(format_date, '%d/%m/%Y').strftime('%m')
             if tipo == 'Entrada':
                 home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Entrada',get_ano,get_mes)
+                print("tipoooo",tipo)
             else:
                 home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Saida',get_ano,get_mes)
+                print("tipoooo",tipo)
+                
         mainpage.load_extrato_filter(self)
         self.chart_gastos_all_2.setCurrentWidget(self.page_Tabe_main1)
         Set_values_startup._set_Saldo(self)
@@ -310,8 +314,8 @@ class mainpage(Ui_MainWindow):
             pass
         else:
             for i in range(len(ids)):
-                validador = card_db_test.Return_Values_Calcs._fatural_atual(ids[i],fomrmat)
-                if validador == '0.00':
+                validador = home_db_query.Return_values_configs._return_default_h_s_z()
+                if validador == 'True':
                     pass
                 else:
                     print("VALIDADOR",validador)
@@ -455,16 +459,18 @@ class mainpage(Ui_MainWindow):
                     #/PAGAMENTO
 
 
-
-                    valor = card_db_test.Return_Values_Calcs._fatural_atual(ids[i][0],format)
+                    mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
+                    ano = self.label_72.text()
+                    valor = card_db_test.Return_Values_Calcs._valor_fatura(ids[i][0],mes,ano)
+                    print("VALOR CARDAO DE TCRI",valor)
                     usd_to_brl = Convert_Moedas._usd_to_brl(self,valor)
                     valor = usd_to_brl
                     # 8 = VALOR
                     if entra_saida == 'Entrada':
-                        format_valor = "+ R$ %s"%(valor)
+                        format_valor = "+ %s"%(valor)
                         color_label = '#00ff00'
                     else:  
-                        format_valor = "- R$ %s"%(valor)
+                        format_valor = "- %s"%(valor)
                         color_label = '#ff0000'
                     
                     print(valor,"VALOR'")
@@ -673,7 +679,7 @@ class mainpage(Ui_MainWindow):
                     status = 'pago'
                 else:
                     status = 'pendente'
-                
+                print("LODAINDG",status,id_lancamento)
 
                 self.pushButton_pago = QPushButton()
                 self.pushButton_pago.setObjectName(u"pagobuto")
@@ -1415,10 +1421,16 @@ class Descricao_lancamento(Ui_MainWindow):
         return self.icon_if_card.setStyleSheet(u"background-image:"+return_icon+";background-position: center;background-repeat:no-repeat;")
 
     def Change_text_btn_pagar_receber(self,id):
-        if home_db_query.Verify_status_payment.verify_type_lanca(id) == True:
+        val = home_db_query.Verify_status_payment.verify_type_lanca(id) 
+        if val == True:
             self.paga_fatura_3.setText("Receber")
-        else:
+            
+        elif val == False:
             self.paga_fatura_3.setText("Pagar")
+        else:
+            self.paga_fatura_3.setText("Pagar Fatura")
+            
+        print(val)
 
 
 class Pagamento(Ui_MainWindow):
@@ -1441,7 +1453,7 @@ class Pagamento(Ui_MainWindow):
         if reco == True:
             if pago_recorrente == False:
             #MENSAGEM BOX
-                print("Lancamento recorrente, deseja pagar todos os lançamentos?")
+                print("Lancamento recorrente")
                 home_db_query.Add_values._add_new_lancamento_recorrente(id_lancamento,id_bank,mes,ano)
                 home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Saida',ano,mes)
                 Set_values_startup._set_Saldo(self)
@@ -1513,7 +1525,7 @@ class Pagamento(Ui_MainWindow):
             if pago == False:
                 id_lancamento = self.table.item(current_row,1).text()
                 id_bank = self.table.item(current_row,2).text()
-                home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Entrada')
+                home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Entrada',ano,mes)
                 Set_values_startup._set_Saldo(self)
                 mainpage.load_extrato_filter(self)
                 #MENSAGEM BOX
@@ -1540,16 +1552,38 @@ class Pagamento(Ui_MainWindow):
         ano = self.label_72.text()
         verifi_if_pago = card_db_test.Return_Values_Calcs._status_fatura(id_bank,mes,ano)
         print("PASDA",verifi_if_pago)
+        
+        #VERIFICA SE FATURA É DO BANCO PRINCIPAL
+        
+        
+        
         if verifi_if_pago == 'pendente':
-            home_db_query.Saldos._pagar_fatura(id_bank,mes,ano)
-            card_db_test.Return_Values_Calcs._pagar_fatura(id_bank,mes,ano)
-            Set_values_startup._set_Saldo(self)
-            mainpage.load_extrato_filter(self)
-            msg = QMessageBox()
-            msg.setWindowTitle("Sucesso")
-            msg.setText("Fatura paga com sucesso")
-            msg.setIcon(QMessageBox.Information)
-            msg.exec_()
+            if  home_db_query.Return_values.return_saldo_banks(id_bank) != None:
+                print("SALDO",home_db_query.Return_values.return_saldo_banks(id_bank))
+                home_db_query.Saldos._pagar_fatura(id_bank,mes,ano)
+                card_db_test.Return_Values_Calcs._pagar_fatura(id_bank,mes,ano)
+                Set_values_startup._set_Saldo(self)
+                mainpage.load_extrato_filter(self)
+                msg = QMessageBox()
+                msg.setWindowTitle("Sucesso")
+                msg.setText("Fatura paga com sucesso")
+                msg.setIcon(QMessageBox.Information)
+                msg.exec_()
+            else:
+                validate = Alerts._alerta_fatura_banco_indiferente(self)
+                if validate == True:
+                    default_bank = home_db_query.Return_values._return_default_bank()
+                    home_db_query.Saldos._pagar_fatura(str(default_bank),mes,ano)
+                    card_db_test.Return_Values_Calcs._pagar_fatura(id_bank,mes,ano)
+                    Set_values_startup._set_Saldo(self)
+                    mainpage.load_extrato_filter(self)
+                    msg = QMessageBox()
+                    msg.setWindowTitle("Sucesso")
+                    msg.setText("Fatura paga com sucesso debitado da conta principal!")
+                    msg.setIcon(QMessageBox.Information)
+                    msg.exec_()
+                else:
+                    print("NÃO PAGAR FATURA")
         elif verifi_if_pago == 'pago':
             msg = QMessageBox()
             msg.setWindowTitle("Erro")
@@ -1581,3 +1615,66 @@ class Convert_Moedas(Ui_MainWindow):
             new_string = new_string.replace(x, '')
             new_string = new_string.replace(',','.')
         return new_string
+    
+    
+    
+class Alerts(Ui_MainWindow):
+
+    def _alerta_fatura_banco_indiferente(self):
+        qdialog = QDialog()
+        qdialog.setWindowTitle("Alerta")
+        qdialog.setWindowIcon(QIcon(':/icons/icons/Alerta.png'))
+        qdialog.setWindowFlags(Qt.WindowCloseButtonHint | Qt.WindowMinimizeButtonHint)
+        qdialog.setFixedSize(400, 200)
+        qdialog.setStyleSheet("background-color: rgb(255, 255, 255);")
+        qdialog.setWindowModality(Qt.ApplicationModal)
+        
+        true_or_false = 0
+        #OK BUTTON CANC BUTTON
+        ok_button = QPushButton("Sim",qdialog)
+        ok_button.setGeometry(300,150,80,30)
+        ok_button.setStyleSheet("background-color: rgb(255, 255, 255);")
+        ok_button.clicked.connect(qdialog.accept)
+        
+        
+        #CANCEL BUTTON
+        cancel_button = QPushButton("Não",qdialog)
+        cancel_button.setGeometry(200,150,80,30)
+        cancel_button.setStyleSheet("background-color: rgb(255, 255, 255);")
+        cancel_button.clicked.connect(qdialog.reject) 
+    
+
+    
+
+        #LABEL
+        label = QLabel(qdialog)
+        label.setGeometry(10,10,380,130)
+        label.setStyleSheet("background-color: rgb(255, 255, 255);")
+        label.setText("Está fatura é de um banco diferente do principal!\nNao existe conta bancaria vinculado a este Cartao de Credito \npara descontar o valor\ndeseja descontar no debito do banco Principal?")
+        label.setAlignment(Qt.AlignCenter)
+        qdialog.exec_()
+        return qdialog.result()
+
+
+
+        
+class Configs(Ui_MainWindow):
+
+    def hide_show_saldos_zeros(self,condicao): #apenas para faturas de cartoes de creditos
+        if condicao == True:
+            home_db_query.Return_values_configs._update_default_h_s_z(True)
+            Qms = QMessageBox()
+            Qms.setWindowTitle("Sucesso")
+            Qms.setText("Saldos zerados ocultados com sucesso")
+            Qms.setIcon(QMessageBox.Information)
+            Qms.exec_()
+            
+            return mainpage.load_extrato_filter(self)
+        elif condicao == False:
+            home_db_query.Return_values_configs._update_default_h_s_z(False)
+            Qms = QMessageBox()
+            Qms.setWindowTitle("Sucesso")
+            Qms.setText("Saldos zerados mostrados com sucesso")
+            Qms.setIcon(QMessageBox.Information)
+            Qms.exec_()
+            return mainpage.load_extrato_filter(self)

@@ -83,9 +83,9 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.table.setStyleSheet("QWidget { color: #fffff8; border-radius:0px; } QHeaderView::section { background-color: rgb(53, 53, 53); border:none; width:45px; height: 50px; border-radius:0px; } QTableWidget { gridline-color: #fffff8; border-radius:0px; border-radius:0px; } QTableWidget QTableCornerButton::section { background-color: #646464; border-radius:0px; } QTableView:item { border-bottom: 0.5px solid qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 0), stop:0.45677 rgba(0, 0, 0, 0), stop:0.479846 rgba(255, 255, 255, 255), stop:0.50571 rgba(239, 236, 55, 0), stop:1 rgba(239, 236, 55, 0)); border-radius:0px; } QTableView::item:selected{ background-color:rgba(255, 255, 255,30); color: rgb(255, 255, 255); }")
         self.table.horizontalHeader().sectionClicked.connect(self.filtro_table_header)
         #HIDDEN TABELA
-        self.table.setColumnHidden(1, True)
-        self.table.setColumnHidden(2, True)
-
+        # self.table.setColumnHidden(1, True)
+        # self.table.setColumnHidden(2, True)
+        self.table.setColumnHidden(11, True)
         
         self.table.setColumnHidden(4, True)
         #TAMANHO DAS COLUNAS
@@ -101,6 +101,11 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.table.setColumnWidth(7, 170)
         #COLUNA PAGAMENTO:
         self.table.setColumnWidth(8, 150)
+        #COLUNA VALOR
+        self.table.setColumnWidth(9, 300)
+        #COLUNA SATUS
+        self.table.setColumnWidth(10, 80)
+        
         
         #CONFIGURANDO CONTA SE TIVER CARDAO DE CREDITO
         self.comboBox_24.currentIndexChanged.connect(lambda:home_db_fun.mainpage._event_change_stakecard(self))
@@ -183,6 +188,9 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.timer.timeout.connect(lambda:card_db_fun.funcoes_cartao._clock_page_cards(self))
         self.timer.start(1000)
 
+        #RADIO CONFIG:
+        self.hidden_saldo_fat0_true.clicked.connect(lambda:home_db_fun.Configs.hide_show_saldos_zeros(self,True))
+        self.hidden_saldo_fat0_false.clicked.connect(lambda:home_db_fun.Configs.hide_show_saldos_zeros(self,False))
         
         card_db_fun.Main_page_Cards._itemlist_metas(self)
         #FILTRO DE EVENTOS#
@@ -224,7 +232,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.previus_month_2.installEventFilter(self)
         self.next_month_2.installEventFilter(self)
         self.paga_fatura_3.installEventFilter(self)
-
+        
     
     def eventFilter(self, obj, event):
             if obj == self.pushButton_8 and event.type() == QtCore.QEvent.MouseButtonPress:
@@ -443,10 +451,9 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
 
                 if self.paga_fatura_3.text() == "Pagar":
                     
-                    if self.table.item(current_row, 7).text() == "Fatura":
-                        return home_db_fun.Pagamento._pagar_fatura(self)
-                    else:
-                        return home_db_fun.Pagamento._pagar_lancamento(self)
+                    return home_db_fun.Pagamento._pagar_lancamento(self)
+                elif self.paga_fatura_3.text() == "Pagar Fatura":
+                    return home_db_fun.Pagamento._pagar_fatura(self)
                 else:
                     return home_db_fun.Pagamento._receber_lancamento(self)
                  

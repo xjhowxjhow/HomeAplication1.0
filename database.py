@@ -39,6 +39,9 @@ class salva_dados:
                 #SETS PRIORIDADE
                 cursor.execute("CREATE TABLE IF NOT EXISTS prioridade_value(id_lancamento int,id_bank int,prioridade text)")
                 
+                
+                #CONFIGURAÇÕES DA APLICAÇÃO:
+                cursor.execute("CREATE TABLE IF NOT EXISTS config_aplicacao (id int,tema text,hide_show_zeros_faturas text)")
                 banco.close()
                 pyautogui.alert('Banco de dados Criado no diretorio raiz')
 

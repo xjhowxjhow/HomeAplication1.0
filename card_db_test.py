@@ -141,7 +141,7 @@ class Return_Values_Calcs:
         #QUERY
         cursor.execute("SELECT SUM (valor_transacao) FROM "+str(card)+" where strftime('%Y-%m', data_filter) = '"+mes+"' GROUP BY status_payment  HAVING status_payment = 'pendente' ")
         result=cursor.fetchall()
-        
+        print("result_asdhyasgb",result)
         #NONE:
 
         if not result:
@@ -379,8 +379,27 @@ class Return_Values_Calcs:
             else:
                 return "proximas"
             
+    def _valor_fatura(id,mes,ano):
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        #ARGUMENTS:
+        card = 'extrato_cartao_%s'%(id)
+        data_select = "%s-%s"%(ano,mes)
 
+        
 
+        #QUERY
+        cursor.execute("SELECT SUM (valor_transacao) FROM "+str(card)+"  where strftime('%Y-%m', data_filter) = '"+data_select+"' GROUP BY status_payment") #TODO Carrega FINAL_CARTAO DB e seta
+        result = cursor.fetchall()
+        try:
+            print("RESULTADO FACYT",result[0][0])
+            return result[0][0]
+        except:
+            print("RESULTADO",0)
+            return str(0)
 class Charts_values:
     
     def _gastos_categoria(id,mes,ano):
