@@ -1206,7 +1206,7 @@ class Ui_MainWindow(object):
         self.scrollArea_9.setWidgetResizable(True)
         self.scrollAreaWidgetContents_9 = QWidget()
         self.scrollAreaWidgetContents_9.setObjectName(u"scrollAreaWidgetContents_9")
-        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, -79, 1454, 1123))
+        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, 0, 1454, 1123))
         self.scrollAreaWidgetContents_9.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); ")
         self.verticalLayout_108 = QVBoxLayout(self.scrollAreaWidgetContents_9)
         self.verticalLayout_108.setSpacing(10)
@@ -4118,9 +4118,6 @@ class Ui_MainWindow(object):
         self.verticalLayout_163 = QVBoxLayout(self.frame_226)
         self.verticalLayout_163.setObjectName(u"verticalLayout_163")
         self.comboBox_26 = QComboBox(self.frame_226)
-        self.comboBox_26.addItem("")
-        self.comboBox_26.addItem("")
-        self.comboBox_26.addItem("")
         self.comboBox_26.addItem("")
         self.comboBox_26.addItem("")
         self.comboBox_26.setObjectName(u"comboBox_26")
@@ -10606,6 +10603,7 @@ class Ui_MainWindow(object):
         self.hidden_saldo_fat0_false.setObjectName(u"hidden_saldo_fat0_false")
         self.hidden_saldo_fat0_false.setStyleSheet(u"background-color:rgba(255,255,255,30);\n"
 "color: rgb(255, 255, 255);")
+        self.hidden_saldo_fat0_false.setChecked(True)
 
         self.horizontalLayout_110.addWidget(self.hidden_saldo_fat0_false)
 
@@ -11016,10 +11014,7 @@ class Ui_MainWindow(object):
 
         self.label_89.setText(QCoreApplication.translate("MainWindow", u"Configurar recorrencia", None))
         self.comboBox_26.setItemText(0, "")
-        self.comboBox_26.setItemText(1, QCoreApplication.translate("MainWindow", u"Dia", None))
-        self.comboBox_26.setItemText(2, QCoreApplication.translate("MainWindow", u"Semanal", None))
-        self.comboBox_26.setItemText(3, QCoreApplication.translate("MainWindow", u"Mes", None))
-        self.comboBox_26.setItemText(4, QCoreApplication.translate("MainWindow", u"Anual", None))
+        self.comboBox_26.setItemText(1, QCoreApplication.translate("MainWindow", u"Mes", None))
 
         self.label_88.setText(QCoreApplication.translate("MainWindow", u"Data todo dia", None))
         self.lineEdit_14.setText("")

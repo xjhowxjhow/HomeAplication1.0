@@ -1,4 +1,5 @@
 
+from itertools import count
 import sqlite3
 from turtle import color
 import pyautogui
@@ -45,114 +46,123 @@ class mainpage(Ui_MainWindow):
 
 
 
-    #NOVO LANCAMENTO
+
     def _new_lancamento(self):
         #OBRIGATORIOS
-
-        # TABLE new_lancamento
-        id_lancamento = randint(0,99999999)
-        id_bank = self.comboBox_11.currentText() # ID DA CONTA BANCO PARA DEBITO
-        tipo = self.comboBox_25.currentText() #Entrada ou Saida
         
+        validador_empty = Alerts._val_new_lan_pass_or_not(self)
+        print(validador_empty,"validador_empty")
+        if validador_empty == True:
         
-        if self.comboBox_22.currentText() == 'Sim':
-            data_lancamento = self.lancamento_programado_2.text() # NAO PROGRAMADO JA FOI RECEBIDO
-            status_pago = 'pago'
-        else:
-            data_lancamento = self.lancamento_programado.text() # PROGRAMADO NAO FOI RECEBIDO
-        
-
-        format_data_lancamento = datetime.strptime(data_lancamento, '%d/%m/%Y').strftime('%Y-%m-%d')
-        data_lancamento = format_data_lancamento
-        
-        categoria = self.comboBox_21.currentText()
-        pagamento = self.comboBox_27.currentText()
-        valor = self.lineEdit_13.text()
-        brl_usd = Convert_Moedas._brl_to_usd(self,valor)
-        descricao = self.lineEdit_11.text()
-        
-        dados = [id_bank, data_lancamento, categoria, pagamento, brl_usd,tipo, descricao]
-        
-        #EXECUTE QUERY
-        home_db_query.Add_values._add_new_lancamento(id_lancamento,dados)
-        
-        
-        # TABLE config_lancamento
-        id_lancamento_config_lancamento =id_lancamento
-        id_bank = self.comboBox_11.currentText() # ID DA CONTA BANCO PARA DEBITO
-        if self.comboBox_23.currentText() == 'Sim':
-            recorrente= self.comboBox_23.currentText()
-            recorrente_m_d_s_y = self.comboBox_26.currentText()
-            recorrente_dia = self.lineEdit_14.text()
-        else:
-            recorrente= self.comboBox_23.currentText()
-            recorrente_m_d_s_y = 'False'
-            recorrente_dia = 'False'
-            
-        
-        anexos = 'test.pdf'
-        dados_lan =[id_bank, recorrente, recorrente_m_d_s_y, recorrente_dia, anexos]
-        #EXECUTE QUERY
-        home_db_query.Add_values._config_lancamento(id_lancamento_config_lancamento,dados_lan)
-        
-        
-        #TABLE STATUS_LANCAMENTO:
-        id_lancamento_status =id_lancamento
-        id_bank = self.comboBox_11.currentText() # ID DA CONTA BANCO PARA DEBITO
-        vencimento = ''
-        if self.comboBox_22.currentText() == 'Sim':
-            vencimento = self.lancamento_programado_2.text() # NAO PROGRAMADO JA FOI RECEBIDO
-            status_pago = 'pago'
-        else:
-            vencimento = self.lancamento_programado.text() # PROGRAMADO NAO FOI RECEBIDO
-            status_pago = 'pendente'
-            
-        format_data_lancamento = datetime.strptime(vencimento, '%d/%m/%Y').strftime('%Y-%m-%d')
-        print("format_data_lancamento: AND STATUS ",format_data_lancamento,status_pago)
-            
-        dados_status = [id_bank,format_data_lancamento,status_pago]
-        #EXECUTE QUERY
-     
-            
-        home_db_query.Add_values._status_lancamento(id_lancamento_status,dados_status)
-            
-            #TODO
-
-        
-        
-        #TABLE_PRIORIDADE VALOR:
-        id_lancamentoprioridade = id_lancamento
-        id_bank = self.comboBox_11.currentText() # ID DA CONTA BANCO PARA DEBITO
-        prioridade = ''
-        brl_usd = Convert_Moedas._brl_to_usd(self,valor)
-        
-        if float(brl_usd) >1000.00:
-            prioridade = 'alto'
-        elif float(brl_usd) >500.00:
-            prioridade = 'medio'
-        else:
-            prioridade = 'baixo'
-        
-        dados_prioridade = [id_bank, prioridade]
-        #EXECUTE QUERY
-        home_db_query.Add_values._prioridade_value(id_lancamentoprioridade, dados_prioridade)
+            # TABLE new_lancamento
+            id_lancamento = randint(0,99999999)
+            id_bank = self.comboBox_11.currentText() # ID DA CONTA BANCO PARA DEBITO
+            tipo = self.comboBox_25.currentText() #Entrada ou Saida
 
 
-        #UPDATE SALDO SE FOR JA PAGO/RECEBIDO
-        if status_pago == 'pago':
-            format_date = datetime.strptime(data_lancamento, '%Y-%m-%d').strftime('%d/%m/%Y')
-            get_ano = datetime.strptime(format_date, '%d/%m/%Y').strftime('%Y')
-            get_mes = datetime.strptime(format_date, '%d/%m/%Y').strftime('%m')
-            if tipo == 'Entrada':
-                home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Entrada',get_ano,get_mes)
-                print("tipoooo",tipo)
+            if self.comboBox_22.currentText() == 'Sim':
+                data_lancamento = self.lancamento_programado_2.text() # NAO PROGRAMADO JA FOI RECEBIDO
+                status_pago = 'pago'
             else:
-                home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Saida',get_ano,get_mes)
-                print("tipoooo",tipo)
-                
-        mainpage.load_extrato_filter(self)
-        self.chart_gastos_all_2.setCurrentWidget(self.page_Tabe_main1)
-        Set_values_startup._set_Saldo(self)
+                data_lancamento = self.lancamento_programado.text() # PROGRAMADO NAO FOI RECEBIDO
+
+
+            format_data_lancamento = datetime.strptime(data_lancamento, '%d/%m/%Y').strftime('%Y-%m-%d')
+            data_lancamento = format_data_lancamento
+
+            categoria = self.comboBox_21.currentText()
+            pagamento = self.comboBox_27.currentText()
+            valor = self.lineEdit_13.text()
+            brl_usd = Convert_Moedas._brl_to_usd(self,valor)
+            descricao = self.lineEdit_11.text()
+
+            dados = [id_bank, data_lancamento, categoria, pagamento, brl_usd,tipo, descricao]
+
+            #EXECUTE QUERY
+            home_db_query.Add_values._add_new_lancamento(id_lancamento,dados)
+
+
+            # TABLE config_lancamento
+            id_lancamento_config_lancamento =id_lancamento
+            id_bank = self.comboBox_11.currentText() # ID DA CONTA BANCO PARA DEBITO
+            if self.comboBox_23.currentText() == 'Sim':
+                recorrente= self.comboBox_23.currentText()
+                recorrente_m_d_s_y = self.comboBox_26.currentText()
+                recorrente_dia = self.lineEdit_14.text()
+            else:
+                recorrente= self.comboBox_23.currentText()
+                recorrente_m_d_s_y = 'False'
+                recorrente_dia = 'False'
+
+
+            anexos = 'test.pdf'
+            dados_lan =[id_bank, recorrente, recorrente_m_d_s_y, recorrente_dia, anexos]
+            #EXECUTE QUERY
+            home_db_query.Add_values._config_lancamento(id_lancamento_config_lancamento,dados_lan)
+
+
+            #TABLE STATUS_LANCAMENTO:
+            id_lancamento_status =id_lancamento
+            id_bank = self.comboBox_11.currentText() # ID DA CONTA BANCO PARA DEBITO
+            vencimento = ''
+            if self.comboBox_22.currentText() == 'Sim':
+                vencimento = self.lancamento_programado_2.text() # NAO PROGRAMADO JA FOI RECEBIDO
+                status_pago = 'pago'
+            else:
+                vencimento = self.lancamento_programado.text() # PROGRAMADO NAO FOI RECEBIDO
+                status_pago = 'pendente'
+
+            format_data_lancamento = datetime.strptime(vencimento, '%d/%m/%Y').strftime('%Y-%m-%d')
+            print("format_data_lancamento: AND STATUS ",format_data_lancamento,status_pago)
+
+            dados_status = [id_bank,format_data_lancamento,status_pago]
+            #EXECUTE QUERY
+
+
+            home_db_query.Add_values._status_lancamento(id_lancamento_status,dados_status)
+
+                #TODO
+
+
+
+            #TABLE_PRIORIDADE VALOR:
+            id_lancamentoprioridade = id_lancamento
+            id_bank = self.comboBox_11.currentText() # ID DA CONTA BANCO PARA DEBITO
+            prioridade = ''
+            brl_usd = Convert_Moedas._brl_to_usd(self,valor)
+
+            if float(brl_usd) >1000.00:
+                prioridade = 'alto'
+            elif float(brl_usd) >500.00:
+                prioridade = 'medio'
+            else:
+                prioridade = 'baixo'
+
+            dados_prioridade = [id_bank, prioridade]
+            #EXECUTE QUERY
+            home_db_query.Add_values._prioridade_value(id_lancamentoprioridade, dados_prioridade)
+
+
+            #UPDATE SALDO SE FOR JA PAGO/RECEBIDO
+            if status_pago == 'pago':
+                format_date = datetime.strptime(data_lancamento, '%Y-%m-%d').strftime('%d/%m/%Y')
+                get_ano = datetime.strptime(format_date, '%d/%m/%Y').strftime('%Y')
+                get_mes = datetime.strptime(format_date, '%d/%m/%Y').strftime('%m')
+                if tipo == 'Entrada':
+                    home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Entrada',get_ano,get_mes)
+                    print("tipoooo",tipo)
+                else:
+                    home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Saida',get_ano,get_mes)
+                    print("tipoooo",tipo)
+
+            mainpage.load_extrato_filter(self)
+            self.chart_gastos_all_2.setCurrentWidget(self.page_Tabe_main1)
+            Set_values_startup._set_Saldo(self)
+
+        else:
+            pass
+        
+        print("VALIDO?",validador_empty)
 
 
     #EVENTS FOR BUTTONS
@@ -1560,7 +1570,7 @@ class Pagamento(Ui_MainWindow):
         if verifi_if_pago == 'pendente':
             if  home_db_query.Return_values.return_saldo_banks(id_bank) != None:
                 print("SALDO",home_db_query.Return_values.return_saldo_banks(id_bank))
-                home_db_query.Saldos._pagar_fatura(id_bank,mes,ano)
+                home_db_query.Saldos._pagar_fatura(id_bank,0,mes,ano)
                 card_db_test.Return_Values_Calcs._pagar_fatura(id_bank,mes,ano)
                 Set_values_startup._set_Saldo(self)
                 mainpage.load_extrato_filter(self)
@@ -1573,8 +1583,16 @@ class Pagamento(Ui_MainWindow):
                 validate = Alerts._alerta_fatura_banco_indiferente(self)
                 if validate == True:
                     default_bank = home_db_query.Return_values._return_default_bank()
-                    home_db_query.Saldos._pagar_fatura(str(default_bank),mes,ano)
+                    # TODO ERRO AQ AWQ TEM Q RETORNAR O ID DO BANCO QUE NAO TEM BANCO CADASTRADO EX NUB
+                    # TODO ERRO AQ AWQ TEM Q RETORNAR O ID DO BANCO QUE NAO TEM BANCO CADASTRADO EX NUB
+                    # TODO ERRO AQ AWQ TEM Q RETORNAR O ID DO BANCO QUE NAO TEM BANCO CADASTRADO EX NUB
+                    # TODO ERRO AQ AWQ TEM Q RETORNAR O ID DO BANCO QUE NAO TEM BANCO CADASTRADO EX NUB
+                    # TODO ERRO AQ AWQ TEM Q RETORNAR O ID DO BANCO QUE NAO TEM BANCO CADASTRADO EX NUB
+                    # TODO ERRO AQ AWQ TEM Q RETORNAR O ID DO BANCO QUE NAO TEM BANCO CADASTRADO EX NUB
+                    
+                    home_db_query.Saldos._pagar_fatura(str(default_bank),id_bank,mes,ano)
                     card_db_test.Return_Values_Calcs._pagar_fatura(id_bank,mes,ano)
+                    # TODO ERRO AQ
                     Set_values_startup._set_Saldo(self)
                     mainpage.load_extrato_filter(self)
                     msg = QMessageBox()
@@ -1597,7 +1615,7 @@ class Pagamento(Ui_MainWindow):
             msg.setIcon(QMessageBox.Critical)
             msg.exec_()
      
-            
+
         #BANCO DIFERENTE N TA DESCONTADO GERANDO ERRO DPS CORRIGIR
         
         
@@ -1617,7 +1635,7 @@ class Convert_Moedas(Ui_MainWindow):
         return new_string
     
     
-    
+
 class Alerts(Ui_MainWindow):
 
     def _alerta_fatura_banco_indiferente(self):
@@ -1656,8 +1674,122 @@ class Alerts(Ui_MainWindow):
         return qdialog.result()
 
 
+    def _combobox_empty(self,recorrente,pago):
+        #CONTA comboBox_11
+        #OPERAÇÃO comboBox_25
+        #PAGAMENTO comboBox_27
+        #CATEGORIA comboBox_21
+        #DESCRIÇÃO lineEdit_11
+        #DATA DA TRANSAÇÃO NAO RECORRENTE lancamento_programado_2
+        # VALOR   lineEdit_13
+        #PAGO/RECEBIDO comboBox_22
+        #RECORRENTE?  comboBox_23
+        #recorrente programar data lancamento_programado
+        #CONFIGURAR RECORRENCIA comboBox_26
+        #.TODOS DIA? lineEdit_14
 
+        #VALIDADOR SE RECORRENTE:
+        if recorrente == True:
+            #VALIDADOR SE paPAGO:
+            if pago == True:
+                if self.comboBox_11.currentText() == "" or self.comboBox_25.currentText() == "" or self.comboBox_27.currentText() == "" or self.comboBox_21.currentText() == "" or self.lineEdit_11.text() == "" or self.lineEdit_13.text() == "" or self.comboBox_22.currentText() == "" or self.comboBox_23.currentText() == "" or self.comboBox_26.currentText() == "" or self.lineEdit_14.text() == "":
+                    return False
+                else:
+                    #VERIFICA SE DATA TODO DIA RECORRENTE É VALIDO
+                    if self.lineEdit_14.text() == "0" or self.lineEdit_14.text() == "00" or len(self.lineEdit_14.text()) > 2 or len(self.lineEdit_14.text()) < 2 or int(self.lineEdit_14.text()) > 31 or int(self.lineEdit_14.text()) < 1:
+                        return False
+                    else:
+                        if len(self.lineEdit_14.text()) == 2:
+                            return True
+
+            if pago == False:
+                if self.comboBox_11.currentText() == "" or self.comboBox_25.currentText() == "" or self.comboBox_27.currentText() == "" or self.comboBox_21.currentText() == "" or self.lineEdit_11.text() == "" or self.lineEdit_13.text() == "" or self.comboBox_22.currentText() == "" or self.comboBox_23.currentText() == "" or self.comboBox_26.currentText() == "" or self.lineEdit_14.text() == "":
+                    return False
+                else:
+                    return True
+        if recorrente == False:
+            if pago == True:
+                if self.comboBox_11.currentText() == "" or self.comboBox_25.currentText() == "" or self.comboBox_27.currentText() == "" or self.comboBox_21.currentText() == "" or self.lineEdit_11.text() == "" or self.lineEdit_13.text() == "" or self.comboBox_22.currentText() == "" or self.comboBox_23.currentText() == "":
+                    return False
+                else:
+                    #VERIFICA VALOR SE CONTEM STRING
+                    val = self.lineEdit_13.text()
+                    if Alerts._validador_int(val) == False:
+                        return False
+                    else:
+                        return True
+            if pago == False:
+                if self.comboBox_11.currentText() == "" or self.comboBox_25.currentText() == "" or self.comboBox_27.currentText() == "" or self.comboBox_21.currentText() == "" or self.lineEdit_11.text() == "" or self.lineEdit_13.text() == "" or self.comboBox_22.currentText() == "" or self.comboBox_23.currentText() == "":
+                    return False
+                else:
+                    return True
         
+    def _val_new_lan_pass_or_not(self):
+        recorrente = self.comboBox_23.currentText()
+        pago_text = self.comboBox_22.currentText()
+        reco_ = True
+        pago_ = True
+        print(recorrente,pago_text,"texto")
+        if recorrente == "Sim" and pago_text == "Sim":
+            reco_ = True
+            pago_ = True
+            print("pago", pago_)
+            
+            if Alerts._combobox_empty(self,reco_,pago_) == True:
+                print("passou",)
+                return True
+            else:
+                Qms = QMessageBox()
+                Qms.setText("Preencha todos os campos")
+                Qms.setIcon(QMessageBox.Warning)
+                Qms.exec_()
+                return False
+            
+        elif recorrente == "Sim" and pago_text == "Não":
+            reco_ = True
+            pago_ = False
+            print("pago", pago_)
+            if Alerts._combobox_empty(self,reco_,pago_) == True:
+                return True
+            else:
+                Qms = QMessageBox()
+                Qms.setText("Preencha todos os campos")
+                Qms.setIcon(QMessageBox.Warning)
+                Qms.exec_()
+                return False
+            
+        elif recorrente == "Não" and pago_text == "Sim":
+            reco_ = False
+
+            pago_ = True
+            if Alerts._combobox_empty(self,reco_,pago_) == True:
+                return True
+            else:
+                Qms = QMessageBox()
+                Qms.setText("Preencha todos os campos")
+                Qms.setIcon(QMessageBox.Warning)
+                Qms.exec_()
+                return False
+            
+        elif recorrente == "Não" and pago_text == "Não":
+            reco_ = False
+            pago_ = False
+            if Alerts._combobox_empty(self,reco_,pago_) == True:
+                return True
+            else:
+                Qms = QMessageBox()
+                Qms.setText("Preencha todos os campos")
+                Qms.setIcon(QMessageBox.Warning)
+                Qms.exec_()
+                return False
+            
+    def _validador_int(value):
+        
+        value = re.sub('[.,]', '', value)
+        if value.isdigit():
+            return True
+        else:
+            return False
 class Configs(Ui_MainWindow):
 
     def hide_show_saldos_zeros(self,condicao): #apenas para faturas de cartoes de creditos

@@ -641,51 +641,54 @@ class Saldos:
         return True
     
     
-    def _pagar_fatura(id_bank,mes,ano):
-        #id_lancamento
-        #ID_BANK
-        #TIPO_E_S
-        #VALOR
-        #DATA DE PAGAMENTO
-        #SALDO_ATUAL
-        
+    def _pagar_fatura(id_bank,id_no_bank,mes,ano):
+
+
         #CONNECT DB
         a = (os.path.dirname(os.path.realpath(__file__)))
         banco = sqlite3.connect(''+a+'/bando_de_valores.db')
         cursor = banco.cursor()
 
+        if  id_no_bank == 0:
+            id_bank_s_n = id_bank
+            id_discount = id_bank
+        else:
+            id_bank_s_n = id_no_bank
+            id_discount = id_bank
+
+
         print("-------------------------")
- 
+
         #GET SALDO ATUAL
-        cursor.execute("SELECT contas_bancarias.saldo_inicial FROM contas_bancarias WHERE id = '"+str(id_bank)+"'")
+        cursor.execute("SELECT contas_bancarias.saldo_inicial FROM contas_bancarias WHERE id = '"+str(id_discount)+"'")
         saldo_inicial = cursor.fetchall()
         saldo_inicial = saldo_inicial[0][0]
         print(saldo_inicial)
         #GET VALOR DA FATURA
         format_anomes = str(ano)+"-"+str(mes)
-        valor_fatu = card_db_test.Return_Values_Calcs._valor_fatura(id_bank,mes,ano)
+        valor_fatu = card_db_test.Return_Values_Calcs._valor_fatura(id_bank_s_n,mes,ano) # TODO AQ ERRO TA RECEBENDO ID BANK DEFAULT Q É C6 E NAO NUBANK
         print("VALOR DA FATURA",valor_fatu)
-
-
+        print("VALOR DA FATURA",valor_fatu,id_bank_s_n,mes,ano)
+        #EWRRO AQ COLOCA INPUTM, NAO TA POAGANDO A FAT
         #OPERACAO PARA SALDO ATUAL
 
         saldo_atual = float(saldo_inicial) - float(valor_fatu)
         print(ano,mes)
         ref = "fatura-ref "+str(mes)+"/"+str(ano)
         id_fatura = randint(100000,999999)
-        return_vencimento = card_db_test.Ui_db._vencimento(id_bank)
+        return_vencimento = card_db_test.Ui_db._vencimento(id_bank_s_n)
         ref_mes = str(ano)+"-"+str(mes)+"-"+str(return_vencimento)
         # SELECT DADOS DO LANÇAMENTO E INSERT IN NEW_LANCAMENTO
         cursor.execute("INSERT INTO pagamentos_saldo (id_lancamento,id_bank,tipo_e_s,valor,ref_vencimento,data_pagamento,saldo_atual)\
-                        VALUES ('"+str(id_fatura)+"','"+str(id_bank)+"','"+str(ref)+"','"+str(valor_fatu)+"','"+str(ref_mes)+"',DateTime('now'),'"+str(saldo_atual)+"')")
+                        VALUES ('"+str(id_fatura)+"','"+str(id_bank_s_n)+"','"+str(ref)+"','"+str(valor_fatu)+"','"+str(ref_mes)+"',DateTime('now'),'"+str(saldo_atual)+"')")
         banco.commit()
 
         # UPDATE SALDO ATUAL
-        cursor.execute("UPDATE contas_bancarias SET saldo_inicial = '"+str(saldo_atual)+"' WHERE id = '"+str(id_bank)+"'")
+        cursor.execute("UPDATE contas_bancarias SET saldo_inicial = '"+str(saldo_atual)+"' WHERE id = '"+str(id_discount)+"'")
         banco.commit()
         
         #UPDATE STATUS DO LANÇAMENTO
-        cursor.execute("UPDATE status_lancamento SET status_pago = 'pago' WHERE id_lancamento = '"+str(id)+"' AND status_lancamento.id_bank = '"+str(id_bank)+"'AND strftime('%Y-%m',status_lancamento.vencimento) = '"+str(ano)+"-"+str(mes)+"'")
+        cursor.execute("UPDATE status_lancamento SET status_pago = 'pago' WHERE id_lancamento = '"+str(id_discount)+"' AND status_lancamento.id_bank = '"+str(id_discount)+"'AND strftime('%Y-%m',status_lancamento.vencimento) = '"+str(ano)+"-"+str(mes)+"'")
 
         print("-------------------------")
         banco.commit()
@@ -774,4 +777,7 @@ class Return_values_configs:
         cursor.execute("SELECT config_aplicacao.hide_show_zeros_faturas FROM config_aplicacao")
         dados = cursor.fetchall()
         banco.close()
-        return dados[0][0]
+        if not dados:
+            return False
+        else:
+            return dados[0][0]

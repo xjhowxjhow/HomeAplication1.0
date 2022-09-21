@@ -83,8 +83,8 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.table.setStyleSheet("QWidget { color: #fffff8; border-radius:0px; } QHeaderView::section { background-color: rgb(53, 53, 53); border:none; width:45px; height: 50px; border-radius:0px; } QTableWidget { gridline-color: #fffff8; border-radius:0px; border-radius:0px; } QTableWidget QTableCornerButton::section { background-color: #646464; border-radius:0px; } QTableView:item { border-bottom: 0.5px solid qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 0), stop:0.45677 rgba(0, 0, 0, 0), stop:0.479846 rgba(255, 255, 255, 255), stop:0.50571 rgba(239, 236, 55, 0), stop:1 rgba(239, 236, 55, 0)); border-radius:0px; } QTableView::item:selected{ background-color:rgba(255, 255, 255,30); color: rgb(255, 255, 255); }")
         self.table.horizontalHeader().sectionClicked.connect(self.filtro_table_header)
         #HIDDEN TABELA
-        # self.table.setColumnHidden(1, True)
-        # self.table.setColumnHidden(2, True)
+        self.table.setColumnHidden(1, True)
+        self.table.setColumnHidden(2, True)
         self.table.setColumnHidden(11, True)
         
         self.table.setColumnHidden(4, True)
