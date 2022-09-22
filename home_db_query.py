@@ -1,4 +1,5 @@
 from ctypes import util
+from msilib.schema import Class
 from operator import index
 from random import randint
 from re import S
@@ -781,3 +782,33 @@ class Return_values_configs:
             return False
         else:
             return dados[0][0]
+        
+        
+        
+
+class Pdf:
+    
+
+    def insert_pdf(id_lancamento,id_bank,patch_pdf,ano,mes):
+        #INSERT PDF FILE
+        ref_mes = str(ano)+"-"+str(mes)+"-"+datetime.now().strftime("%d")
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        cursor.execute("INSERT INTO pdf_patchs (id_lancamento,id_bank,patch,ref_mes) VALUES ('"+str(id_lancamento)+"','"+str(id_bank)+"','"+str(patch_pdf)+"','"+str(ref_mes)+"')")
+        banco.commit()
+        banco.close()
+    
+    def search_pdf(id_lancamento,id_bank,ano,mes):
+        #SEARCH PDF FILE
+        ref_mes = str(ano)+"-"+str(mes)
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        cursor.execute("SELECT pdf_patchs.patch FROM pdf_patchs WHERE pdf_patchs.id_lancamento = '"+str(id_lancamento)+"' AND pdf_patchs.id_bank = '"+str(id_bank)+"' AND strftime('%Y-%m',pdf_patchs.ref_mes) = '"+str(ref_mes)+"'")
+        dados = cursor.fetchall()
+        banco.close()
+        if not dados:
+            return False
+        else:
+            return dados

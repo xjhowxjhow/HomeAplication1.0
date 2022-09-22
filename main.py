@@ -48,17 +48,13 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         
 
         #SOMBRAS PARA FRAMES
-        shadow = QGraphicsDropShadowEffect(self)
-        shadow.setBlurRadius(15)
-
-        shadow.setColor(QColor(0, 0, 0, 60))
-      
-        
-        self.scrollArea_9.setGraphicsEffect(shadow)
-        shadow2 = QGraphicsDropShadowEffect(self)
-        shadow2.setBlurRadius(20)
-
-        self.scrollAreaWidgetContents_2.setGraphicsEffect(shadow2)
+        # shadow = QGraphicsDropShadowEffect(self)
+        # shadow.setBlurRadius(15)
+        # shadow.setColor(QColor(0, 0, 0, 60))
+        # self.scrollArea_9.setGraphicsEffect(shadow)
+        # shadow2 = QGraphicsDropShadowEffect(self)
+        # shadow2.setBlurRadius(20)
+        # self.scrollAreaWidgetContents_2.setGraphicsEffect(shadow2)
         
         
         #NOTIFICAÇÃO SE CLICADA ACTION
@@ -75,7 +71,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.table = self.tableWidget
         self.table.verticalHeader().setVisible(False)
         self.table.setSelectionBehavior(QAbstractItemView.SelectRows)
-
+        self.table.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.table.verticalHeader().setDefaultSectionSize(50)
         self.table.setFont(self.font)
         self.table.horizontalHeaderItem(0).setFlags(QtCore.Qt.ItemIsEnabled|QtCore.Qt.ItemIsSelectable)
@@ -232,6 +228,9 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.previus_month_2.installEventFilter(self)
         self.next_month_2.installEventFilter(self)
         self.paga_fatura_3.installEventFilter(self)
+        self.download_pdf_2.installEventFilter(self)
+        self.download_pdf.installEventFilter(self)
+        
         
     
     def eventFilter(self, obj, event):
@@ -409,6 +408,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                 
                 try:
                     id = self.table.item(current_row, 1).text()
+                    id_bank = self.table.item(current_row, 2).text()
                     #SE FOR ENTRADA MUDA TEXTO BOTAO PAGAMENTO
                     home_db_fun.Descricao_lancamento.Change_text_btn_pagar_receber(self,id)
 
@@ -422,6 +422,8 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                     else:
                         self.frame_if_card_main.hide()
                         self.label_if_card.hide()
+                    
+                    home_db_fun.Pdf_funtion.search_pdf(self,id,id_bank)
                 except:
                     pass
 
@@ -457,8 +459,13 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                 else:
                     return home_db_fun.Pagamento._receber_lancamento(self)
                  
-                
-
+            if obj == self.download_pdf_2 and event.type() == QtCore.QEvent.MouseButtonPress:                
+                    #SELECIONAR PDF PAR ASALVAR NO LANCAMENTO
+                return home_db_fun.Pdf_funtion.open_pdf(self)
+            
+            
+            if obj == self.download_pdf and event.type() == QtCore.QEvent.MouseButtonPress:
+                return home_db_fun.Pdf_funtion.save_pdf(self)
             return super(MainWindow,self).eventFilter(obj, event)
 
         
@@ -650,7 +657,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                     self.move(x-x_w, y-y_w)
         except:
             pass
-
+    
     def update(self):
         resposta = requests.get('https://raw.githubusercontent.com/xjhowxjhow/HomeAplication1.0/main/version/version.txt')
         with open ('version.txt','wb') as novo_arquivo:

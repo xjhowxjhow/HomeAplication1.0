@@ -38,7 +38,8 @@ class salva_dados:
                 cursor.execute("CREATE TABLE IF NOT EXISTS config_lancamento(id_lancamento int,id_bank int,recorrente text,recorrente_m_d_s_y text,recorrente_dia text,anexo text)")
                 #SETS PRIORIDADE
                 cursor.execute("CREATE TABLE IF NOT EXISTS prioridade_value(id_lancamento int,id_bank int,prioridade text)")
-                
+                # PDF PATCHS 
+                cursor.execute("CREATE TABLE IF NOT EXISTS pdf_patchs(id_lancamento int,id_bank int,patch text, date_insert text, date_update text, ref_mes text)")
                 
                 #CONFIGURAÇÕES DA APLICAÇÃO:
                 cursor.execute("CREATE TABLE IF NOT EXISTS config_aplicacao (id int,tema text,hide_show_zeros_faturas text)")

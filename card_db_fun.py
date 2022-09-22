@@ -968,7 +968,7 @@ class funcoes_cartao(Ui_MainWindow):
             "\n"
             "QPushButton{\n"
             "	\n"
-            "	border-radius: 10px;\n"
+            "	border-radius: 10px;color:rgb(0,0,0);\n"
             "\n"
             "	\n"
             "	background-color: rgb(238, 238, 238);\n"
