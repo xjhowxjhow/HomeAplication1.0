@@ -102,7 +102,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         #COLUNA SATUS
         self.table.setColumnWidth(10, 80)
         
-        
+
         #CONFIGURANDO CONTA SE TIVER CARDAO DE CREDITO
         self.comboBox_24.currentIndexChanged.connect(lambda:home_db_fun.mainpage._event_change_stakecard(self))
         self.comboBox_25.currentIndexChanged.connect(lambda:home_db_fun.mainpage._categorias_entra_said(self))
@@ -230,7 +230,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.paga_fatura_3.installEventFilter(self)
         self.download_pdf_2.installEventFilter(self)
         self.download_pdf.installEventFilter(self)
-        
+        self.toolButton_pdf_opt.installEventFilter(self)
         
     
     def eventFilter(self, obj, event):
@@ -466,6 +466,10 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
             
             if obj == self.download_pdf and event.type() == QtCore.QEvent.MouseButtonPress:
                 return home_db_fun.Pdf_funtion.save_pdf(self)
+            
+            
+            if obj == self.toolButton_pdf_opt and event.type() == QtCore.QEvent.MouseButtonPress:
+                return home_db_fun.Pdf_funtion.options_tool_btn_file(self)
             return super(MainWindow,self).eventFilter(obj, event)
 
         

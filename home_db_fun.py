@@ -2,6 +2,7 @@
 from itertools import count
 from operator import iconcat
 import sqlite3
+from tkinter import Menu
 from turtle import color, home
 import pyautogui
 import os.path
@@ -1596,3 +1597,78 @@ class Pdf_funtion(Ui_MainWindow):
                 return True
             else:
                 return False
+            
+    
+    def options_tool_btn_file(self):
+        tool_btn = self.toolButton_pdf_opt
+        menu = QMenu()
+        
+        #ACTIONS:
+        action1 = QAction('Inserir Anexo')
+        action2 = QAction('Abrir PDF (sem salvar)')
+        action1.triggered.connect(lambda:Pdf_funtion.open_pdf_menu(self))
+        action2.triggered.connect(lambda:Pdf_funtion.open_pdf_browser(self))
+        menu = QMenu()
+        menu.addAction(action1)
+        menu.addAction(action2)
+        menu.setStyleSheet("QMenu {background-color: #2d2d2d;color: #fff; font-size: 12px; font-family: 'Segoe UI';} QMenu::item:selected {background-color: #3d3d3d;}")
+        menu.style().unpolish(menu)
+        tool_btn.setMenu(menu)
+        tool_btn.setPopupMode(QToolButton.DelayedPopup)
+        #SHOW
+        menu.exec_(QCursor.pos())
+        
+
+    def open_pdf_menu(self):
+        file = QFileDialog.getOpenFileName(self, 'Open file', 'c:\\',"Pdf files (*.pdf)")
+        current_row = self.tableWidget.currentRow()
+        id_lancamento = self.tableWidget.item(current_row, 1).text()
+        id_bank = self.table.item(current_row, 2).text()
+        tipo = home_db_query.Return_Values_Conditions._return_if_recorrente(id_lancamento)
+        if tipo == True:
+            tipo = "Recorrente"
+        else:
+            tipo = "Lançamento"
+            
+        if file[0]:
+            print(file[0])
+            #SET GLOBAL VAR
+            global file_patch_pdf
+            pdf_file = file_patch_pdf
+            
+            # VERIFICA SE JA TEM UM PDF ANEXADO NO GLOBAL VAR
+            if pdf_file == "" or pdf_file == None:
+                pdf_file = file[0]
+            else:
+                #CLEAR GLOABAL
+                pdf_file = ""
+                pdf_file = file[0]
+            #SET GLOBAL VAR
+            file_patch_pdf = pdf_file
+            print("ARV FILE GLOBAL ADDED",pdf_file)
+            
+            
+            #INSERT IN LISTWIDGET
+            icon = QIcon()
+            item = QListWidgetItem()
+            item.setText(file[0])
+            icon.addFile(u":/dev/dev/academy.png", QSize(), QIcon.Normal, QIcon.Off)
+            item.setIcon(icon)
+            self.listWidget_2.addItem(item)
+            #INSERT IN DB
+
+            Pdf_funtion.copy_and_move_pdf_to_patch(self,tipo,id_bank,id_lancamento)
+
+            
+            
+    def open_pdf_browser(self):
+        #GET CURRENT ROW LISTWIDGET TEXT
+        patch = self.listWidget_2.currentItem().text()
+        
+        #OPEN IN BROWSER
+        format_patch = patch.replace("\\","/")
+        if patch:
+            os.startfile(format_patch)
+            return True
+        else:
+            return False
