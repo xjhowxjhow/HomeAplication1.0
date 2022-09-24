@@ -335,14 +335,17 @@ class mainpage(Ui_MainWindow):
             mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
             ano = self.label_72.text()
             fomrmat = f"{ano}-{mes}"
-
+            #SETTINGS CREDIT CARD ZEROS HIDDEN
+            validador = home_db_query.Return_values_configs._return_default_h_s_z()
             # LANCAMENTO DE FATURAS CARTOES:
             if not ids:
                 pass
             else:
                 for i in range(len(ids)):
-                    validador = home_db_query.Return_values_configs._return_default_h_s_z()
-                    if validador == 'True':
+                    
+                    #verifica se saldo é zero
+                    fatura_zero = card_db_test.Return_Values_Calcs._valor_fatura(ids[i],mes,ano)
+                    if validador == 'True' and fatura_zero == '0':
                         pass
                     else:
                         print("VALIDADOR",validador)
@@ -394,8 +397,8 @@ class mainpage(Ui_MainWindow):
                         # VENCIMENTO DA FATURA
 
                         date_ven = card_db_test.Ui_db._vencimento(ids[i][0])
-                        mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
-                        ano = self.label_72.text()
+                        # mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
+                        # ano = self.label_72.text()
                         print("anoooo",ano)
                         #TODO LOGICA %S CONSULTA DB DIA VENCIMENTO , MES E ANO ATUAL
                         #M D Y
@@ -411,8 +414,8 @@ class mainpage(Ui_MainWindow):
 
                         # 5 = PRIORIDADE 
 
-                        mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
-                        ano = self.label_72.text()
+                        # mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
+                        # ano = self.label_72.text()
                         format = "%s-%s"%(ano,mes)
 
                         priori = card_db_test.Return_Values_Calcs._fatural_atual(ids[i][0],format)
@@ -487,8 +490,8 @@ class mainpage(Ui_MainWindow):
                         #/PAGAMENTO
 
 
-                        mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
-                        ano = self.label_72.text()
+                        # mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
+                        # ano = self.label_72.text()
                         valor = card_db_test.Return_Values_Calcs._valor_fatura(ids[i][0],mes,ano)
                         print("VALOR CARDAO DE TCRI",valor)
                         usd_to_brl = Convert_Moedas._usd_to_brl(self,valor)
@@ -510,8 +513,8 @@ class mainpage(Ui_MainWindow):
 
                         # 9 = STATUS
 
-                        mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
-                        ano = self.label_72.text()
+                        # mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
+                        # ano = self.label_72.text()
 
                         status = card_db_test.Return_Values_Calcs._status_fatura(ids[i][0],mes,ano)
                         print(status,"STATUS")
@@ -541,13 +544,13 @@ class mainpage(Ui_MainWindow):
 
             # LACAMENTO RECORRENTES:
 
-            mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
-            ano = self.label_72.text()
+            # mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
+            # ano = self.label_72.text()
             dados = home_db_query.Return_Values_Conditions.return_lancamentos_recorretes() #LINHAS DA TABELA
             #nao retonra data de lancamento vai ser o do mes atual
 
-            current_mes = Dates_end_times.convert_string_date(self,self.label_67.text())
-            current_mes_local = datetime.now().month
+            # current_mes = Dates_end_times.convert_string_date(self,self.label_67.text())
+            # current_mes_local = datetime.now().month
             if not dados:
                 pass
             else:
@@ -599,7 +602,7 @@ class mainpage(Ui_MainWindow):
                     # 4 = DATA DO LANÇAMENTO 
                     date_ven = home_db_query.Return_Values_Conditions._retur_data_recorrente_mes(str(dados[i][0]))
                     print(date_ven,"DATA VENCIMENTO RECORRENTE")
-                    mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
+                    # mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
                     #TODO LOGICA %S CONSULTA DB DIA VENCIMENTO , MES E ANO ATUAL
                     #M D Y
                     vencimento = "%s-%s-%s"%(date_ven,mes,Dates_end_times.current_date_extrato(self)[0])
@@ -664,7 +667,7 @@ class mainpage(Ui_MainWindow):
 
 
                     self.label = QLabel()
-                    self.label.setStyleSheet(u"background-color:rgba(101, 53, 145);border-radius:3px; margin:7px;")
+                    self.label.setStyleSheet(u"background-color:rgb(101, 53, 145);border-radius:3px; margin:7px;")
                     self.label.setObjectName(u"label")
                     font = QFont()
                     font.setFamily(u"Bahnschrift Light Condensed")
@@ -699,8 +702,8 @@ class mainpage(Ui_MainWindow):
 
                     # 9 = STATUS
 
-                    mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
-                    ano = self.label_72.text()
+                    # mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
+                    # ano = self.label_72.text()
                     vali_status = home_db_query.Return_Values_Conditions._verifi_pago_recorrente(str(dados[i][0]),mes,ano)
 
                     if vali_status == True:
@@ -735,8 +738,8 @@ class mainpage(Ui_MainWindow):
             # LANÇAMENTOS DE CONTAS :
 
             # "FILTRO:>"
-            mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
-            ano = self.label_72.text()
+            # mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
+            # ano = self.label_72.text()
             dados = home_db_query.Return_Values_Conditions.return_lancamentos_month(ano,mes) #LINHAS DA TABELA
 
             if not dados:
