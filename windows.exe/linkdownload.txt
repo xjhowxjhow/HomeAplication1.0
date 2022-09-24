@@ -1,2 +1,2 @@
 Download instalador x64 Windows 8>:
-https://homeapplication.z13.web.core.windows.net/ 
+https://homeapplication.netlify.app/
