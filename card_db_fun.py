@@ -1796,11 +1796,12 @@ class funcoes_cartao(Ui_MainWindow):
                 funcoes_cartao.carrega_extrato_mes(self,extrato)
                 home_db_fun.Set_values_startup._set_Saldo(self)
                 home_db_fun.mainpage.load_extrato_filter(self)
-                msg = QMessageBox()
-                msg.setWindowTitle("Sucesso")
-                msg.setText("Fatura paga com sucesso")
-                msg.setIcon(QMessageBox.Information)
-                msg.exec_()
+                # msg = QMessageBox()
+                # msg.setWindowTitle("Sucesso")
+                # msg.setText("Fatura paga com sucesso")
+                # msg.setIcon(QMessageBox.Information)
+                # msg.exec_()
+                home_db_fun.Loading_screen_gif._payout_receiver_sucess(self)
             else:
                 validate = home_db_fun.Alerts._alerta_fatura_banco_indiferente(self)
                 if validate == True:
@@ -1817,11 +1818,12 @@ class funcoes_cartao(Ui_MainWindow):
                     # TODO ERRO AQ
                     home_db_fun.Set_values_startup._set_Saldo(self)
                     home_db_fun.mainpage.load_extrato_filter(self)
-                    msg = QMessageBox()
-                    msg.setWindowTitle("Sucesso")
-                    msg.setText("Fatura paga com sucesso debitado da conta principal!")
-                    msg.setIcon(QMessageBox.Information)
-                    msg.exec_()
+                    # msg = QMessageBox()
+                    # msg.setWindowTitle("Sucesso")
+                    # msg.setText("Fatura paga com sucesso debitado da conta principal!")
+                    # msg.setIcon(QMessageBox.Information)
+                    # msg.exec_()
+                    home_db_fun.Loading_screen_gif._payout_receiver_sucess(self)
                 else:
                     pass
                     return False

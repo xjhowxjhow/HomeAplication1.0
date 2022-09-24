@@ -48,14 +48,14 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         window_obj = self.ui
         
 
-        # SOMBRAS PARA FRAMES
-        shadow = QGraphicsDropShadowEffect(self)
-        shadow.setBlurRadius(15)
-        shadow.setColor(QColor(0, 0, 0, 60))
-        self.scrollArea_9.setGraphicsEffect(shadow)
-        shadow2 = QGraphicsDropShadowEffect(self)
-        shadow2.setBlurRadius(20)
-        self.scrollAreaWidgetContents_2.setGraphicsEffect(shadow2)
+        # # SOMBRAS PARA FRAMES
+        # shadow = QGraphicsDropShadowEffect(self)
+        # shadow.setBlurRadius(15)
+        # shadow.setColor(QColor(0, 0, 0, 60))
+        # self.scrollArea_9.setGraphicsEffect(shadow)
+        # shadow2 = QGraphicsDropShadowEffect(self)
+        # shadow2.setBlurRadius(20)
+        # self.scrollAreaWidgetContents_2.setGraphicsEffect(shadow2)
         
         
         #NOTIFICAÇÃO SE CLICADA ACTION
@@ -191,7 +191,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.hidden_saldo_fat0_true.clicked.connect(lambda:home_db_fun.Configs.hide_show_saldos_zeros(self,True))
         self.hidden_saldo_fat0_false.clicked.connect(lambda:home_db_fun.Configs.hide_show_saldos_zeros(self,False))
         
-        self.hide_cards_main_2.clicked.connect(lambda:home_db_fun.Loading_screen_gif.show_loading_screen())
+        self.hide_cards_main_2.clicked.connect(lambda:home_db_fun.Loading_screen_gif.test_anin(self))
         # self.show_cards_main_2.clicked.connect(lambda:home_db_fun.Loading_screen_gif.close_loading(self))
         
         

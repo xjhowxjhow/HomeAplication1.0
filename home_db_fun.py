@@ -1130,7 +1130,7 @@ class Pagamento(Ui_MainWindow):
                 Set_values_startup._set_Saldo(self)
                 mainpage.load_extrato_filter(self)
                 #TEMQ FAZER A VALIDADAO POR DATA DO LKANCAMENTO
-                
+                Loading_screen_gif._payout_receiver_sucess(self)
             else:
                 msg = QMessageBox()
                 msg.setWindowTitle("Erro")
@@ -1145,11 +1145,12 @@ class Pagamento(Ui_MainWindow):
                 Set_values_startup._set_Saldo(self)
                 mainpage.load_extrato_filter(self)
                 #MENSAGEM BOX
-                msg = QMessageBox()
-                msg.setWindowTitle("Sucesso")
-                msg.setText("Lançamento pago com sucesso")
-                msg.setIcon(QMessageBox.Information)
-                msg.exec_()
+                # msg = QMessageBox()
+                # msg.setWindowTitle("Sucesso")
+                # msg.setText("Lançamento pago com sucesso")
+                # msg.setIcon(QMessageBox.Information)
+                # msg.exec_()
+                Loading_screen_gif._payout_receiver_sucess(self)
                 
             else:
                 msg = QMessageBox()
@@ -1185,6 +1186,8 @@ class Pagamento(Ui_MainWindow):
                 Set_values_startup._set_Saldo(self)
                 mainpage.load_extrato_filter(self)
                 #TEMQ FAZER A VALIDADAO POR DATA DO LKANCAMENTO
+                Loading_screen_gif._payout_receiver_sucess(self)
+
                 
             else:
                 msg = QMessageBox()
@@ -1200,11 +1203,12 @@ class Pagamento(Ui_MainWindow):
                 Set_values_startup._set_Saldo(self)
                 mainpage.load_extrato_filter(self)
                 #MENSAGEM BOX
-                msg = QMessageBox()
-                msg.setWindowTitle("Sucesso")
-                msg.setText("Lançamento Recebido com sucesso")
-                msg.setIcon(QMessageBox.Information)
-                msg.exec_()
+                # msg = QMessageBox()
+                # msg.setWindowTitle("Sucesso")
+                # msg.setText("Lançamento Recebido com sucesso")
+                # msg.setIcon(QMessageBox.Information)
+                # msg.exec_()
+                Loading_screen_gif._payout_receiver_sucess(self)
                 
             else:
                 msg = QMessageBox()
@@ -1241,6 +1245,8 @@ class Pagamento(Ui_MainWindow):
                 msg.setText("Fatura paga com sucesso")
                 msg.setIcon(QMessageBox.Information)
                 msg.exec_()
+                Loading_screen_gif._payout_receiver_sucess(self)
+                
             else:
                 validate = Alerts._alerta_fatura_banco_indiferente(self)
                 if validate == True:
@@ -1262,6 +1268,8 @@ class Pagamento(Ui_MainWindow):
                     msg.setText("Fatura paga com sucesso debitado da conta principal!")
                     msg.setIcon(QMessageBox.Information)
                     msg.exec_()
+                    Loading_screen_gif._payout_receiver_sucess(self)
+                    
                 else:
                     pass
                     return False
@@ -1717,7 +1725,11 @@ class Loading_screen_gif(Ui_MainWindow):
             label_gif.show()
             sleep(1)
             label_gif.close()
+            label_gif.deleteLater()
             print("GIF CLOSED")
+            #FISH THREAD
+            return True
+
 
         thread = threading.Thread(target=close_loading)
         thread.start()
@@ -1730,3 +1742,62 @@ class Loading_screen_gif(Ui_MainWindow):
 
     def loadingico_salvabt(self):
         print("LOADING ICO")
+        
+    def test_anin(self):
+        label_gif2 = QLabel(self)
+        #GET REAL TIME CENTER
+        label_gif2.setGeometry(795,500, 500, 500)
+        #transparente
+        label_gif2.setStyleSheet("background-color: rgba(0, 0, 0, 0);")
+        label_gif2.setWindowFlags(Qt.FramelessWindowHint)
+        #center
+        #PATCH GIF SRC/LOADING.GIF
+        movie2 = QMovie("src/anin/gatin.gif")
+        label_gif2.setMovie(movie2)
+        movie2.start()
+        
+        print("GIF LOADING")
+        def close_loading2():
+            
+            label_gif2.show()
+            sleep(5)
+            label_gif2.close()
+            label_gif2.deleteLater()
+            print("GIF CLOSED")
+            #FISH THREAD
+            return True
+        thread = threading.Thread(target=close_loading2)
+        thread.start()
+        
+    def _payout_receiver_sucess(self):
+        self.label_gif3 = QLabel(self)
+        #GET REAL TIME CENTER
+        self.label_gif3.setGeometry(740,390, 150, 150)
+        #transparente
+        self.label_gif3.setStyleSheet("background-color: rgba(0, 0, 0, 0);")
+        self.label_gif3.setWindowFlags(Qt.FramelessWindowHint)
+        #center
+        #PATCH GIF SRC/LOADING.GIF
+        self.movie3 = QMovie("src/payouts/chk.gif")
+        self.label_gif3.setMovie(self.movie3)
+        self.movie3.start()
+        
+        
+        print("GIF LOADING")
+        def close_loading3():
+
+            self.label_gif3.show()
+            sleep(3)
+            self.label_gif3.close()
+            
+            #DELETE LABEL
+            self.label_gif3.setParent(None)
+            self.label_gif3.deleteLater()
+
+
+            print("GIF CLOSED")
+            #FISH THREAD
+            return True
+        thread = threading.Thread(target=close_loading3)
+        thread.start()
+
