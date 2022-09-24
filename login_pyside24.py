@@ -1207,7 +1207,7 @@ class Ui_MainWindow(object):
         self.scrollArea_9.setWidgetResizable(True)
         self.scrollAreaWidgetContents_9 = QWidget()
         self.scrollAreaWidgetContents_9.setObjectName(u"scrollAreaWidgetContents_9")
-        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, -26, 1463, 958))
+        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, 0, 1463, 958))
         self.scrollAreaWidgetContents_9.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); ")
         self.verticalLayout_108 = QVBoxLayout(self.scrollAreaWidgetContents_9)
         self.verticalLayout_108.setSpacing(10)
@@ -2646,7 +2646,7 @@ class Ui_MainWindow(object):
         self.scrollArea_10.setWidgetResizable(True)
         self.scrollAreaWidgetContents_10 = QWidget()
         self.scrollAreaWidgetContents_10.setObjectName(u"scrollAreaWidgetContents_10")
-        self.scrollAreaWidgetContents_10.setGeometry(QRect(0, -62, 269, 657))
+        self.scrollAreaWidgetContents_10.setGeometry(QRect(0, 0, 269, 657))
         self.verticalLayout_93 = QVBoxLayout(self.scrollAreaWidgetContents_10)
         self.verticalLayout_93.setObjectName(u"verticalLayout_93")
         self.label_44 = QLabel(self.scrollAreaWidgetContents_10)
@@ -3676,7 +3676,65 @@ class Ui_MainWindow(object):
         self.horizontalLayout_48.setObjectName(u"horizontalLayout_48")
         self.lancamento_programado_2 = QDateEdit(self.frame_192)
         self.lancamento_programado_2.setObjectName(u"lancamento_programado_2")
-        self.lancamento_programado_2.setStyleSheet(u"border:0px;")
+        self.lancamento_programado_2.setStyleSheet(u"QDateEdit{\n"
+"	border:none;\n"
+"	border-radius:0px;}\n"
+"\n"
+"QCalendarWidget QToolButton {\n"
+"  	height: 20px;\n"
+"  	width: 80px;\n"
+"	border:none;\n"
+"	border-radius:0px;\n"
+"  	color: white;\n"
+"  	font-size: 18px;\n"
+"  	icon-size: 20px, 20px;\n"
+"  	background-color:rgb(0,0,0);\n"
+"  }\n"
+"  QCalendarWidget QMenu {\n"
+"  	width: 100px;\n"
+"  	left: 20px;\n"
+"  	color: white;\n"
+"  	font-size: 18px;\n"
+"  	background-color:rgb(0,0,0);\n"
+"  }\n"
+"  QCalendarWidget QSpinBox { \n"
+"  	width: 100px; \n"
+"  	font-size: 18px;;\n"
+"  	color: white; \n"
+"  	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); \n"
+"  	selection-background-color: rgb(136, 136, 136);\n"
+"  	selection-color: rgb(255, 255, 255);\n"
+"  }\n"
+"\n"
+"  QCalendarWidget QSpinBox::up-button { subcontrol-origin: border;  subcontrol-position: top right;  width:20px; }\n"
+"  QCalendarWidget QSpinBox::down-button {subcontrol-origin: border; subcontrol-position: bottom right;  width:20px;}\n"
+"  QCalendar"
+                        "Widget QSpinBox::up-arrow { width:20px;  height:20px; }\n"
+"  QCalendarWidget QSpinBox::down-arrow { width:20px;  height:20px; }\n"
+"   \n"
+"  /* header row */\n"
+"  QCalendarWidget QWidget { alternate-background-color: rgb(128, 128, 128); }\n"
+"   \n"
+"  /* normal days */\n"
+"  QCalendarWidget QAbstractItemView:enabled \n"
+"  {\n"
+"  	font-size: 18px;\n"
+"  	background-color:rgb(0,0,0);\n"
+"  	background-color: black;  \n"
+"  	selection-background-color: rgb(0, 0, 0); \n"
+"  	selection-color: rgb(0, 255, 0); \n"
+"  }\n"
+"   \n"
+"  /* days in other months */\n"
+"  /* navigation bar */\n"
+"QCalendarWidget QWidget#qt_calendar_navigationbar\n"
+"{ \n"
+"  	background-color:rgb(0,0,0);}\n"
+"\n"
+"QCalendarWidget QAbstractItemView:disabled \n"
+"{ \n"
+"color: rgb(64, 64, 64); \n"
+"}")
         self.lancamento_programado_2.setAccelerated(True)
         self.lancamento_programado_2.setProperty("showGroupSeparator", True)
         self.lancamento_programado_2.setCalendarPopup(True)
@@ -10018,7 +10076,7 @@ class Ui_MainWindow(object):
         self.scrollArea_5.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 1486, 870))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 520, 318))
         self.horizontalLayout_20 = QHBoxLayout(self.scrollAreaWidgetContents_5)
         self.horizontalLayout_20.setSpacing(10)
         self.horizontalLayout_20.setObjectName(u"horizontalLayout_20")
@@ -10792,7 +10850,7 @@ class Ui_MainWindow(object):
         self.stackedWidget_3.setCurrentIndex(0)
         self.detalhes_cartao.setCurrentIndex(1)
         self.extrat_meses.setCurrentIndex(1)
-        self.stacked_configcartao0.setCurrentIndex(3)
+        self.stacked_configcartao0.setCurrentIndex(0)
         self.stack_extrato_pages.setCurrentIndex(0)
         self.pushButton_17.setDefault(False)
         self.tabWidget.setCurrentIndex(2)
