@@ -26,7 +26,7 @@ import funcoes
 import atexit
 import requests
 
-
+from home_db_fun import Loading_screen_gif
 WINDOW_SIZE = 0
 TOGLE_STATUS = 80
 CARD_SELECTED = 0
@@ -42,19 +42,20 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.setAttribute(Qt.WA_TranslucentBackground)
         self.setupUi(self)
         self.show()
+        self.center()
         self.ui = Ui_MainWindow()
         global window_obj
         window_obj = self.ui
         
 
-        #SOMBRAS PARA FRAMES
-        # shadow = QGraphicsDropShadowEffect(self)
-        # shadow.setBlurRadius(15)
-        # shadow.setColor(QColor(0, 0, 0, 60))
-        # self.scrollArea_9.setGraphicsEffect(shadow)
-        # shadow2 = QGraphicsDropShadowEffect(self)
-        # shadow2.setBlurRadius(20)
-        # self.scrollAreaWidgetContents_2.setGraphicsEffect(shadow2)
+        # SOMBRAS PARA FRAMES
+        shadow = QGraphicsDropShadowEffect(self)
+        shadow.setBlurRadius(15)
+        shadow.setColor(QColor(0, 0, 0, 60))
+        self.scrollArea_9.setGraphicsEffect(shadow)
+        shadow2 = QGraphicsDropShadowEffect(self)
+        shadow2.setBlurRadius(20)
+        self.scrollAreaWidgetContents_2.setGraphicsEffect(shadow2)
         
         
         #NOTIFICAÇÃO SE CLICADA ACTION
@@ -78,6 +79,8 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.table.horizontalHeaderItem(2).setFlags(QtCore.Qt.ItemIsEnabled|QtCore.Qt.ItemIsSelectable)
         self.table.setStyleSheet("QWidget { color: #fffff8; border-radius:0px; } QHeaderView::section { background-color: rgb(53, 53, 53); border:none; width:45px; height: 50px; border-radius:0px; } QTableWidget { gridline-color: #fffff8; border-radius:0px; border-radius:0px; } QTableWidget QTableCornerButton::section { background-color: #646464; border-radius:0px; } QTableView:item { border-bottom: 0.5px solid qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 0), stop:0.45677 rgba(0, 0, 0, 0), stop:0.479846 rgba(255, 255, 255, 255), stop:0.50571 rgba(239, 236, 55, 0), stop:1 rgba(239, 236, 55, 0)); border-radius:0px; } QTableView::item:selected{ background-color:rgba(255, 255, 255,30); color: rgb(255, 255, 255); }")
         self.table.horizontalHeader().sectionClicked.connect(self.filtro_table_header)
+        #StlypeSheet veritcal ScrollBar
+        
         #HIDDEN TABELA
         self.table.setColumnHidden(1, True)
         self.table.setColumnHidden(2, True)
@@ -187,6 +190,10 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         #RADIO CONFIG:
         self.hidden_saldo_fat0_true.clicked.connect(lambda:home_db_fun.Configs.hide_show_saldos_zeros(self,True))
         self.hidden_saldo_fat0_false.clicked.connect(lambda:home_db_fun.Configs.hide_show_saldos_zeros(self,False))
+        
+        self.hide_cards_main_2.clicked.connect(lambda:home_db_fun.Loading_screen_gif.show_loading_screen())
+        # self.show_cards_main_2.clicked.connect(lambda:home_db_fun.Loading_screen_gif.close_loading(self))
+        
         
         card_db_fun.Main_page_Cards._itemlist_metas(self)
         #FILTRO DE EVENTOS#
@@ -587,7 +594,11 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         return True
 
 
-
+    def center(self):
+        qr = self.frameGeometry()
+        cp = QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
     #TODO TESTE ANIMCAÇÃO MENU EXPANDIDO
     def toggleMenu(self):
         global TOGLE_STATUS

@@ -1070,7 +1070,7 @@ class Ui_MainWindow(object):
 " QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(45, 45, 68);\n"
-"    width: 14px;\n"
+"    width: 5px;\n"
 "    margin: 15px 0 15px 0;\n"
 "	border-radius: 0px;\n"
 " }\n"
@@ -1105,8 +1105,8 @@ class Ui_MainWindow(object):
 "	background-color: rgb(185, 0, 92);\n"
 "}\n"
 "\n"
-"/* BTN BOTTOM "
-                        "- SCROLLBAR */\n"
+"/* BTN BOTTOM -"
+                        " SCROLLBAR */\n"
 "QScrollBar::add-line:vertical {\n"
 "	border: none;\n"
 "	background-color: rgb(59, 59, 90);\n"
@@ -1207,7 +1207,7 @@ class Ui_MainWindow(object):
         self.scrollArea_9.setWidgetResizable(True)
         self.scrollAreaWidgetContents_9 = QWidget()
         self.scrollAreaWidgetContents_9.setObjectName(u"scrollAreaWidgetContents_9")
-        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, -6, 1454, 958))
+        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, -26, 1463, 958))
         self.scrollAreaWidgetContents_9.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); ")
         self.verticalLayout_108 = QVBoxLayout(self.scrollAreaWidgetContents_9)
         self.verticalLayout_108.setSpacing(10)
@@ -1227,7 +1227,8 @@ class Ui_MainWindow(object):
         self.frame_43.setObjectName(u"frame_43")
         self.frame_43.setMinimumSize(QSize(80, 0))
         self.frame_43.setMaximumSize(QSize(80, 16777215))
-        self.frame_43.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); ")
+        self.frame_43.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); \n"
+"border:1px solid rgba(255,255,255,40);")
         self.frame_43.setFrameShape(QFrame.StyledPanel)
         self.frame_43.setFrameShadow(QFrame.Raised)
         self.verticalLayout_36 = QVBoxLayout(self.frame_43)
@@ -1353,9 +1354,10 @@ class Ui_MainWindow(object):
         self.welcome_2.setObjectName(u"welcome_2")
         self.welcome_2.setMinimumSize(QSize(200, 200))
         self.welcome_2.setMaximumSize(QSize(200, 200))
-        self.welcome_2.setStyleSheet(u"border:none;\n"
+        self.welcome_2.setStyleSheet(u"\n"
 "border-image:none;\n"
-"background-color: rgba(255, 255, 255, 30); ")
+"background-color: rgba(255, 255, 255, 30); \n"
+"border:1px solid rgba(255,255,255,40);")
         self.welcome_2.setFrameShape(QFrame.NoFrame)
         self.welcome_2.setFrameShadow(QFrame.Raised)
         self.verticalLayout_37 = QVBoxLayout(self.welcome_2)
@@ -1363,7 +1365,8 @@ class Ui_MainWindow(object):
         self.frame_44 = QFrame(self.welcome_2)
         self.frame_44.setObjectName(u"frame_44")
         self.frame_44.setMinimumSize(QSize(0, 60))
-        self.frame_44.setStyleSheet(u"background-color:none;")
+        self.frame_44.setStyleSheet(u"background-color:none;\n"
+"border:none;")
         self.frame_44.setFrameShape(QFrame.StyledPanel)
         self.frame_44.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_52 = QHBoxLayout(self.frame_44)
@@ -1395,14 +1398,16 @@ class Ui_MainWindow(object):
 
         self.label_41 = QLabel(self.welcome_2)
         self.label_41.setObjectName(u"label_41")
-        self.label_41.setStyleSheet(u"background-color:rgba(255,255,255,0);")
+        self.label_41.setStyleSheet(u"background-color:rgba(255,255,255,0);\n"
+"border:none;")
         self.label_41.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_37.addWidget(self.label_41)
 
         self.label_42 = QLabel(self.welcome_2)
         self.label_42.setObjectName(u"label_42")
-        self.label_42.setStyleSheet(u"background-color:rgba(255,255,255,0);")
+        self.label_42.setStyleSheet(u"background-color:rgba(255,255,255,0);\n"
+"border:none;")
         self.label_42.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_37.addWidget(self.label_42)
@@ -1413,7 +1418,7 @@ class Ui_MainWindow(object):
         self.frame_51 = QFrame(self.main_dasht_top_2)
         self.frame_51.setObjectName(u"frame_51")
         self.frame_51.setMinimumSize(QSize(400, 200))
-        self.frame_51.setStyleSheet(u"border:none;\n"
+        self.frame_51.setStyleSheet(u"border:1px solid rgba(255,255,255,40);\n"
 "border-image:none;\n"
 "background-color: rgba(255, 255, 255, 30); ")
         self.frame_51.setFrameShape(QFrame.StyledPanel)
@@ -1434,7 +1439,8 @@ class Ui_MainWindow(object):
         self.label_68.setObjectName(u"label_68")
         self.label_68.setGeometry(QRect(150, 10, 182, 55))
         self.label_68.setStyleSheet(u"background-color:rgba(255,255,255,0);\n"
-"font-size:12pt;")
+"font-size:12pt;\n"
+"border:none;")
         self.label_68.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.label_69 = QLabel(self.frame_51)
         self.label_69.setObjectName(u"label_69")
@@ -1447,13 +1453,15 @@ class Ui_MainWindow(object):
         font1.setWeight(3)
         self.label_69.setFont(font1)
         self.label_69.setStyleSheet(u"background-color:rgba(255,255,255,0);\n"
-"font-size:12pt;")
+"font-size:12pt;\n"
+"border:none;")
         self.label_69.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.label_70 = QLabel(self.frame_51)
         self.label_70.setObjectName(u"label_70")
         self.label_70.setGeometry(QRect(10, 120, 201, 71))
         self.label_70.setStyleSheet(u"background-color:rgba(255,255,255,0);\n"
-"font-size:20pt;")
+"font-size:20pt;\n"
+"border:none;")
         self.label_70.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.horizontalLayout_65.addWidget(self.frame_51)
@@ -1473,14 +1481,16 @@ class Ui_MainWindow(object):
         self.date_gui_5 = QFrame(self.frame_52)
         self.date_gui_5.setObjectName(u"date_gui_5")
         self.date_gui_5.setMinimumSize(QSize(0, 20))
-        self.date_gui_5.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); ")
+        self.date_gui_5.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); \n"
+"border:1px solid rgba(255,255,255,40);")
         self.date_gui_5.setFrameShape(QFrame.StyledPanel)
         self.date_gui_5.setFrameShadow(QFrame.Raised)
         self.verticalLayout_47 = QVBoxLayout(self.date_gui_5)
         self.verticalLayout_47.setObjectName(u"verticalLayout_47")
         self.label_75 = QLabel(self.date_gui_5)
         self.label_75.setObjectName(u"label_75")
-        self.label_75.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); ")
+        self.label_75.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); \n"
+"border:none;")
 
         self.verticalLayout_47.addWidget(self.label_75)
 
@@ -1492,8 +1502,8 @@ class Ui_MainWindow(object):
 "    background: green;\n"
 "    color: black;\n"
 "    border-style: outset;\n"
-"	\n"
-"    border-color:  black;\n"
+"	border:none;\n"
+"\n"
 "    border-radius: 7px;\n"
 "\n"
 "}\n"
@@ -1538,7 +1548,8 @@ class Ui_MainWindow(object):
         self.labelTitle_14.setFont(font)
         self.labelTitle_14.setLayoutDirection(Qt.LeftToRight)
         self.labelTitle_14.setAutoFillBackground(False)
-        self.labelTitle_14.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); ")
+        self.labelTitle_14.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); \n"
+"border:1px solid rgba(255,255,255,40);")
         self.labelTitle_14.setFrameShape(QFrame.NoFrame)
         self.labelTitle_14.setFrameShadow(QFrame.Plain)
         self.labelTitle_14.setScaledContents(False)
@@ -1548,14 +1559,16 @@ class Ui_MainWindow(object):
 
         self.label_43 = QLabel(self.frame_54)
         self.label_43.setObjectName(u"label_43")
-        self.label_43.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); ")
+        self.label_43.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); \n"
+"border:1px solid rgba(255,255,255,40);")
 
         self.horizontalLayout_69.addWidget(self.label_43)
 
         self.labelTitle_15 = QLabel(self.frame_54)
         self.labelTitle_15.setObjectName(u"labelTitle_15")
         self.labelTitle_15.setFont(font)
-        self.labelTitle_15.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); ")
+        self.labelTitle_15.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); \n"
+"border:1px solid rgba(255,255,255,40);")
         self.labelTitle_15.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_69.addWidget(self.labelTitle_15)
@@ -2331,7 +2344,7 @@ class Ui_MainWindow(object):
         self.scrollArea_7.setWidgetResizable(True)
         self.scrollAreaWidgetContents_7 = QWidget()
         self.scrollAreaWidgetContents_7.setObjectName(u"scrollAreaWidgetContents_7")
-        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 1426, 607))
+        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 1435, 607))
         self.scrollAreaWidgetContents_7.setStyleSheet(u"")
         self.verticalLayout_61 = QVBoxLayout(self.scrollAreaWidgetContents_7)
         self.verticalLayout_61.setSpacing(0)
@@ -2633,7 +2646,7 @@ class Ui_MainWindow(object):
         self.scrollArea_10.setWidgetResizable(True)
         self.scrollAreaWidgetContents_10 = QWidget()
         self.scrollAreaWidgetContents_10.setObjectName(u"scrollAreaWidgetContents_10")
-        self.scrollAreaWidgetContents_10.setGeometry(QRect(0, 0, 260, 643))
+        self.scrollAreaWidgetContents_10.setGeometry(QRect(0, -62, 269, 657))
         self.verticalLayout_93 = QVBoxLayout(self.scrollAreaWidgetContents_10)
         self.verticalLayout_93.setObjectName(u"verticalLayout_93")
         self.label_44 = QLabel(self.scrollAreaWidgetContents_10)
@@ -2646,6 +2659,7 @@ class Ui_MainWindow(object):
 
         self.textEdit = QTextEdit(self.scrollAreaWidgetContents_10)
         self.textEdit.setObjectName(u"textEdit")
+        self.textEdit.setMinimumSize(QSize(0, 100))
         self.textEdit.setFont(font)
         self.textEdit.setStyleSheet(u"border: 1px solid rgba(255,255,255,20);\n"
 "border-radius:7px;")
@@ -2706,7 +2720,7 @@ class Ui_MainWindow(object):
 
         self.btn_if_card_2 = QPushButton(self.frame_59)
         self.btn_if_card_2.setObjectName(u"btn_if_card_2")
-        self.btn_if_card_2.setMinimumSize(QSize(0, 20))
+        self.btn_if_card_2.setMinimumSize(QSize(0, 26))
         self.btn_if_card_2.setFont(font)
         self.btn_if_card_2.setStyleSheet(u"\n"
 "\n"
@@ -2720,7 +2734,8 @@ class Ui_MainWindow(object):
 "	\n"
 "background-color:rgba(255,255,255,10);\n"
 "\n"
-"	border: 1px solid  rgb(55, 55, 55);\n"
+"border: 1px solid rgba(255,255,255,20);\n"
+"border-radius:7px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
@@ -2789,10 +2804,18 @@ class Ui_MainWindow(object):
         self.listWidget_2.setObjectName(u"listWidget_2")
         sizePolicy4.setHeightForWidth(self.listWidget_2.sizePolicy().hasHeightForWidth())
         self.listWidget_2.setSizePolicy(sizePolicy4)
-        self.listWidget_2.setMinimumSize(QSize(0, 0))
+        self.listWidget_2.setMinimumSize(QSize(0, 70))
         self.listWidget_2.setFont(font)
-        self.listWidget_2.setStyleSheet(u"border: 1px solid rgba(255,255,255,20);\n"
-"border-radius:7px;")
+        self.listWidget_2.setStyleSheet(u"\n"
+"\n"
+"QListWidget{\n"
+"border: 1px solid rgba(255,255,255,20);\n"
+"border-radius:7px;\n"
+"}\n"
+"QScrollBar:horizontal { border: 1px solid #2A2929; background: #2A2929; height: 7px; margin: 0px 21px 0 21px; } QScrollBar::handle:horizontal { background: #646464; min-width: 5px; } \n"
+"QScrollBar::add-line:horizontal { border: 1px solid #2A2929; background: #2A2929; width: 20px; subcontrol-position: right; subcontrol-origin: margin; } \n"
+"QScrollBar::sub-line:horizontal { border: 1px solid #2A2929; background: #2A2929; width: 20px; subcontrol-position: left; subcontrol-origin: margin; }\n"
+"QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal { background: none; }")
         self.listWidget_2.setDragEnabled(True)
         self.listWidget_2.setDragDropOverwriteMode(False)
         self.listWidget_2.setDragDropMode(QAbstractItemView.DragOnly)
@@ -3169,7 +3192,7 @@ class Ui_MainWindow(object):
         self.scrollArea_11.setWidgetResizable(True)
         self.scrollAreaWidgetContents_11 = QWidget()
         self.scrollAreaWidgetContents_11.setObjectName(u"scrollAreaWidgetContents_11")
-        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, -37, 1412, 644))
+        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, 0, 1430, 644))
         self.horizontalLayout_58 = QHBoxLayout(self.scrollAreaWidgetContents_11)
         self.horizontalLayout_58.setSpacing(10)
         self.horizontalLayout_58.setObjectName(u"horizontalLayout_58")
@@ -6182,7 +6205,7 @@ class Ui_MainWindow(object):
 " QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(45, 45, 68);\n"
-"    width: 14px;\n"
+"    width: 5px;\n"
 "    margin: 15px 0 15px 0;\n"
 "	border-radius: 0px;\n"
 " }\n"
@@ -6217,8 +6240,8 @@ class Ui_MainWindow(object):
 "	background-color: rgb(185, 0, 92);\n"
 "}\n"
 "\n"
-"/* BTN BOTTOM "
-                        "- SCROLLBAR */\n"
+"/* BTN BOTTOM -"
+                        " SCROLLBAR */\n"
 "QScrollBar::add-line:vertical {\n"
 "	border: none;\n"
 "	background-color: rgb(59, 59, 90);\n"
@@ -6378,7 +6401,8 @@ class Ui_MainWindow(object):
         self.frame_15.setObjectName(u"frame_15")
         self.frame_15.setMinimumSize(QSize(80, 0))
         self.frame_15.setMaximumSize(QSize(80, 16777215))
-        self.frame_15.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); ")
+        self.frame_15.setStyleSheet(u"background-color: rgba(255, 255, 255, 30);\n"
+"border:1px solid rgba(255,255,255,40);")
         self.frame_15.setFrameShape(QFrame.StyledPanel)
         self.frame_15.setFrameShadow(QFrame.Raised)
         self.verticalLayout_17 = QVBoxLayout(self.frame_15)
@@ -6502,7 +6526,8 @@ class Ui_MainWindow(object):
         self.circularProgressBarBase_2.setMaximumSize(QSize(200, 200))
         self.circularProgressBarBase_2.setStyleSheet(u"border:none;\n"
 "border-image:none;\n"
-"background-color: rgba(255, 255, 255,30);")
+"background-color: rgba(255, 255, 255,30);\n"
+"border:1px solid rgba(255,255,255,40);")
         self.circularProgressBarBase_2.setFrameShape(QFrame.NoFrame)
         self.circularProgressBarBase_2.setFrameShadow(QFrame.Raised)
         self.circularProgress_2 = QFrame(self.circularProgressBarBase_2)
@@ -6541,6 +6566,7 @@ class Ui_MainWindow(object):
         self.container_2.setStyleSheet(u"QFrame{\n"
 "	border-radius: 75px;\n"
 "	background-color: rgb(54, 54, 54);\n"
+"border:none;\n"
 "}")
         self.container_2.setFrameShape(QFrame.NoFrame)
         self.container_2.setFrameShadow(QFrame.Raised)
@@ -6599,7 +6625,8 @@ class Ui_MainWindow(object):
         self.date_gui_4 = QFrame(self.frame_30)
         self.date_gui_4.setObjectName(u"date_gui_4")
         self.date_gui_4.setMinimumSize(QSize(0, 20))
-        self.date_gui_4.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); ")
+        self.date_gui_4.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); \n"
+"border:1px solid rgba(255,255,255,40);")
         self.date_gui_4.setFrameShape(QFrame.StyledPanel)
         self.date_gui_4.setFrameShadow(QFrame.Raised)
         self.verticalLayout_19 = QVBoxLayout(self.date_gui_4)
@@ -6616,6 +6643,7 @@ class Ui_MainWindow(object):
 "    border-style: outset;\n"
 "    border-color:  black;\n"
 "    border-radius: 7px;\n"
+"	border:none;\n"
 "\n"
 "}\n"
 "QProgressBar::chunk\n"
@@ -6657,7 +6685,8 @@ class Ui_MainWindow(object):
         self.labelTitle_8.setFont(font)
         self.labelTitle_8.setLayoutDirection(Qt.LeftToRight)
         self.labelTitle_8.setAutoFillBackground(False)
-        self.labelTitle_8.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); ")
+        self.labelTitle_8.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); \n"
+"border:1px solid rgba(255,255,255,40);")
         self.labelTitle_8.setFrameShape(QFrame.NoFrame)
         self.labelTitle_8.setFrameShadow(QFrame.Plain)
         self.labelTitle_8.setScaledContents(False)
@@ -6668,7 +6697,8 @@ class Ui_MainWindow(object):
         self.labelTitle_10 = QLabel(self.frame_16)
         self.labelTitle_10.setObjectName(u"labelTitle_10")
         self.labelTitle_10.setFont(font)
-        self.labelTitle_10.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); ")
+        self.labelTitle_10.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); \n"
+"border:1px solid rgba(255,255,255,40);")
         self.labelTitle_10.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_70.addWidget(self.labelTitle_10)
@@ -7989,7 +8019,7 @@ class Ui_MainWindow(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 1008, 472))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 140, 469))
         self.verticalLayout_72 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_72.setSpacing(0)
         self.verticalLayout_72.setObjectName(u"verticalLayout_72")
@@ -8797,7 +8827,7 @@ class Ui_MainWindow(object):
         self.scrollArea_8.setWidgetResizable(True)
         self.scrollAreaWidgetContents_8 = QWidget()
         self.scrollAreaWidgetContents_8.setObjectName(u"scrollAreaWidgetContents_8")
-        self.scrollAreaWidgetContents_8.setGeometry(QRect(0, 0, 1014, 913))
+        self.scrollAreaWidgetContents_8.setGeometry(QRect(0, 0, 1023, 875))
         self.scrollAreaWidgetContents_8.setStyleSheet(u"background-color:rgba(255,255,255,0);")
         self.verticalLayout_14 = QVBoxLayout(self.scrollAreaWidgetContents_8)
         self.verticalLayout_14.setSpacing(10)
@@ -8817,7 +8847,8 @@ class Ui_MainWindow(object):
         self.frame_2.setObjectName(u"frame_2")
         self.frame_2.setMinimumSize(QSize(80, 0))
         self.frame_2.setMaximumSize(QSize(80, 16777215))
-        self.frame_2.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); ")
+        self.frame_2.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); \n"
+"border:1px solid rgba(255,255,255,40);")
         self.frame_2.setFrameShape(QFrame.StyledPanel)
         self.frame_2.setFrameShadow(QFrame.Raised)
         self.verticalLayout_16 = QVBoxLayout(self.frame_2)
@@ -8939,7 +8970,8 @@ class Ui_MainWindow(object):
         self.welcome.setMaximumSize(QSize(200, 200))
         self.welcome.setStyleSheet(u"border:none;\n"
 "border-image:none;\n"
-"background-color: rgba(255, 255, 255, 30); ")
+"background-color: rgba(255, 255, 255, 30); \n"
+"border:1px solid rgba(255,255,255,40);")
         self.welcome.setFrameShape(QFrame.NoFrame)
         self.welcome.setFrameShadow(QFrame.Raised)
         self.verticalLayout_18 = QVBoxLayout(self.welcome)
@@ -8947,7 +8979,8 @@ class Ui_MainWindow(object):
         self.frame_25 = QFrame(self.welcome)
         self.frame_25.setObjectName(u"frame_25")
         self.frame_25.setMinimumSize(QSize(0, 60))
-        self.frame_25.setStyleSheet(u"background-color:none;")
+        self.frame_25.setStyleSheet(u"background-color:none;\n"
+"border:none;")
         self.frame_25.setFrameShape(QFrame.StyledPanel)
         self.frame_25.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_46 = QHBoxLayout(self.frame_25)
@@ -8979,14 +9012,16 @@ class Ui_MainWindow(object):
 
         self.label_36 = QLabel(self.welcome)
         self.label_36.setObjectName(u"label_36")
-        self.label_36.setStyleSheet(u"background-color:rgba(255,255,255,0);")
+        self.label_36.setStyleSheet(u"background-color:rgba(255,255,255,0);\n"
+"border:none;")
         self.label_36.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_18.addWidget(self.label_36)
 
         self.label_38 = QLabel(self.welcome)
         self.label_38.setObjectName(u"label_38")
-        self.label_38.setStyleSheet(u"background-color:rgba(255,255,255,0);")
+        self.label_38.setStyleSheet(u"background-color:rgba(255,255,255,0);\n"
+"border:none;")
         self.label_38.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_18.addWidget(self.label_38)
@@ -9009,7 +9044,8 @@ class Ui_MainWindow(object):
         self.date_gui_3 = QFrame(self.frame_37)
         self.date_gui_3.setObjectName(u"date_gui_3")
         self.date_gui_3.setMinimumSize(QSize(0, 20))
-        self.date_gui_3.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); ")
+        self.date_gui_3.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); \n"
+"border:1px solid rgba(255,255,255,40);")
         self.date_gui_3.setFrameShape(QFrame.StyledPanel)
         self.date_gui_3.setFrameShadow(QFrame.Raised)
         self.verticalLayout_12 = QVBoxLayout(self.date_gui_3)
@@ -9022,7 +9058,7 @@ class Ui_MainWindow(object):
 "    background: green;\n"
 "    color: black;\n"
 "    border-style: outset;\n"
-"	\n"
+"	border:none;\n"
 "    border-color:  black;\n"
 "    border-radius: 7px;\n"
 "\n"
@@ -9069,7 +9105,7 @@ class Ui_MainWindow(object):
         self.labelTitle_12.setLayoutDirection(Qt.LeftToRight)
         self.labelTitle_12.setAutoFillBackground(False)
         self.labelTitle_12.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); \n"
-"")
+"border:1px solid rgba(255,255,255,40);")
         self.labelTitle_12.setFrameShape(QFrame.NoFrame)
         self.labelTitle_12.setFrameShadow(QFrame.Plain)
         self.labelTitle_12.setScaledContents(False)
@@ -9079,14 +9115,16 @@ class Ui_MainWindow(object):
 
         self.label_39 = QLabel(self.frame_11)
         self.label_39.setObjectName(u"label_39")
-        self.label_39.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); ")
+        self.label_39.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); \n"
+"border:1px solid rgba(255,255,255,40);")
 
         self.horizontalLayout_66.addWidget(self.label_39)
 
         self.labelTitle_13 = QLabel(self.frame_11)
         self.labelTitle_13.setObjectName(u"labelTitle_13")
         self.labelTitle_13.setFont(font)
-        self.labelTitle_13.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); ")
+        self.labelTitle_13.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); \n"
+"border:1px solid rgba(255,255,255,40);")
         self.labelTitle_13.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_66.addWidget(self.labelTitle_13)
@@ -9109,16 +9147,16 @@ class Ui_MainWindow(object):
         self.main_dash_midle.setSizePolicy(sizePolicy)
         self.main_dash_midle.setMinimumSize(QSize(0, 0))
         self.main_dash_midle.setMaximumSize(QSize(16777215, 16777215))
-        self.main_dash_midle.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); \n"
+        self.main_dash_midle.setStyleSheet(u"background-color: rgba(255, 255, 255, 10); \n"
 "\n"
 "border-bottom: 0px;\n"
-"border: 0px;")
+"")
         self.main_dash_midle.setFrameShape(QFrame.StyledPanel)
         self.main_dash_midle.setFrameShadow(QFrame.Raised)
         self.verticalLayout_122 = QVBoxLayout(self.main_dash_midle)
         self.verticalLayout_122.setSpacing(0)
         self.verticalLayout_122.setObjectName(u"verticalLayout_122")
-        self.verticalLayout_122.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout_122.setContentsMargins(0, 0, 0, 0)
         self.date_filters_fatura_4 = QFrame(self.main_dash_midle)
         self.date_filters_fatura_4.setObjectName(u"date_filters_fatura_4")
         self.date_filters_fatura_4.setMaximumSize(QSize(16777215, 50))

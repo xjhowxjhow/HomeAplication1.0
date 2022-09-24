@@ -7,6 +7,8 @@ import os
 import re
 import threading
 import card_db_test
+import home_db_fun
+import home_db_query
 import calendar
 import locale
 import emoji
@@ -1775,14 +1777,68 @@ class funcoes_cartao(Ui_MainWindow):
 
     def _pagar_fatura(self):
         
-        id = EXTRATO_ATUAL
+        id_bank = EXTRATO_ATUAL
         mes = self.label_3.text()
         ano = self.label_2.text()
         valores = {'Janeiro':'01','Fevereiro':'02','Marco':'03','Abril':'04','Maio':'05','Junho':'06','Julho':'07','Agosto':'08','Setembro':'09','Outubro':'10','Novembro':'11','Dezembro':'12'}
         captura_int_mes = valores[mes]
-        card_db_test.Return_Values_Calcs._pagar_fatura(id,captura_int_mes,ano)
         extrato = captura_int_mes+ano
-        funcoes_cartao.carrega_extrato_mes(self,extrato)
+        verifi_if_pago = card_db_test.Return_Values_Calcs._status_fatura(id_bank,captura_int_mes,ano)
+
+        
+        #VERIFICA SE FATURA É DO BANCO PRINCIPAL
+
+        if verifi_if_pago == 'pendente':
+            if  home_db_query.Return_values.return_saldo_banks(id_bank) != None:
+                print("SALDO",home_db_query.Return_values.return_saldo_banks(id_bank))
+                home_db_query.Saldos._pagar_fatura(id_bank,0,captura_int_mes,ano)
+                card_db_test.Return_Values_Calcs._pagar_fatura(id_bank,captura_int_mes,ano)
+                funcoes_cartao.carrega_extrato_mes(self,extrato)
+                home_db_fun.Set_values_startup._set_Saldo(self)
+                home_db_fun.mainpage.load_extrato_filter(self)
+                msg = QMessageBox()
+                msg.setWindowTitle("Sucesso")
+                msg.setText("Fatura paga com sucesso")
+                msg.setIcon(QMessageBox.Information)
+                msg.exec_()
+            else:
+                validate = home_db_fun.Alerts._alerta_fatura_banco_indiferente(self)
+                if validate == True:
+                    default_bank = home_db_query.Return_values._return_default_bank()
+                    # TODO ERRO AQ AWQ TEM Q RETORNAR O ID DO BANCO QUE NAO TEM BANCO CADASTRADO EX NUB
+                    # TODO ERRO AQ AWQ TEM Q RETORNAR O ID DO BANCO QUE NAO TEM BANCO CADASTRADO EX NUB
+                    # TODO ERRO AQ AWQ TEM Q RETORNAR O ID DO BANCO QUE NAO TEM BANCO CADASTRADO EX NUB
+                    # TODO ERRO AQ AWQ TEM Q RETORNAR O ID DO BANCO QUE NAO TEM BANCO CADASTRADO EX NUB
+                    # TODO ERRO AQ AWQ TEM Q RETORNAR O ID DO BANCO QUE NAO TEM BANCO CADASTRADO EX NUB
+                    # TODO ERRO AQ AWQ TEM Q RETORNAR O ID DO BANCO QUE NAO TEM BANCO CADASTRADO EX NUB
+                    
+                    home_db_query.Saldos._pagar_fatura(str(default_bank),id_bank,captura_int_mes,ano)
+                    card_db_test.Return_Values_Calcs._pagar_fatura(id_bank,captura_int_mes,ano)
+                    # TODO ERRO AQ
+                    home_db_fun.Set_values_startup._set_Saldo(self)
+                    home_db_fun.mainpage.load_extrato_filter(self)
+                    msg = QMessageBox()
+                    msg.setWindowTitle("Sucesso")
+                    msg.setText("Fatura paga com sucesso debitado da conta principal!")
+                    msg.setIcon(QMessageBox.Information)
+                    msg.exec_()
+                else:
+                    pass
+                    return False
+                    print("NÃO PAGAR FATURA")
+        elif verifi_if_pago == 'pago':
+            msg = QMessageBox()
+            msg.setWindowTitle("Erro")
+            msg.setText("Fatura já paga")
+            msg.setIcon(QMessageBox.Critical)
+            msg.exec_()
+        elif verifi_if_pago == 'proximas':
+            msg = QMessageBox()
+            msg.setWindowTitle("Erro")
+            msg.setText("Fatura ainda não venceu Ou nao existe Valor")
+            msg.setIcon(QMessageBox.Critical)
+            msg.exec_()
+
 
     
     def _return_mes_ano(self,mes,ano):

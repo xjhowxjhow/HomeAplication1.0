@@ -459,6 +459,7 @@ class Return_Values_Conditions:
                         FROM config_lancamento\
                         WHERE config_lancamento.id_lancamento = '"+id+"'")
         dados = cursor.fetchall()
+        print("recos?",dados)
         if dados[0][0] == 'Não':
             return False
         else:   

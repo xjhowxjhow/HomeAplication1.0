@@ -4,7 +4,6 @@ from operator import iconcat
 import sqlite3
 from tkinter import Menu
 from turtle import color, home
-import pyautogui
 import os.path
 import effects
 import os 
@@ -305,6 +304,11 @@ class mainpage(Ui_MainWindow):
 
     def load_extrato_filter(self):
         def thead(self):
+            Loading_screen_gif.show_loading_screen(self)
+            #LOADING GIF ANIMATION THREAD
+            # START WORKER
+        
+            
             self.table = self.tableWidget
             cont = self.table.rowCount()
             if cont > 0:
@@ -421,13 +425,14 @@ class mainpage(Ui_MainWindow):
                         format_value = priori.replace('.', '')
                         if int(format_value) >= 0 and int(format_value) < 200:
                             text_priori = 'Baixo'
-                            backgroud = '#ff0000'
+                            backgroud = '#6aa84f'
                         elif int(format_value) > 200 and int(format_value) < 400:
                             text_priori = 'Medio'
-                            backgroud = '#ffa500'
+                            backgroud = '#ffd966'
                         else:
                             text_priori = 'Alto'
-                            backgroud = '#00ff00' 
+                            backgroud = '#cc0000' 
+                            
 
                         self.table.setItem(row_count, 6, QTableWidgetItem(str(text_priori)))
                         self.table.item(row_count,6).setTextAlignment(Qt.AlignCenter)
@@ -465,7 +470,7 @@ class mainpage(Ui_MainWindow):
                         if entra_saida == 'Entrada':
                             color_label = '#00ff00'
                         else:
-                            color_label = '#ff0000'
+                            color_label = '#fffff8'
 
 
                         self.label = QLabel()
@@ -494,7 +499,7 @@ class mainpage(Ui_MainWindow):
                             color_label = '#00ff00'
                         else:  
                             format_valor = "- %s"%(valor)
-                            color_label = '#ff0000'
+                            color_label = '#fffff8'
 
                         print(valor,"VALOR'")
                         self.table.setItem(row_count, 9, QTableWidgetItem(str(format_valor)))
@@ -613,11 +618,11 @@ class mainpage(Ui_MainWindow):
                     self.table.setItem(row_count, 6, QTableWidgetItem(str(priori)))
                     backgroud = '#00ff00'
                     if priori == 'baixo':
-                        backgroud = '#ff0000'
+                        backgroud = '#6aa84f'
                     elif priori == 'medio':
-                        backgroud = '#ffa500'
+                        backgroud = '#ffd966'
                     elif priori == 'alto':
-                        backgroud = '#00ff00'
+                        backgroud = '#cc0000'
 
                     self.table.setItem(row_count, 6, QTableWidgetItem(str(priori)))
                     self.table.item(row_count,6).setTextAlignment(Qt.AlignCenter)
@@ -655,7 +660,7 @@ class mainpage(Ui_MainWindow):
                     if entra_saida == 'Entrada':
                         color_label = '#00ff00'
                     else:
-                        color_label = '#ff0000'
+                        color_label = '#fffff8'
 
 
                     self.label = QLabel()
@@ -683,7 +688,7 @@ class mainpage(Ui_MainWindow):
                         color_label = '#00ff00'
                     else:  
                         format_valor = "- %s"%(valor)
-                        color_label = '#ff0000'
+                        color_label = '#fffff8'
 
                     self.table.setItem(row_count, 9, QTableWidgetItem(str(format_valor)))
                     self.table.item(row_count,9).setTextAlignment(Qt.AlignCenter)
@@ -797,11 +802,11 @@ class mainpage(Ui_MainWindow):
                     self.table.setItem(row_count, 6, QTableWidgetItem(str(priori)))
                     backgroud = '#00ff00'
                     if priori == 'baixo':
-                        backgroud = '#ff0000'
+                        backgroud = '#6aa84f'
                     elif priori == 'medio':
-                        backgroud = '#ffa500'
+                        backgroud = '#ffd966'
                     elif priori == 'alto':
-                        backgroud = '#00ff00'
+                        backgroud = '#cc0000'
 
                     self.table.setItem(row_count, 6, QTableWidgetItem(str(priori)))
                     self.table.item(row_count,6).setTextAlignment(Qt.AlignCenter)
@@ -839,7 +844,7 @@ class mainpage(Ui_MainWindow):
                     if entra_saida == 'Entrada':
                         color_label = '#00ff00'
                     else:
-                        color_label = '#ffffff'
+                        color_label = '#fffff8'
 
 
                     self.label = QLabel()
@@ -866,7 +871,7 @@ class mainpage(Ui_MainWindow):
                         color_label = '#00ff00'
                     else:  
                         format_valor = "- R$ %s"%(valor)
-                        color_label = '#ff0000'
+                        color_label = '#fffff8'
 
                     self.table.setItem(row_count, 9, QTableWidgetItem(str(format_valor)))
                     self.table.item(row_count,9).setTextAlignment(Qt.AlignCenter)
@@ -901,7 +906,9 @@ class mainpage(Ui_MainWindow):
                     self.table.setItem(row_count, 11, QTableWidgetItem(str("%s"%usd_to_brl)))
                     self.table.item(row_count,11).setTextAlignment(Qt.AlignCenter)
             
+            #WORKER STOP
 
+            
         thread = threading.Thread(target=thead(self))
         thread.start()
 
@@ -928,6 +935,7 @@ class Dates_end_times(Ui_MainWindow):
         dict = {1:'01', 2:'02', 3:'03', 4:'04', 5:'05', 6:'06', 7:'07', 8:'08', 9:'09', 10:'10', 11:'11', 12:'12'}
         return dict[mes]
     def methodo_date_extrato(self,action):
+        
         label_string_mes = Dates_end_times.convert_string_date(self,self.label_67.text())
         label_string_ano = int(self.label_72.text())
         format_date = datetime.strptime(f'{label_string_ano}-{label_string_mes}-01', '%Y-%m-%d')
@@ -1098,6 +1106,7 @@ class Descricao_lancamento(Ui_MainWindow):
 class Pagamento(Ui_MainWindow):
 
     def _pagar_lancamento(self):
+        Loading_screen_gif()
         current_row = self.table.currentRow()
         id_lancamento = self.table.item(current_row,1).text()
         id_bank = self.table.item(current_row,2).text()
@@ -1208,6 +1217,7 @@ class Pagamento(Ui_MainWindow):
         return True
 
     def _pagar_fatura(self):
+        
         current_row = self.table.currentRow()
         id_bank = self.table.item(current_row,2).text()
         mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
@@ -1253,6 +1263,8 @@ class Pagamento(Ui_MainWindow):
                     msg.setIcon(QMessageBox.Information)
                     msg.exec_()
                 else:
+                    pass
+                    return False
                     print("NÃO PAGAR FATURA")
         elif verifi_if_pago == 'pago':
             msg = QMessageBox()
@@ -1481,7 +1493,7 @@ class Pdf_funtion(Ui_MainWindow):
             return True
     
     
-    def open_pdf(self):
+    def open_pdf(self): # BUSCA PDF PARA SALVAR AO LANCAR NOVO LANÇAMENTO
         file = QFileDialog.getOpenFileName(self, 'Open file', 'c:\\',"Pdf files (*.pdf)")
         if file[0]:
             print(file[0])
@@ -1512,7 +1524,7 @@ class Pdf_funtion(Ui_MainWindow):
         else:
             return None
     
-    def copy_and_move_pdf_to_patch(self,tipo,id_bank,id_lancamento):
+    def copy_and_move_pdf_to_patch(self,tipo,id_bank,id_lancamento): # INSERE NO DB E MOVE O PDF PARA A PASTA PDF
         #get global var
         global file_patch_pdf
         file = file_patch_pdf
@@ -1554,7 +1566,7 @@ class Pdf_funtion(Ui_MainWindow):
             else:
                 return False
             
-    def search_pdf(self,id_lancamento,id_bank):
+    def search_pdf(self,id_lancamento,id_bank): #BUSCA PDF APENAS PELO ID AO CLICAR NA TABELA
         mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
         ano = self.label_72.text()
         
@@ -1571,7 +1583,7 @@ class Pdf_funtion(Ui_MainWindow):
                 self.listWidget_2.setMinimumHeight(120)
             else:
                 #DIMINUI FRAME
-                self.listWidget_2.setMinimumHeight(0)
+                self.listWidget_2.setMinimumHeight(70)
             for i in range(len(data_patch)):
                 icon = QIcon()
                 icon.addFile(u":/dev/dev/academy.png", QSize(), QIcon.Normal, QIcon.Off)
@@ -1581,10 +1593,10 @@ class Pdf_funtion(Ui_MainWindow):
                 self.listWidget_2.addItem(item)
         else:
             self.listWidget_2.clear()
-            self.listWidget_2.setMinimumHeight(0)
+            self.listWidget_2.setMinimumHeight(70)
             return False
 
-    def save_pdf(self):
+    def save_pdf(self): # BAIXAR O PDF OU DOWNLOAD OU SALVAR EM OUTRO LOCAL
         file = self.listWidget_2.currentItem().text()
         print(file)
         if file:
@@ -1599,7 +1611,7 @@ class Pdf_funtion(Ui_MainWindow):
                 return False
             
     
-    def options_tool_btn_file(self):
+    def options_tool_btn_file(self): # ACOES DO MENU TOOL
         tool_btn = self.toolButton_pdf_opt
         menu = QMenu()
         
@@ -1619,16 +1631,21 @@ class Pdf_funtion(Ui_MainWindow):
         menu.exec_(QCursor.pos())
         
 
-    def open_pdf_menu(self):
+    def open_pdf_menu(self): #BUSCA E ABRE O PDF PELO MENU TOOL BUTTON QUANDO QUISER ADICIONAR MAIS ALGUINS PDFS
         file = QFileDialog.getOpenFileName(self, 'Open file', 'c:\\',"Pdf files (*.pdf)")
         current_row = self.tableWidget.currentRow()
         id_lancamento = self.tableWidget.item(current_row, 1).text()
         id_bank = self.table.item(current_row, 2).text()
-        tipo = home_db_query.Return_Values_Conditions._return_if_recorrente(id_lancamento)
-        if tipo == True:
+        if self.tableWidget.item(current_row,7).text() == "Fatura":
             tipo = "Recorrente"
         else:
-            tipo = "Lançamento"
+            tipo = home_db_query.Return_Values_Conditions._return_if_recorrente(id_lancamento)
+            
+            if tipo == True:
+                tipo = "Recorrente"
+            else:
+                tipo = "Lançamento"
+
             
         if file[0]:
             print(file[0])
@@ -1661,7 +1678,7 @@ class Pdf_funtion(Ui_MainWindow):
 
             
             
-    def open_pdf_browser(self):
+    def open_pdf_browser(self): # APENAS ABRE O PDF NO NAVEGADOR
         #GET CURRENT ROW LISTWIDGET TEXT
         patch = self.listWidget_2.currentItem().text()
         
@@ -1672,3 +1689,44 @@ class Pdf_funtion(Ui_MainWindow):
             return True
         else:
             return False
+        
+        
+
+
+
+
+
+class Loading_screen_gif(Ui_MainWindow):
+
+    def show_loading_screen(self):
+        label_gif = QLabel(self)
+        #GET REAL TIME CENTER
+        label_gif.setGeometry(795,500, 100, 100)
+        #transparente
+        label_gif.setStyleSheet("background-color: rgba(0, 0, 0, 0);")
+        label_gif.setWindowFlags(Qt.FramelessWindowHint)
+        #center
+        #PATCH GIF SRC/LOADING.GIF
+        movie = QMovie("src/loading_1.gif")
+        label_gif.setMovie(movie)
+        movie.start()
+        
+        print("GIF LOADING")
+        def close_loading():
+            
+            label_gif.show()
+            sleep(1)
+            label_gif.close()
+            print("GIF CLOSED")
+
+        thread = threading.Thread(target=close_loading)
+        thread.start()
+    
+    def close_loading_screen(self):
+        
+        label_gif = QLabel(self)
+        label_gif.close()
+        return True
+
+    def loadingico_salvabt(self):
+        print("LOADING ICO")
