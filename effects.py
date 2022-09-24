@@ -317,10 +317,10 @@ class Effetc_slides(Ui_MainWindow):
             geometry = 60
         if btn == "investimento":
             self.stackedWidget_2.setCurrentWidget(self.page_4)
-            geometry = 120
+            geometry = 180
         if btn == "cartao":
             self.stackedWidget_2.setCurrentWidget(self.page_3)
-            geometry = 180
+            geometry = 120
         if btn == "transferencia":
             self.stackedWidget_2.setCurrentWidget(self.page_5)
             geometry = 240

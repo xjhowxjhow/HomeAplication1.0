@@ -558,7 +558,7 @@ class Ui_MainWindow(object):
         self.scrolbar.setFrameShadow(QFrame.Raised)
         self.animcurretnpage = QFrame(self.scrolbar)
         self.animcurretnpage.setObjectName(u"animcurretnpage")
-        self.animcurretnpage.setGeometry(QRect(0, 1, 4, 60))
+        self.animcurretnpage.setGeometry(QRect(0, 60, 4, 60))
         self.animcurretnpage.setMinimumSize(QSize(0, 0))
         self.animcurretnpage.setMaximumSize(QSize(4, 60))
         self.animcurretnpage.setStyleSheet(u"background-color: rgb(0, 85, 255);")
@@ -663,47 +663,6 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_27.addWidget(self.pushButton_8)
 
-        self.pushButton_9 = QPushButton(self.topmenu)
-        self.pushButton_9.setObjectName(u"pushButton_9")
-        self.pushButton_9.setMinimumSize(QSize(0, 0))
-        self.pushButton_9.setMaximumSize(QSize(16777215, 16777215))
-        self.pushButton_9.setFont(font)
-        self.pushButton_9.setStyleSheet(u"\n"
-"\n"
-"\n"
-"\n"
-"QPushButton{\n"
-"\n"
-"\n"
-"	border-radius:0px;\n"
-"\n"
-"	padding:15px;\n"
-"	color: rgb(255, 255, 255);\n"
-"	background-color: rgba(0, 0, 0, 0); \n"
-"	 text-align: left;\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:hover{\n"
-"	\n"
-"	\n"
-"background-color: rgba(0, 0, 0, 40); \n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:pressed{\n"
-"	\n"
-"font:  14pt \"Microsoft YaHei\";\n"
-"background-color: rgba(0, 0, 0, 75); \n"
-"\n"
-"}")
-        icon3 = QIcon()
-        icon3.addFile(u":/menu/menu/invest.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.pushButton_9.setIcon(icon3)
-        self.pushButton_9.setIconSize(QSize(30, 30))
-
-        self.verticalLayout_27.addWidget(self.pushButton_9)
-
         self.pushButton_10 = QPushButton(self.topmenu)
         self.pushButton_10.setObjectName(u"pushButton_10")
         self.pushButton_10.setMinimumSize(QSize(0, 0))
@@ -738,12 +697,53 @@ class Ui_MainWindow(object):
 "background-color: rgba(0, 0, 0, 75); \n"
 "\n"
 "}")
-        icon4 = QIcon()
-        icon4.addFile(u":/menu/menu/cards.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.pushButton_10.setIcon(icon4)
+        icon3 = QIcon()
+        icon3.addFile(u":/menu/menu/cards.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.pushButton_10.setIcon(icon3)
         self.pushButton_10.setIconSize(QSize(30, 30))
 
         self.verticalLayout_27.addWidget(self.pushButton_10)
+
+        self.pushButton_9 = QPushButton(self.topmenu)
+        self.pushButton_9.setObjectName(u"pushButton_9")
+        self.pushButton_9.setMinimumSize(QSize(0, 0))
+        self.pushButton_9.setMaximumSize(QSize(16777215, 16777215))
+        self.pushButton_9.setFont(font)
+        self.pushButton_9.setStyleSheet(u"\n"
+"\n"
+"\n"
+"\n"
+"QPushButton{\n"
+"\n"
+"\n"
+"	border-radius:0px;\n"
+"\n"
+"	padding:15px;\n"
+"	color: rgb(255, 255, 255);\n"
+"	background-color: rgba(0, 0, 0, 0); \n"
+"	 text-align: left;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"	\n"
+"	\n"
+"background-color: rgba(0, 0, 0, 40); \n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"	\n"
+"font:  14pt \"Microsoft YaHei\";\n"
+"background-color: rgba(0, 0, 0, 75); \n"
+"\n"
+"}")
+        icon4 = QIcon()
+        icon4.addFile(u":/menu/menu/invest.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.pushButton_9.setIcon(icon4)
+        self.pushButton_9.setIconSize(QSize(30, 30))
+
+        self.verticalLayout_27.addWidget(self.pushButton_9)
 
         self.pushButton_11 = QPushButton(self.topmenu)
         self.pushButton_11.setObjectName(u"pushButton_11")
@@ -3712,10 +3712,8 @@ class Ui_MainWindow(object):
                         "Widget QSpinBox::up-arrow { width:20px;  height:20px; }\n"
 "  QCalendarWidget QSpinBox::down-arrow { width:20px;  height:20px; }\n"
 "   \n"
-"  /* header row */\n"
 "  QCalendarWidget QWidget { alternate-background-color: rgb(128, 128, 128); }\n"
 "   \n"
-"  /* normal days */\n"
 "  QCalendarWidget QAbstractItemView:enabled \n"
 "  {\n"
 "  	font-size: 18px;\n"
@@ -3725,8 +3723,7 @@ class Ui_MainWindow(object):
 "  	selection-color: rgb(0, 255, 0); \n"
 "  }\n"
 "   \n"
-"  /* days in other months */\n"
-"  /* navigation bar */\n"
+"\n"
 "QCalendarWidget QWidget#qt_calendar_navigationbar\n"
 "{ \n"
 "  	background-color:rgb(0,0,0);}\n"
@@ -10881,8 +10878,8 @@ class Ui_MainWindow(object):
         self.exit.setText("")
         self.pushButton.setText(QCoreApplication.translate("MainWindow", u"    Home APP", None))
         self.pushButton_8.setText(QCoreApplication.translate("MainWindow", u"     Inicio", None))
-        self.pushButton_9.setText(QCoreApplication.translate("MainWindow", u"     Investimentos", None))
         self.pushButton_10.setText(QCoreApplication.translate("MainWindow", u"     Cartoes", None))
+        self.pushButton_9.setText(QCoreApplication.translate("MainWindow", u"     Investimentos", None))
         self.pushButton_11.setText(QCoreApplication.translate("MainWindow", u"     Transferencias", None))
         self.pushButton_15.setText(QCoreApplication.translate("MainWindow", u"     Estoque", None))
         self.pushButton_16.setText(QCoreApplication.translate("MainWindow", u"     Preferencias", None))
