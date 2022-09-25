@@ -321,7 +321,27 @@ class Return_values:
         cursor.execute("SELECT config_contas.conta_padrao_bank FROM config_contas")
         dados = cursor.fetchall()
         return dados[0][0]
+    
+    
 class Return_Values_Conditions:
+    
+    
+    def _return_ag_b_t_c(id):
+        #TITULAR
+        #AGENCIA
+        #CONTA
+        #SALDO
+        #BANCO
+
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+
+        cursor.execute("SELECT titular,agencia,num_conta,saldo_inicial,nome_banco FROM contas_bancarias WHERE id = '"+str(id)+"'")
+        dados = cursor.fetchall()
+        banco.close()
+        return dados[0]
     
     def return_lancamentos_month(ano,mes): # TODO RETONA COMPRAS NAO RECORRENTES
         #CONNECT DB

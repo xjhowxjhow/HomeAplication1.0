@@ -43,6 +43,7 @@ class Group:
     def execs(self):
         Dates_end_times.set_text_extrato_startup(self)
         Set_values_startup._set_Saldo(self)
+        Set_values_startup._set_start_ag_b_t(self)
         Set_values_startup.set_values_table_bank(self)
         Set_values_startup.set_banks_combobox_new_lan(self)
         mainpage.load_extrato_filter(self)
@@ -989,7 +990,11 @@ class Set_values_startup(Ui_MainWindow):
                 print(dados[i][j])
         for i in range (len(dados)):
             #NOME BANCO, ID BANCO
-            CardFrameBank.creat_new_widget(self,dados[i])
+            if CardFrameBank.count_cards_startup(self) == True:
+                CardFrameBank.creat_new_widget(self,dados[i])
+            else:
+                #JA TEM FRAME EXISTENTE
+                pass
         return 0
     
     def set_banks_combobox_new_lan(self):
@@ -1017,7 +1022,18 @@ class Set_values_startup(Ui_MainWindow):
         self.label_70.setText("%s"%valor)
         self.label_70.setWordWrap(True)
         self.label_70.setTextInteractionFlags(Qt.NoTextInteraction)
-
+        
+    def _set_start_ag_b_t(self):
+        # titular,agencia,num_conta,saldo_inicial,nome_banco
+        dados = home_db_query.Return_values._return_default_bank()
+        print("DADOS",dados)
+        dados_l = home_db_query.Return_Values_Conditions._return_ag_b_t_c(str(dados))
+        print("DADOS",dados_l)
+        titular = self.label_68.setText(dados_l[0])
+        agencia = self.label_77.setText("Agencia: "+str(dados_l[1]))
+        num_conta = self.label_78.setText("Counta: "+str(dados_l[2]))
+        icon_nam_style = effects.efeitos_geral.style_sheet_card_icon(self,str(dados_l[4]))
+        self.frame_97.setStyleSheet("background-image: "+icon_nam_style+"; background-repeat:no-repeat; background-position:center;")
 class Combobox_startup(Ui_MainWindow):
 
     def default_combox_hidem(self):

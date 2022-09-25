@@ -452,3 +452,23 @@ class CardFrameBank(Ui_MainWindow):
         self.qlabel[0].setText(text)
 
     
+    
+    def count_cards_startup(self):
+        #GET IDS BANKS
+        ids_banks = home_db_query.Return_values.return_banks_active()
+        
+        #LAYOUT self.layout_add_frame_bank
+    
+
+        list = []
+        self.frames2 = self.layout_add_frame_bank
+        print('self.frames',self.frames2.count())
+        for i in range (self.frames2.count()):
+            a = self.frames2.itemAt(i).widget().objectName()
+            list.append(a)
+        print(list)
+        
+        if len(list) == 0:
+            return True
+        else:
+            return False
