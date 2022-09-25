@@ -1207,7 +1207,7 @@ class Ui_MainWindow(object):
         self.scrollArea_9.setWidgetResizable(True)
         self.scrollAreaWidgetContents_9 = QWidget()
         self.scrollAreaWidgetContents_9.setObjectName(u"scrollAreaWidgetContents_9")
-        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, 0, 1463, 958))
+        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, -26, 1463, 958))
         self.scrollAreaWidgetContents_9.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); ")
         self.verticalLayout_108 = QVBoxLayout(self.scrollAreaWidgetContents_9)
         self.verticalLayout_108.setSpacing(10)
@@ -4573,13 +4573,89 @@ class Ui_MainWindow(object):
         self.chart_gastos_all_2.addTab(self.page_Tabe_main2, icon23, "")
         self.page_Tabe_main3 = QWidget()
         self.page_Tabe_main3.setObjectName(u"page_Tabe_main3")
+        self.page_Tabe_main3.setEnabled(True)
         self.page_Tabe_main3.setMaximumSize(QSize(16777215, 16777215))
         self.page_Tabe_main3.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); \n"
 "")
         self.horizontalLayout_83 = QHBoxLayout(self.page_Tabe_main3)
-        self.horizontalLayout_83.setSpacing(11)
+        self.horizontalLayout_83.setSpacing(0)
         self.horizontalLayout_83.setObjectName(u"horizontalLayout_83")
-        self.frame_89 = QFrame(self.page_Tabe_main3)
+        self.horizontalLayout_83.setContentsMargins(0, 0, 0, 0)
+        self.bottom_options_bank = QFrame(self.page_Tabe_main3)
+        self.bottom_options_bank.setObjectName(u"bottom_options_bank")
+        self.bottom_options_bank.setMinimumSize(QSize(700, 0))
+        self.bottom_options_bank.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); \n"
+"")
+        self.bottom_options_bank.setFrameShape(QFrame.StyledPanel)
+        self.bottom_options_bank.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_111 = QVBoxLayout(self.bottom_options_bank)
+        self.verticalLayout_111.setSpacing(0)
+        self.verticalLayout_111.setObjectName(u"verticalLayout_111")
+        self.verticalLayout_111.setContentsMargins(0, 0, 0, 0)
+        self.scrollArea_12 = QScrollArea(self.bottom_options_bank)
+        self.scrollArea_12.setObjectName(u"scrollArea_12")
+        self.scrollArea_12.setMinimumSize(QSize(0, 400))
+        self.scrollArea_12.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); \n"
+"")
+        self.scrollArea_12.setWidgetResizable(True)
+        self.scrollAreaWidgetContents_12 = QWidget()
+        self.scrollAreaWidgetContents_12.setObjectName(u"scrollAreaWidgetContents_12")
+        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 1440, 920))
+        self.scrollAreaWidgetContents_12.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); \n"
+"")
+        self.verticalLayout_112 = QVBoxLayout(self.scrollAreaWidgetContents_12)
+        self.verticalLayout_112.setSpacing(0)
+        self.verticalLayout_112.setObjectName(u"verticalLayout_112")
+        self.verticalLayout_112.setContentsMargins(0, 0, 0, 0)
+        self.botto_1 = QFrame(self.scrollAreaWidgetContents_12)
+        self.botto_1.setObjectName(u"botto_1")
+        self.botto_1.setMinimumSize(QSize(0, 320))
+        self.botto_1.setMaximumSize(QSize(16777215, 16777215))
+        self.botto_1.setFrameShape(QFrame.StyledPanel)
+        self.botto_1.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_113 = QVBoxLayout(self.botto_1)
+        self.verticalLayout_113.setObjectName(u"verticalLayout_113")
+        self.scrollArea_13 = QScrollArea(self.botto_1)
+        self.scrollArea_13.setObjectName(u"scrollArea_13")
+        self.scrollArea_13.setWidgetResizable(True)
+        self.scrollAreaWidgetContents_13 = QWidget()
+        self.scrollAreaWidgetContents_13.setObjectName(u"scrollAreaWidgetContents_13")
+        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 1422, 286))
+        self.horizontalLayout_115 = QHBoxLayout(self.scrollAreaWidgetContents_13)
+        self.horizontalLayout_115.setObjectName(u"horizontalLayout_115")
+        self.layout_add_frame_bank = QHBoxLayout()
+        self.layout_add_frame_bank.setSpacing(150)
+        self.layout_add_frame_bank.setObjectName(u"layout_add_frame_bank")
+        self.layout_add_frame_bank.setContentsMargins(10, 10, 10, 10)
+
+        self.horizontalLayout_115.addLayout(self.layout_add_frame_bank)
+
+        self.scrollArea_13.setWidget(self.scrollAreaWidgetContents_13)
+
+        self.verticalLayout_113.addWidget(self.scrollArea_13)
+
+        self.frame_100 = QFrame(self.botto_1)
+        self.frame_100.setObjectName(u"frame_100")
+        self.frame_100.setMaximumSize(QSize(16777215, 40))
+        self.frame_100.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); \n"
+"border:1px solid rgba(255,255,255,40);")
+        self.frame_100.setFrameShape(QFrame.StyledPanel)
+        self.frame_100.setFrameShadow(QFrame.Raised)
+
+        self.verticalLayout_113.addWidget(self.frame_100)
+
+
+        self.verticalLayout_112.addWidget(self.botto_1)
+
+        self.botto_2 = QFrame(self.scrollAreaWidgetContents_12)
+        self.botto_2.setObjectName(u"botto_2")
+        self.botto_2.setMinimumSize(QSize(0, 0))
+        self.botto_2.setMaximumSize(QSize(16777215, 600))
+        self.botto_2.setFrameShape(QFrame.StyledPanel)
+        self.botto_2.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_114 = QHBoxLayout(self.botto_2)
+        self.horizontalLayout_114.setObjectName(u"horizontalLayout_114")
+        self.frame_89 = QFrame(self.botto_2)
         self.frame_89.setObjectName(u"frame_89")
         self.frame_89.setMaximumSize(QSize(16777215, 16777215))
         self.frame_89.setStyleSheet(u"background-color:rgba(255,255,255,30);\n"
@@ -5246,9 +5322,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_101.addWidget(self.frame_92)
 
 
-        self.horizontalLayout_83.addWidget(self.frame_89)
+        self.horizontalLayout_114.addWidget(self.frame_89)
 
-        self.frame_96 = QFrame(self.page_Tabe_main3)
+        self.frame_96 = QFrame(self.botto_2)
         self.frame_96.setObjectName(u"frame_96")
         self.frame_96.setStyleSheet(u"background-color:rgba(255,255,255,30);\n"
 "border-radius:5px;")
@@ -5997,9 +6073,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_102.addWidget(self.frame_253)
 
 
-        self.horizontalLayout_83.addWidget(self.frame_96)
+        self.horizontalLayout_114.addWidget(self.frame_96)
 
-        self.table_active_banks = QTableWidget(self.page_Tabe_main3)
+        self.table_active_banks = QTableWidget(self.botto_2)
         if (self.table_active_banks.columnCount() < 7):
             self.table_active_banks.setColumnCount(7)
         __qtablewidgetitem16 = QTableWidgetItem()
@@ -6098,7 +6174,17 @@ class Ui_MainWindow(object):
         self.table_active_banks.verticalHeader().setProperty("showSortIndicator", False)
         self.table_active_banks.verticalHeader().setStretchLastSection(False)
 
-        self.horizontalLayout_83.addWidget(self.table_active_banks)
+        self.horizontalLayout_114.addWidget(self.table_active_banks)
+
+
+        self.verticalLayout_112.addWidget(self.botto_2)
+
+        self.scrollArea_12.setWidget(self.scrollAreaWidgetContents_12)
+
+        self.verticalLayout_111.addWidget(self.scrollArea_12)
+
+
+        self.horizontalLayout_83.addWidget(self.bottom_options_bank)
 
         self.chart_gastos_all_2.addTab(self.page_Tabe_main3, icon21, "")
         self.page_Tabe_main4 = QWidget()
@@ -10073,7 +10159,7 @@ class Ui_MainWindow(object):
         self.scrollArea_5.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 520, 318))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 1486, 870))
         self.horizontalLayout_20 = QHBoxLayout(self.scrollAreaWidgetContents_5)
         self.horizontalLayout_20.setSpacing(10)
         self.horizontalLayout_20.setObjectName(u"horizontalLayout_20")
@@ -10282,7 +10368,8 @@ class Ui_MainWindow(object):
 
         self.adclimite = QLineEdit(self.frame_10)
         self.adclimite.setObjectName(u"adclimite")
-        self.adclimite.setStyleSheet(u"border-radius: 10px;\n"
+        self.adclimite.setStyleSheet(u"color:rgb(0,0,0);\n"
+"border-radius: 10px;\n"
 "background-color: rgb(238, 238, 238);\n"
 "border: 1px solid  rgb(55, 55, 55);")
         self.adclimite.setAlignment(Qt.AlignCenter)
@@ -10291,7 +10378,8 @@ class Ui_MainWindow(object):
 
         self.adctitular = QLineEdit(self.frame_10)
         self.adctitular.setObjectName(u"adctitular")
-        self.adctitular.setStyleSheet(u"border-radius: 10px;\n"
+        self.adctitular.setStyleSheet(u"color:rgb(0,0,0);\n"
+"border-radius: 10px;\n"
 "background-color: rgb(238, 238, 238);\n"
 "border: 1px solid  rgb(55, 55, 55);")
         self.adctitular.setAlignment(Qt.AlignCenter)
@@ -10311,7 +10399,8 @@ class Ui_MainWindow(object):
 
         self.adcfechamento = QLineEdit(self.frame_10)
         self.adcfechamento.setObjectName(u"adcfechamento")
-        self.adcfechamento.setStyleSheet(u"border-radius: 10px;\n"
+        self.adcfechamento.setStyleSheet(u"color:rgb(0,0,0);\n"
+"border-radius: 10px;\n"
 "background-color: rgb(238, 238, 238);\n"
 "border: 1px solid  rgb(55, 55, 55);")
         self.adcfechamento.setAlignment(Qt.AlignCenter)
@@ -10353,7 +10442,8 @@ class Ui_MainWindow(object):
 
         self.adcfinal = QLineEdit(self.frame_10)
         self.adcfinal.setObjectName(u"adcfinal")
-        self.adcfinal.setStyleSheet(u"border-radius: 10px;\n"
+        self.adcfinal.setStyleSheet(u"color:rgb(0,0,0);\n"
+"border-radius: 10px;\n"
 "background-color: rgb(238, 238, 238);\n"
 "border: 1px solid  rgb(55, 55, 55);")
         self.adcfinal.setAlignment(Qt.AlignCenter)
@@ -10362,7 +10452,8 @@ class Ui_MainWindow(object):
 
         self.adcvencimento = QLineEdit(self.frame_10)
         self.adcvencimento.setObjectName(u"adcvencimento")
-        self.adcvencimento.setStyleSheet(u"border-radius: 10px;\n"
+        self.adcvencimento.setStyleSheet(u"color:rgb(0,0,0);\n"
+"border-radius: 10px;\n"
 "background-color: rgb(238, 238, 238);\n"
 "border: 1px solid  rgb(55, 55, 55);")
         self.adcvencimento.setAlignment(Qt.AlignCenter)
@@ -10403,7 +10494,7 @@ class Ui_MainWindow(object):
 "\n"
 "	border-radius: 10px;\n"
 "\n"
-"	\n"
+"	color:rgb(0,0,0);\n"
 "	background-color: rgb(238, 238, 238);\n"
 "\n"
 "	border: 1px solid  rgb(55, 55, 55);\n"
@@ -10438,7 +10529,7 @@ class Ui_MainWindow(object):
 "\n"
 "	border-radius: 10px;\n"
 "\n"
-"	\n"
+"	color:rgb(0,0,0);\n"
 "	background-color: rgb(238, 238, 238);\n"
 "\n"
 "	border: 1px solid  rgb(55, 55, 55);\n"
@@ -10472,7 +10563,7 @@ class Ui_MainWindow(object):
 "\n"
 "	border-radius: 10px;\n"
 "\n"
-"	\n"
+"	color:rgb(0,0,0);\n"
 "	background-color: rgb(238, 238, 238);\n"
 "\n"
 "	border: 1px solid  rgb(55, 55, 55);\n"

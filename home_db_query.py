@@ -481,6 +481,16 @@ class Return_Values_Conditions:
         dados = cursor.fetchall()
         return dados[0][0]
 
+    def _return_saldo(id):
+        #id_bank
+        #saldo
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        cursor.execute("SELECT contas_bancarias.saldo_inicial FROM contas_bancarias WHERE id= '"+id+"'")
+        dados = cursor.fetchall()
+        return dados[0][0]
 
     def _verifi_pago_recorrente(id,mes,ano):
         #id_lancamento

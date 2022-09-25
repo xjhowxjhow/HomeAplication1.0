@@ -12,10 +12,12 @@ import threading
 import card_db_test
 import card_db_fun
 import calendar
+from frame_bank.card_frame_bank import CardFrameBank
 import locale
 import emoji
 import home_db_query
 import random
+from frame_bank.card_frame_bank import CardFrameBank
 from PySide2.QtCore import *
 from PySide2 import QtWidgets
 from PySide2.QtGui import *
@@ -985,12 +987,16 @@ class Set_values_startup(Ui_MainWindow):
             for j in range(len(dados[i])):
                 self.table_active_banks.setItem(i, j, QTableWidgetItem(str(dados[i][j])))
                 print(dados[i][j])
+        for i in range (len(dados)):
+            #NOME BANCO, ID BANCO
+            CardFrameBank.creat_new_widget(self,dados[i])
         return 0
     
     def set_banks_combobox_new_lan(self):
         
         dados = home_db_query.Return_values.banks_active_id()
         combo = self.comboBox_11
+        
         if combo.count() > 0:
             pass
         else:
@@ -1000,6 +1006,8 @@ class Set_values_startup(Ui_MainWindow):
                 formats = "%s"%str(dados[i][0])
                 print("COMBOBOX",formats)
                 self.comboBox_11.addItem(formats)
+        
+        
         return 0
 
     def _set_Saldo(self):
@@ -1132,6 +1140,7 @@ class Pagamento(Ui_MainWindow):
                 home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Saida',ano,mes)
                 Set_values_startup._set_Saldo(self)
                 mainpage.load_extrato_filter(self)
+                CardFrameBank._update_frame_cards_saldo(self,id_bank)
                 #TEMQ FAZER A VALIDADAO POR DATA DO LKANCAMENTO
                 Loading_screen_gif._payout_receiver_sucess(self)
             else:
@@ -1147,6 +1156,7 @@ class Pagamento(Ui_MainWindow):
                 home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Saida',ano,mes)
                 Set_values_startup._set_Saldo(self)
                 mainpage.load_extrato_filter(self)
+                CardFrameBank._update_frame_cards_saldo(self,id_bank)
                 #MENSAGEM BOX
                 # msg = QMessageBox()
                 # msg.setWindowTitle("Sucesso")
@@ -1187,7 +1197,9 @@ class Pagamento(Ui_MainWindow):
                 home_db_query.Add_values._add_new_lancamento_recorrente(id_lancamento,id_bank,mes,ano)
                 home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Entrada',ano,mes)
                 Set_values_startup._set_Saldo(self)
+                
                 mainpage.load_extrato_filter(self)
+                CardFrameBank._update_frame_cards_saldo(self,id_bank)
                 #TEMQ FAZER A VALIDADAO POR DATA DO LKANCAMENTO
                 Loading_screen_gif._payout_receiver_sucess(self)
 
@@ -1205,6 +1217,7 @@ class Pagamento(Ui_MainWindow):
                 home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Entrada',ano,mes)
                 Set_values_startup._set_Saldo(self)
                 mainpage.load_extrato_filter(self)
+                CardFrameBank._update_frame_cards_saldo(self,id_bank)
                 #MENSAGEM BOX
                 # msg = QMessageBox()
                 # msg.setWindowTitle("Sucesso")
@@ -1242,6 +1255,7 @@ class Pagamento(Ui_MainWindow):
                 home_db_query.Saldos._pagar_fatura(id_bank,0,mes,ano)
                 card_db_test.Return_Values_Calcs._pagar_fatura(id_bank,mes,ano)
                 Set_values_startup._set_Saldo(self)
+                CardFrameBank._update_frame_cards_saldo(self,id_bank)
                 mainpage.load_extrato_filter(self)
                 msg = QMessageBox()
                 msg.setWindowTitle("Sucesso")
@@ -1266,6 +1280,7 @@ class Pagamento(Ui_MainWindow):
                     # TODO ERRO AQ
                     Set_values_startup._set_Saldo(self)
                     mainpage.load_extrato_filter(self)
+                    CardFrameBank._update_frame_cards_saldo(self,id_bank)
                     msg = QMessageBox()
                     msg.setWindowTitle("Sucesso")
                     msg.setText("Fatura paga com sucesso debitado da conta principal!")
@@ -1794,7 +1809,6 @@ class Loading_screen_gif(Ui_MainWindow):
             self.label_gif3.close()
             
             #DELETE LABEL
-            self.label_gif3.setParent(None)
             self.label_gif3.deleteLater()
 
 
