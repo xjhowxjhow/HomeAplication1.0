@@ -307,6 +307,12 @@ class Effetc_slides(Ui_MainWindow):
         self.detalhes_cartao.setTransitionEasingCurve(QtCore.QEasingCurve.InExpo)
         self.detalhes_cartao.setSlideTransition(True)
 
+    def _add_banks_credits(self):
+        self.stackedWidgetadc_2.setTransitionDirection(QtCore.Qt.Horizontal)
+        self.stackedWidgetadc_2.setTransitionSpeed(250)
+        self.stackedWidgetadc_2.setTransitionEasingCurve(QtCore.QEasingCurve.InExpo)
+        self.stackedWidgetadc_2.setSlideTransition(True)
+
     def grid_lateral_menu(self,botao):
         
         btn = botao

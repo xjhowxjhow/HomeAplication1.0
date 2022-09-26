@@ -4,7 +4,6 @@ from PySide2.QtWidgets import *
 from custom_qstacked_widgets import *
 import sources
 
-
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
@@ -1208,7 +1207,7 @@ class Ui_MainWindow(object):
         self.scrollArea_9.setWidgetResizable(True)
         self.scrollAreaWidgetContents_9 = QWidget()
         self.scrollAreaWidgetContents_9.setObjectName(u"scrollAreaWidgetContents_9")
-        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, 0, 1463, 958))
+        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, -26, 1463, 958))
         self.scrollAreaWidgetContents_9.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); ")
         self.verticalLayout_108 = QVBoxLayout(self.scrollAreaWidgetContents_9)
         self.verticalLayout_108.setSpacing(10)
@@ -4622,7 +4621,7 @@ class Ui_MainWindow(object):
         self.scrollArea_12.setWidgetResizable(True)
         self.scrollAreaWidgetContents_12 = QWidget()
         self.scrollAreaWidgetContents_12.setObjectName(u"scrollAreaWidgetContents_12")
-        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 1440, 920))
+        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, -313, 1440, 920))
         self.scrollAreaWidgetContents_12.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); \n"
 "")
         self.verticalLayout_112 = QVBoxLayout(self.scrollAreaWidgetContents_12)
@@ -4646,7 +4645,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_115 = QHBoxLayout(self.scrollAreaWidgetContents_13)
         self.horizontalLayout_115.setObjectName(u"horizontalLayout_115")
         self.layout_add_frame_bank = QHBoxLayout()
-        self.layout_add_frame_bank.setSpacing(150)
+        self.layout_add_frame_bank.setSpacing(50)
         self.layout_add_frame_bank.setObjectName(u"layout_add_frame_bank")
         self.layout_add_frame_bank.setContentsMargins(10, 10, 10, 10)
 
@@ -4679,7 +4678,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_114.setObjectName(u"horizontalLayout_114")
         self.frame_89 = QFrame(self.botto_2)
         self.frame_89.setObjectName(u"frame_89")
-        self.frame_89.setMaximumSize(QSize(16777215, 16777215))
+        self.frame_89.setMaximumSize(QSize(437, 16777215))
         self.frame_89.setStyleSheet(u"background-color:rgba(255,255,255,30);\n"
 "border-radius:5px;")
         self.frame_89.setFrameShape(QFrame.StyledPanel)
@@ -4822,26 +4821,16 @@ class Ui_MainWindow(object):
         self.stackedWidgetadc_2.setSizePolicy(sizePolicy5)
         self.stackedWidgetadc_2.setMinimumSize(QSize(0, 0))
         self.stackedWidgetadc_2.setMaximumSize(QSize(16777215, 16777215))
-        self.stackedWidgetadc_2.setStyleSheet(u"QFrame{\n"
+        self.stackedWidgetadc_2.setStyleSheet(u"\n"
 "background-color:rgba(255,255,255,0);\n"
-"border-radius: 10px;\n"
-"border: 3px solid  rgb(0, 0, 0);\n"
-"border:0px;\n"
-"\n"
-"}\n"
-"\n"
-"QFrame:hover{\n"
-"border: 3px solid  rgb(55, 50,5 0);\n"
-"\n"
-"}")
+"")
         self.stackedWidgetadc_2.setFrameShape(QFrame.StyledPanel)
         self.stackedWidgetadc_2.setFrameShadow(QFrame.Raised)
-        self.stackedWidgetadc_2Page1 = QWidget()
-        self.stackedWidgetadc_2Page1.setObjectName(u"stackedWidgetadc_2Page1")
-        self.gridLayout_4 = QGridLayout(self.stackedWidgetadc_2Page1)
-        self.gridLayout_4.setObjectName(u"gridLayout_4")
-        self.frame_91 = QFrame(self.stackedWidgetadc_2Page1)
+        self.page_config_counts1 = QWidget()
+        self.page_config_counts1.setObjectName(u"page_config_counts1")
+        self.frame_91 = QFrame(self.page_config_counts1)
         self.frame_91.setObjectName(u"frame_91")
+        self.frame_91.setGeometry(QRect(9, 68, 391, 181))
         self.frame_91.setMinimumSize(QSize(0, 142))
         self.frame_91.setStyleSheet(u"border:none;\n"
 "background-color: rgba(255, 255, 255, 0); color: rgb(0, 0, 0);")
@@ -4924,14 +4913,12 @@ class Ui_MainWindow(object):
 
         self.gridLayout_3.addWidget(self.textcard_7, 3, 0, 1, 1)
 
-
-        self.gridLayout_4.addWidget(self.frame_91, 2, 0, 1, 1)
-
-        self.hide_cards_main_3 = QPushButton(self.stackedWidgetadc_2Page1)
-        self.hide_cards_main_3.setObjectName(u"hide_cards_main_3")
-        self.hide_cards_main_3.setMinimumSize(QSize(40, 53))
-        self.hide_cards_main_3.setMaximumSize(QSize(16777215, 16777215))
-        self.hide_cards_main_3.setStyleSheet(u"\n"
+        self.config_crdit_c = QPushButton(self.page_config_counts1)
+        self.config_crdit_c.setObjectName(u"config_crdit_c")
+        self.config_crdit_c.setGeometry(QRect(364, 9, 46, 53))
+        self.config_crdit_c.setMinimumSize(QSize(40, 53))
+        self.config_crdit_c.setMaximumSize(QSize(16777215, 16777215))
+        self.config_crdit_c.setStyleSheet(u"\n"
 "\n"
 "QPushButton{\n"
 "	\n"
@@ -4941,62 +4928,43 @@ class Ui_MainWindow(object):
 "\n"
 "\n"
 "	\n"
-"	background-color: rgb(46, 46, 46);\n"
+"background-color:rgba(255,255,255,30);\n"
 "\n"
-"	border: 1px solid  rgb(55, 55, 55);\n"
+"	border: 1px solid rgba(255,255,255,70);\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(53, 53, 53);\n"
+"	background-color:rgba(255,255,255,20);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(31, 31, 31);\n"
+"background-color:rgba(255,255,255,100);\n"
 "\n"
 "}")
-        self.hide_cards_main_3.setIcon(icon12)
-        self.hide_cards_main_3.setIconSize(QSize(40, 40))
-
-        self.gridLayout_4.addWidget(self.hide_cards_main_3, 0, 1, 1, 1)
-
-        self.logoadc_2 = QFrame(self.stackedWidgetadc_2Page1)
-        self.logoadc_2.setObjectName(u"logoadc_2")
-        self.logoadc_2.setMinimumSize(QSize(0, 40))
-        self.logoadc_2.setMaximumSize(QSize(40, 40))
-        self.logoadc_2.setStyleSheet(u"border: 0px;\n"
-"\n"
-"")
-        self.logoadc_2.setFrameShape(QFrame.StyledPanel)
-        self.logoadc_2.setFrameShadow(QFrame.Raised)
-
-        self.gridLayout_4.addWidget(self.logoadc_2, 0, 0, 1, 1)
-
-        self.stackedWidgetadc_2.addWidget(self.stackedWidgetadc_2Page1)
-        self.page_10 = QWidget()
-        self.page_10.setObjectName(u"page_10")
-        self.gridLayout_6 = QGridLayout(self.page_10)
-        self.gridLayout_6.setObjectName(u"gridLayout_6")
-        self.logoadc_3 = QFrame(self.page_10)
-        self.logoadc_3.setObjectName(u"logoadc_3")
-        self.logoadc_3.setMinimumSize(QSize(40, 40))
-        self.logoadc_3.setMaximumSize(QSize(40, 40))
-        self.logoadc_3.setStyleSheet(u"border: 0px;\n"
-"\n"
-"")
-        self.logoadc_3.setFrameShape(QFrame.StyledPanel)
-        self.logoadc_3.setFrameShadow(QFrame.Raised)
-
-        self.gridLayout_6.addWidget(self.logoadc_3, 0, 0, 1, 1)
-
-        self.hide_cards_main_4 = QPushButton(self.page_10)
-        self.hide_cards_main_4.setObjectName(u"hide_cards_main_4")
-        self.hide_cards_main_4.setMinimumSize(QSize(40, 53))
-        self.hide_cards_main_4.setMaximumSize(QSize(16777215, 16777215))
-        self.hide_cards_main_4.setStyleSheet(u"\n"
+        icon25 = QIcon()
+        icon25.addFile(u":/backgroud/src-page-cartoes/credt.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.config_crdit_c.setIcon(icon25)
+        self.config_crdit_c.setIconSize(QSize(40, 40))
+        self.label_105 = QLabel(self.page_config_counts1)
+        self.label_105.setObjectName(u"label_105")
+        self.label_105.setGeometry(QRect(60, 10, 297, 53))
+        self.label_105.setStyleSheet(u"background-color:rgba(255,255,255,0);\n"
+"border:none;")
+        self.label_105.setAlignment(Qt.AlignCenter)
+        self.stackedWidgetadc_2.addWidget(self.page_config_counts1)
+        self.page_config_creduts = QWidget()
+        self.page_config_creduts.setObjectName(u"page_config_creduts")
+        self.gridLayout_7 = QGridLayout(self.page_config_creduts)
+        self.gridLayout_7.setObjectName(u"gridLayout_7")
+        self.config_ccoun = QPushButton(self.page_config_creduts)
+        self.config_ccoun.setObjectName(u"config_ccoun")
+        self.config_ccoun.setMinimumSize(QSize(40, 53))
+        self.config_ccoun.setMaximumSize(QSize(46, 16777215))
+        self.config_ccoun.setStyleSheet(u"\n"
 "\n"
 "QPushButton{\n"
 "	\n"
@@ -5006,29 +4974,39 @@ class Ui_MainWindow(object):
 "\n"
 "\n"
 "	\n"
-"	background-color: rgb(46, 46, 46);\n"
+"background-color:rgba(255,255,255,30);\n"
 "\n"
-"	border: 1px solid  rgb(55, 55, 55);\n"
+"	border: 1px solid rgba(255,255,255,70);\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(53, 53, 53);\n"
+"	background-color:rgba(255,255,255,20);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(31, 31, 31);\n"
+"background-color:rgba(255,255,255,100);\n"
 "\n"
 "}")
-        self.hide_cards_main_4.setIcon(icon12)
-        self.hide_cards_main_4.setIconSize(QSize(40, 40))
+        icon26 = QIcon()
+        icon26.addFile(u":/backgroud/src-page-cartoes/cards.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.config_ccoun.setIcon(icon26)
+        self.config_ccoun.setIconSize(QSize(40, 40))
 
-        self.gridLayout_6.addWidget(self.hide_cards_main_4, 0, 2, 1, 1)
+        self.gridLayout_7.addWidget(self.config_ccoun, 0, 0, 1, 1)
 
-        self.frame_94 = QFrame(self.page_10)
+        self.label_104 = QLabel(self.page_config_creduts)
+        self.label_104.setObjectName(u"label_104")
+        self.label_104.setStyleSheet(u"background-color:rgba(255,255,255,0);\n"
+"border:none;")
+        self.label_104.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_7.addWidget(self.label_104, 0, 1, 1, 1)
+
+        self.frame_94 = QFrame(self.page_config_creduts)
         self.frame_94.setObjectName(u"frame_94")
         self.frame_94.setMinimumSize(QSize(0, 142))
         self.frame_94.setStyleSheet(u"border:none;\n"
@@ -5134,13 +5112,9 @@ class Ui_MainWindow(object):
         self.gridLayout_5.addWidget(self.adcvencimento_2, 4, 1, 1, 1)
 
 
-        self.gridLayout_6.addWidget(self.frame_94, 1, 0, 1, 3)
+        self.gridLayout_7.addWidget(self.frame_94, 1, 0, 1, 2)
 
-        self.horizontalSpacer_26 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.gridLayout_6.addItem(self.horizontalSpacer_26, 0, 1, 1, 1)
-
-        self.stackedWidgetadc_2.addWidget(self.page_10)
+        self.stackedWidgetadc_2.addWidget(self.page_config_creduts)
 
         self.horizontalLayout_84.addWidget(self.stackedWidgetadc_2)
 
@@ -5348,6 +5322,7 @@ class Ui_MainWindow(object):
 
         self.frame_96 = QFrame(self.botto_2)
         self.frame_96.setObjectName(u"frame_96")
+        self.frame_96.setMaximumSize(QSize(473, 16777215))
         self.frame_96.setStyleSheet(u"background-color:rgba(255,255,255,30);\n"
 "border-radius:5px;")
         self.frame_96.setFrameShape(QFrame.StyledPanel)
@@ -5356,7 +5331,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_102.setObjectName(u"verticalLayout_102")
         self.label_63 = QLabel(self.frame_96)
         self.label_63.setObjectName(u"label_63")
-        self.label_63.setMinimumSize(QSize(0, 47))
+        self.label_63.setMinimumSize(QSize(0, 40))
         self.label_63.setMaximumSize(QSize(16777215, 40))
         self.label_63.setFont(font)
         self.label_63.setStyleSheet(u"background-color:rgba(255,255,255,0);\n"
@@ -5407,7 +5382,8 @@ class Ui_MainWindow(object):
         self.label_91.setFont(font6)
         self.label_91.setAutoFillBackground(False)
         self.label_91.setStyleSheet(u"border: 0px;\n"
-"border-radius:3px;")
+"border-radius:3px;\n"
+"")
         self.label_91.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_105.addWidget(self.label_91)
@@ -6301,9 +6277,7 @@ class Ui_MainWindow(object):
 "	background-color: rgb(46, 46, 46);\n"
 "\n"
 "}")
-        icon25 = QIcon()
-        icon25.addFile(u":/backgroud/src-page-cartoes/cards.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.grid.setIcon(icon25)
+        self.grid.setIcon(icon26)
         self.grid.setIconSize(QSize(30, 30))
 
         self.horizontalLayout_10.addWidget(self.grid)
@@ -6336,9 +6310,9 @@ class Ui_MainWindow(object):
 "	background-color: rgb(46, 46, 46);\n"
 "\n"
 "}")
-        icon26 = QIcon()
-        icon26.addFile(u":/backgroud/src-page-cartoes/card_config.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.grid_2.setIcon(icon26)
+        icon27 = QIcon()
+        icon27.addFile(u":/backgroud/src-page-cartoes/card_config.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.grid_2.setIcon(icon27)
         self.grid_2.setIconSize(QSize(30, 30))
 
         self.horizontalLayout_10.addWidget(self.grid_2)
@@ -6673,9 +6647,9 @@ class Ui_MainWindow(object):
 "	background-color: rgb(31, 31, 31);\n"
 "\n"
 "}")
-        icon27 = QIcon()
-        icon27.addFile(u":/menu/home-card.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.back_main_dash.setIcon(icon27)
+        icon28 = QIcon()
+        icon28.addFile(u":/menu/home-card.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.back_main_dash.setIcon(icon28)
         self.back_main_dash.setIconSize(QSize(35, 35))
 
         self.verticalLayout_17.addWidget(self.back_main_dash)
@@ -6922,9 +6896,9 @@ class Ui_MainWindow(object):
 "	background-color: rgb(31, 31, 31);\n"
 "\n"
 "}")
-        icon28 = QIcon()
-        icon28.addFile(u":/backgroud/src-page-cartoes/shoop.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.compras.setIcon(icon28)
+        icon29 = QIcon()
+        icon29.addFile(u":/backgroud/src-page-cartoes/shoop.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.compras.setIcon(icon29)
         self.compras.setIconSize(QSize(35, 35))
 
         self.horizontalLayout_17.addWidget(self.compras)
@@ -6956,9 +6930,9 @@ class Ui_MainWindow(object):
 "	background-color: rgb(31, 31, 31);\n"
 "\n"
 "}")
-        icon29 = QIcon()
-        icon29.addFile(u":/backgroud/src-page-cartoes/cart.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.nova_despesa.setIcon(icon29)
+        icon30 = QIcon()
+        icon30.addFile(u":/backgroud/src-page-cartoes/cart.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.nova_despesa.setIcon(icon30)
         self.nova_despesa.setIconSize(QSize(35, 35))
 
         self.horizontalLayout_17.addWidget(self.nova_despesa)
@@ -6990,9 +6964,9 @@ class Ui_MainWindow(object):
 "	background-color: rgb(31, 31, 31);\n"
 "\n"
 "}")
-        icon30 = QIcon()
-        icon30.addFile(u":/backgroud/src-page-cartoes/grafic.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.pushButton_14.setIcon(icon30)
+        icon31 = QIcon()
+        icon31.addFile(u":/backgroud/src-page-cartoes/grafic.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.pushButton_14.setIcon(icon31)
         self.pushButton_14.setIconSize(QSize(35, 35))
 
         self.horizontalLayout_17.addWidget(self.pushButton_14)
@@ -7024,9 +6998,9 @@ class Ui_MainWindow(object):
 "	background-color: rgb(31, 31, 31);\n"
 "\n"
 "}")
-        icon31 = QIcon()
-        icon31.addFile(u":/backgroud/src-page-cartoes/calendarios.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.faturas.setIcon(icon31)
+        icon32 = QIcon()
+        icon32.addFile(u":/backgroud/src-page-cartoes/calendarios.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.faturas.setIcon(icon32)
         self.faturas.setIconSize(QSize(30, 30))
 
         self.horizontalLayout_17.addWidget(self.faturas)
@@ -9877,9 +9851,9 @@ class Ui_MainWindow(object):
 "	color: rgb(255, 255, 255);\n"
 "\n"
 "}")
-        icon32 = QIcon()
-        icon32.addFile(u":/menu/menu/edit.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.pushButton_21.setIcon(icon32)
+        icon33 = QIcon()
+        icon33.addFile(u":/menu/menu/edit.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.pushButton_21.setIcon(icon33)
         self.pushButton_21.setIconSize(QSize(20, 30))
 
         self.horizontalLayout_32.addWidget(self.pushButton_21)
@@ -9946,7 +9920,7 @@ class Ui_MainWindow(object):
 "	color: rgb(255, 255, 255);\n"
 "\n"
 "}")
-        self.pushButton_22.setIcon(icon32)
+        self.pushButton_22.setIcon(icon33)
         self.pushButton_22.setIconSize(QSize(20, 30))
 
         self.horizontalLayout_45.addWidget(self.pushButton_22)
@@ -10794,9 +10768,9 @@ class Ui_MainWindow(object):
         self.pushButton_4.setObjectName(u"pushButton_4")
         self.pushButton_4.setFont(font)
         self.pushButton_4.setStyleSheet(u"color: rgb(255, 255, 255);")
-        icon33 = QIcon()
-        icon33.addFile(u":/dev/dev/devs.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.pushButton_4.setIcon(icon33)
+        icon34 = QIcon()
+        icon34.addFile(u":/dev/dev/devs.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.pushButton_4.setIcon(icon34)
         self.pushButton_4.setIconSize(QSize(40, 40))
 
         self.verticalLayout_58.addWidget(self.pushButton_4)
@@ -10804,9 +10778,9 @@ class Ui_MainWindow(object):
         self.pushButton_5 = QPushButton(self.frame_23)
         self.pushButton_5.setObjectName(u"pushButton_5")
         self.pushButton_5.setStyleSheet(u"color: rgb(255, 255, 255);")
-        icon34 = QIcon()
-        icon34.addFile(u":/dev/dev/academy.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.pushButton_5.setIcon(icon34)
+        icon35 = QIcon()
+        icon35.addFile(u":/dev/dev/academy.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.pushButton_5.setIcon(icon35)
         self.pushButton_5.setIconSize(QSize(40, 40))
 
         self.verticalLayout_58.addWidget(self.pushButton_5)
@@ -10840,9 +10814,9 @@ class Ui_MainWindow(object):
 "	background-color: rgb(121, 121, 121);\n"
 "	border: 2px solid  rgb(55, 55, 55);\n"
 "}")
-        icon35 = QIcon()
-        icon35.addFile(u":/dev/dev/git.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.pushButton_6.setIcon(icon35)
+        icon36 = QIcon()
+        icon36.addFile(u":/dev/dev/git.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.pushButton_6.setIcon(icon36)
         self.pushButton_6.setIconSize(QSize(40, 40))
 
         self.verticalLayout_58.addWidget(self.pushButton_6)
@@ -10956,7 +10930,7 @@ class Ui_MainWindow(object):
         self.stack_extrato_pages_2.setCurrentIndex(0)
         self.pushButton_25.setDefault(False)
         self.pushButton_26.setDefault(False)
-        self.stackedWidgetadc_2.setCurrentIndex(0)
+        self.stackedWidgetadc_2.setCurrentIndex(1)
         self.stackedWidget_3.setCurrentIndex(0)
         self.detalhes_cartao.setCurrentIndex(1)
         self.extrat_meses.setCurrentIndex(1)
@@ -11166,8 +11140,10 @@ class Ui_MainWindow(object):
         self.textcard_6.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:11pt; font-weight:600; color:#ffffff;\">Agencia</span></p></body></html>", None))
         self.adc_conta_conta.setPlaceholderText(QCoreApplication.translate("MainWindow", u"01", None))
         self.textcard_7.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:11pt; font-weight:600; color:#ffffff;\">Conta</span></p></body></html>", None))
-        self.hide_cards_main_3.setText("")
-        self.hide_cards_main_4.setText("")
+        self.config_crdit_c.setText("")
+        self.label_105.setText(QCoreApplication.translate("MainWindow", u"Configurar Conta", None))
+        self.config_ccoun.setText("")
+        self.label_104.setText(QCoreApplication.translate("MainWindow", u"Cart\u00e3o de Credito", None))
         self.label_66.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:11pt; font-weight:600; color:#ffffff;\">Fechamento da Fatura:</span></p></body></html>", None))
         self.adclimite_2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"R$", None))
         self.adctitular_2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Nome", None))
@@ -11187,25 +11163,25 @@ class Ui_MainWindow(object):
         self.remover_bank.setText(QCoreApplication.translate("MainWindow", u"Remover", None))
         self.update_bank.setText(QCoreApplication.translate("MainWindow", u"Atualizar", None))
         self.label_63.setText(QCoreApplication.translate("MainWindow", u"Revisao", None))
-        self.label_91.setText(QCoreApplication.translate("MainWindow", u"Banco", None))
-        self.plainTextEdit.setPlainText(QCoreApplication.translate("MainWindow", u"asdasdasd", None))
-        self.label_84.setText(QCoreApplication.translate("MainWindow", u"Agencia", None))
-        self.plainTextEdit_2.setPlainText(QCoreApplication.translate("MainWindow", u"asdasdasd", None))
+        self.label_91.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt;\">Banco</span></p></body></html>", None))
+        self.plainTextEdit.setPlainText("")
+        self.label_84.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Agencia</p></body></html>", None))
+        self.plainTextEdit_2.setPlainText("")
         self.label_92.setText(QCoreApplication.translate("MainWindow", u"Conta", None))
-        self.plainTextEdit_3.setPlainText(QCoreApplication.translate("MainWindow", u"asdasdasd", None))
+        self.plainTextEdit_3.setPlainText("")
         self.label_93.setText(QCoreApplication.translate("MainWindow", u"Saldo", None))
-        self.plainTextEdit_4.setPlainText(QCoreApplication.translate("MainWindow", u"asdasdasd", None))
+        self.plainTextEdit_4.setPlainText("")
         self.label_64.setText(QCoreApplication.translate("MainWindow", u"Cartao de credito", None))
-        self.label_94.setText(QCoreApplication.translate("MainWindow", u"Limite", None))
-        self.plainTextEdit_5.setPlainText(QCoreApplication.translate("MainWindow", u"asdasdasd", None))
-        self.label_99.setText(QCoreApplication.translate("MainWindow", u"Final do cartao", None))
-        self.plainTextEdit_9.setPlainText(QCoreApplication.translate("MainWindow", u"asdasdasd", None))
+        self.label_94.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Limite</p></body></html>", None))
+        self.plainTextEdit_5.setPlainText("")
+        self.label_99.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Final do cartao</p></body></html>", None))
+        self.plainTextEdit_9.setPlainText("")
         self.label_95.setText(QCoreApplication.translate("MainWindow", u"Titular", None))
-        self.plainTextEdit_6.setPlainText(QCoreApplication.translate("MainWindow", u"asdasdasd", None))
+        self.plainTextEdit_6.setPlainText("")
         self.label_98.setText(QCoreApplication.translate("MainWindow", u"Vencimento", None))
-        self.plainTextEdit_8.setPlainText(QCoreApplication.translate("MainWindow", u"asdasdasd", None))
+        self.plainTextEdit_8.setPlainText("")
         self.label_96.setText(QCoreApplication.translate("MainWindow", u"Fechamento", None))
-        self.plainTextEdit_7.setPlainText(QCoreApplication.translate("MainWindow", u"asdasdasd", None))
+        self.plainTextEdit_7.setPlainText("")
         ___qtablewidgetitem16 = self.table_active_banks.horizontalHeaderItem(0)
         ___qtablewidgetitem16.setText(QCoreApplication.translate("MainWindow", u"id", None));
         ___qtablewidgetitem17 = self.table_active_banks.horizontalHeaderItem(1)

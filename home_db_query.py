@@ -326,6 +326,33 @@ class Return_values:
 class Return_Values_Conditions:
     
     
+    def get_valor_transacao(id_lancamento,id_bank,tipo,ano,mes):
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        cursor.execute("SELECT valor FROM new_lancamento WHERE id_lancamento = '"+str(id_lancamento)+"' AND id_bank = '"+str(id_bank)+"' AND tipo = '"+str(tipo)+"' AND strftime('%Y',data_lancamento) = '"+str(ano)+"' AND strftime('%m',data_lancamento) = '"+str(mes)+"'")
+        dados = cursor.fetchall()
+        return dados[0][0]
+    
+    
+    def _update_default_bank(id_bank):
+        #id_lancamento
+        #data_lancamento
+        #recorrente_m_d_s_y
+        #recorrente_dia
+        
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        cursor.execute("UPDATE config_contas SET conta_padrao_bank = '"+str(id_bank)+"'")
+        banco.commit()
+        banco.close()
+        
+        
     def _return_ag_b_t_c(id):
         #TITULAR
         #AGENCIA

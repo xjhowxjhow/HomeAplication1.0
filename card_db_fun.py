@@ -12,6 +12,7 @@ import home_db_query
 import calendar
 import locale
 import emoji
+from frame_bank.card_frame_bank import CardFrameBank
 from PySide2.QtCore import *
 from PySide2 import QtWidgets
 from PySide2.QtGui import *
@@ -1796,6 +1797,7 @@ class funcoes_cartao(Ui_MainWindow):
                 funcoes_cartao.carrega_extrato_mes(self,extrato)
                 home_db_fun.Set_values_startup._set_Saldo(self)
                 home_db_fun.mainpage.load_extrato_filter(self)
+                CardFrameBank._update_frame_cards_saldo(self,id_bank)
                 # msg = QMessageBox()
                 # msg.setWindowTitle("Sucesso")
                 # msg.setText("Fatura paga com sucesso")
@@ -1818,6 +1820,7 @@ class funcoes_cartao(Ui_MainWindow):
                     # TODO ERRO AQ
                     home_db_fun.Set_values_startup._set_Saldo(self)
                     home_db_fun.mainpage.load_extrato_filter(self)
+                    CardFrameBank._update_frame_cards_saldo(self,id_bank)
                     # msg = QMessageBox()
                     # msg.setWindowTitle("Sucesso")
                     # msg.setText("Fatura paga com sucesso debitado da conta principal!")

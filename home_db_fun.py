@@ -1,5 +1,7 @@
 
+from ast import Pass
 from itertools import count
+from multiprocessing.resource_sharer import stop
 from operator import iconcat
 import sqlite3
 from tkinter import Menu
@@ -182,10 +184,11 @@ class mainpage(Ui_MainWindow):
 
     #EVENTS FOR BUTTONS
     def _event_change_stakecard(self):
+        effects.Effetc_slides._add_banks_credits(self)
         if self.comboBox_24.currentText() == "Sim":
-            return self.stackedWidgetadc_2.setCurrentWidget(self.page_10)
+            return self.stackedWidgetadc_2.setCurrentWidget(self.page_config_creduts)
         else:
-         self.stackedWidgetadc_2.setCurrentWidget(self.stackedWidgetadc_2Page1)
+         return self.stackedWidgetadc_2.setCurrentWidget(self.page_config_counts1)
         
     # ADD VALORES AO BANCO DE DADOS BANK
     def _add_bank(self):
@@ -911,9 +914,7 @@ class mainpage(Ui_MainWindow):
                     usd_to_brl = Convert_Moedas._usd_to_brl(self,return_saldo)
                     self.table.setItem(row_count, 11, QTableWidgetItem(str("%s"%usd_to_brl)))
                     self.table.item(row_count,11).setTextAlignment(Qt.AlignCenter)
-            
-            #WORKER STOP
-
+    
             
         thread = threading.Thread(target=thead(self))
         thread.start()
@@ -1015,7 +1016,13 @@ class Set_values_startup(Ui_MainWindow):
         
         return 0
 
+
+
     def _set_Saldo(self):
+        
+        
+        
+        
         valor = home_db_query.Saldos.Set_saldo_inicial()
         usd_to_brl = Convert_Moedas._usd_to_brl(self,valor)
         valor = usd_to_brl
@@ -1034,6 +1041,8 @@ class Set_values_startup(Ui_MainWindow):
         num_conta = self.label_78.setText("Counta: "+str(dados_l[2]))
         icon_nam_style = effects.efeitos_geral.style_sheet_card_icon(self,str(dados_l[4]))
         self.frame_97.setStyleSheet("background-image: "+icon_nam_style+"; background-repeat:no-repeat; background-position:center;")
+        return True
+
 class Combobox_startup(Ui_MainWindow):
 
     def default_combox_hidem(self):
@@ -1153,12 +1162,18 @@ class Pagamento(Ui_MainWindow):
             #MENSAGEM BOX
                 print("Lancamento recorrente")
                 home_db_query.Add_values._add_new_lancamento_recorrente(id_lancamento,id_bank,mes,ano)
+                #ANIMANCAO
                 home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Saida',ano,mes)
+                
+
+                #TODO TESTE ANIMCAÇAO dps
+                
                 Set_values_startup._set_Saldo(self)
                 mainpage.load_extrato_filter(self)
                 CardFrameBank._update_frame_cards_saldo(self,id_bank)
                 #TEMQ FAZER A VALIDADAO POR DATA DO LKANCAMENTO
                 Loading_screen_gif._payout_receiver_sucess(self)
+                
             else:
                 msg = QMessageBox()
                 msg.setWindowTitle("Erro")
@@ -1834,3 +1849,42 @@ class Loading_screen_gif(Ui_MainWindow):
         thread = threading.Thread(target=close_loading3)
         thread.start()
 
+
+
+
+
+
+
+
+
+
+class AnimationValues(Ui_MainWindow):
+    
+    def _animation_values(self,valor_transacao,tipo,id_bank):
+        Pass
+        # def thead():
+        #     #GET SALDO ATUAL
+        #     saldo_atual = home_db_query.Return_values.return_saldo_banks(id_bank)
+        #     saldo_atual = float(saldo_atual)
+        #     print("SALDO ATUAL",saldo_atual)
+        #     print("Valor da transacao",valor_transacao)
+        #     print("Tipo",tipo)
+        #     if tipo == 'Saida':
+                
+        #         start = saldo_atual
+        #         target = float(saldo_atual) - float(valor_transacao)
+        #         print("SALDO ATUAL start",saldo_atual)
+        #         print("Valor da transacao target",valor_transacao)
+        #         while start > target:
+        #             start = start  -10
+        #             sleep(0.01)
+        #             #set text
+        #             format_saldo = "{:.2f}".format(start)
+        #             self.label_70.setText(str(format_saldo))
+        # #START THREAD
+        # thread = threading.Thread(target=thead)
+        # thread.start()
+        # return True
+        #animation val
+        
+        

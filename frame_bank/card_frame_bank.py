@@ -88,7 +88,7 @@ class CardFrameBank(Ui_MainWindow):
 
             #TODO BOTAO DE VER COMRPAS DO CARD:
 
-            self.ver_compras_cartao_0 = QPushButton(self.frame_cartao_0, clicked = lambda:CardFrameBank.object_name(self))
+            self.ver_compras_cartao_0 = QPushButton(self.frame_cartao_0, clicked = lambda:CardFrameBank.set_default_bank(self))
             self.ver_compras_cartao_0.setObjectName(u"ver_compras_cartao_"+str(NUMERO_DE_CARTOES))
             self.ver_compras_cartao_0.setGeometry(QRect(280, 150, 110, 30))
             self.ver_compras_cartao_0.setMinimumSize(QSize(110, 30))
@@ -122,7 +122,7 @@ class CardFrameBank(Ui_MainWindow):
 
             #TODO NOME DO TITULAR:
             self.txt_titular_cartao_0 = QLabel(self.frame_cartao_0)
-            self.txt_titular_cartao_0.setObjectName(u"txt_titular_cartao_"+str(NUMERO_DE_CARTOES))
+            self.txt_titular_cartao_0.setObjectName(u"txttitular_cartao_"+str(NUMERO_DE_CARTOES))
             self.txt_titular_cartao_0.setGeometry(QRect(200, 10, 151, 36))
             self.txt_titular_cartao_0.setStyleSheet(u"border: 0px;")
             self.txt_titular_cartao_0.setTextFormat(Qt.AutoText)
@@ -141,7 +141,7 @@ class CardFrameBank(Ui_MainWindow):
             #TODO TEXTO FINAL DO TITULAR:
 
             self.txt_final_cartao_0 = QLabel(self.frame_cartao_0)
-            self.txt_final_cartao_0.setObjectName(u"txt_final_cartao_"+str(NUMERO_DE_CARTOES))
+            self.txt_final_cartao_0.setObjectName(u"txtfinal_cartao_"+str(NUMERO_DE_CARTOES))
             self.txt_final_cartao_0.setGeometry(QRect(10, 170, 201, 31))
             self.txt_final_cartao_0.setStyleSheet(u"border: 0px")
             self.txt_final_cartao_0.setTextFormat(Qt.AutoText)
@@ -152,7 +152,7 @@ class CardFrameBank(Ui_MainWindow):
             #TODO VALOR LIMITE DISPOINIVEL "R$0":
 
             self.valor_limitedisponivel_cartao_0 = QLabel(self.frame_cartao_0)
-            self.valor_limitedisponivel_cartao_0.setObjectName(u"valor_limitedisponivel_cartao_"+str(NUMERO_DE_CARTOES))
+            self.valor_limitedisponivel_cartao_0.setObjectName(u"limitedisponivel_cartao_"+str(NUMERO_DE_CARTOES))
             self.valor_limitedisponivel_cartao_0.setGeometry(QRect(150, 130, 121, 36))
             self.valor_limitedisponivel_cartao_0.setStyleSheet(u"border: 0px;")
             self.valor_limitedisponivel_cartao_0.setTextFormat(Qt.AutoText)
@@ -162,7 +162,7 @@ class CardFrameBank(Ui_MainWindow):
 
             #TODO TEXTO DO LIMITE DISPONIVEL"LIMITE DISPONIVEL"
             self.txt_limite_disponivel_cartao_0 = QLabel(self.frame_cartao_0)
-            self.txt_limite_disponivel_cartao_0.setObjectName(u"txt_limite_disponivel_cartao_"+str(NUMERO_DE_CARTOES))
+            self.txt_limite_disponivel_cartao_0.setObjectName(u"limite_disponivel_cartao_"+str(NUMERO_DE_CARTOES))
             self.txt_limite_disponivel_cartao_0.setGeometry(QRect(10, 130, 141, 36))
             self.txt_limite_disponivel_cartao_0.setStyleSheet(u"border: 0px;")
             self.txt_limite_disponivel_cartao_0.setTextFormat(Qt.AutoText)
@@ -346,10 +346,12 @@ class CardFrameBank(Ui_MainWindow):
             #DADOS[5] = TITULAR
 
 
+            format_val = "{:.2f}".format(float(dados[1]))
+
 
             #TODO AQUI VAI SETAR OS TEXTOS POR PADRAO
 
-            self.valor_faturaatual_cartao_0.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"justify\"><span style=\" font-size:20pt; font-weight:600; color:#ffffff\">R$"+str(dados[1])+"</span></p></body></html>", None))
+            self.valor_faturaatual_cartao_0.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"justify\"><span style=\" font-size:20pt; font-weight:600; color:#ffffff\">R$"+str(format_val)+"</span></p></body></html>", None))
             self.txt_limite_disponivel_cartao_0.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"justify\"><span style=\" font-size:11pt; font-weight:600; color:#ffffff;\"></span></p></body></html>", None))
             self.ver_compras_cartao_0.setText(QCoreApplication.translate("MainWindow", u"Trocar Principal", None))
             self.txt_fatura_atual_cartao_0.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"justify\"><span style=\" font-size:11pt; font-weight:600; color:#ffffff;\">Saldo Disponivel</span></p></body></html>", None))
@@ -429,16 +431,23 @@ class CardFrameBank(Ui_MainWindow):
         
         
 
-    def object_name(self): #NT
+    def set_default_bank(self): #NT
         
         #_____________________________________________________
         # Pega nome do botao que foi clicado na hora:
         name_obj = self.focusWidget().objectName()
-        print(name_obj)
+
         #PARA ACESSAR OS BOTOES TERIAMOS QUE UTILIZAR UM INDEX DA LISTA DE BOTOES.
         self.botoes = self.findChildren(QPushButton , str(name_obj))
-        #e vai fazer a validação e direcionar para a função certa no return 
-        return [name_obj,self.botoes]
+        #PEGA O ID PELO NO DO BT
+        ids = re.sub('[^0-9]', '', name_obj)
+        home_db_query.Return_Values_Conditions._update_default_bank(ids)
+        
+        #UPDATE_UI
+        home_db_fun.Set_values_startup._set_start_ag_b_t(self)
+        home_db_fun.Set_values_startup._set_Saldo(self)
+        return True
+    
     
     
     def _update_frame_cards_saldo(self,id):
@@ -468,7 +477,7 @@ class CardFrameBank(Ui_MainWindow):
             list.append(a)
         print(list)
         
-        if len(list) == 0:
+        if len(list) < len(ids_banks):
             return True
         else:
             return False

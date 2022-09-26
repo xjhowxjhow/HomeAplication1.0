@@ -239,9 +239,12 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.download_pdf_2.installEventFilter(self)
         self.download_pdf.installEventFilter(self)
         self.toolButton_pdf_opt.installEventFilter(self)
-        
+        self.config_ccoun.installEventFilter(self)
+        self.config_crdit_c.installEventFilter(self)
     
     def eventFilter(self, obj, event):
+        
+        
             if obj == self.pushButton_8 and event.type() == QtCore.QEvent.MouseButtonPress:
                 btn = "conta"
                 return effects.Effetc_slides.grid_lateral_menu(self,btn)
@@ -478,6 +481,14 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
             
             if obj == self.toolButton_pdf_opt and event.type() == QtCore.QEvent.MouseButtonPress:
                 return home_db_fun.Pdf_funtion.options_tool_btn_file(self)
+            
+            if obj == self.config_ccoun and event.type() == QtCore.QEvent.MouseButtonPress:
+                effects.Effetc_slides._add_banks_credits(self)
+                return self.stackedWidgetadc_2.setCurrentWidget(self.page_config_counts1)
+            
+            if obj == self.config_crdit_c and event.type() == QtCore.QEvent.MouseButtonPress:
+                effects.Effetc_slides._add_banks_credits(self)
+                return self.stackedWidgetadc_2.setCurrentWidget(self.page_config_creduts)
             return super(MainWindow,self).eventFilter(obj, event)
 
         
