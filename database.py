@@ -1,4 +1,3 @@
-from re import S
 import sqlite3
 from PySide2.QtCore import *
 import pyautogui

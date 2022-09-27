@@ -1,10 +1,5 @@
 
-from ast import Pass
-from itertools import count
-from operator import iconcat
 import sqlite3
-from tkinter import Menu
-from turtle import color, home
 import os.path
 import effects
 import os 

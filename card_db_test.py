@@ -1,12 +1,8 @@
-from ctypes import util
-from operator import index
-from re import S
+
 import sqlite3
 from PySide2.QtCore import *
 import os.path
 from datetime import datetime
-from re import S
-from cairo import Extend
 from dateutil.relativedelta import relativedelta
 from datetime import datetime
 from datetime import date 

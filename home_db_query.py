@@ -1,6 +1,3 @@
-from ctypes import util
-from msilib.schema import Class
-from operator import index
 from random import randint
 from re import S
 import sqlite3
