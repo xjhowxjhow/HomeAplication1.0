@@ -61,7 +61,29 @@ class Add_values:
         
         
         else:
-            credit_card = 0
+            credit_card = False
+            a = (os.path.dirname(os.path.realpath(__file__)))
+            banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+            cursor = banco.cursor()
+            
+            #CREATE INDEX
+            cursor.execute("CREATE UNIQUE INDEX IF NOT EXISTS idx_bank_active ON contas_bancarias(id)")
+            #INSERT ID
+            cursor.execute("INSERT INTO  contas_bancarias (id, cartao_credito_id) VALUES ('"+str(id)+"','"+str(credit_card)+"')")
+
+            #ARGUMENTS:
+            tabelas_db = ['contas_bancarias']
+            colunas_contas = ['nome_banco','titular','agencia','num_conta','saldo_inicial',]
+            coluns = [colunas_contas]
+            #QUERY EXAMPLE (['C6', '1580', 'Jhonatan titualr card', '1010 final', 'venci 10', 'fefhca 10'], ['C6', 'Jhonatan', 'ag0111', 'cont 1010', 'r$1,580,00', 'Sim'])
+            # data[0] TEM EM LISTA : [0] = ARGUMENTOS CONTA
+            for i in range(len(data[0])):
+                # print(data[0][i])
+                cursor.execute("UPDATE "+tabelas_db[0]+" SET "+colunas_contas[i]+" = '"+str(data[0][i])+"' WHERE id = '"+str(id)+"'")
+                banco.commit()
+            
+            banco.close()
+            return True
             
     def _default_bank(rand_id):
         default = rand_id

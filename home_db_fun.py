@@ -242,9 +242,9 @@ class mainpage(Ui_MainWindow):
             elif if_credit_card == '':
                 print("Não tem cartão de crédito selecionar algo no campo")
             else:
-                data.append((nome_bank, titular, agencia, conta, saldo_inicial, if_credit_card))
+                data.append(([nome_bank, titular, agencia, conta, saldo_inicial, if_credit_card],[]))
                 credit_card = False
-                return home_db_query.Add_values._add_new_bank(data, credit_card, rand_id)
+                return home_db_query.Add_values._add_new_bank(data[0], credit_card, rand_id)
         else:
             return Loading_screen_gif.error_gif(self)
 
