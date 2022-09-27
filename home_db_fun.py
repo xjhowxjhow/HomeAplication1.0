@@ -192,53 +192,62 @@ class mainpage(Ui_MainWindow):
         
     # ADD VALORES AO BANCO DE DADOS BANK
     def _add_bank(self):
-        # CONTA BANCARIA
-        nome_bank = self.select_conta_bancaria.currentText()
-        titular = self.adctitular_conta.text()
-        agencia = self.adcagencia_conta.text()
-        conta = self.adc_conta_conta.text()
-        saldo_inicial = self.adc_saldo_conta.text()
-        if_credit_card = self.comboBox_24.currentText()
         
         
-        #CARTAO DE CREDITO
-        cartao_nome = self.select_conta_bancaria.currentText()
-        limite = self.adclimite_2.text()
-        titular_card = self.adctitular_2.text()
-        final_card = self.adcfinal_2.text()
-        vencimento = self.adcvencimento_2.text()
-        fechamento = self.adcfechamento_2.text()
-        
-        rand_id = randint(0, 999999) # ID
+        validador_empty = Alerts._validador_new_bank(self)
+        if validador_empty == True:
+            
+            
+            # CONTA BANCARIA
+            nome_bank = self.select_conta_bancaria.currentText()
+            titular = self.adctitular_conta.text()
+            agencia = self.adcagencia_conta.text()
+            conta = self.adc_conta_conta.text()
+            saldo_inicial = self.adc_saldo_conta.text()
+            if_credit_card = self.comboBox_24.currentText()
 
-        # CONEXAO COM O BANCO DE DADOS
-        data = []
-        
-        default_bank= self.combo_bank_padrao.currentText()
-        if default_bank == 'Sim':
+
+            #CARTAO DE CREDITO
+            cartao_nome = self.select_conta_bancaria.currentText()
+            limite = self.adclimite_2.text()
+            titular_card = self.adctitular_2.text()
+            final_card = self.adcfinal_2.text()
+            vencimento = self.adcvencimento_2.text()
+            fechamento = self.adcfechamento_2.text()
+
+            rand_id = randint(0, 999999) # ID
+
+            # CONEXAO COM O BANCO DE DADOS
+            data = []
+
+            default_bank= self.combo_bank_padrao.currentText()
+            if default_bank == 'Sim':
+
+                home_db_query.Add_values._default_bank(rand_id)
+            elif default_bank == '':
+                pass
+            else:
+                pass
             
-            home_db_query.Add_values._default_bank(rand_id)
-        elif default_bank == '':
-            pass
+            if if_credit_card == "Sim":
+
+                # colunas_contas = ['saldo_inicial','nome_banco','agencia','num_conta','titular','cartao_credito_id']
+                # colunas_cartao = ['nome_cartao','titular','limite','final','vencimento','fechamento']
+                data.append(([saldo_inicial, nome_bank, agencia, conta, titular, if_credit_card], [cartao_nome, titular_card, limite, final_card, vencimento, fechamento]))
+                credit_card = True
+                home_db_query.Add_values._add_new_bank(data[0], credit_card, rand_id)
+                return card_db_fun.funcoes_cartao.inicia_cartoes_oculto_se_nao_existir(self)
+
+
+            elif if_credit_card == '':
+                print("Não tem cartão de crédito selecionar algo no campo")
+            else:
+                data.append((nome_bank, titular, agencia, conta, saldo_inicial, if_credit_card))
+                credit_card = False
+                return home_db_query.Add_values._add_new_bank(data, credit_card, rand_id)
         else:
-            pass
-        
-        if if_credit_card == "Sim":
-            
-            # colunas_contas = ['saldo_inicial','nome_banco','agencia','num_conta','titular','cartao_credito_id']
-            # colunas_cartao = ['nome_cartao','titular','limite','final','vencimento','fechamento']
-            data.append(([saldo_inicial, nome_bank, agencia, conta, titular, if_credit_card], [cartao_nome, titular_card, limite, final_card, vencimento, fechamento]))
-            credit_card = True
-            home_db_query.Add_values._add_new_bank(data[0], credit_card, rand_id)
-            return card_db_fun.funcoes_cartao.inicia_cartoes_oculto_se_nao_existir(self)
-            
-            
-        elif if_credit_card == '':
-            print("Não tem cartão de crédito selecionar algo no campo")
-        else:
-            data.append((nome_bank, titular, agencia, conta, saldo_inicial, if_credit_card))
-            credit_card = False
-            return home_db_query.Add_values._add_new_bank(data, credit_card, rand_id)
+            return Loading_screen_gif.error_gif(self)
+
 
     def _categorias_entra_said(self):
         saidas = ['Energia','Gás','Água','Luz','Telefone','Internet','Boletos','Servicos','Aluguel','Impostos','Veiculos','IPVA','IPTU','Outros']
@@ -1205,6 +1214,7 @@ class Pagamento(Ui_MainWindow):
                 msg.setText("Lançamento já pago")
                 msg.setIcon(QMessageBox.Critical)
                 msg.exec_()
+                Loading_screen_gif.error_gif(self)
         else:
             if pago == False:
                 id_lancamento = self.table.item(current_row,1).text()
@@ -1227,6 +1237,7 @@ class Pagamento(Ui_MainWindow):
                 msg.setText("Lançamento já pago")
                 msg.setIcon(QMessageBox.Critical)
                 msg.exec_()
+                Loading_screen_gif.error_gif(self)
 
             
         return True
@@ -1266,6 +1277,7 @@ class Pagamento(Ui_MainWindow):
                 msg.setText("Lançamento já Recebido")
                 msg.setIcon(QMessageBox.Critical)
                 msg.exec_()
+                Loading_screen_gif.error_gif(self)
         else:
             if pago == False:
                 id_lancamento = self.table.item(current_row,1).text()
@@ -1288,6 +1300,7 @@ class Pagamento(Ui_MainWindow):
                 msg.setText("Lançamento já recebido")
                 msg.setIcon(QMessageBox.Critical)
                 msg.exec_()
+                Loading_screen_gif.error_gif(self)
 
             
         return True
@@ -1354,12 +1367,14 @@ class Pagamento(Ui_MainWindow):
             msg.setText("Fatura já paga")
             msg.setIcon(QMessageBox.Critical)
             msg.exec_()
+            Loading_screen_gif.error_gif(self)
         elif verifi_if_pago == 'proximas':
             msg = QMessageBox()
             msg.setWindowTitle("Erro")
             msg.setText("Fatura ainda não venceu Ou nao existe Valor")
             msg.setIcon(QMessageBox.Critical)
             msg.exec_()
+            Loading_screen_gif.error_gif(self)
      
 
         #BANCO DIFERENTE N TA DESCONTADO GERANDO ERRO DPS CORRIGIR
@@ -1536,6 +1551,82 @@ class Alerts(Ui_MainWindow):
             return True
         else:
             return False
+        
+    def _validador_new_bank(self):
+        #config banco
+        #BANCO = self.select_conta_bancaria.currentText()
+        #PADRAO = self.combo_bank_padrao.currentText()
+        #TITULAR  = self.adctitular_conta.text()
+        #AGENCIA = self.adcagencia_conta.text()
+        #CONTA = self.adc_conta_conta.text()
+        #SALDO INICIAL = self.adc_saldo_conta.text()
+        
+        # IF CREDIT CARD
+        
+        #credito s/n  =  self.comboBox_24.currentText()
+        
+        #CONFIG CARD
+        
+        # LIMITE TOTAL DO CARTAO  = self.adclimite_2.text()
+        #titular do cartao = self.adctitular_2.text()
+        #final do cartao = self.adcfinal_2.text()
+        #vebcuneto do cartao = self.adcvencimento_2.text()
+        #fechamneto do cartao = self.adcfechamento_2.text()
+        
+        #   VERIFICA SE VAI TER CARTAO DE CREDITO :
+        if self.comboBox_24.currentText() == "Sim": #COM CARTAO DE CREDITO
+            if self.select_conta_bancaria.currentText() == "" or self.combo_bank_padrao.currentText() == ""\
+                or self.adctitular_conta.text() == "" or self.adcagencia_conta.text() == "" or self.adc_conta_conta.text() == "" \
+                    or self.adc_saldo_conta.text() == "" or self.adclimite_2.text() == "" or self.adctitular_2.text() == "" or \
+                        self.adcfinal_2.text() == "" or self.adcvencimento_2.text() == "" or self.adcfechamento_2.text() == "":
+                return False
+            else :
+                #VERIFICA SALDO INICIAL E LIMITE SE CONTEM STRING
+                val = self.adc_saldo_conta.text()
+                val2 = self.adclimite_2.text()
+                if Alerts._validador_int(val) == False or Alerts._validador_int(val2) == False:
+                    return False
+                #VERIFCA DATA DE FECHAMENTO E VENCIMENTO:
+                elif len(self.adcvencimento_2.text()) != 2 or len(self.adcfechamento_2.text()) != 2 or self.adcvencimento_2.text().isdigit() == False or self.adcfechamento_2.text().isdigit() == False or int(self.adcvencimento_2.text()) > 31 or int(self.adcfechamento_2.text()) > 31 or int(self.adcvencimento_2.text()) < 1 or int(self.adcfechamento_2.text()) < 1: 
+                    return False
+                
+                #VERIFICA FINAL DO CARTAO:
+                elif  self.adcfinal_2.text().isdigit() == False:
+                    return False
+                
+                #VERIFICA SE AGENCIA E CONTA SAO NUMEROS:
+                elif self.adcagencia_conta.text().isdigit() == False or self.adc_conta_conta.text().isdigit() == False:
+                    return False
+                else:
+                    return True
+                
+        else: #SEM CARTAO DE CREDITO
+            if self.select_conta_bancaria.currentText() == "" or self.combo_bank_padrao.currentText() == ""\
+                or self.adctitular_conta.text() == "" or self.adcagencia_conta.text() == "" or self.adc_conta_conta.text() == "" \
+                    or self.adc_saldo_conta.text() == "":
+                return False
+            else :
+                #VERIFICA SALDO INICIAL SE CONTEM STRING
+                val = self.adc_saldo_conta.text()
+                if Alerts._validador_int(val) == False:
+                    return False
+                #VERIFICA SE AGENCIA E CONTA SAO NUMEROS:
+                elif self.adcagencia_conta.text().isdigit() == False or self.adc_conta_conta.text().isdigit() == False:
+                    return False
+                else:
+                    return True
+        
+        
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
 class Configs(Ui_MainWindow):
 
     def hide_show_saldos_zeros(self,condicao): #apenas para faturas de cartoes de creditos
@@ -1875,6 +1966,36 @@ class Loading_screen_gif(Ui_MainWindow):
         thread.start()
 
 
+    def error_gif(self):
+        self.label_gif4 = QLabel(self)
+        #GET REAL TIME CENTER
+        self.label_gif4.setGeometry(740,390, 150, 150)
+        #transparente
+        self.label_gif4.setStyleSheet("background-color: rgba(0, 0, 0, 0);")
+        self.label_gif4.setWindowFlags(Qt.FramelessWindowHint)
+        #center
+        #PATCH GIF SRC/LOADING.GIF
+        self.movie4 = QMovie("src/error/error.gif")
+        self.label_gif4.setMovie(self.movie4)
+        self.movie4.start()
+        
+        
+        print("GIF LOADING")
+        def close_loading4():
+
+            self.label_gif4.show()
+            sleep(3)
+            self.label_gif4.close()
+            
+            #DELETE LABEL
+            self.label_gif4.deleteLater()
+
+
+            print("GIF CLOSED")
+            #FISH THREAD
+            return True
+        thread = threading.Thread(target=close_loading4)
+        thread.start()
 
 
 
