@@ -1,7 +1,6 @@
 
 from ast import Pass
 from itertools import count
-from multiprocessing.resource_sharer import stop
 from operator import iconcat
 import sqlite3
 from tkinter import Menu
@@ -13,6 +12,7 @@ import re
 import threading
 import card_db_test
 import card_db_fun
+from threading import Thread
 import calendar
 from frame_bank.card_frame_bank import CardFrameBank
 import locale
@@ -914,11 +914,36 @@ class mainpage(Ui_MainWindow):
                     usd_to_brl = Convert_Moedas._usd_to_brl(self,return_saldo)
                     self.table.setItem(row_count, 11, QTableWidgetItem(str("%s"%usd_to_brl)))
                     self.table.item(row_count,11).setTextAlignment(Qt.AlignCenter)
-    
             
-        thread = threading.Thread(target=thead(self))
+
+
+        thread = ThreadWithReturnValue(target=thead(self))
         thread.start()
 
+
+
+
+
+
+
+
+class ThreadWithReturnValue(Thread):
+    def __init__(self, group=None, target=None, name=None,args=(), kwargs={}, Verbose=None):
+        Thread.__init__(self, group, target, name, args, kwargs)
+        self._return = None
+
+    def run(self):
+        if self._target is not None:
+            self._return = self._target(*self._args,
+                                        **self._kwargs)
+
+    def join(self, *args):
+        Thread.join(self, *args)
+        return self._return
+
+    def get_return(self):
+        return self._return
+    
 
 
 class Dates_end_times(Ui_MainWindow):

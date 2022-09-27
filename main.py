@@ -193,6 +193,8 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.hidden_saldo_fat0_false.clicked.connect(lambda:home_db_fun.Configs.hide_show_saldos_zeros(self,False))
         
         self.hide_cards_main_2.clicked.connect(lambda:home_db_fun.Loading_screen_gif.test_anin(self))
+        
+        
         # self.show_cards_main_2.clicked.connect(lambda:home_db_fun.Loading_screen_gif.close_loading(self))
         
         
@@ -241,6 +243,10 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.toolButton_pdf_opt.installEventFilter(self)
         self.config_ccoun.installEventFilter(self)
         self.config_crdit_c.installEventFilter(self)
+    
+        #THREAD
+
+        
     
     def eventFilter(self, obj, event):
         
@@ -491,7 +497,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                 return self.stackedWidgetadc_2.setCurrentWidget(self.page_config_creduts)
             return super(MainWindow,self).eventFilter(obj, event)
 
-        
+
     def campo_de_verificacao(self):
 
         usuario = ""
