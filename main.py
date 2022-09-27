@@ -629,6 +629,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                 self.animation.setEndValue(250)
                 self.animation.setEasingCurve(QEasingCurve.OutExpo)
                 self.animation.start()
+                
                 TOGLE_STATUS = 150
 
 

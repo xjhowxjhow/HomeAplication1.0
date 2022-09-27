@@ -1067,7 +1067,7 @@ class Set_values_startup(Ui_MainWindow):
         print("DADOS",dados_l)
         titular = self.label_68.setText(dados_l[0])
         agencia = self.label_77.setText("Agencia: "+str(dados_l[1]))
-        num_conta = self.label_78.setText("Counta: "+str(dados_l[2]))
+        num_conta = self.label_78.setText("Conta: "+str(dados_l[2]))
         icon_nam_style = effects.efeitos_geral.style_sheet_card_icon(self,str(dados_l[4]))
         self.frame_97.setStyleSheet("background-image: "+icon_nam_style+"; background-repeat:no-repeat; background-position:center;")
         return True
@@ -2002,7 +2002,7 @@ class Loading_screen_gif(Ui_MainWindow):
 class AnimationValues(Ui_MainWindow):
     
     def _animation_values(self,valor_transacao,tipo,id_bank):
-        Pass
+        pass
         # def thead():
         #     #GET SALDO ATUAL
         #     saldo_atual = home_db_query.Return_values.return_saldo_banks(id_bank)
