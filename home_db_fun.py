@@ -1165,9 +1165,59 @@ class Descricao_lancamento(Ui_MainWindow):
         print(val)
         
 
+    def set_detalhes_lancamneto_menu(self,id,id_bank,tipo):
+        
+        lancamento = id
+        banco = id_bank
+        mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
+        ano = self.label_72.text()
+        if tipo == "fatura":
+            query = home_db_query.Return_Values_Conditions._detalhes_lancamento(lancamento,banco,mes,ano,"fatura")
+            print("QUWETYY",query)
+            card =  card_db_test.Ui_db._cartao(query[0][1])
+            
+            if not card:
+                card = home_db_query.Return_Values_Conditions._return_name_bank(str(query[0][1]))
                 
+            style_icon = effects.efeitos_geral.style_sheet_card_icon(self,str(card))
 
+            icon_ui = self.icon_payout_com.setStyleSheet("background-image: "+style_icon+"; background-repeat:no-repeat; background-position:center;")
+            #data pagamento
+            #DATAS 2022-09-26 03:03:58 QUERTY [0][2]
+            data_pagamento = query[0][3]
+            data_vencimento = query[0][2]
+            self.set_payment_date.setDateTime(QDateTime.fromString(data_pagamento, "yyyy-MM-dd hh:mm:ss"))
+            #data programada
+            self.set_vencimento_lan.setDate(QDate.fromString(data_vencimento, "yyyy-MM-dd"))
+            
+        else:
+            qyert_name_bank = home_db_query.Return_Values_Conditions._return_name_bank(banco)
+            query = home_db_query.Return_Values_Conditions._detalhes_lancamento(lancamento,banco,mes,ano,"lancamento")
+            style_icon = effects.efeitos_geral.style_sheet_card_icon(self,str(qyert_name_bank))
+            
+            icon_ui = self.icon_payout_com.setStyleSheet("background-image: "+style_icon+"; background-repeat:no-repeat; background-position:center;")
+            #data pagamento
+            #DATAS 2022-09-26 03:03:58 QUERTY [0][2]
+            data_pagamento = query[0][2]
+            data_vencimento = query[0][1]
+            self.set_payment_date.setDateTime(QDateTime.fromString(data_pagamento, "yyyy-MM-dd hh:mm:ss"))
+            #data programada
+            self.set_vencimento_lan.setDate(QDate.fromString(data_vencimento, "yyyy-MM-dd"))
 
+        print("QUREY",query)
+        #ex [(974257, '2022-08-10', '2022-09-26 03:03:58')]
+        #icon
+        
+
+        
+    def _verifi_is_credit_card(self,id):
+        if home_db_query.Return_Values_Conditions._verify_id_is_credit_card(id) == True:
+            print("cartao")
+            
+            return True
+        else:
+            print("nao cartao")
+            return False
 class Pagamento(Ui_MainWindow):
 
     def _pagar_lancamento(self):
@@ -1315,6 +1365,7 @@ class Pagamento(Ui_MainWindow):
         
         if verifi_if_pago == 'pendente':
             if  home_db_query.Return_values.return_saldo_banks(id_bank) != None:
+                
                 print("SALDO",home_db_query.Return_values.return_saldo_banks(id_bank))
                 home_db_query.Saldos._pagar_fatura(id_bank,0,mes,ano)
                 card_db_test.Return_Values_Calcs._pagar_fatura(id_bank,mes,ano)
@@ -1332,12 +1383,6 @@ class Pagamento(Ui_MainWindow):
                 validate = Alerts._alerta_fatura_banco_indiferente(self)
                 if validate == True:
                     default_bank = home_db_query.Return_values._return_default_bank()
-                    # TODO ERRO AQ AWQ TEM Q RETORNAR O ID DO BANCO QUE NAO TEM BANCO CADASTRADO EX NUB
-                    # TODO ERRO AQ AWQ TEM Q RETORNAR O ID DO BANCO QUE NAO TEM BANCO CADASTRADO EX NUB
-                    # TODO ERRO AQ AWQ TEM Q RETORNAR O ID DO BANCO QUE NAO TEM BANCO CADASTRADO EX NUB
-                    # TODO ERRO AQ AWQ TEM Q RETORNAR O ID DO BANCO QUE NAO TEM BANCO CADASTRADO EX NUB
-                    # TODO ERRO AQ AWQ TEM Q RETORNAR O ID DO BANCO QUE NAO TEM BANCO CADASTRADO EX NUB
-                    # TODO ERRO AQ AWQ TEM Q RETORNAR O ID DO BANCO QUE NAO TEM BANCO CADASTRADO EX NUB
                     
                     home_db_query.Saldos._pagar_fatura(str(default_bank),id_bank,mes,ano)
                     card_db_test.Return_Values_Calcs._pagar_fatura(id_bank,mes,ano)

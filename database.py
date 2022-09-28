@@ -23,7 +23,7 @@ class salva_dados:
                 #TABLE CONTAS BANCARIAS
                 cursor.execute("CREATE TABLE IF NOT EXISTS contas_bancarias(id int,saldo_inicial text,nome_banco text,agencia int,num_conta int,titular text, cartao_credito_id text)")
                 #TABLE PAGAMENTOS SALDO
-                cursor.execute("CREATE TABLE IF NOT EXISTS pagamentos_saldo(id_lancamento int,id_bank int,tipo_e_s text,valor ,ref_vencimento text,data_pagamento text,saldo_atual text)")
+                cursor.execute("CREATE TABLE IF NOT EXISTS pagamentos_saldo(id_lancamento int,id_bank int,tipo_e_s text,valor ,ref_vencimento text,data_pagamento text,saldo_atual text,id_discount int)")
                 
                 #CONFIGURACOES DE CONTAS
                 cursor.execute("CREATE TABLE IF NOT EXISTS config_contas(conta_padrao_bank int)")

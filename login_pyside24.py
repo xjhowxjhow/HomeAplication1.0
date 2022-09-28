@@ -2391,20 +2391,18 @@ class Ui_MainWindow(object):
         self.verticalLayout_62.setSpacing(0)
         self.verticalLayout_62.setObjectName(u"verticalLayout_62")
         self.verticalLayout_62.setContentsMargins(0, 0, 0, 0)
-        self.stacked_configcartao0_2 = QStackedWidget(self.frame_57)
+        self.stacked_configcartao0_2 = QFrame(self.frame_57)
         self.stacked_configcartao0_2.setObjectName(u"stacked_configcartao0_2")
         self.stacked_configcartao0_2.setMinimumSize(QSize(0, 90))
         self.stacked_configcartao0_2.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); \n"
 "")
         self.stacked_configcartao0_2.setFrameShape(QFrame.StyledPanel)
         self.stacked_configcartao0_2.setFrameShadow(QFrame.Raised)
-        self.table_extrato_main_1 = QWidget()
-        self.table_extrato_main_1.setObjectName(u"table_extrato_main_1")
-        self.horizontalLayout_53 = QHBoxLayout(self.table_extrato_main_1)
+        self.horizontalLayout_53 = QHBoxLayout(self.stacked_configcartao0_2)
         self.horizontalLayout_53.setSpacing(0)
         self.horizontalLayout_53.setObjectName(u"horizontalLayout_53")
         self.horizontalLayout_53.setContentsMargins(0, 0, 0, 0)
-        self.stack_extrato_pages_2 = QStackedWidget(self.table_extrato_main_1)
+        self.stack_extrato_pages_2 = QStackedWidget(self.stacked_configcartao0_2)
         self.stack_extrato_pages_2.setObjectName(u"stack_extrato_pages_2")
         self.stack_extrato_pages_2.setMinimumSize(QSize(0, 0))
         self.stack_extrato_pages_2.setMaximumSize(QSize(16777215, 16777215))
@@ -2630,30 +2628,32 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_53.addWidget(self.stack_extrato_pages_2)
 
-        self.main_menu_extrato_page = QFrame(self.table_extrato_main_1)
+        self.main_menu_extrato_page = QFrame(self.stacked_configcartao0_2)
         self.main_menu_extrato_page.setObjectName(u"main_menu_extrato_page")
         self.main_menu_extrato_page.setMinimumSize(QSize(0, 0))
-        self.main_menu_extrato_page.setMaximumSize(QSize(400, 16777215))
+        self.main_menu_extrato_page.setMaximumSize(QSize(300, 16777215))
         self.main_menu_extrato_page.setStyleSheet(u"background-color:rgba(255,255,255,0);")
         self.main_menu_extrato_page.setFrameShape(QFrame.StyledPanel)
         self.main_menu_extrato_page.setFrameShadow(QFrame.Raised)
         self.verticalLayout_66 = QVBoxLayout(self.main_menu_extrato_page)
         self.verticalLayout_66.setObjectName(u"verticalLayout_66")
         self.verticalLayout_66.setContentsMargins(0, 0, 0, 0)
-        self.frame_58 = QFrame(self.main_menu_extrato_page)
-        self.frame_58.setObjectName(u"frame_58")
-        self.frame_58.setStyleSheet(u"border-radius: 0px;\n"
+        self.stackedWidget_58 = QStackedWidget(self.main_menu_extrato_page)
+        self.stackedWidget_58.setObjectName(u"stackedWidget_58")
+        self.stackedWidget_58.setStyleSheet(u"border-radius: 0px;\n"
 "\n"
 "	\n"
 "\n"
-"background-color: rgba(255, 255, 255,30);\n"
+"background-color: rgba(255, 255, 255,10);\n"
 "\n"
 "")
-        self.frame_58.setFrameShape(QFrame.StyledPanel)
-        self.frame_58.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_67 = QVBoxLayout(self.frame_58)
+        self.stackedWidget_58.setFrameShape(QFrame.StyledPanel)
+        self.stackedWidget_58.setFrameShadow(QFrame.Raised)
+        self.stackedWidget_resumo_extrato = QWidget()
+        self.stackedWidget_resumo_extrato.setObjectName(u"stackedWidget_resumo_extrato")
+        self.verticalLayout_67 = QVBoxLayout(self.stackedWidget_resumo_extrato)
         self.verticalLayout_67.setObjectName(u"verticalLayout_67")
-        self.scrollArea_10 = QScrollArea(self.frame_58)
+        self.scrollArea_10 = QScrollArea(self.stackedWidget_resumo_extrato)
         self.scrollArea_10.setObjectName(u"scrollArea_10")
         sizePolicy2 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
         sizePolicy2.setHorizontalStretch(0)
@@ -2667,7 +2667,7 @@ class Ui_MainWindow(object):
         self.scrollArea_10.setWidgetResizable(True)
         self.scrollAreaWidgetContents_10 = QWidget()
         self.scrollAreaWidgetContents_10.setObjectName(u"scrollAreaWidgetContents_10")
-        self.scrollAreaWidgetContents_10.setGeometry(QRect(0, 0, 269, 657))
+        self.scrollAreaWidgetContents_10.setGeometry(QRect(0, -68, 277, 657))
         self.verticalLayout_93 = QVBoxLayout(self.scrollAreaWidgetContents_10)
         self.verticalLayout_93.setObjectName(u"verticalLayout_93")
         self.label_44 = QLabel(self.scrollAreaWidgetContents_10)
@@ -3151,13 +3151,226 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_67.addWidget(self.scrollArea_10)
 
+        self.stackedWidget_58.addWidget(self.stackedWidget_resumo_extrato)
+        self.stackedWidget_detalhes_lancamento = QWidget()
+        self.stackedWidget_detalhes_lancamento.setObjectName(u"stackedWidget_detalhes_lancamento")
+        self.verticalLayout_116 = QVBoxLayout(self.stackedWidget_detalhes_lancamento)
+        self.verticalLayout_116.setObjectName(u"verticalLayout_116")
+        self.scrollArea_14 = QScrollArea(self.stackedWidget_detalhes_lancamento)
+        self.scrollArea_14.setObjectName(u"scrollArea_14")
+        sizePolicy2.setHeightForWidth(self.scrollArea_14.sizePolicy().hasHeightForWidth())
+        self.scrollArea_14.setSizePolicy(sizePolicy2)
+        self.scrollArea_14.setFont(font)
+        self.scrollArea_14.setStyleSheet(u"color: rgb(255, 255, 255);\n"
+"border:0px;\n"
+"background-color: rgba(255, 255, 255,0);")
+        self.scrollArea_14.setWidgetResizable(True)
+        self.scrollAreaWidgetContents_14 = QWidget()
+        self.scrollAreaWidgetContents_14.setObjectName(u"scrollAreaWidgetContents_14")
+        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, 0, 282, 589))
+        self.verticalLayout_114 = QVBoxLayout(self.scrollAreaWidgetContents_14)
+        self.verticalLayout_114.setSpacing(9)
+        self.verticalLayout_114.setObjectName(u"verticalLayout_114")
+        self.label_103 = QLabel(self.scrollAreaWidgetContents_14)
+        self.label_103.setObjectName(u"label_103")
+        self.label_103.setFont(font)
+        self.label_103.setLayoutDirection(Qt.LeftToRight)
+        self.label_103.setStyleSheet(u"border:0px;\n"
+"")
+        self.label_103.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_66.addWidget(self.frame_58)
+        self.verticalLayout_114.addWidget(self.label_103)
+
+        self.verticalSpacer_16 = QSpacerItem(20, 247, QSizePolicy.Minimum, QSizePolicy.Ignored)
+
+        self.verticalLayout_114.addItem(self.verticalSpacer_16)
+
+        self.frame_if_card_main_2 = QFrame(self.scrollAreaWidgetContents_14)
+        self.frame_if_card_main_2.setObjectName(u"frame_if_card_main_2")
+        sizePolicy4.setHeightForWidth(self.frame_if_card_main_2.sizePolicy().hasHeightForWidth())
+        self.frame_if_card_main_2.setSizePolicy(sizePolicy4)
+        self.frame_if_card_main_2.setMaximumSize(QSize(16777215, 16777215))
+        self.frame_if_card_main_2.setStyleSheet(u"border: 1px solid rgba(255,255,255,20);\n"
+"border-radius:7px;")
+        self.frame_if_card_main_2.setFrameShape(QFrame.StyledPanel)
+        self.frame_if_card_main_2.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_112 = QHBoxLayout(self.frame_if_card_main_2)
+        self.horizontalLayout_112.setObjectName(u"horizontalLayout_112")
+        self.lauy_4 = QHBoxLayout()
+        self.lauy_4.setObjectName(u"lauy_4")
+        self.frame_101 = QFrame(self.frame_if_card_main_2)
+        self.frame_101.setObjectName(u"frame_101")
+        self.frame_101.setMaximumSize(QSize(157, 16777215))
+        self.frame_101.setStyleSheet(u"border: none;\n"
+"border-radius:0px;")
+        self.frame_101.setFrameShape(QFrame.StyledPanel)
+        self.frame_101.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_115 = QVBoxLayout(self.frame_101)
+        self.verticalLayout_115.setObjectName(u"verticalLayout_115")
+        self.label_106 = QLabel(self.frame_101)
+        self.label_106.setObjectName(u"label_106")
+        self.label_106.setFont(font)
+        self.label_106.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_115.addWidget(self.label_106)
+
+
+        self.lauy_4.addWidget(self.frame_101)
+
+        self.icon_payout_com = QFrame(self.frame_if_card_main_2)
+        self.icon_payout_com.setObjectName(u"icon_payout_com")
+        self.icon_payout_com.setMinimumSize(QSize(40, 40))
+        self.icon_payout_com.setMaximumSize(QSize(40, 40))
+        self.icon_payout_com.setStyleSheet(u"background-color: rgb(255, 85, 255);\n"
+"border-radius:20px;")
+        self.icon_payout_com.setFrameShape(QFrame.StyledPanel)
+        self.icon_payout_com.setFrameShadow(QFrame.Raised)
+
+        self.lauy_4.addWidget(self.icon_payout_com)
+
+
+        self.horizontalLayout_112.addLayout(self.lauy_4)
+
+
+        self.verticalLayout_114.addWidget(self.frame_if_card_main_2)
+
+        self.frame_tools_nexo_2 = QFrame(self.scrollAreaWidgetContents_14)
+        self.frame_tools_nexo_2.setObjectName(u"frame_tools_nexo_2")
+        self.frame_tools_nexo_2.setMinimumSize(QSize(0, 50))
+        self.frame_tools_nexo_2.setFrameShape(QFrame.StyledPanel)
+        self.frame_tools_nexo_2.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_113 = QHBoxLayout(self.frame_tools_nexo_2)
+        self.horizontalLayout_113.setSpacing(0)
+        self.horizontalLayout_113.setObjectName(u"horizontalLayout_113")
+        self.horizontalLayout_113.setContentsMargins(0, 0, 0, 0)
+        self.label_107 = QLabel(self.frame_tools_nexo_2)
+        self.label_107.setObjectName(u"label_107")
+        self.label_107.setFont(font)
+        self.label_107.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_113.addWidget(self.label_107)
+
+
+        self.verticalLayout_114.addWidget(self.frame_tools_nexo_2)
+
+        self.frame_options_pdf_2 = QFrame(self.scrollAreaWidgetContents_14)
+        self.frame_options_pdf_2.setObjectName(u"frame_options_pdf_2")
+        self.frame_options_pdf_2.setMinimumSize(QSize(0, 63))
+        self.frame_options_pdf_2.setStyleSheet(u"border: 1px solid rgba(255,255,255,20);\n"
+"border-radius:7px;")
+        self.frame_options_pdf_2.setFrameShape(QFrame.StyledPanel)
+        self.frame_options_pdf_2.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_116 = QHBoxLayout(self.frame_options_pdf_2)
+        self.horizontalLayout_116.setSpacing(6)
+        self.horizontalLayout_116.setObjectName(u"horizontalLayout_116")
+        self.horizontalLayout_116.setContentsMargins(0, 0, 0, 0)
+        self.set_payment_date = QDateTimeEdit(self.frame_options_pdf_2)
+        self.set_payment_date.setObjectName(u"set_payment_date")
+        self.set_payment_date.setEnabled(True)
+        self.set_payment_date.setStyleSheet(u"border:none;")
+        self.set_payment_date.setAlignment(Qt.AlignCenter)
+        self.set_payment_date.setReadOnly(True)
+
+        self.horizontalLayout_116.addWidget(self.set_payment_date)
+
+
+        self.verticalLayout_114.addWidget(self.frame_options_pdf_2)
+
+        self.frame_tools_nexo_3 = QFrame(self.scrollAreaWidgetContents_14)
+        self.frame_tools_nexo_3.setObjectName(u"frame_tools_nexo_3")
+        self.frame_tools_nexo_3.setMinimumSize(QSize(0, 50))
+        self.frame_tools_nexo_3.setFrameShape(QFrame.StyledPanel)
+        self.frame_tools_nexo_3.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_118 = QHBoxLayout(self.frame_tools_nexo_3)
+        self.horizontalLayout_118.setSpacing(0)
+        self.horizontalLayout_118.setObjectName(u"horizontalLayout_118")
+        self.horizontalLayout_118.setContentsMargins(0, 0, 0, 0)
+        self.label_108 = QLabel(self.frame_tools_nexo_3)
+        self.label_108.setObjectName(u"label_108")
+        self.label_108.setFont(font)
+        self.label_108.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_118.addWidget(self.label_108)
+
+
+        self.verticalLayout_114.addWidget(self.frame_tools_nexo_3)
+
+        self.frame_options_pdf_3 = QFrame(self.scrollAreaWidgetContents_14)
+        self.frame_options_pdf_3.setObjectName(u"frame_options_pdf_3")
+        self.frame_options_pdf_3.setMinimumSize(QSize(0, 63))
+        self.frame_options_pdf_3.setStyleSheet(u"border: 1px solid rgba(255,255,255,20);\n"
+"border-radius:7px;")
+        self.frame_options_pdf_3.setFrameShape(QFrame.StyledPanel)
+        self.frame_options_pdf_3.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_117 = QHBoxLayout(self.frame_options_pdf_3)
+        self.horizontalLayout_117.setSpacing(6)
+        self.horizontalLayout_117.setObjectName(u"horizontalLayout_117")
+        self.horizontalLayout_117.setContentsMargins(0, 0, 0, 0)
+        self.set_vencimento_lan = QDateEdit(self.frame_options_pdf_3)
+        self.set_vencimento_lan.setObjectName(u"set_vencimento_lan")
+        self.set_vencimento_lan.setStyleSheet(u"border:none;")
+        self.set_vencimento_lan.setAlignment(Qt.AlignCenter)
+        self.set_vencimento_lan.setReadOnly(True)
+        self.set_vencimento_lan.setAccelerated(True)
+
+        self.horizontalLayout_117.addWidget(self.set_vencimento_lan)
+
+
+        self.verticalLayout_114.addWidget(self.frame_options_pdf_3)
+
+        self.paga_fatura_4 = QPushButton(self.scrollAreaWidgetContents_14)
+        self.paga_fatura_4.setObjectName(u"paga_fatura_4")
+        self.paga_fatura_4.setMinimumSize(QSize(0, 30))
+        self.paga_fatura_4.setMaximumSize(QSize(16777215, 30))
+        self.paga_fatura_4.setFont(font)
+        self.paga_fatura_4.setLayoutDirection(Qt.LeftToRight)
+        self.paga_fatura_4.setStyleSheet(u"\n"
+"\n"
+"QPushButton{\n"
+"	\n"
+"\n"
+"	border-radius:10px;\n"
+"	color: rgb(255, 255, 255);\n"
+"\n"
+"\n"
+"	\n"
+"background-color:rgba(255,255,255,10);\n"
+"\n"
+"border: 1px solid rgba(255,255,255,20);\n"
+"border-radius:7px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"	\n"
+"	\n"
+"background-color:rgba(255,255,255,30);\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"	\n"
+"	\n"
+"background-color:rgba(255,255,255,70);\n"
+"\n"
+"}")
+        self.paga_fatura_4.setIcon(icon12)
+
+        self.verticalLayout_114.addWidget(self.paga_fatura_4)
+
+        self.verticalSpacer_17 = QSpacerItem(20, 500, QSizePolicy.Minimum, QSizePolicy.Preferred)
+
+        self.verticalLayout_114.addItem(self.verticalSpacer_17)
+
+        self.scrollArea_14.setWidget(self.scrollAreaWidgetContents_14)
+
+        self.verticalLayout_116.addWidget(self.scrollArea_14)
+
+        self.stackedWidget_58.addWidget(self.stackedWidget_detalhes_lancamento)
+
+        self.verticalLayout_66.addWidget(self.stackedWidget_58)
 
 
         self.horizontalLayout_53.addWidget(self.main_menu_extrato_page)
 
-        self.stacked_configcartao0_2.addWidget(self.table_extrato_main_1)
 
         self.verticalLayout_62.addWidget(self.stacked_configcartao0_2)
 
@@ -4621,7 +4834,7 @@ class Ui_MainWindow(object):
         self.scrollArea_12.setWidgetResizable(True)
         self.scrollAreaWidgetContents_12 = QWidget()
         self.scrollAreaWidgetContents_12.setObjectName(u"scrollAreaWidgetContents_12")
-        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, -313, 1440, 920))
+        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 1440, 920))
         self.scrollAreaWidgetContents_12.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); \n"
 "")
         self.verticalLayout_112 = QVBoxLayout(self.scrollAreaWidgetContents_12)
@@ -6437,7 +6650,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 1486, 870))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 96, 415))
         self.scrollAreaWidgetContents_2.setStyleSheet(u"background-color: rgba(255, 255, 255, 0);")
         self.horizontalLayout_15 = QHBoxLayout(self.scrollAreaWidgetContents_2)
         self.horizontalLayout_15.setSpacing(0)
@@ -6462,7 +6675,7 @@ class Ui_MainWindow(object):
         self.scrollArea_4.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 440, 870))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 39, 415))
         self.verticalLayout_3 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_3.setSpacing(20)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
@@ -8964,7 +9177,7 @@ class Ui_MainWindow(object):
         self.scrollArea_8.setWidgetResizable(True)
         self.scrollAreaWidgetContents_8 = QWidget()
         self.scrollAreaWidgetContents_8.setObjectName(u"scrollAreaWidgetContents_8")
-        self.scrollAreaWidgetContents_8.setGeometry(QRect(0, 0, 1023, 875))
+        self.scrollAreaWidgetContents_8.setGeometry(QRect(0, 0, 454, 875))
         self.scrollAreaWidgetContents_8.setStyleSheet(u"background-color:rgba(255,255,255,0);")
         self.verticalLayout_14 = QVBoxLayout(self.scrollAreaWidgetContents_8)
         self.verticalLayout_14.setSpacing(10)
@@ -10926,8 +11139,8 @@ class Ui_MainWindow(object):
         self.detalhes_cartao_2.setCurrentIndex(0)
         self.extrat_meses_2.setCurrentIndex(1)
         self.chart_gastos_all_2.setCurrentIndex(0)
-        self.stacked_configcartao0_2.setCurrentIndex(0)
         self.stack_extrato_pages_2.setCurrentIndex(0)
+        self.stackedWidget_58.setCurrentIndex(0)
         self.pushButton_25.setDefault(False)
         self.pushButton_26.setDefault(False)
         self.stackedWidgetadc_2.setCurrentIndex(0)
@@ -11072,9 +11285,14 @@ class Ui_MainWindow(object):
         self.download_pdf.setText(QCoreApplication.translate("MainWindow", u"Download", None))
         self.paga_fatura_3.setText(QCoreApplication.translate("MainWindow", u"Pagar", None))
         self.edit_compra_3.setText(QCoreApplication.translate("MainWindow", u"Editar Lan\u00e7amento", None))
-        self.parcela_fatura_3.setText(QCoreApplication.translate("MainWindow", u"Op\u00e7\u00f5es", None))
+        self.parcela_fatura_3.setText(QCoreApplication.translate("MainWindow", u"Detalhes do Lan\u00e7amento", None))
         self.apaga_compra_3.setText(QCoreApplication.translate("MainWindow", u"Apagar", None))
         self.filter_dates_btn_3.setText(QCoreApplication.translate("MainWindow", u"Filtrar por Data  ", None))
+        self.label_103.setText(QCoreApplication.translate("MainWindow", u"Detalhes do lan\u00e7amento:", None))
+        self.label_106.setText(QCoreApplication.translate("MainWindow", u"Pago com saldo de", None))
+        self.label_107.setText(QCoreApplication.translate("MainWindow", u"Data de pagamento:", None))
+        self.label_108.setText(QCoreApplication.translate("MainWindow", u"Vencimento:", None))
+        self.paga_fatura_4.setText(QCoreApplication.translate("MainWindow", u"Voltar", None))
         self.chart_gastos_all_2.setTabText(self.chart_gastos_all_2.indexOf(self.page_Tabe_main1), QCoreApplication.translate("MainWindow", u"Fluxo de Caixa", None))
         self.label_47.setText(QCoreApplication.translate("MainWindow", u"Lan\u00e7amento", None))
         self.label_85.setText(QCoreApplication.translate("MainWindow", u"Conta", None))

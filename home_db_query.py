@@ -630,7 +630,46 @@ class Return_Values_Conditions:
     
 
 
-    
+    def _detalhes_lancamento(id,bank,mes,ano,tipo):
+
+
+        print("id",id,"bank",bank,"mes",mes,"ano",ano,"tipo",tipo)
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        like = 'fatu%'
+        if tipo == 'fatura':
+            cursor.execute("\
+                SELECT pagamentos_saldo.id_bank,\
+                       pagamentos_saldo.id_discount,\
+                       pagamentos_saldo.ref_vencimento,\
+                       pagamentos_saldo.data_pagamento\
+                FROM pagamentos_saldo\
+                WHERE pagamentos_saldo.id_bank = '"+bank+"' AND strftime('%Y-%m', pagamentos_saldo.ref_vencimento) = '"+str(ano)+"-"+str(mes)+"'\
+                AND pagamentos_saldo.tipo_e_s LIKE '"+like+"'\
+                ORDER BY pagamentos_saldo.data_pagamento DESC")
+            dados = cursor.fetchall()
+            print(dados)
+        else:
+            cursor.execute("\
+                SELECT pagamentos_saldo.id_bank,\
+                       pagamentos_saldo.ref_vencimento,\
+                       pagamentos_saldo.data_pagamento\
+                FROM pagamentos_saldo\
+                WHERE pagamentos_saldo.id_lancamento = '"+id+"' AND strftime('%Y-%m', pagamentos_saldo.ref_vencimento) = '"+str(ano)+"-"+str(mes)+"' and pagamentos_saldo.id_bank = '"+bank+"'")
+            dados = cursor.fetchall()
+            print(dados)
+            
+        banco.close()
+
+        if dados:
+            
+            return dados
+        else:
+            return False
+        
+
     
 class Saldos:
 
@@ -731,8 +770,8 @@ class Saldos:
             id_bank_s_n = id_bank
             id_discount = id_bank
         else:
-            id_bank_s_n = id_no_bank
-            id_discount = id_bank
+            id_bank_s_n = id_no_bank #SE NAO TEM CONTA VINCULADO AO CARTAO DE CREDITO
+            id_discount = id_bank #id da conta que vai receber o desconto
 
 
         print("-------------------------")
@@ -744,7 +783,7 @@ class Saldos:
         print(saldo_inicial)
         #GET VALOR DA FATURA
         format_anomes = str(ano)+"-"+str(mes)
-        valor_fatu = card_db_test.Return_Values_Calcs._valor_fatura(id_bank_s_n,mes,ano) # TODO AQ ERRO TA RECEBENDO ID BANK DEFAULT Q É C6 E NAO NUBANK
+        valor_fatu = card_db_test.Return_Values_Calcs._valor_fatura(id_bank_s_n,mes,ano) #
         print("VALOR DA FATURA",valor_fatu)
         print("VALOR DA FATURA",valor_fatu,id_bank_s_n,mes,ano)
         #EWRRO AQ COLOCA INPUTM, NAO TA POAGANDO A FAT
@@ -757,8 +796,8 @@ class Saldos:
         return_vencimento = card_db_test.Ui_db._vencimento(id_bank_s_n)
         ref_mes = str(ano)+"-"+str(mes)+"-"+str(return_vencimento)
         # SELECT DADOS DO LANÇAMENTO E INSERT IN NEW_LANCAMENTO
-        cursor.execute("INSERT INTO pagamentos_saldo (id_lancamento,id_bank,tipo_e_s,valor,ref_vencimento,data_pagamento,saldo_atual)\
-                        VALUES ('"+str(id_fatura)+"','"+str(id_bank_s_n)+"','"+str(ref)+"','"+str(valor_fatu)+"','"+str(ref_mes)+"',DateTime('now'),'"+str(saldo_atual)+"')")
+        cursor.execute("INSERT INTO pagamentos_saldo (id_lancamento,id_bank,tipo_e_s,valor,ref_vencimento,data_pagamento,saldo_atual,id_discount)\
+                        VALUES ('"+str(id_fatura)+"','"+str(id_bank_s_n)+"','"+str(ref)+"','"+str(valor_fatu)+"','"+str(ref_mes)+"',DateTime('now'),'"+str(saldo_atual)+"' ,'"+str(id_discount)+"')")
         banco.commit()
 
         # UPDATE SALDO ATUAL

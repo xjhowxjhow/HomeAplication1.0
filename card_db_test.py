@@ -97,7 +97,11 @@ class Ui_db: # valores fixos
         result = cursor.fetchall()
         
         #RETURN:
-        return result[0][0]
+        if result :
+            return result[0][0]
+        else:
+            return None
+        
 
     def _extrato(id,mes): #EXTRATO MENSAL 
         

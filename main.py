@@ -152,8 +152,6 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.table_active_cards.setColumnHidden(6, True) # COLUNA ID OCULTADA
         self.table_faturas_ind_3.horizontalHeader().setVisible(True)
         self.table_faturas_ind.horizontalHeader().setVisible(True)
-        # self.table.setColumnHidden(1, True) # COLUNA ID BANK OCULTADA
-        # self.table.setColumnHidden(2, True) # COLUNA ID COMPRA OCULTADA
         self.table_active_cards.horizontalHeader().setVisible(True)
         self.table_active_banks.horizontalHeader().setVisible(True)
         self.table_faturas_ind_3.horizontalHeader().setDefaultSectionSize(310)
@@ -241,6 +239,8 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.toolButton_pdf_opt.installEventFilter(self)
         self.config_ccoun.installEventFilter(self)
         self.config_crdit_c.installEventFilter(self)
+        self.parcela_fatura_3.installEventFilter(self)
+        self.paga_fatura_4.installEventFilter(self)
     
         #THREAD
 
@@ -418,29 +418,36 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
             if obj == self.table and event.type() == QtWidgets.QAbstractItemView.SelectRows:
                 current_row = self.table.currentRow()
                 current_column = self.table.currentColumn()
-                
+                id = self.table.item(current_row, 1).text()
+                tipo = home_db_fun.Descricao_lancamento._verifi_is_credit_card(self,id) 
+
                 #PRINT CELL WIDGET TEXT
                 
-                try:
-                    id = self.table.item(current_row, 1).text()
-                    id_bank = self.table.item(current_row, 2).text()
-                    #SE FOR ENTRADA MUDA TEXTO BOTAO PAGAMENTO
-                    home_db_fun.Descricao_lancamento.Change_text_btn_pagar_receber(self,id)
 
-                    #CHAMA QUERY PARA PEGAR A DESCRCAO DO LANÇAMENTO
-                    validador = home_db_fun.Descricao_lancamento.set_descricao_lancamento(self,id)
+                id = self.table.item(current_row, 1).text()
+                id_bank = self.table.item(current_row, 2).text()
+                #SE FOR ENTRADA MUDA TEXTO BOTAO PAGAMENTO
+                home_db_fun.Descricao_lancamento.Change_text_btn_pagar_receber(self,id)
+                #CHAMA QUERY PARA PEGAR A DESCRCAO DO LANÇAMENTO
+                validador = home_db_fun.Descricao_lancamento.set_descricao_lancamento(self,id)
+                #SET TEXT DETALHES DO LANÇAMENTO:
+                
+                
+                self.frame_options_pdf.hide()
+                if validador== "fatura":
+                    home_db_fun.Descricao_lancamento.set_icon_desc(self,id)
+                else:
+                    self.frame_if_card_main.hide()
+                    self.label_if_card.hide()
+                
+                home_db_fun.Pdf_funtion.search_pdf(self,id,id_bank)
+                
+                if tipo == True:
+                    home_db_fun.Descricao_lancamento.set_detalhes_lancamneto_menu(self,id,id_bank,"fatura")
+                else:
+                    home_db_fun.Descricao_lancamento.set_detalhes_lancamneto_menu(self,id,id_bank,"lancamento")
 
-                    self.frame_options_pdf.hide()
 
-                    if validador== "fatura":
-                        home_db_fun.Descricao_lancamento.set_icon_desc(self,id)
-                    else:
-                        self.frame_if_card_main.hide()
-                        self.label_if_card.hide()
-                    
-                    home_db_fun.Pdf_funtion.search_pdf(self,id,id_bank)
-                except:
-                    pass
 
             if obj == self.add_bank and event.type() == QtCore.QEvent.MouseButtonPress:
                 
@@ -493,6 +500,15 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
             if obj == self.config_crdit_c and event.type() == QtCore.QEvent.MouseButtonPress:
                 effects.Effetc_slides._add_banks_credits(self)
                 return self.stackedWidgetadc_2.setCurrentWidget(self.page_config_creduts)
+            
+            #DETALHES LANCAMENTO:
+            if obj == self.parcela_fatura_3 and event.type() == QtCore.QEvent.MouseButtonPress:
+                return self.stackedWidget_58.setCurrentWidget(self.stackedWidget_detalhes_lancamento)
+            
+            #VOLTA MENU DETALHJES LANCAMENTOI:
+            if obj == self.paga_fatura_4 and event.type() == QtCore.QEvent.MouseButtonPress:
+                return self.stackedWidget_58.setCurrentWidget(self.stackedWidget_resumo_extrato)
+            
             return super(MainWindow,self).eventFilter(obj, event)
 
 
