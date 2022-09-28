@@ -736,7 +736,7 @@ class Saldos:
                                new_lancamento.tipo,\
                                new_lancamento.valor,\
                                status_lancamento.vencimento,\
-                               DateTime('now'),\
+                               DateTime('now','localtime'),\
                                "+str(saldo_atual)+"\
                         FROM new_lancamento \
                         INNER JOIN status_lancamento\
@@ -797,7 +797,7 @@ class Saldos:
         ref_mes = str(ano)+"-"+str(mes)+"-"+str(return_vencimento)
         # SELECT DADOS DO LANÇAMENTO E INSERT IN NEW_LANCAMENTO
         cursor.execute("INSERT INTO pagamentos_saldo (id_lancamento,id_bank,tipo_e_s,valor,ref_vencimento,data_pagamento,saldo_atual,id_discount)\
-                        VALUES ('"+str(id_fatura)+"','"+str(id_bank_s_n)+"','"+str(ref)+"','"+str(valor_fatu)+"','"+str(ref_mes)+"',DateTime('now'),'"+str(saldo_atual)+"' ,'"+str(id_discount)+"')")
+                        VALUES ('"+str(id_fatura)+"','"+str(id_bank_s_n)+"','"+str(ref)+"','"+str(valor_fatu)+"','"+str(ref_mes)+"',DateTime('now','localtime'),'"+str(saldo_atual)+"' ,'"+str(id_discount)+"')")
         banco.commit()
 
         # UPDATE SALDO ATUAL

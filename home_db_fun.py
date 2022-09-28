@@ -1174,22 +1174,29 @@ class Descricao_lancamento(Ui_MainWindow):
         if tipo == "fatura":
             query = home_db_query.Return_Values_Conditions._detalhes_lancamento(lancamento,banco,mes,ano,"fatura")
             print("QUWETYY",query)
-            card =  card_db_test.Ui_db._cartao(query[0][1])
-            
-            if not card:
-                card = home_db_query.Return_Values_Conditions._return_name_bank(str(query[0][1]))
-                
-            style_icon = effects.efeitos_geral.style_sheet_card_icon(self,str(card))
+            try:
+                card =  card_db_test.Ui_db._cartao(query[0][1])
 
-            icon_ui = self.icon_payout_com.setStyleSheet("background-image: "+style_icon+"; background-repeat:no-repeat; background-position:center;")
-            #data pagamento
-            #DATAS 2022-09-26 03:03:58 QUERTY [0][2]
-            data_pagamento = query[0][3]
-            data_vencimento = query[0][2]
-            self.set_payment_date.setDateTime(QDateTime.fromString(data_pagamento, "yyyy-MM-dd hh:mm:ss"))
-            #data programada
-            self.set_vencimento_lan.setDate(QDate.fromString(data_vencimento, "yyyy-MM-dd"))
-            
+                if not card:
+                    card = home_db_query.Return_Values_Conditions._return_name_bank(str(query[0][1]))
+
+                style_icon = effects.efeitos_geral.style_sheet_card_icon(self,str(card))
+
+                icon_ui = self.icon_payout_com.setStyleSheet("background-image: "+style_icon+"; background-repeat:no-repeat; background-position:center;")
+                #data pagamento
+                #DATAS 2022-09-26 03:03:58 QUERTY [0][2]
+                data_pagamento = query[0][3]
+                data_vencimento = query[0][2]
+                self.set_payment_date.setDateTime(QDateTime.fromString(data_pagamento, "yyyy-MM-dd hh:mm:ss"))
+                #data programada
+                self.set_vencimento_lan.setDate(QDate.fromString(data_vencimento, "yyyy-MM-dd"))
+            except:
+                    #NAO ESTA PAGO
+                    print("NAO ESTA PAGO")
+                    self.set_payment_date.setDateTime(QDateTime.currentDateTime())
+                    self.set_vencimento_lan.setDate(QDate.currentDate())
+                    
+                                 
         else:
             qyert_name_bank = home_db_query.Return_Values_Conditions._return_name_bank(banco)
             query = home_db_query.Return_Values_Conditions._detalhes_lancamento(lancamento,banco,mes,ano,"lancamento")

@@ -503,10 +503,12 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
             
             #DETALHES LANCAMENTO:
             if obj == self.parcela_fatura_3 and event.type() == QtCore.QEvent.MouseButtonPress:
+                effects.Effetc_slides._detalhes_lancamento_slide(self)
                 return self.stackedWidget_58.setCurrentWidget(self.stackedWidget_detalhes_lancamento)
             
             #VOLTA MENU DETALHJES LANCAMENTOI:
             if obj == self.paga_fatura_4 and event.type() == QtCore.QEvent.MouseButtonPress:
+                effects.Effetc_slides._detalhes_lancamento_slide(self)
                 return self.stackedWidget_58.setCurrentWidget(self.stackedWidget_resumo_extrato)
             
             return super(MainWindow,self).eventFilter(obj, event)

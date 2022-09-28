@@ -289,6 +289,13 @@ class efeitos_geral(Ui_MainWindow):
             return icon
 
 class Effetc_slides(Ui_MainWindow):
+    
+    def _detalhes_lancamento_slide(self):
+        self.stackedWidget_58.setTransitionDirection(QtCore.Qt.Horizontal)
+        self.stackedWidget_58.setTransitionSpeed(250)
+        self.stackedWidget_58.setTransitionEasingCurve(QtCore.QEasingCurve.InExpo)
+        self.stackedWidget_58.setSlideTransition(True)
+    
     def menu_card(self): #TODO TRANSICAO PRINCIPAL MAIN
         self.stacked_configcartao0.setTransitionDirection(QtCore.Qt.Horizontal)
         self.stacked_configcartao0.setTransitionSpeed(250)
