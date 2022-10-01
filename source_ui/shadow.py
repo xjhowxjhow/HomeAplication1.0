@@ -28,11 +28,22 @@ class set_shadow(Ui_MainWindow):
     def sets(self):
         self.applyShadow = InitShadow
         #FRAMES:
-        self.scrollArea_9
-        self.scrollAreaWidgetContents_2
-        
-        
         #SETA A SOMBRAS
-        self.applyShadow(self.scrollArea_9)
-        self.applyShadow(self.scrollAreaWidgetContents_2)
-        
+        self.applyShadow(self.frame_43)
+        self.applyShadow(self.welcome_2)
+        self.applyShadow(self.frame_51)
+        self.applyShadow(self.tableWidget)
+        self.applyShadow(self.extrat_meses_2)
+        self.applyShadow(self.frame_87)
+        self.applyShadow(self.config_new_lan_3)
+        self.applyShadow(self.frame_88)
+        self.applyShadow(self.scrollArea_13)
+        self.applyShadow(self.frame_89)
+        self.applyShadow(self.frame_96)
+        self.applyShadow(self.scrollArea_4)
+        self.applyShadow(self.main_dasht_top)
+        self.applyShadow(self.datails_fatura_card_4)
+        self.applyShadow(self.frame_12)
+        self.applyShadow(self.frame_60)
+        self.applyShadow(self.frame_31)
+        self.applyShadow(self.stackedWidget_58)
