@@ -237,6 +237,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.config_crdit_c.installEventFilter(self)
         self.parcela_fatura_3.installEventFilter(self)
         self.paga_fatura_4.installEventFilter(self)
+        self.listWidget_3.installEventFilter(self)
     
         #THREAD
 
@@ -507,6 +508,12 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                 effects.Effetc_slides._detalhes_lancamento_slide(self)
                 return self.stackedWidget_58.setCurrentWidget(self.stackedWidget_resumo_extrato)
             
+            #SE APERTAR DELETE APAGA O O ITEM SELECIONADO DO PDFS PARA LANÇAMENTOS
+            if obj == self.listWidget_3 and event.type() == QtCore.QEvent.KeyPress:
+                if event.key() == QtCore.Qt.Key_Delete:
+                    return self.listWidget_3.takeItem(self.listWidget_3.currentRow()) 
+
+      
             return super(MainWindow,self).eventFilter(obj, event)
 
 
