@@ -9,6 +9,7 @@ from threading import Timer
 from card_db_fun import Chart_one
 from datetime import datetime
 from frame_bank.card_frame_bank import CardFrameBank
+from source_ui.shadow import InitShadow ,set_shadow
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import card_db_fun
 import home_db_fun
@@ -48,14 +49,9 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         
 
         # SOMBRAS PARA FRAMES
-        shadow = QGraphicsDropShadowEffect(self)
-        shadow.setBlurRadius(15)
-        shadow.setColor(QColor(0, 0, 0, 60))
-        self.scrollArea_9.setGraphicsEffect(shadow)
-        shadow2 = QGraphicsDropShadowEffect(self)
-        shadow2.setBlurRadius(20)
-        self.scrollAreaWidgetContents_2.setGraphicsEffect(shadow2)
-        
+        set_shadow.sets(self)
+ 
+
         
         #NOTIFICAÇÃO SE CLICADA ACTION
         tray.messageClicked.connect(lambda: messageClicked(self))

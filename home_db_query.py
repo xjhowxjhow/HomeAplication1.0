@@ -66,11 +66,11 @@ class Add_values:
             #CREATE INDEX
             cursor.execute("CREATE UNIQUE INDEX IF NOT EXISTS idx_bank_active ON contas_bancarias(id)")
             #INSERT ID
-            cursor.execute("INSERT INTO  contas_bancarias (id, cartao_credito_id) VALUES ('"+str(id)+"','"+str(credit_card)+"')")
+            cursor.execute("INSERT INTO  contas_bancarias (id) VALUES ('"+str(id)+"')")
 
             #ARGUMENTS:
             tabelas_db = ['contas_bancarias']
-            colunas_contas = ['nome_banco','titular','agencia','num_conta','saldo_inicial',]
+            colunas_contas = ['nome_banco','titular','agencia','num_conta','saldo_inicial','cartao_credito_id']
             coluns = [colunas_contas]
             #QUERY EXAMPLE (['C6', '1580', 'Jhonatan titualr card', '1010 final', 'venci 10', 'fefhca 10'], ['C6', 'Jhonatan', 'ag0111', 'cont 1010', 'r$1,580,00', 'Sim'])
             # data[0] TEM EM LISTA : [0] = ARGUMENTOS CONTA
@@ -91,8 +91,15 @@ class Add_values:
         banco = sqlite3.connect(''+a+'/bando_de_valores.db')
         cursor = banco.cursor()
 
-        cursor.execute("INSERT INTO  config_contas (conta_padrao_bank) VALUES ('"+str(default)+"')")
-        banco.commit()
+        # VERIFY IF DEFAULT BANK IS ALREADY SET
+        cursor.execute("SELECT * FROM config_contas")
+        data = cursor.fetchall()
+        if len(data) == 0:
+            cursor.execute("INSERT INTO  config_contas (conta_padrao_bank) VALUES ('"+str(default)+"')")
+            banco.commit()
+        else:
+            cursor.execute("UPDATE config_contas SET conta_padrao_bank = '"+str(default)+"'")
+            banco.commit()
         banco.close()
         return True
 
@@ -231,6 +238,9 @@ class Add_values:
         banco.close()
         return True
 class Return_values:
+    
+    
+    
     
     def return_banks_active():
         #CONNECT DB
@@ -628,7 +638,17 @@ class Return_Values_Conditions:
         dados = cursor.fetchall()
         return dados[0][0]
     
+    def _return_bank_id(id):
 
+        
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        cursor.execute("SELECT * FROM contas_bancarias  WHERE id = '"+id+"'")
+        dados = cursor.fetchall()
+        return dados
 
     def _detalhes_lancamento(id,bank,mes,ano,tipo):
 
@@ -684,7 +704,7 @@ class Saldos:
         #SELECT DEFAULT BANK
         cursor.execute("SELECT config_contas.conta_padrao_bank FROM config_contas")
         conta_padrao = cursor.fetchall()
-        
+        print("conta padrao:",conta_padrao)
         #SELECT SALDO INICIAL
         cursor.execute("SELECT contas_bancarias.saldo_inicial FROM contas_bancarias WHERE id = '"+str(conta_padrao[0][0])+"'")
         saldo_inicial = cursor.fetchall()

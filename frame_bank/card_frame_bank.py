@@ -40,7 +40,7 @@ class CardFrameBank(Ui_MainWindow):
             #DADOS[3] = AGENCIA
             #DADOS[4] = CONTA
             #DADOS[5] = TITULAR
-            
+            print(dados)
             styler = CardFrameBank.style_sheet_card_(self,dados[2])
 
             #TODO CACARTERIZAÇÃO DO WIDGET:

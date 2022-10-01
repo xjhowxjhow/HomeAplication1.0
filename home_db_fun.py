@@ -45,7 +45,7 @@ class Group:
         Set_values_startup.set_banks_combobox_new_lan(self)
         mainpage.load_extrato_filter(self)
         Combobox_startup.default_combox_hidem(self)
-        
+        return True
 
 class mainpage(Ui_MainWindow):
 
@@ -209,6 +209,10 @@ class mainpage(Ui_MainWindow):
             final_card = self.adcfinal_2.text()
             vencimento = self.adcvencimento_2.text()
             fechamento = self.adcfechamento_2.text()
+            
+            #CONVERT VALUES BRL TO USD
+            saldo_inicial = Convert_Moedas._brl_to_usd(self,saldo_inicial)
+            limite = Convert_Moedas._brl_to_usd(self,limite)
 
             rand_id = randint(0, 999999) # ID
 
@@ -231,7 +235,14 @@ class mainpage(Ui_MainWindow):
                 data.append(([saldo_inicial, nome_bank, agencia, conta, titular, if_credit_card], [cartao_nome, titular_card, limite, final_card, vencimento, fechamento]))
                 credit_card = True
                 home_db_query.Add_values._add_new_bank(data[0], credit_card, rand_id)
-                return card_db_fun.funcoes_cartao.inicia_cartoes_oculto_se_nao_existir(self)
+                card_db_fun.funcoes_cartao._delete_all_frame_cards(self)
+                card_db_fun.funcoes_cartao.hide_show_logoff(self)
+                card_db_fun.funcoes_cartao._start_values(self)
+                card_db_fun.funcoes_cartao.group_main(self)
+                dados = home_db_query.Return_Values_Conditions._return_bank_id(str(rand_id))
+                CardFrameBank.creat_new_widget(self,dados[0])
+                return Group.execs(self)
+            
 
 
             elif if_credit_card == '':
@@ -239,7 +250,11 @@ class mainpage(Ui_MainWindow):
             else:
                 data.append(([nome_bank, titular, agencia, conta, saldo_inicial, if_credit_card],[]))
                 credit_card = False
-                return home_db_query.Add_values._add_new_bank(data[0], credit_card, rand_id)
+                print("data",data)
+                home_db_query.Add_values._add_new_bank(data[0], credit_card, rand_id)
+                dados = home_db_query.Return_Values_Conditions._return_bank_id(str(rand_id))
+                CardFrameBank.creat_new_widget(self,dados[0])
+                return Group.execs(self)
         else:
             return Loading_screen_gif.error_gif(self)
 
@@ -1006,6 +1021,7 @@ class Set_values_startup(Ui_MainWindow):
     def set_values_table_bank(self):
         
         dados = home_db_query.Return_values.return_banks_active()
+        print(dados)
         cont = self.table_active_banks.rowCount()
         if cont > 0:
             for i in range (cont): 
@@ -1022,6 +1038,7 @@ class Set_values_startup(Ui_MainWindow):
             #NOME BANCO, ID BANCO
             if CardFrameBank.count_cards_startup(self) == True:
                 CardFrameBank.creat_new_widget(self,dados[i])
+                print('Criado',dados[i])
             else:
                 #JA TEM FRAME EXISTENTE
                 pass

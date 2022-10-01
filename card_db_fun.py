@@ -476,7 +476,7 @@ class funcoes_cartao(Ui_MainWindow):
 
                     GLOBAL_SELECT_CARD_ADD = card
                     funcoes_cartao.creat_new_widget(self,id_list[index2][0])
-
+                    
 
 
                 else:
@@ -548,6 +548,13 @@ class funcoes_cartao(Ui_MainWindow):
                     index +=1
             except:
                 pass
+        thread = threading.Thread(target=thead())
+        thread.start()
+
+    def _delete_all_frame_cards(self):
+        def thead():
+            for i in reversed(range(self.verticalLayout_3.count())): 
+                self.verticalLayout_3.itemAt(i).widget().setParent(None)
         thread = threading.Thread(target=thead())
         thread.start()
 
