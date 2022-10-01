@@ -192,9 +192,10 @@ class Ui_MainWindow(object):
         self.frame_3.setObjectName(u"frame_3")
         self.frame_3.setMaximumSize(QSize(16777215, 48))
         self.frame_3.setStyleSheet(u"background-image: url();\n"
-"background-color: rgb(54, 54, 54);\n"
+"background-color: rgba(255,255,255,30);\n"
 "border-radius:10px;\n"
-"border-image:url();")
+"border-image:url();\n"
+"")
         self.frame_3.setFrameShape(QFrame.StyledPanel)
         self.frame_3.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_4 = QHBoxLayout(self.frame_3)
@@ -249,7 +250,8 @@ class Ui_MainWindow(object):
         self.frame_6.setMaximumSize(QSize(16777215, 48))
         self.frame_6.setStyleSheet(u"background-image: url();\n"
 "border-radius:10px;\n"
-"background-color:rgb(54, 54, 54);\n"
+"\n"
+"background-color: rgba(255,255,255,30);\n"
 "border-image:url();")
         self.frame_6.setFrameShape(QFrame.StyledPanel)
         self.frame_6.setFrameShadow(QFrame.Raised)
@@ -323,27 +325,28 @@ class Ui_MainWindow(object):
 "\n"
 "QPushButton{\n"
 "	\n"
-"	border-image:url('');\n"
+"\n"
 "	border-radius:10px;\n"
 "	color: rgb(255, 255, 255);\n"
 "\n"
-"\n"
+"	border-image: NONE;\n"
 "	\n"
-"	background-color: rgb(46, 46, 46);\n"
+"background-color:rgba(255,255,255,10);\n"
 "\n"
-"	border: 1px solid  rgb(55, 55, 55);\n"
+"border: 1px solid rgba(255,255,255,20);\n"
+"border-radius:7px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(33, 33, 33);\n"
+"background-color:rgba(255,255,255,30);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(46, 46, 46);\n"
+"background-color:rgba(255,255,255,70);\n"
 "\n"
 "}")
 
@@ -1044,7 +1047,9 @@ class Ui_MainWindow(object):
         self.page_1.setStyleSheet(u"background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(81, 0, 135, 255), stop:0.427447 rgba(41, 61, 132, 235), stop:1 rgba(155, 79, 165, 255));\n"
 "")
         self.verticalLayout_2 = QVBoxLayout(self.page_1)
+        self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.frame_40 = QFrame(self.page_1)
         self.frame_40.setObjectName(u"frame_40")
         self.frame_40.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); \n"
@@ -1165,7 +1170,7 @@ class Ui_MainWindow(object):
         self.scrollArea_6.setWidgetResizable(True)
         self.scrollAreaWidgetContents_6 = QWidget()
         self.scrollAreaWidgetContents_6.setObjectName(u"scrollAreaWidgetContents_6")
-        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 1486, 950))
+        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 1504, 968))
         self.scrollAreaWidgetContents_6.setStyleSheet(u"background-color: rgba(255, 255, 255, 0);")
         self.horizontalLayout_51 = QHBoxLayout(self.scrollAreaWidgetContents_6)
         self.horizontalLayout_51.setSpacing(0)
@@ -1207,7 +1212,7 @@ class Ui_MainWindow(object):
         self.scrollArea_9.setWidgetResizable(True)
         self.scrollAreaWidgetContents_9 = QWidget()
         self.scrollAreaWidgetContents_9.setObjectName(u"scrollAreaWidgetContents_9")
-        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, 0, 1463, 958))
+        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, 0, 1481, 1008))
         self.scrollAreaWidgetContents_9.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); ")
         self.verticalLayout_108 = QVBoxLayout(self.scrollAreaWidgetContents_9)
         self.verticalLayout_108.setSpacing(10)
@@ -2288,7 +2293,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_56.setContentsMargins(0, 0, 0, 0)
         self.chart_gastos_all_2 = QTabWidget(self.main_dash_bottom_2)
         self.chart_gastos_all_2.setObjectName(u"chart_gastos_all_2")
-        self.chart_gastos_all_2.setMinimumSize(QSize(0, 650))
+        self.chart_gastos_all_2.setMinimumSize(QSize(0, 700))
         self.chart_gastos_all_2.setMaximumSize(QSize(16777215, 16777215))
         self.chart_gastos_all_2.setFont(font)
         self.chart_gastos_all_2.setLayoutDirection(Qt.LeftToRight)
@@ -2365,7 +2370,7 @@ class Ui_MainWindow(object):
         self.scrollArea_7.setWidgetResizable(True)
         self.scrollAreaWidgetContents_7 = QWidget()
         self.scrollAreaWidgetContents_7.setObjectName(u"scrollAreaWidgetContents_7")
-        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 1435, 607))
+        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 1453, 657))
         self.scrollAreaWidgetContents_7.setStyleSheet(u"")
         self.verticalLayout_61 = QVBoxLayout(self.scrollAreaWidgetContents_7)
         self.verticalLayout_61.setSpacing(0)
@@ -2667,7 +2672,7 @@ class Ui_MainWindow(object):
         self.scrollArea_10.setWidgetResizable(True)
         self.scrollAreaWidgetContents_10 = QWidget()
         self.scrollAreaWidgetContents_10.setObjectName(u"scrollAreaWidgetContents_10")
-        self.scrollAreaWidgetContents_10.setGeometry(QRect(0, -68, 277, 657))
+        self.scrollAreaWidgetContents_10.setGeometry(QRect(0, 0, 277, 657))
         self.verticalLayout_93 = QVBoxLayout(self.scrollAreaWidgetContents_10)
         self.verticalLayout_93.setObjectName(u"verticalLayout_93")
         self.label_44 = QLabel(self.scrollAreaWidgetContents_10)
@@ -3167,7 +3172,7 @@ class Ui_MainWindow(object):
         self.scrollArea_14.setWidgetResizable(True)
         self.scrollAreaWidgetContents_14 = QWidget()
         self.scrollAreaWidgetContents_14.setObjectName(u"scrollAreaWidgetContents_14")
-        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, 0, 282, 589))
+        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, 0, 222, 432))
         self.verticalLayout_114 = QVBoxLayout(self.scrollAreaWidgetContents_14)
         self.verticalLayout_114.setSpacing(9)
         self.verticalLayout_114.setObjectName(u"verticalLayout_114")
@@ -3426,7 +3431,7 @@ class Ui_MainWindow(object):
         self.scrollArea_11.setWidgetResizable(True)
         self.scrollAreaWidgetContents_11 = QWidget()
         self.scrollAreaWidgetContents_11.setObjectName(u"scrollAreaWidgetContents_11")
-        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, 0, 1430, 644))
+        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, 0, 1453, 657))
         self.horizontalLayout_58 = QHBoxLayout(self.scrollAreaWidgetContents_11)
         self.horizontalLayout_58.setSpacing(10)
         self.horizontalLayout_58.setObjectName(u"horizontalLayout_58")
@@ -4834,7 +4839,7 @@ class Ui_MainWindow(object):
         self.scrollArea_12.setWidgetResizable(True)
         self.scrollAreaWidgetContents_12 = QWidget()
         self.scrollAreaWidgetContents_12.setObjectName(u"scrollAreaWidgetContents_12")
-        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 1440, 920))
+        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 1458, 920))
         self.scrollAreaWidgetContents_12.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); \n"
 "")
         self.verticalLayout_112 = QVBoxLayout(self.scrollAreaWidgetContents_12)
@@ -4851,10 +4856,14 @@ class Ui_MainWindow(object):
         self.verticalLayout_113.setObjectName(u"verticalLayout_113")
         self.scrollArea_13 = QScrollArea(self.botto_1)
         self.scrollArea_13.setObjectName(u"scrollArea_13")
+        self.scrollArea_13.setStyleSheet(u"QScrollBar:horizontal { border: 1px solid #2A2929; background: #2A2929; height: 7px; margin: 0px 21px 0 21px; } QScrollBar::handle:horizontal { background: #646464; min-width: 5px; } \n"
+"QScrollBar::add-line:horizontal { border: 1px solid #2A2929; background: #2A2929; width: 20px; subcontrol-position: right; subcontrol-origin: margin; } \n"
+"QScrollBar::sub-line:horizontal { border: 1px solid #2A2929; background: #2A2929; width: 20px; subcontrol-position: left; subcontrol-origin: margin; }\n"
+"QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal { background: none; }")
         self.scrollArea_13.setWidgetResizable(True)
         self.scrollAreaWidgetContents_13 = QWidget()
         self.scrollAreaWidgetContents_13.setObjectName(u"scrollAreaWidgetContents_13")
-        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 1422, 286))
+        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 1440, 286))
         self.horizontalLayout_115 = QHBoxLayout(self.scrollAreaWidgetContents_13)
         self.horizontalLayout_115.setObjectName(u"horizontalLayout_115")
         self.layout_add_frame_bank = QHBoxLayout()
@@ -6470,24 +6479,28 @@ class Ui_MainWindow(object):
 "\n"
 "QPushButton{\n"
 "	\n"
-"	\n"
-"	color: rgb(255, 255, 255);\n"
-"	border-radius:10px;	\n"
-"	background-color: rgb(46, 46, 46);\n"
 "\n"
-"	border: 1px solid  rgb(55, 55, 55);\n"
+"	border-radius:10px;\n"
+"	color: rgb(255, 255, 255);\n"
+"\n"
+"\n"
+"	\n"
+"background-color:rgba(255,255,255,10);\n"
+"\n"
+"border: 1px solid rgba(255,255,255,20);\n"
+"border-radius:7px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(33, 33, 33);\n"
+"background-color:rgba(255,255,255,30);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(46, 46, 46);\n"
+"background-color:rgba(255,255,255,70);\n"
 "\n"
 "}")
         self.grid.setIcon(icon26)
@@ -6503,24 +6516,28 @@ class Ui_MainWindow(object):
 "\n"
 "QPushButton{\n"
 "	\n"
-"	\n"
-"	color: rgb(255, 255, 255);\n"
-"	border-radius:10px;	\n"
-"	background-color: rgb(46, 46, 46);\n"
 "\n"
-"	border: 1px solid  rgb(55, 55, 55);\n"
+"	border-radius:10px;\n"
+"	color: rgb(255, 255, 255);\n"
+"\n"
+"\n"
+"	\n"
+"background-color:rgba(255,255,255,10);\n"
+"\n"
+"border: 1px solid rgba(255,255,255,20);\n"
+"border-radius:7px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(33, 33, 33);\n"
+"background-color:rgba(255,255,255,30);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(46, 46, 46);\n"
+"background-color:rgba(255,255,255,70);\n"
 "\n"
 "}")
         icon27 = QIcon()
@@ -6650,7 +6667,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 96, 415))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 1486, 870))
         self.scrollAreaWidgetContents_2.setStyleSheet(u"background-color: rgba(255, 255, 255, 0);")
         self.horizontalLayout_15 = QHBoxLayout(self.scrollAreaWidgetContents_2)
         self.horizontalLayout_15.setSpacing(0)
@@ -6675,7 +6692,7 @@ class Ui_MainWindow(object):
         self.scrollArea_4.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 39, 415))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 440, 870))
         self.verticalLayout_3 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_3.setSpacing(20)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
@@ -7840,12 +7857,21 @@ class Ui_MainWindow(object):
 
         self.frame_21 = QFrame(self.frame_13)
         self.frame_21.setObjectName(u"frame_21")
-        self.frame_21.setStyleSheet(u"	border-radius: 10px;\n"
+        self.frame_21.setStyleSheet(u"border-radius: 10px;\n"
 "\n"
 "	\n"
-"	background-color:rgb(53, 53, 53);\n"
 "\n"
-"	border: 1px solid  rgb(55, 55, 55);")
+"\n"
+"border: 1px solid  rgb(55, 55, 55);\n"
+"\n"
+"\n"
+"\n"
+"	\n"
+"\n"
+"\n"
+"background-color: rgba(255, 255, 255,30);\n"
+"\n"
+"")
         self.frame_21.setFrameShape(QFrame.StyledPanel)
         self.frame_21.setFrameShadow(QFrame.Raised)
         self.verticalLayout_25 = QVBoxLayout(self.frame_21)
@@ -7865,21 +7891,22 @@ class Ui_MainWindow(object):
 "\n"
 "\n"
 "	\n"
-"	background-color: rgb(46, 46, 46);\n"
+"background-color:rgba(255,255,255,10);\n"
 "\n"
-"	border: 1px solid  rgb(55, 55, 55);\n"
+"border: 1px solid rgba(255,255,255,20);\n"
+"border-radius:7px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(33, 33, 33);\n"
+"background-color:rgba(255,255,255,30);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(46, 46, 46);\n"
+"background-color:rgba(255,255,255,70);\n"
 "\n"
 "}")
         self.apaga_compra.setIcon(icon19)
@@ -7901,21 +7928,22 @@ class Ui_MainWindow(object):
 "\n"
 "\n"
 "	\n"
-"	background-color: rgb(46, 46, 46);\n"
+"background-color:rgba(255,255,255,10);\n"
 "\n"
-"	border: 1px solid  rgb(55, 55, 55);\n"
+"border: 1px solid rgba(255,255,255,20);\n"
+"border-radius:7px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(33, 33, 33);\n"
+"background-color:rgba(255,255,255,30);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(46, 46, 46);\n"
+"background-color:rgba(255,255,255,70);\n"
 "\n"
 "}")
         self.edit_compra.setIcon(icon21)
@@ -7937,21 +7965,22 @@ class Ui_MainWindow(object):
 "\n"
 "\n"
 "	\n"
-"	background-color: rgb(46, 46, 46);\n"
+"background-color:rgba(255,255,255,10);\n"
 "\n"
-"	border: 1px solid  rgb(55, 55, 55);\n"
+"border: 1px solid rgba(255,255,255,20);\n"
+"border-radius:7px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(33, 33, 33);\n"
+"background-color:rgba(255,255,255,30);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(46, 46, 46);\n"
+"background-color:rgba(255,255,255,70);\n"
 "\n"
 "}")
         self.paga_fatura.setIcon(icon20)
@@ -7973,21 +8002,22 @@ class Ui_MainWindow(object):
 "\n"
 "\n"
 "	\n"
-"	background-color: rgb(46, 46, 46);\n"
+"background-color:rgba(255,255,255,10);\n"
 "\n"
-"	border: 1px solid  rgb(55, 55, 55);\n"
+"border: 1px solid rgba(255,255,255,20);\n"
+"border-radius:7px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(33, 33, 33);\n"
+"background-color:rgba(255,255,255,30);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(46, 46, 46);\n"
+"background-color:rgba(255,255,255,70);\n"
 "\n"
 "}")
         self.parcela_fatura.setIcon(icon22)
@@ -8008,21 +8038,22 @@ class Ui_MainWindow(object):
 "\n"
 "\n"
 "	\n"
-"	background-color: rgb(46, 46, 46);\n"
+"background-color:rgba(255,255,255,10);\n"
 "\n"
-"	border: 1px solid  rgb(55, 55, 55);\n"
+"border: 1px solid rgba(255,255,255,20);\n"
+"border-radius:7px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(33, 33, 33);\n"
+"background-color:rgba(255,255,255,30);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(46, 46, 46);\n"
+"background-color:rgba(255,255,255,70);\n"
 "\n"
 "}")
         self.filter_dates_btn.setIcon(icon23)
@@ -8384,6 +8415,7 @@ class Ui_MainWindow(object):
         self.frame_61.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_29 = QHBoxLayout(self.frame_61)
         self.horizontalLayout_29.setObjectName(u"horizontalLayout_29")
+        self.horizontalLayout_29.setContentsMargins(20, -1, -1, -1)
         self.frame_68 = QFrame(self.frame_61)
         self.frame_68.setObjectName(u"frame_68")
         self.frame_68.setMinimumSize(QSize(0, 0))
@@ -8424,7 +8456,7 @@ class Ui_MainWindow(object):
         self.frame_80.setObjectName(u"frame_80")
         self.frame_80.setMinimumSize(QSize(200, 0))
         self.frame_80.setMaximumSize(QSize(16777215, 16777215))
-        self.frame_80.setStyleSheet(u"	border: 1px solid rgb(253, 253, 253);\n"
+        self.frame_80.setStyleSheet(u"border: 1px solid rgba(255,255,255,40);\n"
 "	border-radius: 10px;")
         self.frame_80.setFrameShape(QFrame.StyledPanel)
         self.frame_80.setFrameShadow(QFrame.Raised)
@@ -8474,6 +8506,7 @@ class Ui_MainWindow(object):
         self.frame_65.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_25 = QHBoxLayout(self.frame_65)
         self.horizontalLayout_25.setObjectName(u"horizontalLayout_25")
+        self.horizontalLayout_25.setContentsMargins(20, -1, -1, -1)
         self.frame_69 = QFrame(self.frame_65)
         self.frame_69.setObjectName(u"frame_69")
         self.frame_69.setMinimumSize(QSize(40, 0))
@@ -8517,7 +8550,7 @@ class Ui_MainWindow(object):
         self.frame_81.setObjectName(u"frame_81")
         self.frame_81.setMinimumSize(QSize(0, 0))
         self.frame_81.setMaximumSize(QSize(16777215, 16777215))
-        self.frame_81.setStyleSheet(u"	border: 1px solid rgb(253, 253, 253);\n"
+        self.frame_81.setStyleSheet(u"border: 1px solid rgba(255,255,255,40);\n"
 "	border-radius: 10px;")
         self.frame_81.setFrameShape(QFrame.StyledPanel)
         self.frame_81.setFrameShadow(QFrame.Raised)
@@ -8550,6 +8583,7 @@ class Ui_MainWindow(object):
         self.frame_64.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_23 = QHBoxLayout(self.frame_64)
         self.horizontalLayout_23.setObjectName(u"horizontalLayout_23")
+        self.horizontalLayout_23.setContentsMargins(20, -1, -1, -1)
         self.frame_70 = QFrame(self.frame_64)
         self.frame_70.setObjectName(u"frame_70")
         self.frame_70.setMinimumSize(QSize(40, 0))
@@ -8593,7 +8627,7 @@ class Ui_MainWindow(object):
         self.frame_82.setObjectName(u"frame_82")
         self.frame_82.setMinimumSize(QSize(0, 0))
         self.frame_82.setMaximumSize(QSize(16777215, 16777215))
-        self.frame_82.setStyleSheet(u"	border: 1px solid rgb(253, 253, 253);\n"
+        self.frame_82.setStyleSheet(u"border: 1px solid rgba(255,255,255,40);\n"
 "	border-radius: 10px;")
         self.frame_82.setFrameShape(QFrame.StyledPanel)
         self.frame_82.setFrameShadow(QFrame.Raised)
@@ -8663,6 +8697,7 @@ class Ui_MainWindow(object):
         self.frame_66.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_22 = QHBoxLayout(self.frame_66)
         self.horizontalLayout_22.setObjectName(u"horizontalLayout_22")
+        self.horizontalLayout_22.setContentsMargins(20, -1, -1, -1)
         self.frame_71 = QFrame(self.frame_66)
         self.frame_71.setObjectName(u"frame_71")
         self.frame_71.setMinimumSize(QSize(40, 0))
@@ -8706,7 +8741,7 @@ class Ui_MainWindow(object):
         self.frame_83.setObjectName(u"frame_83")
         self.frame_83.setMinimumSize(QSize(0, 0))
         self.frame_83.setMaximumSize(QSize(16777215, 16777215))
-        self.frame_83.setStyleSheet(u"	border: 1px solid rgb(253, 253, 253);\n"
+        self.frame_83.setStyleSheet(u"border: 1px solid rgba(255,255,255,40);\n"
 "	border-radius: 10px;")
         self.frame_83.setFrameShape(QFrame.StyledPanel)
         self.frame_83.setFrameShadow(QFrame.Raised)
@@ -8737,6 +8772,7 @@ class Ui_MainWindow(object):
         self.frame_63.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_21 = QHBoxLayout(self.frame_63)
         self.horizontalLayout_21.setObjectName(u"horizontalLayout_21")
+        self.horizontalLayout_21.setContentsMargins(20, -1, -1, -1)
         self.frame_72 = QFrame(self.frame_63)
         self.frame_72.setObjectName(u"frame_72")
         self.frame_72.setMinimumSize(QSize(40, 0))
@@ -8781,7 +8817,7 @@ class Ui_MainWindow(object):
         self.frame_84.setObjectName(u"frame_84")
         self.frame_84.setMinimumSize(QSize(0, 0))
         self.frame_84.setMaximumSize(QSize(16777215, 16777215))
-        self.frame_84.setStyleSheet(u"	border: 1px solid rgb(253, 253, 253);\n"
+        self.frame_84.setStyleSheet(u"border: 1px solid rgba(255,255,255,40);\n"
 "	border-radius: 10px;")
         self.frame_84.setFrameShape(QFrame.StyledPanel)
         self.frame_84.setFrameShadow(QFrame.Raised)
@@ -8814,6 +8850,7 @@ class Ui_MainWindow(object):
         self.frame_67.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_19 = QHBoxLayout(self.frame_67)
         self.horizontalLayout_19.setObjectName(u"horizontalLayout_19")
+        self.horizontalLayout_19.setContentsMargins(20, -1, -1, -1)
         self.frame_73 = QFrame(self.frame_67)
         self.frame_73.setObjectName(u"frame_73")
         self.frame_73.setMinimumSize(QSize(40, 0))
@@ -8857,7 +8894,7 @@ class Ui_MainWindow(object):
         self.frame_85.setObjectName(u"frame_85")
         self.frame_85.setMinimumSize(QSize(0, 0))
         self.frame_85.setMaximumSize(QSize(16777215, 16777215))
-        self.frame_85.setStyleSheet(u"	border: 1px solid rgb(253, 253, 253);\n"
+        self.frame_85.setStyleSheet(u"border: 1px solid rgba(255,255,255,40);\n"
 "	border-radius: 10px;")
         self.frame_85.setFrameShape(QFrame.StyledPanel)
         self.frame_85.setFrameShadow(QFrame.Raised)
@@ -9177,7 +9214,7 @@ class Ui_MainWindow(object):
         self.scrollArea_8.setWidgetResizable(True)
         self.scrollAreaWidgetContents_8 = QWidget()
         self.scrollAreaWidgetContents_8.setObjectName(u"scrollAreaWidgetContents_8")
-        self.scrollAreaWidgetContents_8.setGeometry(QRect(0, 0, 454, 875))
+        self.scrollAreaWidgetContents_8.setGeometry(QRect(0, 0, 1023, 875))
         self.scrollAreaWidgetContents_8.setStyleSheet(u"background-color:rgba(255,255,255,0);")
         self.verticalLayout_14 = QVBoxLayout(self.scrollAreaWidgetContents_8)
         self.verticalLayout_14.setSpacing(10)
@@ -10380,8 +10417,7 @@ class Ui_MainWindow(object):
 "	background-color: rgba(255, 255, 255, 30); \n"
 "\n"
 "	border-radius: 10px;\n"
-"	border-bottom: 4px solid rgb(45, 45, 45);\n"
-"	border-right: 4px solid rgb(45, 45, 45);\n"
+"\n"
 "\n"
 "}")
         self.frame_9.setFrameShape(QFrame.StyledPanel)
@@ -11005,7 +11041,7 @@ class Ui_MainWindow(object):
 "\n"
 "QPushButton{\n"
 "\n"
-"\n"
+"color:rgb(0,0,0);\n"
 "\n"
 "border-radius:4px;\n"
 "	\n"
@@ -11057,7 +11093,7 @@ class Ui_MainWindow(object):
 "\n"
 "\n"
 "border-radius:4px;\n"
-"	\n"
+"	color:rgb(0,0,0);\n"
 "	background-color: rgb(238, 238, 238);\n"
 "\n"
 "	border: 1px solid  rgb(55, 55, 55);\n"

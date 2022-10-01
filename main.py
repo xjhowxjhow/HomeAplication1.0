@@ -359,7 +359,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                 return Chart_one._creat_charts(self)
             
             if obj == self.pushButton_18 and event.type() == QtCore.QEvent.MouseButtonPress:
-                btn = "config"
+                btn = "dev"
                 return effects.Effetc_slides.grid_lateral_menu(self,btn)
             
             if obj == self.back_main_dash and event.type() == QtCore.QEvent.MouseButtonPress:

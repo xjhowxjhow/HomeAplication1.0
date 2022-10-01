@@ -18,7 +18,7 @@ class InitShadow(QtWidgets.QGraphicsDropShadowEffect):
         self.setBlurRadius(20)
         self.setColor(QColor(0, 0, 0, 60))
         self.frame.setGraphicsEffect(self)
-
+        
 
 
 

@@ -343,6 +343,9 @@ class Effetc_slides(Ui_MainWindow):
         if btn == "config" :
             self.stackedWidget_2.setCurrentWidget(self.page_6)
             geometry = 360
+        if btn == "dev":
+            self.stackedWidget_2.setCurrentWidget(self.page_7)
+            geometry = 420
 
 
             

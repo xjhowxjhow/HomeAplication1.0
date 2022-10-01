@@ -45,7 +45,8 @@ class Group:
         Set_values_startup.set_banks_combobox_new_lan(self)
         mainpage.load_extrato_filter(self)
         Combobox_startup.default_combox_hidem(self)
-        return True
+
+
 
 class mainpage(Ui_MainWindow):
 
