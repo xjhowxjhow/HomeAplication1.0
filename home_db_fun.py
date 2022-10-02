@@ -1264,20 +1264,32 @@ class Pagamento(Ui_MainWindow):
         if reco == True:
             if pago_recorrente == False:
             #MENSAGEM BOX
-                print("Lancamento recorrente")
-                home_db_query.Add_values._add_new_lancamento_recorrente(id_lancamento,id_bank,mes,ano)
-                #ANIMANCAO
-                home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Saida',ano,mes)
+                ui_val =self.table.item(current_row,9).text()
+                format_split = ui_val.split(" ")
                 
+                valor =  Convert_Moedas._brl_to_usd(self,format_split[2])
+                saldo_atual = home_db_query.Return_values.return_saldo_banks(id_bank)
+                operacao = float(saldo_atual) - float(valor)
+                valor_to_blr = Convert_Moedas._usd_to_brl(self,valor)
+                operacao_to_blr = Convert_Moedas._usd_to_brl(self,operacao)
+                
+                alert_confirm = Confirn_Frame._show(self, str(valor_to_blr), str(operacao_to_blr))
 
-                #TODO TESTE ANIMCAÇAO dps
-                
-                Set_values_startup._set_Saldo(self)
-                mainpage.load_extrato_filter(self)
-                CardFrameBank._update_frame_cards_saldo(self,id_bank)
-                #TEMQ FAZER A VALIDADAO POR DATA DO LKANCAMENTO
-                Loading_screen_gif._payout_receiver_sucess(self)
-                
+                if alert_confirm == True:
+                    print("Lancamento recorrente")
+                    home_db_query.Add_values._add_new_lancamento_recorrente(id_lancamento,id_bank,mes,ano)
+                    #ANIMANCAO
+                    home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Saida',ano,mes)
+
+
+                    #TODO TESTE ANIMCAÇAO dps
+
+                    Set_values_startup._set_Saldo(self)
+                    mainpage.load_extrato_filter(self)
+                    CardFrameBank._update_frame_cards_saldo(self,id_bank)
+                    Loading_screen_gif._payout_receiver_sucess(self)
+                else:
+                    pass
             else:
                 msg = QMessageBox()
                 msg.setWindowTitle("Erro")
@@ -1287,19 +1299,32 @@ class Pagamento(Ui_MainWindow):
                 Loading_screen_gif.error_gif(self)
         else:
             if pago == False:
-                id_lancamento = self.table.item(current_row,1).text()
-                id_bank = self.table.item(current_row,2).text()
-                home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Saida',ano,mes)
-                Set_values_startup._set_Saldo(self)
-                mainpage.load_extrato_filter(self)
-                CardFrameBank._update_frame_cards_saldo(self,id_bank)
-                #MENSAGEM BOX
-                # msg = QMessageBox()
-                # msg.setWindowTitle("Sucesso")
-                # msg.setText("Lançamento pago com sucesso")
-                # msg.setIcon(QMessageBox.Information)
-                # msg.exec_()
-                Loading_screen_gif._payout_receiver_sucess(self)
+                ui_val =self.table.item(current_row,9).text()
+                format_split = ui_val.split(" ")
+                
+                valor =  Convert_Moedas._brl_to_usd(self,format_split[2])
+                saldo_atual = home_db_query.Return_values.return_saldo_banks(id_bank)
+                operacao = float(saldo_atual) - float(valor)
+                valor_to_blr = Convert_Moedas._usd_to_brl(self,valor)
+                operacao_to_blr = Convert_Moedas._usd_to_brl(self,operacao)
+                
+                alert_confirm = Confirn_Frame._show(self, str(valor_to_blr), str(operacao_to_blr))
+                if alert_confirm == True:
+                    id_lancamento = self.table.item(current_row,1).text()
+                    id_bank = self.table.item(current_row,2).text()
+                    home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Saida',ano,mes)
+                    Set_values_startup._set_Saldo(self)
+                    mainpage.load_extrato_filter(self)
+                    CardFrameBank._update_frame_cards_saldo(self,id_bank)
+                    #MENSAGEM BOX
+                    # msg = QMessageBox()
+                    # msg.setWindowTitle("Sucesso")
+                    # msg.setText("Lançamento pago com sucesso")
+                    # msg.setIcon(QMessageBox.Information)
+                    # msg.exec_()
+                    Loading_screen_gif._payout_receiver_sucess(self)
+                else:
+                    pass
                 
             else:
                 msg = QMessageBox()
@@ -1330,16 +1355,28 @@ class Pagamento(Ui_MainWindow):
         if reco == True:
             if pago_recorrente == False:
             #MENSAGEM BOX
-                print("Lancamento recorrente, deseja receber todos os lançamentos?")
-                home_db_query.Add_values._add_new_lancamento_recorrente(id_lancamento,id_bank,mes,ano)
-                home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Entrada',ano,mes)
-                Set_values_startup._set_Saldo(self)
+                ui_val =self.table.item(current_row,9).text()
+                format_split = ui_val.split(" ")
                 
-                mainpage.load_extrato_filter(self)
-                CardFrameBank._update_frame_cards_saldo(self,id_bank)
-                #TEMQ FAZER A VALIDADAO POR DATA DO LKANCAMENTO
-                Loading_screen_gif._payout_receiver_sucess(self)
+                valor =  Convert_Moedas._brl_to_usd(self,format_split[2])
+                saldo_atual = home_db_query.Return_values.return_saldo_banks(id_bank)
+                operacao = float(saldo_atual) + float(valor)
+                valor_to_blr = Convert_Moedas._usd_to_brl(self,valor)
+                operacao_to_blr = Convert_Moedas._usd_to_brl(self,operacao)
+                
+                alert_confirm = Confirn_Frame._show(self, str(valor_to_blr), str(operacao_to_blr))
+                if alert_confirm == True:
+                    print("Lancamento recorrente, deseja receber todos os lançamentos?")
+                    home_db_query.Add_values._add_new_lancamento_recorrente(id_lancamento,id_bank,mes,ano)
+                    home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Entrada',ano,mes)
+                    Set_values_startup._set_Saldo(self)
 
+                    mainpage.load_extrato_filter(self)
+                    CardFrameBank._update_frame_cards_saldo(self,id_bank)
+                    #TEMQ FAZER A VALIDADAO POR DATA DO LKANCAMENTO
+                    Loading_screen_gif._payout_receiver_sucess(self)
+                else:
+                    pass
                 
             else:
                 msg = QMessageBox()
@@ -1350,20 +1387,32 @@ class Pagamento(Ui_MainWindow):
                 Loading_screen_gif.error_gif(self)
         else:
             if pago == False:
-                id_lancamento = self.table.item(current_row,1).text()
-                id_bank = self.table.item(current_row,2).text()
-                home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Entrada',ano,mes)
-                Set_values_startup._set_Saldo(self)
-                mainpage.load_extrato_filter(self)
-                CardFrameBank._update_frame_cards_saldo(self,id_bank)
-                #MENSAGEM BOX
-                # msg = QMessageBox()
-                # msg.setWindowTitle("Sucesso")
-                # msg.setText("Lançamento Recebido com sucesso")
-                # msg.setIcon(QMessageBox.Information)
-                # msg.exec_()
-                Loading_screen_gif._payout_receiver_sucess(self)
+                ui_val =self.table.item(current_row,9).text()
+                format_split = ui_val.split(" ")
                 
+                valor =  Convert_Moedas._brl_to_usd(self,format_split[2])
+                saldo_atual = home_db_query.Return_values.return_saldo_banks(id_bank)
+                operacao = float(saldo_atual) + float(valor)
+                valor_to_blr = Convert_Moedas._usd_to_brl(self,valor)
+                operacao_to_blr = Convert_Moedas._usd_to_brl(self,operacao)
+                
+                alert_confirm = Confirn_Frame._show(self, str(valor_to_blr), str(operacao_to_blr))
+                if alert_confirm == True:
+                    id_lancamento = self.table.item(current_row,1).text()
+                    id_bank = self.table.item(current_row,2).text()
+                    home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Entrada',ano,mes)
+                    Set_values_startup._set_Saldo(self)
+                    mainpage.load_extrato_filter(self)
+                    CardFrameBank._update_frame_cards_saldo(self,id_bank)
+                    #MENSAGEM BOX
+                    # msg = QMessageBox()
+                    # msg.setWindowTitle("Sucesso")
+                    # msg.setText("Lançamento Recebido com sucesso")
+                    # msg.setIcon(QMessageBox.Information)
+                    # msg.exec_()
+                    Loading_screen_gif._payout_receiver_sucess(self)
+                else:
+                    pass
             else:
                 msg = QMessageBox()
                 msg.setWindowTitle("Erro")
@@ -1390,38 +1439,64 @@ class Pagamento(Ui_MainWindow):
         
         if verifi_if_pago == 'pendente':
             if  home_db_query.Return_values.return_saldo_banks(id_bank) != None:
+                ui_val =self.table.item(current_row,9).text()
+                format_split = ui_val.split(" ")
                 
-                print("SALDO",home_db_query.Return_values.return_saldo_banks(id_bank))
-                home_db_query.Saldos._pagar_fatura(id_bank,0,mes,ano)
-                card_db_test.Return_Values_Calcs._pagar_fatura(id_bank,mes,ano)
-                Set_values_startup._set_Saldo(self)
-                CardFrameBank._update_frame_cards_saldo(self,id_bank)
-                mainpage.load_extrato_filter(self)
-                msg = QMessageBox()
-                msg.setWindowTitle("Sucesso")
-                msg.setText("Fatura paga com sucesso")
-                msg.setIcon(QMessageBox.Information)
-                msg.exec_()
-                Loading_screen_gif._payout_receiver_sucess(self)
+                valor =  Convert_Moedas._brl_to_usd(self,format_split[2])
+                saldo_atual = home_db_query.Return_values.return_saldo_banks(id_bank)
+                operacao = float(saldo_atual) - float(valor)
+                valor_to_blr = Convert_Moedas._usd_to_brl(self,valor)
+                operacao_to_blr = Convert_Moedas._usd_to_brl(self,operacao)
+                
+                alert_confirm = Confirn_Frame._show(self, str(valor_to_blr), str(operacao_to_blr))
+                if alert_confirm == True:
+                    print("SALDO",home_db_query.Return_values.return_saldo_banks(id_bank))
+                    home_db_query.Saldos._pagar_fatura(id_bank,0,mes,ano)
+                    card_db_test.Return_Values_Calcs._pagar_fatura(id_bank,mes,ano)
+                    Set_values_startup._set_Saldo(self)
+                    CardFrameBank._update_frame_cards_saldo(self,id_bank)
+                    mainpage.load_extrato_filter(self)
+                    msg = QMessageBox()
+                    msg.setWindowTitle("Sucesso")
+                    msg.setText("Fatura paga com sucesso")
+                    msg.setIcon(QMessageBox.Information)
+                    msg.exec_()
+                    Loading_screen_gif._payout_receiver_sucess(self)
+                else:
+                    pass
                 
             else:
                 validate = Alerts._alerta_fatura_banco_indiferente(self)
                 if validate == True:
                     default_bank = home_db_query.Return_values._return_default_bank()
+                    ui_val =self.table.item(current_row,9).text()
+                    format_split = ui_val.split(" ")
+
+                    valor =  Convert_Moedas._brl_to_usd(self,format_split[2])
+                    saldo_atual = home_db_query.Return_values.return_saldo_banks(default_bank)
+                    operacao = float(saldo_atual) - float(valor)
+                    valor_to_blr = Convert_Moedas._usd_to_brl(self,valor)
+                    operacao_to_blr = Convert_Moedas._usd_to_brl(self,operacao)
+
+                    alert_confirm = Confirn_Frame._show(self, str(valor_to_blr), str(operacao_to_blr))
                     
-                    home_db_query.Saldos._pagar_fatura(str(default_bank),id_bank,mes,ano)
-                    card_db_test.Return_Values_Calcs._pagar_fatura(id_bank,mes,ano)
-                    # TODO ERRO AQ
-                    Set_values_startup._set_Saldo(self)
-                    mainpage.load_extrato_filter(self)
-                    CardFrameBank._update_frame_cards_saldo(self,id_bank)
-                    msg = QMessageBox()
-                    msg.setWindowTitle("Sucesso")
-                    msg.setText("Fatura paga com sucesso debitado da conta principal!")
-                    msg.setIcon(QMessageBox.Information)
-                    msg.exec_()
-                    Loading_screen_gif._payout_receiver_sucess(self)
-                    
+                    if alert_confirm == True:
+                        
+
+                        home_db_query.Saldos._pagar_fatura(str(default_bank),id_bank,mes,ano)
+                        card_db_test.Return_Values_Calcs._pagar_fatura(id_bank,mes,ano)
+                        # TODO ERRO AQ
+                        Set_values_startup._set_Saldo(self)
+                        mainpage.load_extrato_filter(self)
+                        CardFrameBank._update_frame_cards_saldo(self,id_bank)
+                        msg = QMessageBox()
+                        msg.setWindowTitle("Sucesso")
+                        msg.setText("Fatura paga com sucesso debitado da conta principal!")
+                        msg.setIcon(QMessageBox.Information)
+                        msg.exec_()
+                        Loading_screen_gif._payout_receiver_sucess(self)
+                    else:
+                        pass
                 else:
                     pass
                     return False
@@ -2065,6 +2140,98 @@ class Loading_screen_gif(Ui_MainWindow):
 
 
 
+
+class Confirn_Frame(Ui_MainWindow):
+    def _show(self, valor,saldo_apos):
+
+        
+        qdialog = QDialog()
+        qdialog.setWindowFlags(Qt.FramelessWindowHint)
+        qdialog.setStyleSheet("background-color:rgb(40, 42, 54); border: 1px solid rgba(255,255,255,30);")
+        #get position Ui_MainWindow
+        x = self.frameGeometry().x()
+        y = self.frameGeometry().y()
+        #set position
+
+        
+        qdialog.setGeometry(QRect(x+650,y+400, 331, 251))
+        
+        qdialog.setModal(True)
+        
+        label_confirm = QLabel(qdialog)
+        label_confirm.setObjectName(u"label_confirm")
+        label_confirm.setGeometry(QRect(60, 20, 201, 41))
+        font = QFont()
+        font.setFamily(u"Bahnschrift Light Condensed")
+        font.setPointSize(15)
+    
+        label_confirm.setFont(font)
+        label_confirm.setStyleSheet("color: rgb(255, 255, 255); background-color:rgba(255,255,255,0); border:none;")
+        label_confirm.setAlignment(Qt.AlignCenter)
+        sald_confirm = QLabel(qdialog)
+        sald_confirm.setObjectName(u"sald_confirm")
+        sald_confirm.setGeometry(QRect(20, 143, 301, 31))
+        font1 = QFont()
+        font1.setFamily(u"Bahnschrift Light SemiCondensed")
+        font1.setPointSize(11)
+        
+        
+        sald_confirm.setFont(font1)
+        sald_confirm.setStyleSheet("color: rgb(255, 255, 255); background-color:rgba(255,255,255,0); border:none;")
+        line_confirm = QFrame(qdialog)
+        line_confirm.setObjectName(u"line_confirm")
+        line_confirm.setGeometry(QRect(20, 136, 291, 1))
+        line_confirm.setMaximumSize(QSize(16777215, 1))
+        line_confirm.setFrameShape(QFrame.HLine)
+        line_confirm.setFrameShadow(QFrame.Sunken)
+        val_confirm = QLabel(qdialog)
+        val_confirm.setObjectName(u"val_confirm")
+        val_confirm.setGeometry(QRect(20, 107, 291, 31))
+        font2 = QFont()
+        font2.setFamily(u"Bahnschrift Light SemiCondensed")
+        font2.setPointSize(13)
+        
+        val_confirm.setFont(font2)
+        val_confirm.setStyleSheet("color: rgb(255, 255, 255); background-color:rgba(255,255,255,0); border:none;")
+        pushOK = QPushButton(qdialog)
+        pushOK.setObjectName(u"pushOK")
+        pushOK.setGeometry(QRect(40, 202, 75, 31))
+        
+        font3 = QFont()
+        font3.setFamily(u"Bahnschrift Light SemiCondensed")
+        font3.setPointSize(10)
+        
+        
+        pushOK.setFont(font3)
+        pushOK.setStyleSheet("QPushButton{ border-radius:10px; color: rgb(255, 255, 255); background-color:rgba(255,255,255,10); border: 1px solid rgba(255,255,255,20); border-radius:7px; } QPushButton:hover{ background-color:rgba(31, 168, 49,70);} QPushButton:pressed{ background-color:rgba(31, 168, 49,170); }")
+        pushOK.clicked.connect(qdialog.accept)
+        
+        pushCAN = QPushButton(qdialog)
+        pushCAN.setObjectName(u"pushCAN")
+        pushCAN.setGeometry(QRect(210, 202, 75, 31))
+        pushCAN.setFont(font3)
+        pushCAN.setStyleSheet("QPushButton{ border-radius:10px; color: rgb(255, 255, 255); background-color:rgba(255,255,255,10); border: 1px solid rgba(255,255,255,20); border-radius:7px; } QPushButton:hover{ background-color:rgba(225, 60, 47,70); } QPushButton:pressed{ background-color:rgba(225, 60, 47,170); }")
+        pushCAN.clicked.connect(qdialog.reject) 
+        
+        valor = str(valor)
+        saldo_apos = str(saldo_apos)
+        
+        
+        # #set text
+        label_confirm.setText("Confirmar o Pagamento")
+        val_confirm.setText("Valor: "+valor)
+        sald_confirm.setText("Saldo após a Transação: "+saldo_apos)
+        pushOK.setText("Continuar")
+        pushCAN.setText("Cancelar")
+
+        #show
+        qdialog.exec_()
+        
+        return qdialog.result()
+        
+
+        
+    
 
 
 

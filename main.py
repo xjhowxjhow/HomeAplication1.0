@@ -39,7 +39,6 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         super(MainWindow, self).__init__(parent)
         self.setAttribute(Qt.WA_DeleteOnClose)
         self.setWindowFlags(Qt.FramelessWindowHint)
-        self.setAttribute(Qt.WA_TranslucentBackground)
         self.setupUi(self)
         self.show()
         self.center()
@@ -184,7 +183,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.hidden_saldo_fat0_true.clicked.connect(lambda:home_db_fun.Configs.hide_show_saldos_zeros(self,True))
         self.hidden_saldo_fat0_false.clicked.connect(lambda:home_db_fun.Configs.hide_show_saldos_zeros(self,False))
         
-        self.hide_cards_main_2.clicked.connect(lambda:home_db_fun.Loading_screen_gif.test_anin(self))
+        self.hide_cards_main_2.clicked.connect(lambda:home_db_fun.Confirn_Frame._show(self))
         
         
         # self.show_cards_main_2.clicked.connect(lambda:home_db_fun.Loading_screen_gif.close_loading(self))
@@ -238,14 +237,13 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.parcela_fatura_3.installEventFilter(self)
         self.paga_fatura_4.installEventFilter(self)
         self.listWidget_3.installEventFilter(self)
-    
+
         #THREAD
 
         
     
     def eventFilter(self, obj, event):
-        
-        
+
             if obj == self.pushButton_8 and event.type() == QtCore.QEvent.MouseButtonPress:
                 btn = "conta"
                 return effects.Effetc_slides.grid_lateral_menu(self,btn)
