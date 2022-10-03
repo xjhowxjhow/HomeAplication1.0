@@ -349,11 +349,52 @@ class Return_values:
         
         cursor.execute("SELECT config_contas.conta_padrao_bank FROM config_contas")
         dados = cursor.fetchall()
-        return dados[0][0]
+        
+        if dados:
+            return dados[0][0]
+        else:
+            return None
     
     
 class Return_Values_Conditions:
     
+    
+    def return_talbe_banks(id_bank,id_card):#RETONA DADOS DO BANCO E DO CARTAO DE CREDITO PARA TABLE
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        if id_card != "Não":
+            cursor.execute("SELECT contas_bancarias.nome_banco,\
+	                               contas_bancarias.agencia,\
+	                               contas_bancarias.num_conta,\
+	                               contas_bancarias.saldo_inicial,\
+	                               card_active.limite,\
+	                               card_active.final,\
+	                               card_active.titular,\
+	                               card_active.vencimento,\
+	                               card_active.fechamento\
+                            FROM contas_bancarias\
+                            INNER JOIN card_active\
+                            ON contas_bancarias.id = card_active.id\
+                            WHERE contas_bancarias.id ='"+str(id_bank)+"'")
+            dados = cursor.fetchall()
+            banco.close()
+            print("dados",dados)
+            return dados[0]
+            
+        else:
+            cursor.execute("SELECT contas_bancarias.nome_banco,\
+                                   contas_bancarias.agencia,\
+                                   contas_bancarias.num_conta,\
+                                   contas_bancarias.saldo_inicial\
+                            FROM contas_bancarias\
+                            WHERE contas_bancarias.id ='"+str(id_bank)+"'")
+            dados = cursor.fetchall()
+            banco.close()
+            return dados[0]
+    
+        
     
     def get_valor_transacao(id_lancamento,id_bank,tipo,ano,mes):
         #CONNECT DB
@@ -376,10 +417,20 @@ class Return_Values_Conditions:
         a = (os.path.dirname(os.path.realpath(__file__)))
         banco = sqlite3.connect(''+a+'/bando_de_valores.db')
         cursor = banco.cursor()
-        
-        cursor.execute("UPDATE config_contas SET conta_padrao_bank = '"+str(id_bank)+"'")
-        banco.commit()
-        banco.close()
+        #VERIFICA SE JA TEM UM PADRAO
+        cursor.execute("SELECT config_contas.conta_padrao_bank FROM config_contas")
+        dados = cursor.fetchall()
+        if dados:
+            cursor.execute("UPDATE config_contas SET conta_padrao_bank = '"+str(id_bank)+"'")
+            banco.commit()
+            banco.close()
+            return True
+        else:
+            cursor.execute("INSERT INTO config_contas(conta_padrao_bank) VALUES('"+str(id_bank)+"')")
+            banco.commit()
+            banco.close()
+            return True
+
         
         
     def _return_ag_b_t_c(id):
@@ -397,7 +448,10 @@ class Return_Values_Conditions:
         cursor.execute("SELECT titular,agencia,num_conta,saldo_inicial,nome_banco FROM contas_bancarias WHERE id = '"+str(id)+"'")
         dados = cursor.fetchall()
         banco.close()
-        return dados[0]
+        if dados:
+            return dados[0]
+        else:
+            return None
     
     def return_lancamentos_month(ano,mes): # TODO RETONA COMPRAS NAO RECORRENTES
         #CONNECT DB
@@ -705,13 +759,18 @@ class Saldos:
         cursor.execute("SELECT config_contas.conta_padrao_bank FROM config_contas")
         conta_padrao = cursor.fetchall()
         print("conta padrao:",conta_padrao)
-        #SELECT SALDO INICIAL
-        cursor.execute("SELECT contas_bancarias.saldo_inicial FROM contas_bancarias WHERE id = '"+str(conta_padrao[0][0])+"'")
-        saldo_inicial = cursor.fetchall()
-        saldo_inicial = saldo_inicial[0][0]
+        if conta_padrao:
+            #SELECT SALDO INICIAL
+            cursor.execute("SELECT contas_bancarias.saldo_inicial FROM contas_bancarias WHERE id = '"+str(conta_padrao[0][0])+"'")
+            saldo_inicial = cursor.fetchall()
 
+            if saldo_inicial:
+                saldo_inicial = saldo_inicial[0][0]
 
-
+            else:
+                saldo_inicial = str(0)
+        else:
+            saldo_inicial = str(0)
        
         return saldo_inicial
     
@@ -948,3 +1007,135 @@ class Pdf:
             return False
         else:
             return dados
+        
+
+
+
+
+    
+
+class Update_Remove:
+    
+    def _update_table_banks_cards(id_bank,id_card,dados):
+        
+        #UPDATE TABLE BANKS CARDS
+        #id_bank
+        #id_card
+        # [banco,agencia,conta,saldo,limite,final_cartao,titular,vencimento,fechamento]
+        
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+
+        if id_card != "Não":
+            tabelas = ['card_active','contas_bancarias']
+            
+            #UPDATE TABLE BANK
+            cursor.execute("UPDATE contas_bancarias SET nome_banco = '"+str(dados[0])+"',agencia = '"+str(dados[1])+"',num_conta = '"+str(dados[2])+"',saldo_inicial = '"+str(dados[3])+"' WHERE contas_bancarias.id = '"+str(id_bank)+"'")
+            banco.commit()
+        
+            #UPDATE TABLE CARD
+            cursor.execute("UPDATE card_active SET limite = '"+str(dados[4])+"',final = '"+str(dados[5])+"',titular = '"+str(dados[6])+"',vencimento = '"+str(dados[7])+"',fechamento = '"+str(dados[8])+"' WHERE card_active.id = '"+str(id_card)+"'")
+            banco.commit()
+        
+        else:
+            tabelas = ['contas_bancarias']
+            
+            #UPDATE TABLE BANK
+            cursor.execute("UPDATE contas_bancarias SET nome_banco = '"+str(dados[0])+"',agencia = '"+str(dados[1])+"',num_conta = '"+str(dados[2])+"',saldo_inicial = '"+str(dados[3])+"' WHERE contas_bancarias.id = '"+str(id_bank)+"'")
+            banco.commit()
+        return True
+    
+    
+    
+    
+    def _remove_table_banks_cards(id_bank,id_card):
+        
+        #REMOVE TABLE BANKS CARDS
+        #id_bank
+        #id_card
+        
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        if id_card != "Não":
+            tabelas = ['card_active','contas_bancarias']
+            
+            #REMOVE TABLE BANK
+            cursor.execute("DELETE FROM contas_bancarias WHERE contas_bancarias.id = '"+str(id_bank)+"'")
+            banco.commit()
+        
+            #REMOVE TABLE CARD
+            cursor.execute("DELETE FROM card_active WHERE card_active.id = '"+str(id_card)+"'")
+            banco.commit()
+            
+            #REMOVE TABLE PDF
+            cursor.execute("DELETE FROM pdf_patchs WHERE pdf_patchs.id_bank = '"+str(id_bank)+"'")
+            banco.commit()
+            
+            #REMOVE TABLE LANCAMENTOS
+            cursor.execute("DELETE FROM new_lancamento WHERE new_lancamento.id_bank = '"+str(id_bank)+"'")
+            banco.commit()
+            
+            #REMOVE PAGAMENTOS_SALDO
+            cursor.execute("DELETE FROM pagamentos_saldo WHERE pagamentos_saldo.id_bank = '"+str(id_bank)+"'")
+            banco.commit()
+            
+            #REMOVE STATUS_LANCAMENTO
+            cursor.execute("DELETE FROM status_lancamento WHERE status_lancamento.id_bank = '"+str(id_bank)+"'")
+            
+            #REMOVE prioridade_value
+            cursor.execute("DELETE FROM prioridade_value WHERE prioridade_value.id_bank = '"+str(id_bank)+"'")
+            
+            #REMOVE config_lancamento
+            cursor.execute("DELETE FROM config_lancamento WHERE config_lancamento.id_bank = '"+str(id_bank)+"'")
+            
+            #REMOVE config_contas #CONTA PADRAO
+            verify = cursor.execute("SELECT * FROM config_contas WHERE config_contas.conta_padrao_bank = '"+str(id_bank)+"'").fetchall()
+            if verify:
+                cursor.execute("DELETE FROM config_contas WHERE config_contas.conta_padrao_bank = '"+str(id_bank)+"'")
+            banco.commit()
+
+            #DELETE TABLE extrato_cartao_
+            cursor.execute("DROP TABLE IF EXISTS extrato_cartao_"+str(id_bank)+"")
+            banco.commit()
+            
+
+            
+        else:
+
+            
+            #REMOVE TABLE BANK
+            cursor.execute("DELETE FROM contas_bancarias WHERE contas_bancarias.id = '"+str(id_bank)+"'")
+            banco.commit()
+            
+            #REMOVE TABLE PDF
+            cursor.execute("DELETE FROM pdf_patchs WHERE pdf_patchs.id_bank = '"+str(id_bank)+"'")
+            banco.commit()
+            
+            #REMOVE TABLE LANCAMENTOS
+            cursor.execute("DELETE FROM new_lancamento WHERE new_lancamento.id_bank = '"+str(id_bank)+"'")
+            banco.commit()
+            
+            #REMOVE PAGAMENTOS_SALDO
+            cursor.execute("DELETE FROM pagamentos_saldo WHERE pagamentos_saldo.id_bank = '"+str(id_bank)+"'")
+            banco.commit()
+            
+            #REMOVE STATUS_LANCAMENTO
+            cursor.execute("DELETE FROM status_lancamento WHERE status_lancamento.id_bank = '"+str(id_bank)+"'")
+            
+            #REMOVE prioridade_value
+            cursor.execute("DELETE FROM prioridade_value WHERE prioridade_value.id_bank = '"+str(id_bank)+"'")
+            
+            #REMOVE config_lancamento
+            cursor.execute("DELETE FROM config_lancamento WHERE config_lancamento.id_bank = '"+str(id_bank)+"'")
+            
+            #REMOVE config_contas #CONTA PADRAO
+            verify = cursor.execute("SELECT * FROM config_contas WHERE config_contas.conta_padrao_bank = '"+str(id_bank)+"'").fetchall()
+            if verify:
+                cursor.execute("DELETE FROM config_contas WHERE config_contas.conta_padrao_bank = '"+str(id_bank)+"'")
+            banco.commit()
+            
+            
+        return True

@@ -1192,6 +1192,7 @@ class Ui_MainWindow(object):
 
         self.detalhes_cartao_2 = QStackedWidget(self.scrollAreaWidgetContents_6)
         self.detalhes_cartao_2.setObjectName(u"detalhes_cartao_2")
+        self.detalhes_cartao_2.setFont(font)
         self.detalhes_cartao_2.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); ")
         self.detalhes_cartao_2.setFrameShape(QFrame.StyledPanel)
         self.detalhes_cartao_2.setFrameShadow(QFrame.Raised)
@@ -1423,6 +1424,7 @@ class Ui_MainWindow(object):
         self.frame_51 = QFrame(self.main_dasht_top_2)
         self.frame_51.setObjectName(u"frame_51")
         self.frame_51.setMinimumSize(QSize(400, 200))
+        self.frame_51.setFont(font)
         self.frame_51.setStyleSheet(u"border:1px solid rgba(255,255,255,40);\n"
 "border-image:none;\n"
 "background-color: rgba(255, 255, 255, 30); ")
@@ -1469,6 +1471,13 @@ class Ui_MainWindow(object):
         self.label_70 = QLabel(self.frame_51)
         self.label_70.setObjectName(u"label_70")
         self.label_70.setGeometry(QRect(10, 110, 201, 41))
+        font3 = QFont()
+        font3.setFamily(u"Bahnschrift Light Condensed")
+        font3.setPointSize(20)
+        font3.setBold(False)
+        font3.setItalic(False)
+        font3.setWeight(3)
+        self.label_70.setFont(font3)
         self.label_70.setStyleSheet(u"background-color:rgba(255,255,255,0);\n"
 "font-size:20pt;\n"
 "border:none;")
@@ -1827,13 +1836,13 @@ class Ui_MainWindow(object):
         __qtablewidgetitem3.setTextAlignment(Qt.AlignCenter);
         self.table_faturas_ind_4.setHorizontalHeaderItem(3, __qtablewidgetitem3)
         self.table_faturas_ind_4.setObjectName(u"table_faturas_ind_4")
-        font3 = QFont()
-        font3.setFamily(u"Bahnschrift Light Condensed")
-        font3.setPointSize(11)
-        font3.setBold(False)
-        font3.setItalic(False)
-        font3.setWeight(3)
-        self.table_faturas_ind_4.setFont(font3)
+        font4 = QFont()
+        font4.setFamily(u"Bahnschrift Light Condensed")
+        font4.setPointSize(11)
+        font4.setBold(False)
+        font4.setItalic(False)
+        font4.setWeight(3)
+        self.table_faturas_ind_4.setFont(font4)
         self.table_faturas_ind_4.setStyleSheet(u"QWidget {\n"
 "	\n"
 "    color: #fffff8;\n"
@@ -2424,25 +2433,25 @@ class Ui_MainWindow(object):
             self.tableWidget.setColumnCount(12)
         icon17 = QIcon()
         icon17.addFile(u":/main_menutable/main_page_tables/unchecked.png", QSize(), QIcon.Normal, QIcon.Off)
-        font4 = QFont()
-        font4.setStyleStrategy(QFont.PreferAntialias)
+        font5 = QFont()
+        font5.setStyleStrategy(QFont.PreferAntialias)
         __qtablewidgetitem4 = QTableWidgetItem()
         __qtablewidgetitem4.setTextAlignment(Qt.AlignCenter);
-        __qtablewidgetitem4.setFont(font4);
+        __qtablewidgetitem4.setFont(font5);
         __qtablewidgetitem4.setIcon(icon17);
         self.tableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem4)
-        font5 = QFont()
-        font5.setFamily(u"Yu Gothic")
-        font5.setPointSize(12)
+        font6 = QFont()
+        font6.setFamily(u"Yu Gothic")
+        font6.setPointSize(12)
         __qtablewidgetitem5 = QTableWidgetItem()
         __qtablewidgetitem5.setTextAlignment(Qt.AlignCenter);
-        __qtablewidgetitem5.setFont(font5);
+        __qtablewidgetitem5.setFont(font6);
         self.tableWidget.setHorizontalHeaderItem(1, __qtablewidgetitem5)
         __qtablewidgetitem6 = QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(2, __qtablewidgetitem6)
         __qtablewidgetitem7 = QTableWidgetItem()
         __qtablewidgetitem7.setTextAlignment(Qt.AlignCenter);
-        __qtablewidgetitem7.setFont(font5);
+        __qtablewidgetitem7.setFont(font6);
         self.tableWidget.setHorizontalHeaderItem(3, __qtablewidgetitem7)
         __qtablewidgetitem8 = QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(4, __qtablewidgetitem8)
@@ -2450,37 +2459,37 @@ class Ui_MainWindow(object):
         icon18.addFile(u":/main_menutable/main_page_tables/decrecente.png", QSize(), QIcon.Normal, QIcon.Off)
         __qtablewidgetitem9 = QTableWidgetItem()
         __qtablewidgetitem9.setTextAlignment(Qt.AlignCenter);
-        __qtablewidgetitem9.setFont(font5);
+        __qtablewidgetitem9.setFont(font6);
         __qtablewidgetitem9.setIcon(icon18);
         self.tableWidget.setHorizontalHeaderItem(5, __qtablewidgetitem9)
         __qtablewidgetitem10 = QTableWidgetItem()
         __qtablewidgetitem10.setTextAlignment(Qt.AlignCenter);
-        __qtablewidgetitem10.setFont(font5);
+        __qtablewidgetitem10.setFont(font6);
         __qtablewidgetitem10.setIcon(icon18);
         self.tableWidget.setHorizontalHeaderItem(6, __qtablewidgetitem10)
         __qtablewidgetitem11 = QTableWidgetItem()
         __qtablewidgetitem11.setTextAlignment(Qt.AlignCenter);
-        __qtablewidgetitem11.setFont(font5);
+        __qtablewidgetitem11.setFont(font6);
         __qtablewidgetitem11.setIcon(icon18);
         self.tableWidget.setHorizontalHeaderItem(7, __qtablewidgetitem11)
         __qtablewidgetitem12 = QTableWidgetItem()
         __qtablewidgetitem12.setTextAlignment(Qt.AlignCenter);
-        __qtablewidgetitem12.setFont(font5);
+        __qtablewidgetitem12.setFont(font6);
         __qtablewidgetitem12.setIcon(icon18);
         self.tableWidget.setHorizontalHeaderItem(8, __qtablewidgetitem12)
         __qtablewidgetitem13 = QTableWidgetItem()
         __qtablewidgetitem13.setTextAlignment(Qt.AlignCenter);
-        __qtablewidgetitem13.setFont(font5);
+        __qtablewidgetitem13.setFont(font6);
         __qtablewidgetitem13.setIcon(icon18);
         self.tableWidget.setHorizontalHeaderItem(9, __qtablewidgetitem13)
         __qtablewidgetitem14 = QTableWidgetItem()
         __qtablewidgetitem14.setTextAlignment(Qt.AlignCenter);
-        __qtablewidgetitem14.setFont(font5);
+        __qtablewidgetitem14.setFont(font6);
         __qtablewidgetitem14.setIcon(icon18);
         self.tableWidget.setHorizontalHeaderItem(10, __qtablewidgetitem14)
         __qtablewidgetitem15 = QTableWidgetItem()
         __qtablewidgetitem15.setTextAlignment(Qt.AlignCenter);
-        __qtablewidgetitem15.setFont(font5);
+        __qtablewidgetitem15.setFont(font6);
         __qtablewidgetitem15.setIcon(icon18);
         self.tableWidget.setHorizontalHeaderItem(11, __qtablewidgetitem15)
         self.tableWidget.setObjectName(u"tableWidget")
@@ -3489,13 +3498,13 @@ class Ui_MainWindow(object):
         self.label_85.setObjectName(u"label_85")
         self.label_85.setMinimumSize(QSize(0, 27))
         self.label_85.setMaximumSize(QSize(16777215, 18))
-        font6 = QFont()
-        font6.setFamily(u"Bahnschrift Light Condensed")
-        font6.setPointSize(13)
-        font6.setBold(False)
-        font6.setItalic(False)
-        font6.setWeight(3)
-        self.label_85.setFont(font6)
+        font7 = QFont()
+        font7.setFamily(u"Bahnschrift Light Condensed")
+        font7.setPointSize(13)
+        font7.setBold(False)
+        font7.setItalic(False)
+        font7.setWeight(3)
+        self.label_85.setFont(font7)
         self.label_85.setAutoFillBackground(False)
         self.label_85.setStyleSheet(u"border: 0px;\n"
 "border-radius:3px;\n"
@@ -3576,7 +3585,7 @@ class Ui_MainWindow(object):
         self.label_100.setObjectName(u"label_100")
         self.label_100.setMinimumSize(QSize(0, 0))
         self.label_100.setMaximumSize(QSize(16777215, 28))
-        self.label_100.setFont(font6)
+        self.label_100.setFont(font7)
         self.label_100.setLayoutDirection(Qt.LeftToRight)
         self.label_100.setAutoFillBackground(False)
         self.label_100.setStyleSheet(u"border: 0px;\n"
@@ -3658,7 +3667,7 @@ class Ui_MainWindow(object):
         self.label_90.setObjectName(u"label_90")
         self.label_90.setMinimumSize(QSize(177, 40))
         self.label_90.setMaximumSize(QSize(177, 40))
-        self.label_90.setFont(font6)
+        self.label_90.setFont(font7)
         self.label_90.setAutoFillBackground(False)
         self.label_90.setStyleSheet(u"border: 0px;\n"
 "border-radius:3px;\n"
@@ -3732,7 +3741,7 @@ class Ui_MainWindow(object):
         self.label_82.setObjectName(u"label_82")
         self.label_82.setMinimumSize(QSize(0, 0))
         self.label_82.setMaximumSize(QSize(16777215, 25))
-        self.label_82.setFont(font6)
+        self.label_82.setFont(font7)
         self.label_82.setAutoFillBackground(False)
         self.label_82.setStyleSheet(u"border: 0px;\n"
 "border-radius:3px;\n"
@@ -3810,7 +3819,7 @@ class Ui_MainWindow(object):
         self.label_79.setObjectName(u"label_79")
         self.label_79.setMinimumSize(QSize(0, 0))
         self.label_79.setMaximumSize(QSize(16777215, 18))
-        self.label_79.setFont(font6)
+        self.label_79.setFont(font7)
         self.label_79.setAutoFillBackground(False)
         self.label_79.setStyleSheet(u"border: 0px;\n"
 "border-radius:3px;\n"
@@ -3890,7 +3899,7 @@ class Ui_MainWindow(object):
         self.label_80.setObjectName(u"label_80")
         self.label_80.setMinimumSize(QSize(0, 0))
         self.label_80.setMaximumSize(QSize(16777215, 18))
-        self.label_80.setFont(font6)
+        self.label_80.setFont(font7)
         self.label_80.setAutoFillBackground(False)
         self.label_80.setStyleSheet(u"border: 0px;\n"
 "border-radius:3px;\n"
@@ -4062,7 +4071,7 @@ class Ui_MainWindow(object):
         self.label_81.setObjectName(u"label_81")
         self.label_81.setMinimumSize(QSize(177, 40))
         self.label_81.setMaximumSize(QSize(177, 40))
-        self.label_81.setFont(font6)
+        self.label_81.setFont(font7)
         self.label_81.setAutoFillBackground(False)
         self.label_81.setStyleSheet(u"border: 0px;\n"
 "border-radius:3px;\n"
@@ -4140,7 +4149,7 @@ class Ui_MainWindow(object):
         self.label_83.setObjectName(u"label_83")
         self.label_83.setMinimumSize(QSize(0, 0))
         self.label_83.setMaximumSize(QSize(16777215, 28))
-        self.label_83.setFont(font6)
+        self.label_83.setFont(font7)
         self.label_83.setLayoutDirection(Qt.LeftToRight)
         self.label_83.setAutoFillBackground(False)
         self.label_83.setStyleSheet(u"border: 0px;\n"
@@ -4245,7 +4254,7 @@ class Ui_MainWindow(object):
         self.label_101.setObjectName(u"label_101")
         self.label_101.setMinimumSize(QSize(0, 0))
         self.label_101.setMaximumSize(QSize(16777215, 28))
-        self.label_101.setFont(font6)
+        self.label_101.setFont(font7)
         self.label_101.setLayoutDirection(Qt.LeftToRight)
         self.label_101.setAutoFillBackground(False)
         self.label_101.setStyleSheet(u"border: 0px;\n"
@@ -4323,7 +4332,7 @@ class Ui_MainWindow(object):
         self.label_86.setObjectName(u"label_86")
         self.label_86.setMinimumSize(QSize(0, 0))
         self.label_86.setMaximumSize(QSize(16777215, 28))
-        self.label_86.setFont(font6)
+        self.label_86.setFont(font7)
         self.label_86.setLayoutDirection(Qt.LeftToRight)
         self.label_86.setAutoFillBackground(False)
         self.label_86.setStyleSheet(u"border: 0px;\n"
@@ -4404,7 +4413,7 @@ class Ui_MainWindow(object):
         self.label_89.setObjectName(u"label_89")
         self.label_89.setMinimumSize(QSize(0, 0))
         self.label_89.setMaximumSize(QSize(16777215, 28))
-        self.label_89.setFont(font6)
+        self.label_89.setFont(font7)
         self.label_89.setLayoutDirection(Qt.LeftToRight)
         self.label_89.setAutoFillBackground(False)
         self.label_89.setStyleSheet(u"border: 0px;\n"
@@ -4484,7 +4493,7 @@ class Ui_MainWindow(object):
         self.label_88.setObjectName(u"label_88")
         self.label_88.setMinimumSize(QSize(0, 0))
         self.label_88.setMaximumSize(QSize(16777215, 28))
-        self.label_88.setFont(font6)
+        self.label_88.setFont(font7)
         self.label_88.setLayoutDirection(Qt.LeftToRight)
         self.label_88.setAutoFillBackground(False)
         self.label_88.setStyleSheet(u"border: 0px;\n"
@@ -4601,7 +4610,7 @@ class Ui_MainWindow(object):
         self.label_87.setObjectName(u"label_87")
         self.label_87.setMinimumSize(QSize(0, 0))
         self.label_87.setMaximumSize(QSize(16777215, 28))
-        self.label_87.setFont(font6)
+        self.label_87.setFont(font7)
         self.label_87.setLayoutDirection(Qt.LeftToRight)
         self.label_87.setAutoFillBackground(False)
         self.label_87.setStyleSheet(u"border: 0px;\n"
@@ -4839,7 +4848,7 @@ class Ui_MainWindow(object):
         self.scrollArea_12.setWidgetResizable(True)
         self.scrollAreaWidgetContents_12 = QWidget()
         self.scrollAreaWidgetContents_12.setObjectName(u"scrollAreaWidgetContents_12")
-        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 1458, 920))
+        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, -261, 1458, 920))
         self.scrollAreaWidgetContents_12.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); \n"
 "")
         self.verticalLayout_112 = QVBoxLayout(self.scrollAreaWidgetContents_12)
@@ -4928,17 +4937,17 @@ class Ui_MainWindow(object):
         self.select_conta_bancaria.addItem("")
         self.select_conta_bancaria.setObjectName(u"select_conta_bancaria")
         self.select_conta_bancaria.setMinimumSize(QSize(0, 30))
-        font7 = QFont()
-        font7.setFamily(u"Bahnschrift Light Condensed")
-        font7.setPointSize(14)
-        font7.setBold(False)
-        font7.setItalic(False)
-        font7.setUnderline(False)
-        font7.setWeight(3)
-        font7.setStrikeOut(False)
-        font7.setKerning(True)
-        font7.setStyleStrategy(QFont.PreferDefault)
-        self.select_conta_bancaria.setFont(font7)
+        font8 = QFont()
+        font8.setFamily(u"Bahnschrift Light Condensed")
+        font8.setPointSize(14)
+        font8.setBold(False)
+        font8.setItalic(False)
+        font8.setUnderline(False)
+        font8.setWeight(3)
+        font8.setStrikeOut(False)
+        font8.setKerning(True)
+        font8.setStyleStrategy(QFont.PreferDefault)
+        self.select_conta_bancaria.setFont(font8)
         self.select_conta_bancaria.setLayoutDirection(Qt.LeftToRight)
         self.select_conta_bancaria.setStyleSheet(u"")
 
@@ -5222,6 +5231,7 @@ class Ui_MainWindow(object):
 
         self.label_104 = QLabel(self.page_config_creduts)
         self.label_104.setObjectName(u"label_104")
+        self.label_104.setFont(font)
         self.label_104.setStyleSheet(u"background-color:rgba(255,255,255,0);\n"
 "border:none;")
         self.label_104.setAlignment(Qt.AlignCenter)
@@ -5295,6 +5305,16 @@ class Ui_MainWindow(object):
 
         self.textcard_10 = QLabel(self.frame_94)
         self.textcard_10.setObjectName(u"textcard_10")
+        font9 = QFont()
+        font9.setFamily(u"Bahnschrift Light Condensed")
+        font9.setPointSize(14)
+        font9.setBold(False)
+        font9.setItalic(False)
+        font9.setUnderline(False)
+        font9.setWeight(3)
+        font9.setStrikeOut(False)
+        font9.setKerning(True)
+        self.textcard_10.setFont(font9)
         self.textcard_10.setStyleSheet(u"border: 0px;\n"
 "")
         self.textcard_10.setTextFormat(Qt.AutoText)
@@ -5467,75 +5487,6 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_85.addWidget(self.add_bank)
 
-        self.remover_bank = QPushButton(self.frame_92)
-        self.remover_bank.setObjectName(u"remover_bank")
-        self.remover_bank.setMinimumSize(QSize(110, 30))
-        self.remover_bank.setMaximumSize(QSize(110, 25))
-        self.remover_bank.setFont(font)
-        self.remover_bank.setStyleSheet(u"\n"
-"\n"
-"QPushButton{\n"
-"	\n"
-"\n"
-"\n"
-"	border-radius: 10px;\n"
-"\n"
-"	\n"
-"	background-color: rgb(238, 238, 238);\n"
-"\n"
-"	border: 1px solid  rgb(55, 55, 55);\n"
-"}\n"
-"\n"
-"QPushButton:hover{\n"
-"	\n"
-"	\n"
-"	background-color: rgb(255, 255, 255);\n"
-"	border: 2px solid  rgb(255, 255, 255);\n"
-"}\n"
-"\n"
-"QPushButton:pressed{\n"
-"	\n"
-"	\n"
-"	background-color: rgb(121, 121, 121);\n"
-"	border: 2px solid  rgb(55, 55, 55);\n"
-"}")
-
-        self.horizontalLayout_85.addWidget(self.remover_bank)
-
-        self.update_bank = QPushButton(self.frame_92)
-        self.update_bank.setObjectName(u"update_bank")
-        self.update_bank.setMinimumSize(QSize(0, 30))
-        self.update_bank.setMaximumSize(QSize(110, 25))
-        self.update_bank.setStyleSheet(u"\n"
-"\n"
-"QPushButton{\n"
-"	\n"
-"\n"
-"\n"
-"	border-radius: 10px;\n"
-"\n"
-"	\n"
-"	background-color: rgb(238, 238, 238);\n"
-"\n"
-"	border: 1px solid  rgb(55, 55, 55);\n"
-"}\n"
-"\n"
-"QPushButton:hover{\n"
-"	\n"
-"	\n"
-"	background-color: rgb(255, 255, 255);\n"
-"	border: 2px solid  rgb(255, 255, 255);\n"
-"}\n"
-"\n"
-"QPushButton:pressed{\n"
-"	\n"
-"	\n"
-"	background-color: rgb(121, 121, 121);\n"
-"	border: 2px solid  rgb(55, 55, 55);\n"
-"}")
-
-        self.horizontalLayout_85.addWidget(self.update_bank)
-
 
         self.verticalLayout_101.addWidget(self.frame_92)
 
@@ -5544,7 +5495,8 @@ class Ui_MainWindow(object):
 
         self.frame_96 = QFrame(self.botto_2)
         self.frame_96.setObjectName(u"frame_96")
-        self.frame_96.setMaximumSize(QSize(473, 16777215))
+        self.frame_96.setMinimumSize(QSize(0, 582))
+        self.frame_96.setMaximumSize(QSize(473, 582))
         self.frame_96.setStyleSheet(u"background-color:rgba(255,255,255,30);\n"
 "border-radius:5px;")
         self.frame_96.setFrameShape(QFrame.StyledPanel)
@@ -5565,15 +5517,17 @@ class Ui_MainWindow(object):
 
         self.frame_232 = QFrame(self.frame_96)
         self.frame_232.setObjectName(u"frame_232")
-        self.frame_232.setMinimumSize(QSize(120, 0))
-        self.frame_232.setMaximumSize(QSize(16777215, 67))
-        self.frame_232.setStyleSheet(u"background-color:rgba(255,255,255,10);\n"
+        self.frame_232.setMinimumSize(QSize(0, 0))
+        self.frame_232.setMaximumSize(QSize(16777215, 30))
+        self.frame_232.setStyleSheet(u"background-color:rgba(255,255,255,0);\n"
 "border-radius:5px;\n"
 "font: 25 13pt \"Bahnschrift Light Condensed\";")
         self.frame_232.setFrameShape(QFrame.StyledPanel)
         self.frame_232.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_86 = QHBoxLayout(self.frame_232)
+        self.horizontalLayout_86.setSpacing(0)
         self.horizontalLayout_86.setObjectName(u"horizontalLayout_86")
+        self.horizontalLayout_86.setContentsMargins(10, 0, 0, 0)
         self.frame_233 = QFrame(self.frame_232)
         self.frame_233.setObjectName(u"frame_233")
         self.frame_233.setMinimumSize(QSize(40, 0))
@@ -5599,9 +5553,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_105.setContentsMargins(0, 0, 0, 0)
         self.label_91 = QLabel(self.frame_234)
         self.label_91.setObjectName(u"label_91")
-        self.label_91.setMinimumSize(QSize(0, 27))
+        self.label_91.setMinimumSize(QSize(0, 0))
         self.label_91.setMaximumSize(QSize(16777215, 16777215))
-        self.label_91.setFont(font6)
+        self.label_91.setFont(font7)
         self.label_91.setAutoFillBackground(False)
         self.label_91.setStyleSheet(u"border: 0px;\n"
 "border-radius:3px;\n"
@@ -5643,14 +5597,17 @@ class Ui_MainWindow(object):
 
         self.frame_206 = QFrame(self.frame_96)
         self.frame_206.setObjectName(u"frame_206")
-        self.frame_206.setMinimumSize(QSize(120, 0))
-        self.frame_206.setMaximumSize(QSize(16777215, 67))
-        self.frame_206.setStyleSheet(u"background-color:rgba(255,255,255,10);\n"
-"border-radius:5px;")
+        self.frame_206.setMinimumSize(QSize(0, 0))
+        self.frame_206.setMaximumSize(QSize(16777215, 30))
+        self.frame_206.setStyleSheet(u"background-color:rgba(255,255,255,0);\n"
+"border-radius:5px;\n"
+"font: 25 13pt \"Bahnschrift Light Condensed\";")
         self.frame_206.setFrameShape(QFrame.StyledPanel)
         self.frame_206.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_87 = QHBoxLayout(self.frame_206)
+        self.horizontalLayout_87.setSpacing(0)
         self.horizontalLayout_87.setObjectName(u"horizontalLayout_87")
+        self.horizontalLayout_87.setContentsMargins(10, 0, 0, 0)
         self.frame_207 = QFrame(self.frame_206)
         self.frame_207.setObjectName(u"frame_207")
         self.frame_207.setMinimumSize(QSize(40, 0))
@@ -5676,9 +5633,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_106.setContentsMargins(0, 0, 0, 0)
         self.label_84 = QLabel(self.frame_208)
         self.label_84.setObjectName(u"label_84")
-        self.label_84.setMinimumSize(QSize(0, 27))
-        self.label_84.setMaximumSize(QSize(16777215, 18))
-        self.label_84.setFont(font)
+        self.label_84.setMinimumSize(QSize(0, 0))
+        self.label_84.setMaximumSize(QSize(16777215, 16777215))
+        self.label_84.setFont(font7)
         self.label_84.setAutoFillBackground(False)
         self.label_84.setStyleSheet(u"border: 0px;\n"
 "border-radius:3px;")
@@ -5707,7 +5664,7 @@ class Ui_MainWindow(object):
         self.plainTextEdit_2.setStyleSheet(u"border:none;")
         self.plainTextEdit_2.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.plainTextEdit_2.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.plainTextEdit_2.setReadOnly(True)
+        self.plainTextEdit_2.setReadOnly(False)
 
         self.horizontalLayout_98.addWidget(self.plainTextEdit_2)
 
@@ -5719,14 +5676,17 @@ class Ui_MainWindow(object):
 
         self.frame_237 = QFrame(self.frame_96)
         self.frame_237.setObjectName(u"frame_237")
-        self.frame_237.setMinimumSize(QSize(120, 0))
-        self.frame_237.setMaximumSize(QSize(16777215, 67))
-        self.frame_237.setStyleSheet(u"background-color:rgba(255,255,255,10);\n"
-"border-radius:5px;")
+        self.frame_237.setMinimumSize(QSize(0, 0))
+        self.frame_237.setMaximumSize(QSize(16777215, 30))
+        self.frame_237.setStyleSheet(u"background-color:rgba(255,255,255,0);\n"
+"border-radius:5px;\n"
+"font: 25 13pt \"Bahnschrift Light Condensed\";")
         self.frame_237.setFrameShape(QFrame.StyledPanel)
         self.frame_237.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_88 = QHBoxLayout(self.frame_237)
+        self.horizontalLayout_88.setSpacing(0)
         self.horizontalLayout_88.setObjectName(u"horizontalLayout_88")
+        self.horizontalLayout_88.setContentsMargins(10, 0, 0, 0)
         self.frame_238 = QFrame(self.frame_237)
         self.frame_238.setObjectName(u"frame_238")
         self.frame_238.setMinimumSize(QSize(40, 0))
@@ -5757,7 +5717,7 @@ class Ui_MainWindow(object):
         self.label_92.setObjectName(u"label_92")
         self.label_92.setMinimumSize(QSize(0, 0))
         self.label_92.setMaximumSize(QSize(16777215, 18))
-        self.label_92.setFont(font)
+        self.label_92.setFont(font7)
         self.label_92.setAutoFillBackground(False)
         self.label_92.setStyleSheet(u"border: 0px;\n"
 "border-radius:3px;")
@@ -5786,7 +5746,7 @@ class Ui_MainWindow(object):
         self.plainTextEdit_3.setStyleSheet(u"border:none;")
         self.plainTextEdit_3.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.plainTextEdit_3.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.plainTextEdit_3.setReadOnly(True)
+        self.plainTextEdit_3.setReadOnly(False)
 
         self.horizontalLayout_97.addWidget(self.plainTextEdit_3)
 
@@ -5798,18 +5758,21 @@ class Ui_MainWindow(object):
 
         self.frame_241 = QFrame(self.frame_96)
         self.frame_241.setObjectName(u"frame_241")
-        self.frame_241.setMinimumSize(QSize(120, 0))
-        self.frame_241.setMaximumSize(QSize(16777215, 67))
-        self.frame_241.setStyleSheet(u"background-color:rgba(255,255,255,10);\n"
-"border-radius:5px;")
+        self.frame_241.setMinimumSize(QSize(0, 0))
+        self.frame_241.setMaximumSize(QSize(16777215, 30))
+        self.frame_241.setStyleSheet(u"background-color:rgba(255,255,255,0);\n"
+"border-radius:5px;\n"
+"font: 25 13pt \"Bahnschrift Light Condensed\";")
         self.frame_241.setFrameShape(QFrame.StyledPanel)
         self.frame_241.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_89 = QHBoxLayout(self.frame_241)
+        self.horizontalLayout_89.setSpacing(0)
         self.horizontalLayout_89.setObjectName(u"horizontalLayout_89")
+        self.horizontalLayout_89.setContentsMargins(10, 0, 0, 0)
         self.frame_242 = QFrame(self.frame_241)
         self.frame_242.setObjectName(u"frame_242")
         self.frame_242.setMinimumSize(QSize(40, 0))
-        self.frame_242.setMaximumSize(QSize(40, 40))
+        self.frame_242.setMaximumSize(QSize(40, 28))
         self.frame_242.setStyleSheet(u"border-image: url(:/backgroud/src-page-cartoes/calendarios.png);\n"
 "\n"
 "\n"
@@ -5837,7 +5800,7 @@ class Ui_MainWindow(object):
         self.label_93.setObjectName(u"label_93")
         self.label_93.setMinimumSize(QSize(0, 0))
         self.label_93.setMaximumSize(QSize(16777215, 18))
-        self.label_93.setFont(font)
+        self.label_93.setFont(font7)
         self.label_93.setAutoFillBackground(False)
         self.label_93.setStyleSheet(u"border: 0px;\n"
 "border-radius:3px;")
@@ -5878,8 +5841,8 @@ class Ui_MainWindow(object):
 
         self.label_64 = QLabel(self.frame_96)
         self.label_64.setObjectName(u"label_64")
-        self.label_64.setMinimumSize(QSize(0, 47))
-        self.label_64.setMaximumSize(QSize(16777215, 16777215))
+        self.label_64.setMinimumSize(QSize(0, 31))
+        self.label_64.setMaximumSize(QSize(16777215, 20))
         self.label_64.setFont(font)
         self.label_64.setStyleSheet(u"background-color:rgba(255,255,255,0);\n"
 "border-bottom: 1px solid rgba(255,255,255,30);\n"
@@ -5890,14 +5853,17 @@ class Ui_MainWindow(object):
 
         self.frame_245 = QFrame(self.frame_96)
         self.frame_245.setObjectName(u"frame_245")
-        self.frame_245.setMinimumSize(QSize(120, 0))
-        self.frame_245.setMaximumSize(QSize(16777215, 67))
-        self.frame_245.setStyleSheet(u"background-color:rgba(255,255,255,10);\n"
-"border-radius:5px;")
+        self.frame_245.setMinimumSize(QSize(0, 0))
+        self.frame_245.setMaximumSize(QSize(16777215, 30))
+        self.frame_245.setStyleSheet(u"background-color:rgba(255,255,255,0);\n"
+"border-radius:5px;\n"
+"font: 25 13pt \"Bahnschrift Light Condensed\";")
         self.frame_245.setFrameShape(QFrame.StyledPanel)
         self.frame_245.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_91 = QHBoxLayout(self.frame_245)
+        self.horizontalLayout_91.setSpacing(0)
         self.horizontalLayout_91.setObjectName(u"horizontalLayout_91")
+        self.horizontalLayout_91.setContentsMargins(10, 0, 0, 0)
         self.frame_246 = QFrame(self.frame_245)
         self.frame_246.setObjectName(u"frame_246")
         self.frame_246.setMinimumSize(QSize(40, 0))
@@ -5929,7 +5895,7 @@ class Ui_MainWindow(object):
         self.label_94.setObjectName(u"label_94")
         self.label_94.setMinimumSize(QSize(0, 0))
         self.label_94.setMaximumSize(QSize(16777215, 16777215))
-        self.label_94.setFont(font)
+        self.label_94.setFont(font7)
         self.label_94.setAutoFillBackground(False)
         self.label_94.setStyleSheet(u"border: 0px;\n"
 "border-radius:3px;")
@@ -5958,7 +5924,7 @@ class Ui_MainWindow(object):
         self.plainTextEdit_5.setStyleSheet(u"border:none;")
         self.plainTextEdit_5.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.plainTextEdit_5.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.plainTextEdit_5.setReadOnly(True)
+        self.plainTextEdit_5.setReadOnly(False)
 
         self.horizontalLayout_95.addWidget(self.plainTextEdit_5)
 
@@ -5970,14 +5936,17 @@ class Ui_MainWindow(object):
 
         self.frame_265 = QFrame(self.frame_96)
         self.frame_265.setObjectName(u"frame_265")
-        self.frame_265.setMinimumSize(QSize(120, 0))
-        self.frame_265.setMaximumSize(QSize(16777215, 67))
-        self.frame_265.setStyleSheet(u"background-color:rgba(255,255,255,10);\n"
-"border-radius:5px;")
+        self.frame_265.setMinimumSize(QSize(0, 0))
+        self.frame_265.setMaximumSize(QSize(16777215, 30))
+        self.frame_265.setStyleSheet(u"background-color:rgba(255,255,255,0);\n"
+"border-radius:5px;\n"
+"font: 25 13pt \"Bahnschrift Light Condensed\";")
         self.frame_265.setFrameShape(QFrame.StyledPanel)
         self.frame_265.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_103 = QHBoxLayout(self.frame_265)
+        self.horizontalLayout_103.setSpacing(0)
         self.horizontalLayout_103.setObjectName(u"horizontalLayout_103")
+        self.horizontalLayout_103.setContentsMargins(10, 0, 0, 0)
         self.frame_266 = QFrame(self.frame_265)
         self.frame_266.setObjectName(u"frame_266")
         self.frame_266.setMinimumSize(QSize(40, 0))
@@ -6009,7 +5978,7 @@ class Ui_MainWindow(object):
         self.label_99.setObjectName(u"label_99")
         self.label_99.setMinimumSize(QSize(0, 0))
         self.label_99.setMaximumSize(QSize(16777215, 16777215))
-        self.label_99.setFont(font)
+        self.label_99.setFont(font7)
         self.label_99.setLayoutDirection(Qt.LeftToRight)
         self.label_99.setAutoFillBackground(False)
         self.label_99.setStyleSheet(u"border: 0px;\n"
@@ -6039,7 +6008,7 @@ class Ui_MainWindow(object):
         self.plainTextEdit_9.setStyleSheet(u"border:none;")
         self.plainTextEdit_9.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.plainTextEdit_9.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.plainTextEdit_9.setReadOnly(True)
+        self.plainTextEdit_9.setReadOnly(False)
 
         self.horizontalLayout_104.addWidget(self.plainTextEdit_9)
 
@@ -6051,14 +6020,17 @@ class Ui_MainWindow(object):
 
         self.frame_249 = QFrame(self.frame_96)
         self.frame_249.setObjectName(u"frame_249")
-        self.frame_249.setMinimumSize(QSize(120, 0))
-        self.frame_249.setMaximumSize(QSize(16777215, 67))
-        self.frame_249.setStyleSheet(u"background-color:rgba(255,255,255,10);\n"
-"border-radius:5px;")
+        self.frame_249.setMinimumSize(QSize(0, 0))
+        self.frame_249.setMaximumSize(QSize(16777215, 30))
+        self.frame_249.setStyleSheet(u"background-color:rgba(255,255,255,0);\n"
+"border-radius:5px;\n"
+"font: 25 13pt \"Bahnschrift Light Condensed\";")
         self.frame_249.setFrameShape(QFrame.StyledPanel)
         self.frame_249.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_92 = QHBoxLayout(self.frame_249)
+        self.horizontalLayout_92.setSpacing(0)
         self.horizontalLayout_92.setObjectName(u"horizontalLayout_92")
+        self.horizontalLayout_92.setContentsMargins(10, 0, 0, 0)
         self.frame_250 = QFrame(self.frame_249)
         self.frame_250.setObjectName(u"frame_250")
         self.frame_250.setMinimumSize(QSize(40, 0))
@@ -6079,7 +6051,7 @@ class Ui_MainWindow(object):
         self.frame_251.setObjectName(u"frame_251")
         self.frame_251.setMinimumSize(QSize(190, 0))
         self.frame_251.setMaximumSize(QSize(190, 16777215))
-        self.frame_251.setFont(font)
+        self.frame_251.setFont(font7)
         self.frame_251.setStyleSheet(u"background-color:rgba(255,255,255,0);")
         self.frame_251.setFrameShape(QFrame.StyledPanel)
         self.frame_251.setFrameShadow(QFrame.Raised)
@@ -6091,7 +6063,7 @@ class Ui_MainWindow(object):
         self.label_95.setObjectName(u"label_95")
         self.label_95.setMinimumSize(QSize(0, 0))
         self.label_95.setMaximumSize(QSize(16777215, 16777215))
-        self.label_95.setFont(font)
+        self.label_95.setFont(font7)
         self.label_95.setAutoFillBackground(False)
         self.label_95.setStyleSheet(u"border: 0px;\n"
 "border-radius:3px;")
@@ -6117,10 +6089,12 @@ class Ui_MainWindow(object):
         self.horizontalLayout_90.setContentsMargins(0, 0, 0, 0)
         self.plainTextEdit_6 = QPlainTextEdit(self.frame_252)
         self.plainTextEdit_6.setObjectName(u"plainTextEdit_6")
+        self.plainTextEdit_6.setEnabled(True)
         self.plainTextEdit_6.setStyleSheet(u"border:none;")
         self.plainTextEdit_6.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.plainTextEdit_6.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.plainTextEdit_6.setReadOnly(True)
+        self.plainTextEdit_6.setTabChangesFocus(True)
+        self.plainTextEdit_6.setReadOnly(False)
 
         self.horizontalLayout_90.addWidget(self.plainTextEdit_6)
 
@@ -6132,14 +6106,17 @@ class Ui_MainWindow(object):
 
         self.frame_261 = QFrame(self.frame_96)
         self.frame_261.setObjectName(u"frame_261")
-        self.frame_261.setMinimumSize(QSize(120, 0))
-        self.frame_261.setMaximumSize(QSize(16777215, 67))
-        self.frame_261.setStyleSheet(u"background-color:rgba(255,255,255,10);\n"
-"border-radius:5px;")
+        self.frame_261.setMinimumSize(QSize(0, 0))
+        self.frame_261.setMaximumSize(QSize(16777215, 30))
+        self.frame_261.setStyleSheet(u"background-color:rgba(255,255,255,0);\n"
+"border-radius:5px;\n"
+"font: 25 13pt \"Bahnschrift Light Condensed\";")
         self.frame_261.setFrameShape(QFrame.StyledPanel)
         self.frame_261.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_101 = QHBoxLayout(self.frame_261)
+        self.horizontalLayout_101.setSpacing(0)
         self.horizontalLayout_101.setObjectName(u"horizontalLayout_101")
+        self.horizontalLayout_101.setContentsMargins(10, 0, 0, 0)
         self.frame_262 = QFrame(self.frame_261)
         self.frame_262.setObjectName(u"frame_262")
         self.frame_262.setMinimumSize(QSize(40, 0))
@@ -6171,7 +6148,7 @@ class Ui_MainWindow(object):
         self.label_98.setObjectName(u"label_98")
         self.label_98.setMinimumSize(QSize(0, 0))
         self.label_98.setMaximumSize(QSize(16777215, 16777215))
-        self.label_98.setFont(font)
+        self.label_98.setFont(font7)
         self.label_98.setLayoutDirection(Qt.LeftToRight)
         self.label_98.setAutoFillBackground(False)
         self.label_98.setStyleSheet(u"border: 0px;\n"
@@ -6201,7 +6178,7 @@ class Ui_MainWindow(object):
         self.plainTextEdit_8.setStyleSheet(u"border:none;")
         self.plainTextEdit_8.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.plainTextEdit_8.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.plainTextEdit_8.setReadOnly(True)
+        self.plainTextEdit_8.setReadOnly(False)
 
         self.horizontalLayout_102.addWidget(self.plainTextEdit_8)
 
@@ -6213,14 +6190,17 @@ class Ui_MainWindow(object):
 
         self.frame_253 = QFrame(self.frame_96)
         self.frame_253.setObjectName(u"frame_253")
-        self.frame_253.setMinimumSize(QSize(120, 0))
-        self.frame_253.setMaximumSize(QSize(16777215, 67))
-        self.frame_253.setStyleSheet(u"background-color:rgba(255,255,255,10);\n"
-"border-radius:5px;")
+        self.frame_253.setMinimumSize(QSize(0, 0))
+        self.frame_253.setMaximumSize(QSize(16777215, 30))
+        self.frame_253.setStyleSheet(u"background-color:rgba(255,255,255,0);\n"
+"border-radius:5px;\n"
+"font: 25 13pt \"Bahnschrift Light Condensed\";")
         self.frame_253.setFrameShape(QFrame.StyledPanel)
         self.frame_253.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_93 = QHBoxLayout(self.frame_253)
+        self.horizontalLayout_93.setSpacing(0)
         self.horizontalLayout_93.setObjectName(u"horizontalLayout_93")
+        self.horizontalLayout_93.setContentsMargins(10, 0, 0, 0)
         self.frame_254 = QFrame(self.frame_253)
         self.frame_254.setObjectName(u"frame_254")
         self.frame_254.setMinimumSize(QSize(40, 0))
@@ -6252,7 +6232,7 @@ class Ui_MainWindow(object):
         self.label_96.setObjectName(u"label_96")
         self.label_96.setMinimumSize(QSize(0, 0))
         self.label_96.setMaximumSize(QSize(16777215, 16777215))
-        self.label_96.setFont(font)
+        self.label_96.setFont(font7)
         self.label_96.setLayoutDirection(Qt.LeftToRight)
         self.label_96.setAutoFillBackground(False)
         self.label_96.setStyleSheet(u"border: 0px;\n"
@@ -6282,7 +6262,10 @@ class Ui_MainWindow(object):
         self.plainTextEdit_7.setStyleSheet(u"border:none;")
         self.plainTextEdit_7.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.plainTextEdit_7.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.plainTextEdit_7.setReadOnly(True)
+        self.plainTextEdit_7.setTabChangesFocus(False)
+        self.plainTextEdit_7.setReadOnly(False)
+        self.plainTextEdit_7.setBackgroundVisible(False)
+        self.plainTextEdit_7.setCenterOnScroll(False)
 
         self.horizontalLayout_94.addWidget(self.plainTextEdit_7)
 
@@ -6291,6 +6274,87 @@ class Ui_MainWindow(object):
 
 
         self.verticalLayout_102.addWidget(self.frame_253)
+
+        self.frame_58 = QFrame(self.frame_96)
+        self.frame_58.setObjectName(u"frame_58")
+        self.frame_58.setMaximumSize(QSize(16777215, 40))
+        self.frame_58.setStyleSheet(u"background-color:none;\n"
+"color: rgb(0, 0, 0);")
+        self.frame_58.setFrameShape(QFrame.StyledPanel)
+        self.frame_58.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_119 = QHBoxLayout(self.frame_58)
+        self.horizontalLayout_119.setObjectName(u"horizontalLayout_119")
+        self.update_bank = QPushButton(self.frame_58)
+        self.update_bank.setObjectName(u"update_bank")
+        self.update_bank.setMinimumSize(QSize(0, 30))
+        self.update_bank.setMaximumSize(QSize(110, 25))
+        self.update_bank.setStyleSheet(u"\n"
+"\n"
+"QPushButton{\n"
+"	\n"
+"\n"
+"\n"
+"	border-radius: 10px;\n"
+"\n"
+"	\n"
+"	background-color: rgb(238, 238, 238);\n"
+"\n"
+"	border: 1px solid  rgb(55, 55, 55);\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"	\n"
+"	\n"
+"	background-color: rgb(255, 255, 255);\n"
+"	border: 2px solid  rgb(255, 255, 255);\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"	\n"
+"	\n"
+"	background-color: rgb(121, 121, 121);\n"
+"	border: 2px solid  rgb(55, 55, 55);\n"
+"}")
+
+        self.horizontalLayout_119.addWidget(self.update_bank)
+
+        self.remover_bank = QPushButton(self.frame_58)
+        self.remover_bank.setObjectName(u"remover_bank")
+        self.remover_bank.setMinimumSize(QSize(110, 30))
+        self.remover_bank.setMaximumSize(QSize(110, 25))
+        self.remover_bank.setFont(font)
+        self.remover_bank.setStyleSheet(u"\n"
+"\n"
+"QPushButton{\n"
+"	\n"
+"\n"
+"\n"
+"	border-radius: 10px;\n"
+"\n"
+"	\n"
+"	background-color: rgb(238, 238, 238);\n"
+"\n"
+"	border: 1px solid  rgb(55, 55, 55);\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"	\n"
+"	\n"
+"	background-color: rgb(255, 255, 255);\n"
+"	border: 2px solid  rgb(255, 255, 255);\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"	\n"
+"	\n"
+"	background-color: rgb(121, 121, 121);\n"
+"	border: 2px solid  rgb(55, 55, 55);\n"
+"}")
+
+        self.horizontalLayout_119.addWidget(self.remover_bank)
+
+
+        self.verticalLayout_102.addWidget(self.frame_58)
 
 
         self.horizontalLayout_114.addWidget(self.frame_96)
@@ -8320,7 +8384,7 @@ class Ui_MainWindow(object):
         __qtablewidgetitem37.setTextAlignment(Qt.AlignCenter);
         self.table_faturas_ind.setHorizontalHeaderItem(4, __qtablewidgetitem37)
         self.table_faturas_ind.setObjectName(u"table_faturas_ind")
-        self.table_faturas_ind.setFont(font3)
+        self.table_faturas_ind.setFont(font4)
         self.table_faturas_ind.setStyleSheet(u"QWidget {\n"
 "	\n"
 "    color: #fffff8;\n"
@@ -9738,7 +9802,7 @@ class Ui_MainWindow(object):
         __qtablewidgetitem41.setTextAlignment(Qt.AlignCenter);
         self.table_faturas_ind_3.setHorizontalHeaderItem(3, __qtablewidgetitem41)
         self.table_faturas_ind_3.setObjectName(u"table_faturas_ind_3")
-        self.table_faturas_ind_3.setFont(font3)
+        self.table_faturas_ind_3.setFont(font4)
         self.table_faturas_ind_3.setStyleSheet(u"QWidget {\n"
 "    color: #fffff8;\n"
 "\n"
@@ -10544,7 +10608,7 @@ class Ui_MainWindow(object):
         self.select_card.addItem("")
         self.select_card.setObjectName(u"select_card")
         self.select_card.setMinimumSize(QSize(0, 30))
-        self.select_card.setFont(font7)
+        self.select_card.setFont(font8)
         self.select_card.setLayoutDirection(Qt.LeftToRight)
         self.select_card.setStyleSheet(u"color: rgb(255, 255, 255);\n"
 "\n"
@@ -10924,14 +10988,14 @@ class Ui_MainWindow(object):
 
         self.hidden_saldo_fat0_true = QRadioButton(self.frame_99)
         self.hidden_saldo_fat0_true.setObjectName(u"hidden_saldo_fat0_true")
-        font8 = QFont()
-        font8.setFamily(u"Bahnschrift Light Condensed")
-        font8.setPointSize(14)
-        font8.setBold(False)
-        font8.setItalic(False)
-        font8.setWeight(3)
-        font8.setStyleStrategy(QFont.PreferDefault)
-        self.hidden_saldo_fat0_true.setFont(font8)
+        font10 = QFont()
+        font10.setFamily(u"Bahnschrift Light Condensed")
+        font10.setPointSize(14)
+        font10.setBold(False)
+        font10.setItalic(False)
+        font10.setWeight(3)
+        font10.setStyleStrategy(QFont.PreferDefault)
+        self.hidden_saldo_fat0_true.setFont(font10)
         self.hidden_saldo_fat0_true.setContextMenuPolicy(Qt.DefaultContextMenu)
         self.hidden_saldo_fat0_true.setLayoutDirection(Qt.LeftToRight)
         self.hidden_saldo_fat0_true.setStyleSheet(u"background-color:rgba(255,255,255,30);\n"
@@ -11414,9 +11478,7 @@ class Ui_MainWindow(object):
         self.comboBox_24.setItemText(2, QCoreApplication.translate("MainWindow", u"N\u00e3o", None))
 
         self.add_bank.setText(QCoreApplication.translate("MainWindow", u"Adicionar", None))
-        self.remover_bank.setText(QCoreApplication.translate("MainWindow", u"Remover", None))
-        self.update_bank.setText(QCoreApplication.translate("MainWindow", u"Atualizar", None))
-        self.label_63.setText(QCoreApplication.translate("MainWindow", u"Revisao", None))
+        self.label_63.setText(QCoreApplication.translate("MainWindow", u"Alterar", None))
         self.label_91.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:14pt;\">Banco</span></p></body></html>", None))
         self.plainTextEdit.setPlainText("")
         self.label_84.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Agencia</p></body></html>", None))
@@ -11436,6 +11498,8 @@ class Ui_MainWindow(object):
         self.plainTextEdit_8.setPlainText("")
         self.label_96.setText(QCoreApplication.translate("MainWindow", u"Fechamento", None))
         self.plainTextEdit_7.setPlainText("")
+        self.update_bank.setText(QCoreApplication.translate("MainWindow", u"Atualizar", None))
+        self.remover_bank.setText(QCoreApplication.translate("MainWindow", u"Remover", None))
         ___qtablewidgetitem16 = self.table_active_banks.horizontalHeaderItem(0)
         ___qtablewidgetitem16.setText(QCoreApplication.translate("MainWindow", u"id", None));
         ___qtablewidgetitem17 = self.table_active_banks.horizontalHeaderItem(1)

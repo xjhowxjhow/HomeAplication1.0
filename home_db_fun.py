@@ -46,7 +46,7 @@ class Group:
         mainpage.load_extrato_filter(self)
         Combobox_startup.default_combox_hidem(self)
 
-
+        return True
 
 class mainpage(Ui_MainWindow):
 
@@ -1080,14 +1080,17 @@ class Set_values_startup(Ui_MainWindow):
     def _set_start_ag_b_t(self):
         # titular,agencia,num_conta,saldo_inicial,nome_banco
         dados = home_db_query.Return_values._return_default_bank()
-        print("DADOS",dados)
-        dados_l = home_db_query.Return_Values_Conditions._return_ag_b_t_c(str(dados))
-        print("DADOS",dados_l)
-        titular = self.label_68.setText(dados_l[0])
-        agencia = self.label_77.setText("Agencia: "+str(dados_l[1]))
-        num_conta = self.label_78.setText("Conta: "+str(dados_l[2]))
-        icon_nam_style = effects.efeitos_geral.style_sheet_card_icon(self,str(dados_l[4]))
-        self.frame_97.setStyleSheet("background-image: "+icon_nam_style+"; background-repeat:no-repeat; background-position:center;")
+        if dados:
+            print("DADOS",dados)
+            dados_l = home_db_query.Return_Values_Conditions._return_ag_b_t_c(str(dados))
+            print("DADOS",dados_l)
+            titular = self.label_68.setText(dados_l[0])
+            agencia = self.label_77.setText("Agencia: "+str(dados_l[1]))
+            num_conta = self.label_78.setText("Conta: "+str(dados_l[2]))
+            icon_nam_style = effects.efeitos_geral.style_sheet_card_icon(self,str(dados_l[4]))
+            self.frame_97.setStyleSheet("background-image: "+icon_nam_style+"; background-repeat:no-repeat; background-position:center;")
+        else:
+            pass
         return True
 
 class Combobox_startup(Ui_MainWindow):
@@ -1543,34 +1546,42 @@ class Alerts(Ui_MainWindow):
         qdialog = QDialog()
         qdialog.setWindowTitle("Alerta")
         qdialog.setWindowIcon(QIcon(':/icons/icons/Alerta.png'))
-        qdialog.setWindowFlags(Qt.WindowCloseButtonHint | Qt.WindowMinimizeButtonHint)
+        qdialog.setWindowFlags(Qt.FramelessWindowHint)
         qdialog.setFixedSize(400, 200)
-        qdialog.setStyleSheet("background-color: rgb(255, 255, 255);")
+        qdialog.setStyleSheet("background-color:rgb(40, 42, 54); border: 1px solid rgba(255,255,255,30);")
+
         qdialog.setWindowModality(Qt.ApplicationModal)
-        
+
+        #FONTE
+        #fonte
+        font3 = QFont()
+        font3.setFamily(u"Bahnschrift Light SemiCondensed")
+        font3.setPointSize(10)
+
         true_or_false = 0
         #OK BUTTON CANC BUTTON
         ok_button = QPushButton("Sim",qdialog)
         ok_button.setGeometry(300,150,80,30)
-        ok_button.setStyleSheet("background-color: rgb(255, 255, 255);")
+        ok_button.setStyleSheet("QPushButton{ border-radius:10px; color: rgb(255, 255, 255); background-color:rgba(255,255,255,10); border: 1px solid rgba(255,255,255,20); border-radius:7px; } QPushButton:hover{ background-color:rgba(31, 168, 49,70);} QPushButton:pressed{ background-color:rgba(31, 168, 49,170); }")
         ok_button.clicked.connect(qdialog.accept)
-        
+        ok_button.setFont(font3)
         
         #CANCEL BUTTON
         cancel_button = QPushButton("Não",qdialog)
         cancel_button.setGeometry(200,150,80,30)
-        cancel_button.setStyleSheet("background-color: rgb(255, 255, 255);")
         cancel_button.clicked.connect(qdialog.reject) 
-    
+        cancel_button.setStyleSheet("QPushButton{ border-radius:10px; color: rgb(255, 255, 255); background-color:rgba(255,255,255,10); border: 1px solid rgba(255,255,255,20); border-radius:7px; } QPushButton:hover{ background-color:rgba(225, 60, 47,70); } QPushButton:pressed{ background-color:rgba(225, 60, 47,170); }")
+        cancel_button.setFont(font3)
 
     
 
         #LABEL
         label = QLabel(qdialog)
         label.setGeometry(10,10,380,130)
-        label.setStyleSheet("background-color: rgb(255, 255, 255);")
+        label.setStyleSheet("color: rgb(255, 255, 255); background-color:rgba(255,255,255,0); border:none;")
         label.setText("Está fatura é de um banco diferente do principal!\nNao existe conta bancaria vinculado a este Cartao de Credito \npara descontar o valor\ndeseja descontar no debito do banco Principal?")
         label.setAlignment(Qt.AlignCenter)
+        label.setFont(font3)
         qdialog.exec_()
         return qdialog.result()
 
@@ -1756,7 +1767,48 @@ class Alerts(Ui_MainWindow):
                 else:
                     return True
         
+    def Alert_Remove_Bank(self):
+        qdialog = QDialog()
+        qdialog.setWindowTitle("Alerta")
+        qdialog.setWindowIcon(QIcon(':/icons/icons/Alerta.png'))
+        qdialog.setWindowFlags(Qt.FramelessWindowHint)
+        qdialog.setFixedSize(450, 200)
+        qdialog.setStyleSheet("background-color:rgb(40, 42, 54); border: 1px solid rgba(255,255,255,30);")
+
+        qdialog.setWindowModality(Qt.ApplicationModal)
+
+        #FONTE
+        #fonte
+        font3 = QFont()
+        font3.setFamily(u"Bahnschrift Light SemiCondensed")
+        font3.setPointSize(10)
+
+        true_or_false = 0
+        #OK BUTTON CANC BUTTON
+        ok_button = QPushButton("Sim",qdialog)
+        ok_button.setGeometry(300,150,80,30)
+        ok_button.setStyleSheet("QPushButton{ border-radius:10px; color: rgb(255, 255, 255); background-color:rgba(255,255,255,10); border: 1px solid rgba(255,255,255,20); border-radius:7px; } QPushButton:hover{ background-color:rgba(31, 168, 49,70);} QPushButton:pressed{ background-color:rgba(31, 168, 49,170); }")
+        ok_button.clicked.connect(qdialog.accept)
+        ok_button.setFont(font3)
         
+        #CANCEL BUTTON
+        cancel_button = QPushButton("Não",qdialog)
+        cancel_button.setGeometry(200,150,80,30)
+        cancel_button.clicked.connect(qdialog.reject) 
+        cancel_button.setStyleSheet("QPushButton{ border-radius:10px; color: rgb(255, 255, 255); background-color:rgba(255,255,255,10); border: 1px solid rgba(255,255,255,20); border-radius:7px; } QPushButton:hover{ background-color:rgba(225, 60, 47,70); } QPushButton:pressed{ background-color:rgba(225, 60, 47,170); }")
+        cancel_button.setFont(font3)
+
+    
+
+        #LABEL
+        label = QLabel(qdialog)
+        label.setGeometry(10,10,440,130)
+        label.setStyleSheet("color: rgb(255, 255, 255); background-color:rgba(255,255,255,0); border:none;")
+        label.setText("Deseja realmente remover esta conta bancária ?\n\nATENÇÃO: Esta ação não poderá ser desfeita.\n Todos os lançamentos desta conta serão removidos, e não poderão ser recuperados\n\n Juntamente com os cartões de crédito vinculados a esta conta se houver.")
+        label.setAlignment(Qt.AlignCenter)
+        label.setFont(font3)
+        qdialog.exec_()
+        return qdialog.result()
         
         
         
@@ -2236,33 +2288,134 @@ class Confirn_Frame(Ui_MainWindow):
 
 
 
-class AnimationValues(Ui_MainWindow):
+class Table_Banks_Remove_Update(Ui_MainWindow):
     
-    def _animation_values(self,valor_transacao,tipo,id_bank):
-        pass
-        # def thead():
-        #     #GET SALDO ATUAL
-        #     saldo_atual = home_db_query.Return_values.return_saldo_banks(id_bank)
-        #     saldo_atual = float(saldo_atual)
-        #     print("SALDO ATUAL",saldo_atual)
-        #     print("Valor da transacao",valor_transacao)
-        #     print("Tipo",tipo)
-        #     if tipo == 'Saida':
+    def set_values_frame(self,id_bank,id_card): #SETA OS VALORES NO FRAME DE "ALTERAR DADOS"
+        #lineedits para setText
+        
+        #CONTA:
+        # self.plainTextEdit.se
+        #BANCO = self.plainTextEdit
+        #agencia self.plainTextEdit_2
+        #conta self.plainTextEdit_3
+        #saldo self.plainTextEdit_4
+        
+        #CARTAO:
+        
+        #LIMITE self.plainTextEdit_5
+        #FINAL DO CARTAO self.plainTextEdit_9
+        #TITULAR self.plainTextEdit_6
+        #VENCIMENTO self.plainTextEdit_8
+        #FECHAMENTO self.plainTextEdit_7
+        
+        dados = home_db_query.Return_Values_Conditions.return_talbe_banks(id_bank,id_card)
+        
+        if id_card != "Não":
+            self.plainTextEdit.setPlainText(str(dados[0]))
+            self.plainTextEdit_2.setPlainText(str(dados[1]))
+            self.plainTextEdit_3.setPlainText(str(dados[2]))
+            self.plainTextEdit_4.setPlainText(str(dados[3]))
+            self.plainTextEdit_5.setPlainText(str(dados[4]))
+            self.plainTextEdit_9.setPlainText(str(dados[5]))
+            self.plainTextEdit_6.setPlainText(str(dados[6]))
+            self.plainTextEdit_8.setPlainText(str(dados[7]))
+            self.plainTextEdit_7.setPlainText(str(dados[8]))
+        else:
+            self.plainTextEdit.setPlainText(str(dados[0]))
+            self.plainTextEdit_2.setPlainText(str(dados[1]))
+            self.plainTextEdit_3.setPlainText(str(dados[2]))
+            self.plainTextEdit_4.setPlainText(str(dados[3]))
+            self.plainTextEdit_5.setPlainText(str("Não Possui"))
+            self.plainTextEdit_9.setPlainText(str("Não Possui"))
+            self.plainTextEdit_6.setPlainText(str("Não Possui"))
+            self.plainTextEdit_8.setPlainText(str("Não Possui"))
+            self.plainTextEdit_7.setPlainText(str("Não Possui"))
+        
+        return True
+        
+        
+    
+    def _update_table_banks(self,id_bank,id_card):
+        #CONTA:
+        # self.plainTextEdit.se
+        #BANCO = self.plainTextEdit
+        #agencia self.plainTextEdit_2
+        #conta self.plainTextEdit_3
+        #saldo self.plainTextEdit_4
+        
+        #CARTAO:
+        
+        #LIMITE self.plainTextEdit_5
+        #FINAL DO CARTAO self.plainTextEdit_9
+        #TITULAR self.plainTextEdit_6
+        #VENCIMENTO self.plainTextEdit_8
+        #FECHAMENTO self.plainTextEdit_7
+        
+        if id_card != "Não":
+            #VALIDA OS DADOS SE TIVER VAZIO DPS
+            banco = self.plainTextEdit.toPlainText()
+            agencia = self.plainTextEdit_2.toPlainText()
+            conta = self.plainTextEdit_3.toPlainText()
+            saldo = self.plainTextEdit_4.toPlainText()
+            limite = self.plainTextEdit_5.toPlainText()
+            final_cartao = self.plainTextEdit_9.toPlainText()
+            titular = self.plainTextEdit_6.toPlainText()
+            vencimento = self.plainTextEdit_8.toPlainText()
+            fechamento = self.plainTextEdit_7.toPlainText()
+            
+            dados = [banco,agencia,conta,saldo,limite,final_cartao,titular,vencimento,fechamento]
+
+            #update
+            home_db_query.Update_Remove._update_table_banks_cards(id_bank,id_card,dados)
+        
+        else:
+            #VALIDA OS DADOS SE TIVER VAZIO DPS
+            banco = self.plainTextEdit.toPlainText()
+            agencia = self.plainTextEdit_2.toPlainText()
+            conta = self.plainTextEdit_3.toPlainText()
+            saldo = self.plainTextEdit_4.toPlainText()
+            
+            dados = [banco,agencia,conta,saldo]
+
+            #update
+            home_db_query.Update_Remove._update_table_banks_cards(id_bank,id_card,dados)
+        
+        
+        #ATT DADOS UI
+        Group.execs(self)
+        
+        
+        
+        
+    def _remove_table_banks(self,id_bank,id_card):
+        
+        #confirmação de remoção
+        validacao = Alerts.Alert_Remove_Bank(self)
+        if id_card != "Não":
+            if validacao == True:
+                home_db_query.Update_Remove._remove_table_banks_cards(id_bank,id_card)
+                Group.execs(self)
+
                 
-        #         start = saldo_atual
-        #         target = float(saldo_atual) - float(valor_transacao)
-        #         print("SALDO ATUAL start",saldo_atual)
-        #         print("Valor da transacao target",valor_transacao)
-        #         while start > target:
-        #             start = start  -10
-        #             sleep(0.01)
-        #             #set text
-        #             format_saldo = "{:.2f}".format(start)
-        #             self.label_70.setText(str(format_saldo))
-        # #START THREAD
-        # thread = threading.Thread(target=thead)
-        # thread.start()
-        # return True
-        #animation val
-        
-        
+                #DELET WIDGET FRAME BANK #LAYOUT self.layout_add_frame_bank
+                name_staked = "stackedWidget_cartao_"+str(id_bank)
+                self.frame_remove = self.findChildren(QStackedWidget, str(name_staked))
+                self.frame_remove[0].deleteLater()
+                self.frame_remove[1].deleteLater()
+
+
+            else:
+                print("Cancelado")
+                pass
+        else:
+            if validacao == True:
+                home_db_query.Update_Remove._remove_table_banks_cards(id_bank,id_card)
+                Group.execs(self)
+            
+                #DELET WIDGET FRAME BANK #LAYOUT self.layout_add_frame_bank
+                name_staked = "stackedWidget_cartao_"+str(id_bank)
+                self.frame_remove = self.findChildren(QStackedWidget, str(name_staked))
+                self.frame_remove[0].deleteLater()
+            else:
+                print("Cancelado")
+                pass

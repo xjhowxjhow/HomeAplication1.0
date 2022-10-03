@@ -1,3 +1,4 @@
+from typing_extensions import Self
 from PySide2.QtCore import *
 from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2.QtCore import (QCoreApplication, QPropertyAnimation, QDate, QDateTime, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
@@ -145,6 +146,17 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.extrato_cartao_0.setColumnHidden(9, True) # STATUS DO PAGAMENTO PARA FILTRO OCULTADA
         self.table_faturas_ind_3.setColumnHidden(3, True) # COLUNA ID OCULTADA
         self.table_active_cards.setColumnHidden(6, True) # COLUNA ID OCULTADA
+        
+        
+        #TABLE DE BANCOS ATIVOS OCULTA
+        
+        self.table_active_banks.setColumnHidden(0, True) # COLUNA ID OCULTADA
+        self.table_active_banks.setColumnHidden(1, True) # COLUNA SALDO INICIAL
+        self.table_active_banks.setColumnHidden(6, True) # COLUNA  ID CREDIT CARD
+        
+        #selecação do linha interia
+        self.table_active_banks.setSelectionBehavior(QAbstractItemView.SelectRows)
+        
         self.table_faturas_ind_3.horizontalHeader().setVisible(True)
         self.table_faturas_ind.horizontalHeader().setVisible(True)
         self.table_active_cards.horizontalHeader().setVisible(True)
@@ -237,8 +249,10 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.parcela_fatura_3.installEventFilter(self)
         self.paga_fatura_4.installEventFilter(self)
         self.listWidget_3.installEventFilter(self)
+        self.table_active_banks.installEventFilter(self)
+        self.update_bank.installEventFilter(self)
+        self.remover_bank.installEventFilter(self)
 
-        #THREAD
 
         
     
@@ -511,7 +525,30 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                 if event.key() == QtCore.Qt.Key_Delete:
                     return self.listWidget_3.takeItem(self.listWidget_3.currentRow()) 
 
-      
+            if obj == self.table_active_banks and event.type() == QtWidgets.QAbstractItemView.SelectRows:
+                current_row = self.table_active_banks.currentRow()
+                
+                id_bank = self.table_active_banks.item(current_row, 0).text()
+                id_card = self.table_active_banks.item(current_row, 6).text()
+                home_db_fun.Table_Banks_Remove_Update.set_values_frame(self,id_bank,id_card)
+                return print(id_bank, id_card)
+            if obj == self.update_bank and event.type() == QtCore.QEvent.MouseButtonPress:
+                current_row = self.table_active_banks.currentRow()
+                id_bank = self.table_active_banks.item(current_row, 0).text()
+                id_card = self.table_active_banks.item(current_row, 6).text()
+                    
+                    
+                return home_db_fun.Table_Banks_Remove_Update._update_table_banks(self,id_bank,id_card)
+            
+            if obj == self.remover_bank and event.type() == QtCore.QEvent.MouseButtonPress:
+                current_row = self.table_active_banks.currentRow()
+                id_bank = self.table_active_banks.item(current_row, 0).text()
+                id_card = self.table_active_banks.item(current_row, 6).text()
+                    
+                    
+                return home_db_fun.Table_Banks_Remove_Update._remove_table_banks(self,id_bank,id_card)
+            
+            
             return super(MainWindow,self).eventFilter(obj, event)
 
 

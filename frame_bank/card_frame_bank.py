@@ -436,7 +436,7 @@ class CardFrameBank(Ui_MainWindow):
         #_____________________________________________________
         # Pega nome do botao que foi clicado na hora:
         name_obj = self.focusWidget().objectName()
-
+        print("NOME DDO STAKEDC",name_obj)
         #PARA ACESSAR OS BOTOES TERIAMOS QUE UTILIZAR UM INDEX DA LISTA DE BOTOES.
         self.botoes = self.findChildren(QPushButton , str(name_obj))
         #PEGA O ID PELO NO DO BT
