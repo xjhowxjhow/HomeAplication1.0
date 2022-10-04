@@ -896,10 +896,10 @@ class mainpage(Ui_MainWindow):
                     valor = dados[i][7]
                     usd_to_brl = Convert_Moedas._usd_to_brl(self,valor)
                     if entra_saida == 'Entrada':
-                        format_valor = "+ R$ %s"%(valor)
+                        format_valor = "+ %s"%(usd_to_brl)
                         color_label = '#00ff00'
                     else:  
-                        format_valor = "- R$ %s"%(valor)
+                        format_valor = "- %s"%(usd_to_brl)
                         color_label = '#fffff8'
 
                     self.table.setItem(row_count, 9, QTableWidgetItem(str(format_valor)))
@@ -1062,6 +1062,8 @@ class Set_values_startup(Ui_MainWindow):
         
         
         return 0
+    
+
 
 
 
@@ -2394,6 +2396,8 @@ class Table_Banks_Remove_Update(Ui_MainWindow):
         if id_card != "Não":
             if validacao == True:
                 home_db_query.Update_Remove._remove_table_banks_cards(id_bank,id_card)
+                self.comboBox_11.clear()
+
                 Group.execs(self)
 
                 
@@ -2410,12 +2414,17 @@ class Table_Banks_Remove_Update(Ui_MainWindow):
         else:
             if validacao == True:
                 home_db_query.Update_Remove._remove_table_banks_cards(id_bank,id_card)
+
+                self.comboBox_11.clear()
+                
                 Group.execs(self)
             
                 #DELET WIDGET FRAME BANK #LAYOUT self.layout_add_frame_bank
                 name_staked = "stackedWidget_cartao_"+str(id_bank)
                 self.frame_remove = self.findChildren(QStackedWidget, str(name_staked))
                 self.frame_remove[0].deleteLater()
+    
+
             else:
                 print("Cancelado")
                 pass

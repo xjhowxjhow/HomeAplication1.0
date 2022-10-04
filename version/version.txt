@@ -1,2 +1,2 @@
-VERSION: 1.06
-NOTES:  1- Correção de bugs de lançamento, que corrompia o banco de dados, Adicao de novo layout, adicionado menu inicial  (geral da pagina cartoes), validacao de fechamento de fatura adicionado, devera ser alterado ou adicionado o fechamento da fatura de todos os cartoes para que funcione corretamente. vira como 'none' de inicio. funcao de graficos e correcoes de bugs realizado. 
+VERSION: 1.10
+NOTES:  - Novo layout, e novas funcionalidades de fluxo de despesas.

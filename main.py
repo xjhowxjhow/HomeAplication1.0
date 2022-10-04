@@ -31,7 +31,7 @@ from home_db_fun import Loading_screen_gif
 WINDOW_SIZE = 0
 TOGLE_STATUS = 80
 CARD_SELECTED = 0
-GLOBAL_VERSION = '1.06'
+GLOBAL_VERSION = '1.10'
 
 
 class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
