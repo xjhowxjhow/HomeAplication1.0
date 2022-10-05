@@ -5,8 +5,8 @@ from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 from PySide2 import QtCore, QtGui, QtWidgets
 from login_pyside24 import Ui_MainWindow
-
-
+import home_db_query
+import os
 
 
 
@@ -26,24 +26,39 @@ class InitShadow(QtWidgets.QGraphicsDropShadowEffect):
 class set_shadow(Ui_MainWindow):
     
     def sets(self):
-        self.applyShadow = InitShadow
-        #FRAMES:
-        #SETA A SOMBRAS
-        self.applyShadow(self.frame_43)
-        self.applyShadow(self.welcome_2)
-        self.applyShadow(self.frame_51)
-        self.applyShadow(self.tableWidget)
-        self.applyShadow(self.extrat_meses_2)
-        self.applyShadow(self.frame_87)
-        self.applyShadow(self.config_new_lan_3)
-        self.applyShadow(self.frame_88)
-        self.applyShadow(self.scrollArea_13)
-        self.applyShadow(self.frame_89)
-        self.applyShadow(self.frame_96)
-        self.applyShadow(self.scrollArea_4)
-        self.applyShadow(self.main_dasht_top)
-        self.applyShadow(self.datails_fatura_card_4)
-        self.applyShadow(self.frame_12)
-        self.applyShadow(self.frame_60)
-        self.applyShadow(self.frame_31)
-        self.applyShadow(self.stackedWidget_58)
+        #verify se o db existe
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        #volta para raiz
+        a = a[:a.rfind("\\")]
+        if (os.path.exists(''+a+'/bando_de_valores.db')):
+            
+        
+            if home_db_query.Return_values_configs._return_shadow_ui() == 'True':
+                self.applyShadow = InitShadow
+                #FRAMES:
+                #SETA A SOMBRAS
+                self.applyShadow(self.frame_43)
+                self.applyShadow(self.welcome_2)
+                self.applyShadow(self.frame_51)
+                self.applyShadow(self.tableWidget)
+                self.applyShadow(self.extrat_meses_2)
+                self.applyShadow(self.frame_87)
+                self.applyShadow(self.config_new_lan_3)
+                self.applyShadow(self.frame_88)
+                self.applyShadow(self.scrollArea_13)
+                self.applyShadow(self.frame_89)
+                self.applyShadow(self.frame_96)
+                self.applyShadow(self.scrollArea_4)
+                self.applyShadow(self.main_dasht_top)
+                self.applyShadow(self.datails_fatura_card_4)
+                self.applyShadow(self.frame_12)
+                self.applyShadow(self.frame_60)
+                self.applyShadow(self.frame_31)
+                self.applyShadow(self.stackedWidget_58)
+
+            else:
+
+                pass
+        else:
+
+            pass

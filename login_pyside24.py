@@ -3440,7 +3440,7 @@ class Ui_MainWindow(object):
         self.scrollArea_11.setWidgetResizable(True)
         self.scrollAreaWidgetContents_11 = QWidget()
         self.scrollAreaWidgetContents_11.setObjectName(u"scrollAreaWidgetContents_11")
-        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, 0, 1453, 657))
+        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, 0, 1026, 644))
         self.horizontalLayout_58 = QHBoxLayout(self.scrollAreaWidgetContents_11)
         self.horizontalLayout_58.setSpacing(10)
         self.horizontalLayout_58.setObjectName(u"horizontalLayout_58")
@@ -4848,7 +4848,7 @@ class Ui_MainWindow(object):
         self.scrollArea_12.setWidgetResizable(True)
         self.scrollAreaWidgetContents_12 = QWidget()
         self.scrollAreaWidgetContents_12.setObjectName(u"scrollAreaWidgetContents_12")
-        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, -261, 1458, 920))
+        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 1458, 920))
         self.scrollAreaWidgetContents_12.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); \n"
 "")
         self.verticalLayout_112 = QVBoxLayout(self.scrollAreaWidgetContents_12)
@@ -7715,7 +7715,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 394, 90))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 1008, 512))
         self.scrollAreaWidgetContents.setStyleSheet(u"background-color:rgba(255,255,255,0);")
         self.verticalLayout_53 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_53.setSpacing(0)
@@ -11025,6 +11025,80 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_109.addWidget(self.frame_98)
 
+        self.frame_102 = QFrame(self.page_6)
+        self.frame_102.setObjectName(u"frame_102")
+        self.frame_102.setGeometry(QRect(30, 250, 451, 171))
+        self.frame_102.setStyleSheet(u"background-color:rgba(255,255,255,30);")
+        self.frame_102.setFrameShape(QFrame.StyledPanel)
+        self.frame_102.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_117 = QVBoxLayout(self.frame_102)
+        self.verticalLayout_117.setSpacing(10)
+        self.verticalLayout_117.setObjectName(u"verticalLayout_117")
+        self.label_109 = QLabel(self.frame_102)
+        self.label_109.setObjectName(u"label_109")
+        self.label_109.setMaximumSize(QSize(16777215, 40))
+
+        self.verticalLayout_117.addWidget(self.label_109)
+
+        self.frame_103 = QFrame(self.frame_102)
+        self.frame_103.setObjectName(u"frame_103")
+        self.frame_103.setStyleSheet(u"background-color:rgba(255,255,255,0);")
+        self.frame_103.setFrameShape(QFrame.StyledPanel)
+        self.frame_103.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_118 = QVBoxLayout(self.frame_103)
+        self.verticalLayout_118.setSpacing(0)
+        self.verticalLayout_118.setObjectName(u"verticalLayout_118")
+        self.verticalLayout_118.setContentsMargins(0, 0, 0, 0)
+        self.label_110 = QLabel(self.frame_103)
+        self.label_110.setObjectName(u"label_110")
+        self.label_110.setStyleSheet(u"background-color:rgba(255,255,255,30);")
+
+        self.verticalLayout_118.addWidget(self.label_110)
+
+        self.frame_104 = QFrame(self.frame_103)
+        self.frame_104.setObjectName(u"frame_104")
+        self.frame_104.setFrameShape(QFrame.StyledPanel)
+        self.frame_104.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_120 = QHBoxLayout(self.frame_104)
+        self.horizontalLayout_120.setSpacing(0)
+        self.horizontalLayout_120.setObjectName(u"horizontalLayout_120")
+        self.horizontalLayout_120.setContentsMargins(0, 0, 0, 0)
+        self.horizontalSpacer_34 = QSpacerItem(70, 20, QSizePolicy.Fixed, QSizePolicy.Minimum)
+
+        self.horizontalLayout_120.addItem(self.horizontalSpacer_34)
+
+        self.shadow_true = QRadioButton(self.frame_104)
+        self.shadow_true.setObjectName(u"shadow_true")
+        self.shadow_true.setFont(font10)
+        self.shadow_true.setContextMenuPolicy(Qt.DefaultContextMenu)
+        self.shadow_true.setLayoutDirection(Qt.LeftToRight)
+        self.shadow_true.setStyleSheet(u"background-color:rgba(255,255,255,30);\n"
+"color: rgb(255, 255, 255);")
+
+        self.horizontalLayout_120.addWidget(self.shadow_true)
+
+        self.horizontalSpacer_35 = QSpacerItem(70, 20, QSizePolicy.Fixed, QSizePolicy.Minimum)
+
+        self.horizontalLayout_120.addItem(self.horizontalSpacer_35)
+
+        self.shadow_false = QRadioButton(self.frame_104)
+        self.shadow_false.setObjectName(u"shadow_false")
+        self.shadow_false.setStyleSheet(u"background-color:rgba(255,255,255,30);\n"
+"color: rgb(255, 255, 255);")
+        self.shadow_false.setChecked(True)
+
+        self.horizontalLayout_120.addWidget(self.shadow_false)
+
+        self.horizontalSpacer_36 = QSpacerItem(70, 20, QSizePolicy.Fixed, QSizePolicy.Minimum)
+
+        self.horizontalLayout_120.addItem(self.horizontalSpacer_36)
+
+
+        self.verticalLayout_118.addWidget(self.frame_104)
+
+
+        self.verticalLayout_117.addWidget(self.frame_103)
+
         self.stackedWidget_2.addWidget(self.page_6)
         self.page_7 = QWidget()
         self.page_7.setObjectName(u"page_7")
@@ -11374,7 +11448,7 @@ class Ui_MainWindow(object):
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Bahnschrift Light Condensed'; font-size:14pt; font-weight:24; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a name=\"KCA1_48\"></a><span style=\" font-size:12pt; font-weight:400;\">O</span><span style=\" font-size:12pt; font-weight:400;\"> Texas \u00e9 um dos 50 estados dos Estados Unidos, localizado na regi\u00e3o sul do pa\u00eds. Possui como limites o estado de Oklahoma ao norte, Novo M\u00e9xico ao oeste, \u2026</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a name=\"KCA1_48\"></a><span style=\" font-size:12pt; font-weight:400;\"></span><span style=\" font-size:12pt; font-weight:400;\"></span></p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-weight:400;\"><br /></p></body></html>", None))
         self.label_if_card.setText(QCoreApplication.translate("MainWindow", u"Cartao:", None))
         self.label_45.setText(QCoreApplication.translate("MainWindow", u"Fatura de ", None))
@@ -11742,6 +11816,10 @@ class Ui_MainWindow(object):
         self.label_76.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt; color:#ffffff;\">Ocultar Faturas com valores zerados:</span></p></body></html>", None))
         self.hidden_saldo_fat0_true.setText(QCoreApplication.translate("MainWindow", u"Sim", None))
         self.hidden_saldo_fat0_false.setText(QCoreApplication.translate("MainWindow", u"Nao", None))
+        self.label_109.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" color:#ffffff;\">Interface</span></p></body></html>", None))
+        self.label_110.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt; color:#ffffff;\">Efeitos de Sombras</span></p><p align=\"center\"><span style=\" font-size:12pt; color:#ffffff;\">(Dependendo do Hardware, pode causar lentid\u00e3o necess\u00e1rio reiniciar! )</span></p></body></html>", None))
+        self.shadow_true.setText(QCoreApplication.translate("MainWindow", u"Sim", None))
+        self.shadow_false.setText(QCoreApplication.translate("MainWindow", u"Nao", None))
         self.pushButton_4.setText(QCoreApplication.translate("MainWindow", u"Desenvolvido por Jhonatan Deni", None))
         self.pushButton_5.setText(QCoreApplication.translate("MainWindow", u"Estudante de Analise e desenvolvimento de Sistemas", None))
         self.pushButton_6.setText(QCoreApplication.translate("MainWindow", u"GitHub", None))

@@ -944,6 +944,8 @@ class Verify_status_payment:
         
 
 class Return_values_configs:
+    
+    #CONFIGS UI
     def _update_default_h_s_z(value):
         
         a = (os.path.dirname(os.path.realpath(__file__)))
@@ -962,8 +964,27 @@ class Return_values_configs:
             banco.commit()
             banco.close()
             return True
+        
+    def shadow_ui(value):
+        
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        verifica_se_existe = cursor.execute("SELECT shadow_ui FROM config_aplicacao")
+        verifica_se_existe = cursor.fetchall() 
+        print(verifica_se_existe)
+        if verifica_se_existe:
+            cursor.execute("UPDATE config_aplicacao SET shadow_ui = '"+str(value)+"'")
+            banco.commit()
+            banco.close()
+            return True
+        else:
+            cursor.execute("INSERT INTO config_aplicacao (shadow_ui) VALUES ('"+str(value)+"')")
+            banco.commit()
+            banco.close()
+            return True
 
-
+    #CONFIGS UI
     
     
     def _return_default_h_s_z():
@@ -979,8 +1000,18 @@ class Return_values_configs:
             return dados[0][0]
         
         
-        
-
+    def _return_shadow_ui():
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        cursor.execute("SELECT config_aplicacao.shadow_ui FROM config_aplicacao")
+        dados = cursor.fetchall()
+        banco.close()
+        if not dados:
+            return False
+        else:
+            return dados[0][0]
+    #CONFIGS UI
 class Pdf:
     
 

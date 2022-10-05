@@ -14,7 +14,7 @@ from source_ui.shadow import InitShadow ,set_shadow
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import card_db_fun
 import home_db_fun
-import home_db_query
+import  home_db_query
 import pyautogui
 import database
 import webbrowser
@@ -31,7 +31,7 @@ from home_db_fun import Loading_screen_gif
 WINDOW_SIZE = 0
 TOGLE_STATUS = 80
 CARD_SELECTED = 0
-GLOBAL_VERSION = '1.10'
+GLOBAL_VERSION = '1.11'
 
 
 class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
@@ -194,6 +194,11 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         #RADIO CONFIG:
         self.hidden_saldo_fat0_true.clicked.connect(lambda:home_db_fun.Configs.hide_show_saldos_zeros(self,True))
         self.hidden_saldo_fat0_false.clicked.connect(lambda:home_db_fun.Configs.hide_show_saldos_zeros(self,False))
+        
+        #SHADOW ENABLE OR DISABLE
+        self.shadow_true.clicked.connect(lambda:home_db_fun.Configs.show_hide_shadow(self,True))
+        self.shadow_false.clicked.connect(lambda:home_db_fun.Configs.show_hide_shadow(self,False))
+        
         
         self.hide_cards_main_2.clicked.connect(lambda:home_db_fun.Confirn_Frame._show(self))
         

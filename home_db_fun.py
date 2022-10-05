@@ -3,6 +3,7 @@ import sqlite3
 import os.path
 import effects
 import os 
+import sys
 import re
 import threading
 import card_db_test
@@ -15,6 +16,7 @@ import emoji
 import home_db_query
 import random
 from frame_bank.card_frame_bank import CardFrameBank
+from source_ui.categories import Category,Payments_Type
 from PySide2.QtCore import *
 from PySide2 import QtWidgets
 from PySide2.QtGui import *
@@ -261,12 +263,12 @@ class mainpage(Ui_MainWindow):
 
 
     def _categorias_entra_said(self):
-        saidas = ['Energia','Gás','Água','Luz','Telefone','Internet','Boletos','Servicos','Aluguel','Impostos','Veiculos','IPVA','IPTU','Outros']
-        entradas =['Salario','Rendimentos','Beneficios','Criptomoedas','Investimentos','Cheques','Transferencia','Depositos','Pagamentos','Outros']
+        saidas =  Category._saidas()
+        entradas = Category._entradas()
         
-        metodos_pagamento_entrada = ['Credito em Conta','Dinheiro','Transferência','Cheque','Outros','Rendimentos','Criptomoedas','Pix']
+        metodos_pagamento_entrada = Payments_Type._entradas()
         
-        metodos_pagamento_saida = ['Debito em Conta','Dinheiro','Transferência','Cheque','Outros','Pix']
+        metodos_pagamento_saida = Payments_Type._saidas()
         
         if self.comboBox_25.currentText() == "Entrada":
             self.comboBox_21.clear()
@@ -1842,8 +1844,28 @@ class Configs(Ui_MainWindow):
             Qms.exec_()
             return mainpage.load_extrato_filter(self)
         
-        
+    def show_hide_shadow(self,condicao):
+        if condicao == True:
+            home_db_query.Return_values_configs.shadow_ui(True)
+            #REINICIA A APLICAÇÃO
+            Qms = QMessageBox()
+            Qms.setWindowTitle("Sucesso")
+            Qms.setText("Sombra habilitadas com sucesso")
+            Qms.setIcon(QMessageBox.Information)
+            Qms.exec_()
+            return os.execl(sys.executable, sys.executable, *sys.argv)
 
+        elif condicao == False:
+            home_db_query.Return_values_configs.shadow_ui(False)
+            #REINICIA A APLICAÇÃO
+            Qms = QMessageBox()
+            Qms.setWindowTitle("Sucesso")
+            Qms.setText("Sombra ocultada com sucesso")
+            Qms.setIcon(QMessageBox.Information)
+            Qms.exec_()
+            return os.execl(sys.executable, sys.executable, *sys.argv)
+
+            
 class Pdf_funtion(Ui_MainWindow):
     
     #PFD FOLDER PATCH /pdf

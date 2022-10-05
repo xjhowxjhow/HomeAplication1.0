@@ -41,7 +41,7 @@ class salva_dados:
                 cursor.execute("CREATE TABLE IF NOT EXISTS pdf_patchs(id_lancamento int,id_bank int,patch text, date_insert text, date_update text, ref_mes text)")
                 
                 #CONFIGURAÇÕES DA APLICAÇÃO:
-                cursor.execute("CREATE TABLE IF NOT EXISTS config_aplicacao (id int,tema text,hide_show_zeros_faturas text)")
+                cursor.execute("CREATE TABLE IF NOT EXISTS config_aplicacao (id int,tema text,hide_show_zeros_faturas text, shadow_ui text)")
                 banco.close()
                 pyautogui.alert('Banco de dados Criado no diretorio raiz')
 

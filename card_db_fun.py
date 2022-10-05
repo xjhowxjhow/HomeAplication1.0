@@ -8,7 +8,7 @@ import re
 import threading
 import card_db_test
 import home_db_fun
-import home_db_query
+import  home_db_query
 import calendar
 import locale
 import emoji
