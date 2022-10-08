@@ -31,7 +31,7 @@ from home_db_fun import Loading_screen_gif
 WINDOW_SIZE = 0
 TOGLE_STATUS = 80
 CARD_SELECTED = 0
-GLOBAL_VERSION = '1.11'
+GLOBAL_VERSION = '1.12'
 
 
 class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
@@ -594,8 +594,6 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                 card_db_fun.funcoes_cartao._start_values(self)
                 titulo ='Updates'
                 mensagem = 'Procurando Por Atualização'
-                show_tray_message(self.ui, tray,titulo,mensagem)
-                self.update()
                 try:
                     card_db_fun.funcoes_cartao.group_main(self)
                     
@@ -603,6 +601,8 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                     pass
                 # home_db_fun.Set_values_startup.set_values_table_bank(self)
                 home_db_fun.Group.execs(self)
+                self.update()
+                show_tray_message(self.ui, tray,titulo,mensagem)
             else:
                 self.CONTAINER_geral.hide()
                 pyautogui.confirm(text='!!ATENÇÃO!!\nBanco de dados nao foi localizado, Por favor Criar arquivo em MENU>CRIAR BANCO DE DADOS',title='BANCO DE DADOS NAO LOCALIZADO', buttons=['OK', 'Cancel'])
@@ -755,7 +755,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         resposta = requests.get('https://raw.githubusercontent.com/xjhowxjhow/HomeAplication1.0/main/version/version.txt')
         with open ('version.txt','wb') as novo_arquivo:
             novo_arquivo.write(resposta.content)
-            
+        
 
         read = open('version.txt','r')
         acess = read.readlines()
