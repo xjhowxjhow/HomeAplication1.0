@@ -46,17 +46,17 @@ class funcoes_cartao(Ui_MainWindow):
         
         if conditions  > 0 and conditions < 4:
             self.label_36.setText("Olá, Boa noite"+emoji.emojize(" :noite_estrelada:", language="pt"))
-            self.frame_34.setStyleSheet(u"background-image: url(:/time/menu/night.png);background-repeat:no-repeat;background-position:center;")
+            self.frame_34.setStyleSheet(u"background-image: url(:/time/menu/time/night.png);background-repeat:no-repeat;background-position:center;")
 
         elif conditions  > 4 and conditions < 12:
             self.label_36.setText("Olá, Bom dia"+emoji.emojize(" :praia_e_guarda-sol:", language="pt"))
-            self.frame_34.setStyleSheet(u"background-image: url(:/time/menu/day.png);background-repeat:no-repeat;background-position:center;")
+            self.frame_34.setStyleSheet(u"background-image: url(:/time/menu/time/day.png);background-repeat:no-repeat;background-position:center;")
         elif conditions >= 12 and conditions < 18:
             self.label_36.setText("Olá, Boa tarde"+emoji.emojize(" :nuvem:", language="pt"))
-            self.frame_34.setStyleSheet(u"background-image: url(:/time/menu/tarde.png);background-repeat:no-repeat;background-position:center;")
+            self.frame_34.setStyleSheet(u"background-image: url(:/time/menu/time/tarde.png);background-repeat:no-repeat;background-position:center;")
         elif conditions >= 18 and conditions < 24:
             self.label_36.setText("Olá, Boa noite"+emoji.emojize(" :noite_estrelada:", language="pt"))
-            self.frame_34.setStyleSheet(u"background-image: url(:/time/menu/night.png);background-repeat:no-repeat;background-position:center;")
+            self.frame_34.setStyleSheet(u"background-image: url(:/time/menu/time/night.png);background-repeat:no-repeat;background-position:center;")
 
     def _start_values(self): 
         def thead():
@@ -2251,7 +2251,7 @@ class Chart_one(Ui_MainWindow):
                       "Medico":self.set12,\
                       "Viagem":self.set13,\
                       "Eletronicos":self.set14,\
-                      "Dometicos":self.set15}
+                      "Domesticos":self.set15}
             
             
             #VALORES

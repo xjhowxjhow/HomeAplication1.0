@@ -4848,7 +4848,7 @@ class Ui_MainWindow(object):
         self.scrollArea_12.setWidgetResizable(True)
         self.scrollAreaWidgetContents_12 = QWidget()
         self.scrollAreaWidgetContents_12.setObjectName(u"scrollAreaWidgetContents_12")
-        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 1458, 920))
+        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 770, 920))
         self.scrollAreaWidgetContents_12.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); \n"
 "")
         self.verticalLayout_112 = QVBoxLayout(self.scrollAreaWidgetContents_12)
@@ -4872,7 +4872,7 @@ class Ui_MainWindow(object):
         self.scrollArea_13.setWidgetResizable(True)
         self.scrollAreaWidgetContents_13 = QWidget()
         self.scrollAreaWidgetContents_13.setObjectName(u"scrollAreaWidgetContents_13")
-        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 1440, 286))
+        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 95, 38))
         self.horizontalLayout_115 = QHBoxLayout(self.scrollAreaWidgetContents_13)
         self.horizontalLayout_115.setObjectName(u"horizontalLayout_115")
         self.layout_add_frame_bank = QHBoxLayout()
@@ -6942,7 +6942,7 @@ class Ui_MainWindow(object):
 "\n"
 "}")
         icon28 = QIcon()
-        icon28.addFile(u":/menu/home-card.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon28.addFile(u":/menu/menu/home-card.png", QSize(), QIcon.Normal, QIcon.Off)
         self.back_main_dash.setIcon(icon28)
         self.back_main_dash.setIconSize(QSize(35, 35))
 
@@ -7715,7 +7715,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 1008, 512))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 394, 90))
         self.scrollAreaWidgetContents.setStyleSheet(u"background-color:rgba(255,255,255,0);")
         self.verticalLayout_53 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_53.setSpacing(0)
@@ -11135,7 +11135,7 @@ class Ui_MainWindow(object):
         self.frame_24 = QFrame(self.frame_22)
         self.frame_24.setObjectName(u"frame_24")
         self.frame_24.setMaximumSize(QSize(300, 300))
-        self.frame_24.setStyleSheet(u"border-image: url(:/dev/C:/Users/Jhonatan Deni/Desktop/58306583.jfif);")
+        self.frame_24.setStyleSheet(u"border-image: url(:/menu/ddev.jpg);")
         self.frame_24.setFrameShape(QFrame.StyledPanel)
         self.frame_24.setFrameShadow(QFrame.Raised)
 
@@ -11156,7 +11156,7 @@ class Ui_MainWindow(object):
         self.pushButton_4.setFont(font)
         self.pushButton_4.setStyleSheet(u"color: rgb(255, 255, 255);")
         icon34 = QIcon()
-        icon34.addFile(u":/dev/dev/devs.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon34.addFile(u":/menu/devs.png", QSize(), QIcon.Normal, QIcon.Off)
         self.pushButton_4.setIcon(icon34)
         self.pushButton_4.setIconSize(QSize(40, 40))
 
@@ -11166,7 +11166,7 @@ class Ui_MainWindow(object):
         self.pushButton_5.setObjectName(u"pushButton_5")
         self.pushButton_5.setStyleSheet(u"color: rgb(255, 255, 255);")
         icon35 = QIcon()
-        icon35.addFile(u":/dev/dev/academy.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon35.addFile(u":/menu/academy.png", QSize(), QIcon.Normal, QIcon.Off)
         self.pushButton_5.setIcon(icon35)
         self.pushButton_5.setIconSize(QSize(40, 40))
 
@@ -11202,7 +11202,7 @@ class Ui_MainWindow(object):
 "	border: 2px solid  rgb(55, 55, 55);\n"
 "}")
         icon36 = QIcon()
-        icon36.addFile(u":/dev/dev/git.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon36.addFile(u":/menu/git.png", QSize(), QIcon.Normal, QIcon.Off)
         self.pushButton_6.setIcon(icon36)
         self.pushButton_6.setIconSize(QSize(40, 40))
 
@@ -11448,7 +11448,7 @@ class Ui_MainWindow(object):
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Bahnschrift Light Condensed'; font-size:14pt; font-weight:24; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a name=\"KCA1_48\"></a><span style=\" font-size:12pt; font-weight:400;\"></span><span style=\" font-size:12pt; font-weight:400;\"></span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a name=\"KCA1_48\"></a><span style=\" font-size:12pt; font-weight:400;\">O</span><span style=\" font-size:12pt; font-weight:400;\"> Texas \u00e9 um dos 50 estados dos Estados Unidos, localizado na regi\u00e3o sul do pa\u00eds. Possui como limites o estado de Oklahoma ao norte, Novo M\u00e9xico ao oeste, \u2026</span></p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-weight:400;\"><br /></p></body></html>", None))
         self.label_if_card.setText(QCoreApplication.translate("MainWindow", u"Cartao:", None))
         self.label_45.setText(QCoreApplication.translate("MainWindow", u"Fatura de ", None))
