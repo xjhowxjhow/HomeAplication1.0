@@ -1,0 +1,5 @@
+-- Pyside2
+-- pyautogui
+-- requests
+-- pip install emoji
+-- pip install python-dateutil

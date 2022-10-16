@@ -1,4 +1,4 @@
-from typing_extensions import Self
+
 from PySide2.QtCore import *
 from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2.QtCore import (QCoreApplication, QPropertyAnimation, QDate, QDateTime, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
@@ -11,7 +11,6 @@ from card_db_fun import Chart_one
 from datetime import datetime
 from frame_bank.card_frame_bank import CardFrameBank
 from source_ui.shadow import InitShadow ,set_shadow
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import card_db_fun
 import home_db_fun
 import  home_db_query
@@ -46,6 +45,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         global window_obj
         window_obj = self.ui
+        
         
 
         # SOMBRAS PARA FRAMES
