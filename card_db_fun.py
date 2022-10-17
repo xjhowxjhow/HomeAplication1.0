@@ -321,6 +321,7 @@ class funcoes_cartao(Ui_MainWindow):
                 funcoes_cartao.icontable_extrato(self)
                 Main_page_Cards._top_main_values_update(self)
                 Main_page_Cards._middle_main_values_update(self)
+                funcoes_cartao.group_main(self)
 
                 try:
                     self.grafico_categoria.setParent(None)
@@ -906,6 +907,10 @@ class funcoes_cartao(Ui_MainWindow):
         
         try:
             self.grafico_categoria.setParent(None)
+        except:
+            pass
+        try:
+            funcoes_cartao.group_main(self)
         except:
             pass
 
@@ -1810,29 +1815,21 @@ class funcoes_cartao(Ui_MainWindow):
                 # msg.setIcon(QMessageBox.Information)
                 # msg.exec_()
                 home_db_fun.Loading_screen_gif._payout_receiver_sucess(self)
+                funcoes_cartao.group_main(self)
             else:
                 validate = home_db_fun.Alerts._alerta_fatura_banco_indiferente(self)
                 if validate == True:
                     default_bank = home_db_query.Return_values._return_default_bank()
-                    # TODO ERRO AQ AWQ TEM Q RETORNAR O ID DO BANCO QUE NAO TEM BANCO CADASTRADO EX NUB
-                    # TODO ERRO AQ AWQ TEM Q RETORNAR O ID DO BANCO QUE NAO TEM BANCO CADASTRADO EX NUB
-                    # TODO ERRO AQ AWQ TEM Q RETORNAR O ID DO BANCO QUE NAO TEM BANCO CADASTRADO EX NUB
-                    # TODO ERRO AQ AWQ TEM Q RETORNAR O ID DO BANCO QUE NAO TEM BANCO CADASTRADO EX NUB
-                    # TODO ERRO AQ AWQ TEM Q RETORNAR O ID DO BANCO QUE NAO TEM BANCO CADASTRADO EX NUB
-                    # TODO ERRO AQ AWQ TEM Q RETORNAR O ID DO BANCO QUE NAO TEM BANCO CADASTRADO EX NUB
-                    
+
                     home_db_query.Saldos._pagar_fatura(str(default_bank),id_bank,captura_int_mes,ano)
                     card_db_test.Return_Values_Calcs._pagar_fatura(id_bank,captura_int_mes,ano)
-                    # TODO ERRO AQ
+ 
                     home_db_fun.Set_values_startup._set_Saldo(self)
                     home_db_fun.mainpage.load_extrato_filter(self)
-                    CardFrameBank._update_frame_cards_saldo(self,id_bank)
-                    # msg = QMessageBox()
-                    # msg.setWindowTitle("Sucesso")
-                    # msg.setText("Fatura paga com sucesso debitado da conta principal!")
-                    # msg.setIcon(QMessageBox.Information)
-                    # msg.exec_()
+                    funcoes_cartao.group_main(self) # COLOQUEI AQUI 16/10
+                    CardFrameBank._update_frame_cards_saldo(self,id_bank) # 16/10/2022 error aqui # TODO ERRO AQ
                     home_db_fun.Loading_screen_gif._payout_receiver_sucess(self)
+
                 else:
                     pass
                     return False
@@ -2488,7 +2485,7 @@ class Main_page_Cards(Ui_MainWindow):
             
             
             
-            self.label_39.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" color:#ffffff;\">Faturas de: </span></p><p align=\"center\"><span style=\" font-size:16pt; color:#ffffff;\">R$"+all_soma_faturas+"</span></p></body></html>", None))
+            self.label_39.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" color:#ffffff;\">Faturas de: "+mes+" </span></p><p align=\"center\"><span style=\" font-size:16pt; color:#ffffff;\">R$"+all_soma_faturas+"</span></p></body></html>", None))
 
         thread = threading.Thread(target=thead())
         thread.start()

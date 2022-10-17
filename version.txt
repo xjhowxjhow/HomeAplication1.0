@@ -1,2 +1,0 @@
-VERSION: 1.12
-NOTES:  - Novo layout, e novas funcionalidades de fluxo de despesas.

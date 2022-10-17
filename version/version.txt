@@ -1,2 +1,2 @@
-VERSION: 1.13
+VERSION: 1.14
 NOTES:  - Correção de bugs.
