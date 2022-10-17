@@ -11346,7 +11346,7 @@ class Ui_MainWindow(object):
         self.enter_pass.setPlaceholderText(QCoreApplication.translate("MainWindow", u"   Senha", None))
         self.checkBox.setText(QCoreApplication.translate("MainWindow", u"Lembrar senha", None))
         self.buton_login.setText(QCoreApplication.translate("MainWindow", u"Entrar", None))
-        self.credits.setText(QCoreApplication.translate("MainWindow", u"   Home Application Ver: 1.06", None))
+        self.credits.setText(QCoreApplication.translate("MainWindow", u"   Home Application Ver: 1.13", None))
         self.minimize.setText("")
         self.maxmize.setText("")
         self.exit.setText("")
