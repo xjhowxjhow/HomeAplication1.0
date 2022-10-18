@@ -99,8 +99,10 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.table.setColumnWidth(9, 300)
         #COLUNA SATUS
         self.table.setColumnWidth(10, 80)
+        #COLUNA CATEGORIA TABELA CARTAO 
+        self.extrato_cartao_0.setColumnWidth(1, 150)
         
-
+        
         #CONFIGURANDO CONTA SE TIVER CARDAO DE CREDITO
         self.comboBox_24.currentIndexChanged.connect(lambda:home_db_fun.mainpage._event_change_stakecard(self))
         self.comboBox_25.currentIndexChanged.connect(lambda:home_db_fun.mainpage._categorias_entra_said(self))
@@ -740,6 +742,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
             self.extrato_cartao_0.setFont(font8)
             self.extrato_cartao_0.setIconSize(QSize(40, 40))
             self.table_faturas_ind.horizontalHeader().setDefaultSectionSize(255)
+            self.extrato_cartao_0.setColumnWidth(1, 150)
 
         else:
             WINDOW_SIZE = 0
@@ -752,6 +755,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
             self.extrato_cartao_0.horizontalHeader().setDefaultSectionSize(100)
             self.extrato_cartao_0.verticalHeader().setDefaultSectionSize(40)
             self.table_faturas_ind.horizontalHeader().setDefaultSectionSize(189)
+            self.extrato_cartao_0.setColumnWidth(1, 150)
 
     def mousePressEvent(self, event):
         self.offset = event.pos()
