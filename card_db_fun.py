@@ -13,6 +13,7 @@ import calendar
 import locale
 import emoji
 from frame_bank.card_frame_bank import CardFrameBank
+from source_ui.categories import Texts_Erros
 from PySide2.QtCore import *
 from PySide2 import QtWidgets
 from PySide2.QtGui import *
@@ -35,7 +36,20 @@ EXTRATO_ATUAL = 0;
 
 
 
-class funcoes_cartao(Ui_MainWindow):    
+class funcoes_cartao(Ui_MainWindow):
+    
+    
+    def delete_card_if_bank_v(self,id_card):
+        
+        veify = home_db_query.Return_Values_Conditions._return_bank_id(str(id_card))
+        if not veify:
+            funcoes_cartao.destroy_frame_card(self)
+            return True
+        else:
+            text = Texts_Erros.deletar_cartao_config()
+            home_db_fun.Alerts.Alert_all_error(self,text)
+            return False
+        
     def _clock_page_cards(self): #NT
         current_time = QDateTime.currentDateTime()
         label_time = current_time.toString('dd/MM/yyyy hh:mm:ss')
@@ -45,16 +59,35 @@ class funcoes_cartao(Ui_MainWindow):
         conditions= int(current_time.toString('hh'))
         
         if conditions  > 0 and conditions < 4:
+            #page main
+            self.label_41.setText("Olá, Boa noite"+emoji.emojize(" :noite_estrelada:", language="pt"))
+            self.frame_45.setStyleSheet(u"background-image: url(:/time/menu/time/night.png);background-repeat:no-repeat;background-position:center;")
+
+            #page cartao
             self.label_36.setText("Olá, Boa noite"+emoji.emojize(" :noite_estrelada:", language="pt"))
             self.frame_34.setStyleSheet(u"background-image: url(:/time/menu/time/night.png);background-repeat:no-repeat;background-position:center;")
 
         elif conditions  > 4 and conditions < 12:
+            #page main:
+            self.label_41.setText("Olá, Bom dia"+emoji.emojize(" :praia_e_guarda-sol:", language="pt"))
+            self.frame_45.setStyleSheet(u"background-image: url(:/time/menu/time/day.png);background-repeat:no-repeat;background-position:center;")
+            
             self.label_36.setText("Olá, Bom dia"+emoji.emojize(" :praia_e_guarda-sol:", language="pt"))
             self.frame_34.setStyleSheet(u"background-image: url(:/time/menu/time/day.png);background-repeat:no-repeat;background-position:center;")
         elif conditions >= 12 and conditions < 18:
+            #page main:
+            self.label_41.setText("Olá, Boa tarde"+emoji.emojize(" :nuvem:", language="pt"))
+            self.frame_45.setStyleSheet(u"background-image: url(:/time/menu/time/tarde.png);background-repeat:no-repeat;background-position:center;")
+            
+            
             self.label_36.setText("Olá, Boa tarde"+emoji.emojize(" :nuvem:", language="pt"))
             self.frame_34.setStyleSheet(u"background-image: url(:/time/menu/time/tarde.png);background-repeat:no-repeat;background-position:center;")
         elif conditions >= 18 and conditions < 24:
+            #page main:
+            self.label_41.setText("Olá, Boa noite"+emoji.emojize(" :noite_estrelada:", language="pt"))
+            self.frame_45.setStyleSheet(u"background-image: url(:/time/menu/time/night.png);background-repeat:no-repeat;background-position:center;")
+            
+            
             self.label_36.setText("Olá, Boa noite"+emoji.emojize(" :noite_estrelada:", language="pt"))
             self.frame_34.setStyleSheet(u"background-image: url(:/time/menu/time/night.png);background-repeat:no-repeat;background-position:center;")
 

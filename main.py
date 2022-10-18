@@ -30,7 +30,7 @@ from home_db_fun import Loading_screen_gif
 WINDOW_SIZE = 0
 TOGLE_STATUS = 80
 CARD_SELECTED = 0
-GLOBAL_VERSION = '1.14'
+GLOBAL_VERSION = '1.15'
 
 
 class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
@@ -179,7 +179,6 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         effects.Effetc_slides._conent_geral_cards(self)
         
         self.add_card_3.clicked.connect(lambda:card_db_fun.funcoes_cartao.adicionar_cartao(self))
-        self.remover_card_3.clicked.connect(lambda:card_db_fun.funcoes_cartao.destroy_frame_card(self))
         self.apaga_compra.clicked.connect(lambda:card_db_fun.funcoes_cartao.remove_compra(self))
         self.pushButton_6.clicked.connect(self.open_webbrowser)
         self.pushButton_17.clicked.connect(lambda:card_db_fun.funcoes_cartao.today(self))
@@ -257,7 +256,9 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.table_active_banks.installEventFilter(self)
         self.update_bank.installEventFilter(self)
         self.remover_bank.installEventFilter(self)
-
+        self.apaga_compra_3.installEventFilter(self)
+        self.btn_if_card_2.installEventFilter(self)
+        self.remover_card_3.installEventFilter(self)
 
         
     
@@ -553,6 +554,23 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                     
                 return home_db_fun.Table_Banks_Remove_Update._remove_table_banks(self,id_bank,id_card)
             
+            if obj == self.apaga_compra_3 and event.type() == QtCore.QEvent.MouseButtonPress: #TODO APAGA LANCAMENTO
+                current_row = self.table.currentRow()
+                id = self.table.item(current_row, 1).text()
+                id_bank = self.table.item(current_row, 2).text()
+                return home_db_fun.Remove_lancamentos._Delet_lancamento(self,id)
+            
+            if obj == self.btn_if_card_2 and event.type() == QtCore.QEvent.MouseButtonPress:
+                btn = "cartao"
+                return effects.Effetc_slides.grid_lateral_menu(self,btn)
+            
+            if obj == self.remover_card_3 and event.type() == QtCore.QEvent.MouseButtonPress:
+                current_row = self.table_active_cards.currentRow()
+                id_bank = self.table_active_cards.item(current_row, 6).text()
+                #verifica se tem banco vinculado
+                return card_db_fun.funcoes_cartao.delete_card_if_bank_v(self,id_bank)
+                
+                 
             
             return super(MainWindow,self).eventFilter(obj, event)
 

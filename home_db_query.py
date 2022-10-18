@@ -401,6 +401,7 @@ class Return_Values_Conditions:
         
         cursor.execute("SELECT valor FROM new_lancamento WHERE id_lancamento = '"+str(id_lancamento)+"' AND id_bank = '"+str(id_bank)+"' AND tipo = '"+str(tipo)+"' AND strftime('%Y',data_lancamento) = '"+str(ano)+"' AND strftime('%m',data_lancamento) = '"+str(mes)+"'")
         dados = cursor.fetchall()
+        print("dados",dados)
         return dados[0][0]
     
     
@@ -743,6 +744,18 @@ class Return_Values_Conditions:
 
     
 class Saldos:
+
+    def Update_Saldo(id_bank,valor):
+        #id_bank
+        #valor
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        cursor.execute("UPDATE contas_bancarias SET saldo_inicial = '"+str(valor)+"' WHERE id = '"+id_bank+"'")
+        banco.commit()
+        banco.close()
+        return True
 
     def Set_saldo_inicial():
 
@@ -1167,3 +1180,26 @@ class Update_Remove:
             
             
         return True
+    
+    
+    
+    def _Delete_lancamento(id_lancamento):
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        #TABLES:new_lancamento,
+            # config_lancamento,
+            # pagamentos_saldo,
+            # prioridade_value,
+            # status_lancamento,
+            # pdf_patchs
+        cursor.execute("DELETE FROM new_lancamento WHERE new_lancamento.id_lancamento = '"+str(id_lancamento)+"'")
+        cursor.execute("DELETE FROM config_lancamento WHERE config_lancamento.id_lancamento = '"+str(id_lancamento)+"'")
+        cursor.execute("DELETE FROM pagamentos_saldo WHERE pagamentos_saldo.id_lancamento = '"+str(id_lancamento)+"'")
+        cursor.execute("DELETE FROM prioridade_value WHERE prioridade_value.id_lancamento = '"+str(id_lancamento)+"'")
+        cursor.execute("DELETE FROM status_lancamento WHERE status_lancamento.id_lancamento = '"+str(id_lancamento)+"'")
+        cursor.execute("DELETE FROM pdf_patchs WHERE pdf_patchs.id_lancamento = '"+str(id_lancamento)+"'")
+        banco.commit()
+        return True
+

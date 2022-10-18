@@ -16,7 +16,7 @@ import emoji
 import home_db_query
 import random
 from frame_bank.card_frame_bank import CardFrameBank
-from source_ui.categories import Category,Payments_Type
+from source_ui.categories import Category,Payments_Type,Texts_Erros
 from PySide2.QtCore import *
 from PySide2 import QtWidgets
 from PySide2.QtGui import *
@@ -478,10 +478,9 @@ class mainpage(Ui_MainWindow):
                         # 6 = CATEGORIA
                         cate = 'Fatura'
 
-                        list_icon = ["delivery","appstrans","comida","mercado","lazer","icons8-casa-96","inuteis","servicos","streaming","urgencia","gatos","dogs","medico","viagem","eletronico","domesticos"]
                         icone = QFrame()
                         icone.setMaximumSize(QSize(35, 35))
-                        icone.setStyleSheet(u"background-color:rgba(255,255,255,0);border-image: url(:/icons-cards/src-page-cartoes/"+list_icon[randint(0,10)]+".png);\n"
+                        icone.setStyleSheet(u"background-color:rgba(255,255,255,0);border-image: url(:/icons-cards/src-page-cartoes/credit-debit.png);\n"
                             "\n"
                             "\n"
                             "background-position: center;\n"
@@ -668,10 +667,10 @@ class mainpage(Ui_MainWindow):
                     # 6 = CATEGORIA
                     cate = dados[i][4]
 
-                    list_icon = ["delivery","appstrans","comida","mercado","lazer","icons8-casa-96","inuteis","servicos","streaming","urgencia","gatos","dogs","medico","viagem","eletronico","domesticos"]
+                    url_icon = Category.patch_icons(str(cate))
                     icone = QFrame()
                     icone.setMaximumSize(QSize(35, 35))
-                    icone.setStyleSheet(u"background-color:rgba(255,255,255,0);border-image: url(:/icons-cards/src-page-cartoes/"+list_icon[randint(0,10)]+".png);\n"
+                    icone.setStyleSheet(u"background-color:rgba(255,255,255,0);border-image: url("+url_icon+");\n"
                         "\n"
                         "\n"
                         "background-position: center;\n"
@@ -851,11 +850,10 @@ class mainpage(Ui_MainWindow):
 
                     # 6 = CATEGORIA
                     cate = dados[i][5]
-
-                    list_icon = ["delivery","appstrans","comida","mercado","lazer","icons8-casa-96","inuteis","servicos","streaming","urgencia","gatos","dogs","medico","viagem","eletronico","domesticos"]
+                    url_icon = Category.patch_icons(str(cate))
                     icone = QFrame()
                     icone.setMaximumSize(QSize(35, 35))
-                    icone.setStyleSheet(u"background-color:rgba(255,255,255,0);border-image: url(:/icons-cards/src-page-cartoes/"+list_icon[randint(0,10)]+".png);\n"
+                    icone.setStyleSheet(u"background-color:rgba(255,255,255,0);border-image: url("+url_icon+");\n"
                         "\n"
                         "\n"
                         "background-position: center;\n"
@@ -1813,9 +1811,82 @@ class Alerts(Ui_MainWindow):
         qdialog.exec_()
         return qdialog.result()
         
-        
-        
+    def Alert_Remove_Lancamento(self):
+        qdialog = QDialog()
+        qdialog.setWindowTitle("Alerta")
+        qdialog.setWindowIcon(QIcon(':/icons/icons/Alerta.png'))
+        qdialog.setWindowFlags(Qt.FramelessWindowHint)
+        qdialog.setFixedSize(400, 200)
+        qdialog.setStyleSheet("background-color:rgb(40, 42, 54); border: 1px solid rgba(255,255,255,30);")
 
+        qdialog.setWindowModality(Qt.ApplicationModal)
+
+        #FONTE
+        #fonte
+        font3 = QFont()
+        font3.setFamily(u"Bahnschrift Light SemiCondensed")
+        font3.setPointSize(10)
+
+        true_or_false = 0
+        #OK BUTTON CANC BUTTON
+        ok_button = QPushButton("Sim",qdialog)
+        ok_button.setGeometry(300,150,80,30)
+        ok_button.setStyleSheet("QPushButton{ border-radius:10px; color: rgb(255, 255, 255); background-color:rgba(255,255,255,10); border: 1px solid rgba(255,255,255,20); border-radius:7px; } QPushButton:hover{ background-color:rgba(31, 168, 49,70);} QPushButton:pressed{ background-color:rgba(31, 168, 49,170); }")
+        ok_button.clicked.connect(qdialog.accept)
+        ok_button.setFont(font3)
+        
+        #CANCEL BUTTON
+        cancel_button = QPushButton("Não",qdialog)
+        cancel_button.setGeometry(200,150,80,30)
+        cancel_button.clicked.connect(qdialog.reject) 
+        cancel_button.setStyleSheet("QPushButton{ border-radius:10px; color: rgb(255, 255, 255); background-color:rgba(255,255,255,10); border: 1px solid rgba(255,255,255,20); border-radius:7px; } QPushButton:hover{ background-color:rgba(225, 60, 47,70); } QPushButton:pressed{ background-color:rgba(225, 60, 47,170); }")
+        cancel_button.setFont(font3)
+
+    
+
+        #LABEL
+        label = QLabel(qdialog)
+        label.setGeometry(10,10,380,130)
+        label.setStyleSheet("color: rgb(255, 255, 255); background-color:rgba(255,255,255,0); border:none;")
+        label.setText("Deseja realmente remover este lançamento ?\n\nATENÇÃO: Esta ação não poderá ser desfeita.\n")
+        label.setAlignment(Qt.AlignCenter)
+        label.setFont(font3)
+        qdialog.exec_()
+        return qdialog.result()
+        
+    def Alert_all_error(self,text):
+        qdialog = QDialog()
+        qdialog.setWindowTitle("Alerta")
+        qdialog.setWindowIcon(QIcon(':/icons/icons/Alerta.png'))
+        qdialog.setWindowFlags(Qt.FramelessWindowHint)
+        qdialog.setFixedSize(400, 200)
+        qdialog.setStyleSheet("background-color:rgb(40, 42, 54); border: 1px solid rgba(255,255,255,30);")
+
+        qdialog.setWindowModality(Qt.ApplicationModal)
+
+        #FONTE
+        #fonte
+        font3 = QFont()
+        font3.setFamily(u"Bahnschrift Light SemiCondensed")
+        font3.setPointSize(10)
+
+        true_or_false = 0
+        #OK BUTTON CANC BUTTON
+        ok_button = QPushButton("Compreendi",qdialog)
+        ok_button.setGeometry(300,150,80,30)
+        ok_button.setStyleSheet("QPushButton{ border-radius:10px; color: rgb(255, 255, 255); background-color:rgba(255,255,255,10); border: 1px solid rgba(255,255,255,20); border-radius:7px; } QPushButton:hover{ background-color:rgba(31, 168, 49,70);} QPushButton:pressed{ background-color:rgba(31, 168, 49,170); }")
+        ok_button.clicked.connect(qdialog.accept)
+        ok_button.setFont(font3)
+        
+        #LABEL
+        label = QLabel(qdialog)
+        label.setGeometry(10,10,380,130)
+        label.setStyleSheet("color: rgb(255, 255, 255); background-color:rgba(255,255,255,0); border:none;")
+        label.setText(text)
+        label.setAlignment(Qt.AlignCenter)
+        label.setFont(font3)
+        qdialog.exec_()
+        return qdialog.result()
         
         
         
@@ -1903,7 +1974,7 @@ class Pdf_funtion(Ui_MainWindow):
             icon = QIcon()
             item = QListWidgetItem()
             item.setText(file[0])
-            icon.addFile(u":/dev/dev/academy.png", QSize(), QIcon.Normal, QIcon.Off)
+            icon.addFile(u":/category_main/category_main/pdf.png", QSize(), QIcon.Normal, QIcon.Off)
             item.setIcon(icon)
             self.listWidget_3.addItem(item)
 
@@ -1974,7 +2045,7 @@ class Pdf_funtion(Ui_MainWindow):
                 self.listWidget_2.setMinimumHeight(70)
             for i in range(len(data_patch)):
                 icon = QIcon()
-                icon.addFile(u":/dev/dev/academy.png", QSize(), QIcon.Normal, QIcon.Off)
+                icon.addFile(u":/category_main/category_main/pdf.png", QSize(), QIcon.Normal, QIcon.Off)
                 item = QListWidgetItem()
                 item.setText(data_patch[i][0])
                 item.setIcon(icon)
@@ -2057,7 +2128,7 @@ class Pdf_funtion(Ui_MainWindow):
             icon = QIcon()
             item = QListWidgetItem()
             item.setText(file[0])
-            icon.addFile(u":/dev/dev/academy.png", QSize(), QIcon.Normal, QIcon.Off)
+            icon.addFile(u":/category_main/category_main/pdf.png", QSize(), QIcon.Normal, QIcon.Off)
             item.setIcon(icon)
             self.listWidget_2.addItem(item)
             #INSERT IN DB
@@ -2305,7 +2376,92 @@ class Confirn_Frame(Ui_MainWindow):
         return qdialog.result()
         
 
+    def _devoler_pagamento_remove(self, valor,saldo_apos):
+    
         
+        qdialog = QDialog()
+        qdialog.setWindowFlags(Qt.FramelessWindowHint)
+        qdialog.setStyleSheet("background-color:rgb(40, 42, 54); border: 1px solid rgba(255,255,255,30);")
+        #get position Ui_MainWindow
+        x = self.frameGeometry().x()
+        y = self.frameGeometry().y()
+        #set position
+
+        
+        qdialog.setGeometry(QRect(x+650,y+400, 331, 251))
+        
+        qdialog.setModal(True)
+        
+        label_confirm = QLabel(qdialog)
+        label_confirm.setObjectName(u"label_confirm")
+        label_confirm.setGeometry(QRect(60, 20, 201, 41))
+        font = QFont()
+        font.setFamily(u"Bahnschrift Light Condensed")
+        font.setPointSize(15)
+    
+        label_confirm.setFont(font)
+        label_confirm.setStyleSheet("color: rgb(255, 255, 255); background-color:rgba(255,255,255,0); border:none;")
+        label_confirm.setAlignment(Qt.AlignCenter)
+        sald_confirm = QLabel(qdialog)
+        sald_confirm.setObjectName(u"sald_confirm")
+        sald_confirm.setGeometry(QRect(20, 143, 301, 31))
+        font1 = QFont()
+        font1.setFamily(u"Bahnschrift Light SemiCondensed")
+        font1.setPointSize(11)
+        
+        
+        sald_confirm.setFont(font1)
+        sald_confirm.setStyleSheet("color: rgb(255, 255, 255); background-color:rgba(255,255,255,0); border:none;")
+        line_confirm = QFrame(qdialog)
+        line_confirm.setObjectName(u"line_confirm")
+        line_confirm.setGeometry(QRect(20, 136, 291, 1))
+        line_confirm.setMaximumSize(QSize(16777215, 1))
+        line_confirm.setFrameShape(QFrame.HLine)
+        line_confirm.setFrameShadow(QFrame.Sunken)
+        val_confirm = QLabel(qdialog)
+        val_confirm.setObjectName(u"val_confirm")
+        val_confirm.setGeometry(QRect(20, 107, 291, 31))
+        font2 = QFont()
+        font2.setFamily(u"Bahnschrift Light SemiCondensed")
+        font2.setPointSize(13)
+        
+        val_confirm.setFont(font2)
+        val_confirm.setStyleSheet("color: rgb(255, 255, 255); background-color:rgba(255,255,255,0); border:none;")
+        pushOK = QPushButton(qdialog)
+        pushOK.setObjectName(u"pushOK")
+        pushOK.setGeometry(QRect(40, 202, 75, 31))
+        
+        font3 = QFont()
+        font3.setFamily(u"Bahnschrift Light SemiCondensed")
+        font3.setPointSize(10)
+        
+        
+        pushOK.setFont(font3)
+        pushOK.setStyleSheet("QPushButton{ border-radius:10px; color: rgb(255, 255, 255); background-color:rgba(255,255,255,10); border: 1px solid rgba(255,255,255,20); border-radius:7px; } QPushButton:hover{ background-color:rgba(31, 168, 49,70);} QPushButton:pressed{ background-color:rgba(31, 168, 49,170); }")
+        pushOK.clicked.connect(qdialog.accept)
+        
+        pushCAN = QPushButton(qdialog)
+        pushCAN.setObjectName(u"pushCAN")
+        pushCAN.setGeometry(QRect(210, 202, 75, 31))
+        pushCAN.setFont(font3)
+        pushCAN.setStyleSheet("QPushButton{ border-radius:10px; color: rgb(255, 255, 255); background-color:rgba(255,255,255,10); border: 1px solid rgba(255,255,255,20); border-radius:7px; } QPushButton:hover{ background-color:rgba(225, 60, 47,70); } QPushButton:pressed{ background-color:rgba(225, 60, 47,170); }")
+        pushCAN.clicked.connect(qdialog.reject) 
+        
+        valor = str(valor)
+        saldo_apos = str(saldo_apos)
+        
+        
+        # #set text
+        label_confirm.setText("Devolver o Pagamento?")
+        val_confirm.setText("Valor: "+valor)
+        sald_confirm.setText("Saldo após a Devolução: "+saldo_apos)
+        pushOK.setText("Sim")
+        pushCAN.setText("Nao")
+
+        #show
+        qdialog.exec_()
+        
+        return qdialog.result()
     
 
 
@@ -2449,3 +2605,71 @@ class Table_Banks_Remove_Update(Ui_MainWindow):
             else:
                 print("Cancelado")
                 pass
+            
+
+
+
+class Remove_lancamentos(Ui_MainWindow):
+    
+    def _Delet_lancamento(self,id_lancamento):
+        current_row = self.table.currentRow()
+        id = self.table.item(current_row, 1).text()
+        id_bank = self.table.item(current_row, 2).text()
+        tipo = home_db_query.Verify_status_payment.verify_type_lanca(id_lancamento)
+        if tipo =="fatura":
+            text = Texts_Erros.deletar_fatura_no_menu()
+            Alerts.Alert_all_error(self,text)
+        else:
+            Alert = Alerts.Alert_Remove_Lancamento(self)
+            if Alert == True:
+                #verifica se ja foi pago/recebido
+                if home_db_query.Verify_status_payment.return_status_p_pago(id_lancamento,id_bank) == True:
+
+
+                    mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
+                    ano = self.label_72.text()
+
+
+                    if tipo == True:
+                        tipo = "Entrada"
+                    elif tipo == False:
+                        tipo = "Saida"
+                    else: tipo ="Fatura"
+
+                    print(id_lancamento,id_bank,tipo,mes,ano)
+                    value_lancamento = home_db_query.Return_Values_Conditions.get_valor_transacao(id_lancamento,id_bank,tipo,ano,mes)
+
+                    saldo_atual = home_db_query.Return_Values_Conditions._return_saldo(id_bank)
+
+                    if tipo == "Entrada":
+                        saldo_atual = float(saldo_atual) - float(value_lancamento)
+                    else:
+                        saldo_atual = float(saldo_atual) + float(value_lancamento)
+
+
+                    #Devolução do saldo
+                    #formts
+                    vl = Convert_Moedas._usd_to_brl(self,str(value_lancamento))
+                    sa = Convert_Moedas._usd_to_brl(self,str(saldo_atual))
+
+                    Devoler_dinheiro = Confirn_Frame._devoler_pagamento_remove(self,vl,sa)
+                    if Devoler_dinheiro == True:
+                        print("Devolução de dinheiro")
+                        saldo = float(saldo_atual)
+
+                        home_db_query.Saldos.Update_Saldo(id_bank,saldo)
+                        home_db_query.Update_Remove._Delete_lancamento(id_lancamento)
+                        Group.execs(self)
+                    else:
+                        print("nao devolvido de dinheiro")
+                        home_db_query.Update_Remove._Delete_lancamento(id_lancamento)
+                        Group.execs(self)
+                else:
+                        print("nao pago/recebido portanto nao devolvio")
+                        home_db_query.Update_Remove._Delete_lancamento(id_lancamento)
+                        Group.execs(self)
+
+            else:
+                pass
+            
+        return True
