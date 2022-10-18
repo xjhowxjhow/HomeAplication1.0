@@ -1612,14 +1612,25 @@ class Alerts(Ui_MainWindow):
                     if self.lineEdit_14.text() == "0" or self.lineEdit_14.text() == "00" or len(self.lineEdit_14.text()) > 2 or len(self.lineEdit_14.text()) < 2 or int(self.lineEdit_14.text()) > 31 or int(self.lineEdit_14.text()) < 1:
                         return False
                     else:
-                        if len(self.lineEdit_14.text()) == 2:
-                            return True
+                        val = self.lineEdit_13.text()
+                        if Alerts._validador_int(val) == False:
+                            print ("error?????????????????????",Alerts._validador_int(val))
+                            return False
+                        else:
+                            if len(self.lineEdit_14.text()) == 2:
+                                return True
 
             if pago == False:
                 if self.comboBox_11.currentText() == "" or self.comboBox_25.currentText() == "" or self.comboBox_27.currentText() == "" or self.comboBox_21.currentText() == "" or self.lineEdit_11.text() == "" or self.lineEdit_13.text() == "" or self.comboBox_22.currentText() == "" or self.comboBox_23.currentText() == "" or self.comboBox_26.currentText() == "" or self.lineEdit_14.text() == "":
                     return False
                 else:
-                    return True
+                    val = self.lineEdit_13.text()
+                    if Alerts._validador_int(val) == False:
+                        print ("error?????????????????????",Alerts._validador_int(val))
+                        return False
+                    else:
+                        if len(self.lineEdit_14.text()) == 2:
+                            return True
         if recorrente == False:
             if pago == True:
                 if self.comboBox_11.currentText() == "" or self.comboBox_25.currentText() == "" or self.comboBox_27.currentText() == "" or self.comboBox_21.currentText() == "" or self.lineEdit_11.text() == "" or self.lineEdit_13.text() == "" or self.comboBox_22.currentText() == "" or self.comboBox_23.currentText() == "":
@@ -1635,7 +1646,13 @@ class Alerts(Ui_MainWindow):
                 if self.comboBox_11.currentText() == "" or self.comboBox_25.currentText() == "" or self.comboBox_27.currentText() == "" or self.comboBox_21.currentText() == "" or self.lineEdit_11.text() == "" or self.lineEdit_13.text() == "" or self.comboBox_22.currentText() == "" or self.comboBox_23.currentText() == "":
                     return False
                 else:
-                    return True
+                    val = self.lineEdit_13.text()
+                    if Alerts._validador_int(val) == False:
+                        print ("error?????????????????????",Alerts._validador_int(val))
+                        return False
+                    else:
+                        if len(self.lineEdit_14.text()) == 2:
+                            return True
         
     def _val_new_lan_pass_or_not(self):
         recorrente = self.comboBox_23.currentText()
@@ -1653,7 +1670,7 @@ class Alerts(Ui_MainWindow):
                 return True
             else:
                 Qms = QMessageBox()
-                Qms.setText("Preencha todos os campos")
+                Qms.setText("Preencha todos os campos corretamente!")
                 Qms.setIcon(QMessageBox.Warning)
                 Qms.exec_()
                 return False
@@ -1666,7 +1683,7 @@ class Alerts(Ui_MainWindow):
                 return True
             else:
                 Qms = QMessageBox()
-                Qms.setText("Preencha todos os campos")
+                Qms.setText("Preencha todos os campos corretamente!")
                 Qms.setIcon(QMessageBox.Warning)
                 Qms.exec_()
                 return False
@@ -1679,7 +1696,7 @@ class Alerts(Ui_MainWindow):
                 return True
             else:
                 Qms = QMessageBox()
-                Qms.setText("Preencha todos os campos")
+                Qms.setText("Preencha todos os campos corretamente!")
                 Qms.setIcon(QMessageBox.Warning)
                 Qms.exec_()
                 return False
@@ -1691,7 +1708,7 @@ class Alerts(Ui_MainWindow):
                 return True
             else:
                 Qms = QMessageBox()
-                Qms.setText("Preencha todos os campos")
+                Qms.setText("Preencha todos os campos corretamente!")
                 Qms.setIcon(QMessageBox.Warning)
                 Qms.exec_()
                 return False
