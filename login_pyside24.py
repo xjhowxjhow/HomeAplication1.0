@@ -1199,21 +1199,29 @@ class Ui_MainWindow(object):
         self.dashboard_cards_2 = QWidget()
         self.dashboard_cards_2.setObjectName(u"dashboard_cards_2")
         self.dashboard_cards_2.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); ")
-        self.verticalLayout_34 = QVBoxLayout(self.dashboard_cards_2)
-        self.verticalLayout_34.setObjectName(u"verticalLayout_34")
+        self.horizontalLayout_121 = QHBoxLayout(self.dashboard_cards_2)
+        self.horizontalLayout_121.setSpacing(0)
+        self.horizontalLayout_121.setObjectName(u"horizontalLayout_121")
+        self.horizontalLayout_121.setContentsMargins(0, 0, 0, 0)
+        self.horizontalSpacer_26 = QSpacerItem(0, 20, QSizePolicy.Preferred, QSizePolicy.Minimum)
+
+        self.horizontalLayout_121.addItem(self.horizontalSpacer_26)
+
         self.scrollArea_9 = QScrollArea(self.dashboard_cards_2)
         self.scrollArea_9.setObjectName(u"scrollArea_9")
         self.scrollArea_9.setMinimumSize(QSize(0, 0))
+        self.scrollArea_9.setMaximumSize(QSize(1486, 950))
+        self.scrollArea_9.setLayoutDirection(Qt.LeftToRight)
         self.scrollArea_9.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); ")
         self.scrollArea_9.setFrameShape(QFrame.StyledPanel)
         self.scrollArea_9.setFrameShadow(QFrame.Plain)
         self.scrollArea_9.setLineWidth(1)
         self.scrollArea_9.setMidLineWidth(0)
-        self.scrollArea_9.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+        self.scrollArea_9.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
         self.scrollArea_9.setWidgetResizable(True)
         self.scrollAreaWidgetContents_9 = QWidget()
         self.scrollAreaWidgetContents_9.setObjectName(u"scrollAreaWidgetContents_9")
-        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, -58, 1481, 1008))
+        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, 0, 1486, 950))
         self.scrollAreaWidgetContents_9.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); ")
         self.verticalLayout_108 = QVBoxLayout(self.scrollAreaWidgetContents_9)
         self.verticalLayout_108.setSpacing(10)
@@ -2302,7 +2310,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_56.setContentsMargins(0, 0, 0, 0)
         self.chart_gastos_all_2 = QTabWidget(self.main_dash_bottom_2)
         self.chart_gastos_all_2.setObjectName(u"chart_gastos_all_2")
-        self.chart_gastos_all_2.setMinimumSize(QSize(0, 700))
+        self.chart_gastos_all_2.setMinimumSize(QSize(0, 0))
         self.chart_gastos_all_2.setMaximumSize(QSize(16777215, 16777215))
         self.chart_gastos_all_2.setFont(font)
         self.chart_gastos_all_2.setLayoutDirection(Qt.LeftToRight)
@@ -2379,7 +2387,7 @@ class Ui_MainWindow(object):
         self.scrollArea_7.setWidgetResizable(True)
         self.scrollAreaWidgetContents_7 = QWidget()
         self.scrollAreaWidgetContents_7.setObjectName(u"scrollAreaWidgetContents_7")
-        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 1453, 657))
+        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 1458, 589))
         self.scrollAreaWidgetContents_7.setStyleSheet(u"")
         self.verticalLayout_61 = QVBoxLayout(self.scrollAreaWidgetContents_7)
         self.verticalLayout_61.setSpacing(0)
@@ -3452,10 +3460,11 @@ class Ui_MainWindow(object):
         self.scrollArea_11.setWidgetResizable(True)
         self.scrollAreaWidgetContents_11 = QWidget()
         self.scrollAreaWidgetContents_11.setObjectName(u"scrollAreaWidgetContents_11")
-        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, 0, 1453, 657))
+        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, 0, 1453, 637))
         self.horizontalLayout_58 = QHBoxLayout(self.scrollAreaWidgetContents_11)
         self.horizontalLayout_58.setSpacing(10)
         self.horizontalLayout_58.setObjectName(u"horizontalLayout_58")
+        self.horizontalLayout_58.setContentsMargins(0, 9, 9, 0)
         self.frame_87 = QFrame(self.scrollAreaWidgetContents_11)
         self.frame_87.setObjectName(u"frame_87")
         self.frame_87.setStyleSheet(u"border:1px solid rgba(255,255,255,40);\n"
@@ -4958,7 +4967,7 @@ class Ui_MainWindow(object):
         self.scrollArea_12.setWidgetResizable(True)
         self.scrollAreaWidgetContents_12 = QWidget()
         self.scrollAreaWidgetContents_12.setObjectName(u"scrollAreaWidgetContents_12")
-        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, -263, 1458, 920))
+        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, -305, 1463, 902))
         self.scrollAreaWidgetContents_12.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); \n"
 "")
         self.verticalLayout_112 = QVBoxLayout(self.scrollAreaWidgetContents_12)
@@ -4972,7 +4981,9 @@ class Ui_MainWindow(object):
         self.botto_1.setFrameShape(QFrame.StyledPanel)
         self.botto_1.setFrameShadow(QFrame.Raised)
         self.verticalLayout_113 = QVBoxLayout(self.botto_1)
+        self.verticalLayout_113.setSpacing(10)
         self.verticalLayout_113.setObjectName(u"verticalLayout_113")
+        self.verticalLayout_113.setContentsMargins(0, -1, -1, 0)
         self.scrollArea_13 = QScrollArea(self.botto_1)
         self.scrollArea_13.setObjectName(u"scrollArea_13")
         self.scrollArea_13.setStyleSheet(u"QScrollBar:horizontal { border: 1px solid #2A2929; background: #2A2929; height: 7px; margin: 0px 21px 0 21px; } QScrollBar::handle:horizontal { background: #646464; min-width: 5px; } \n"
@@ -4982,9 +4993,11 @@ class Ui_MainWindow(object):
         self.scrollArea_13.setWidgetResizable(True)
         self.scrollAreaWidgetContents_13 = QWidget()
         self.scrollAreaWidgetContents_13.setObjectName(u"scrollAreaWidgetContents_13")
-        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 1440, 286))
+        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 1454, 311))
         self.horizontalLayout_115 = QHBoxLayout(self.scrollAreaWidgetContents_13)
+        self.horizontalLayout_115.setSpacing(10)
         self.horizontalLayout_115.setObjectName(u"horizontalLayout_115")
+        self.horizontalLayout_115.setContentsMargins(0, -1, -1, 0)
         self.layout_add_frame_bank = QHBoxLayout()
         self.layout_add_frame_bank.setSpacing(50)
         self.layout_add_frame_bank.setObjectName(u"layout_add_frame_bank")
@@ -4996,16 +5009,6 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_113.addWidget(self.scrollArea_13)
 
-        self.frame_100 = QFrame(self.botto_1)
-        self.frame_100.setObjectName(u"frame_100")
-        self.frame_100.setMaximumSize(QSize(16777215, 40))
-        self.frame_100.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); \n"
-"border:1px solid rgba(255,255,255,40);")
-        self.frame_100.setFrameShape(QFrame.StyledPanel)
-        self.frame_100.setFrameShadow(QFrame.Raised)
-
-        self.verticalLayout_113.addWidget(self.frame_100)
-
 
         self.verticalLayout_112.addWidget(self.botto_1)
 
@@ -5016,7 +5019,9 @@ class Ui_MainWindow(object):
         self.botto_2.setFrameShape(QFrame.StyledPanel)
         self.botto_2.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_114 = QHBoxLayout(self.botto_2)
+        self.horizontalLayout_114.setSpacing(10)
         self.horizontalLayout_114.setObjectName(u"horizontalLayout_114")
+        self.horizontalLayout_114.setContentsMargins(0, 0, -1, 0)
         self.frame_89 = QFrame(self.botto_2)
         self.frame_89.setObjectName(u"frame_89")
         self.frame_89.setMaximumSize(QSize(437, 16777215))
@@ -6663,7 +6668,11 @@ class Ui_MainWindow(object):
 
         self.scrollArea_9.setWidget(self.scrollAreaWidgetContents_9)
 
-        self.verticalLayout_34.addWidget(self.scrollArea_9)
+        self.horizontalLayout_121.addWidget(self.scrollArea_9)
+
+        self.horizontalSpacer_37 = QSpacerItem(0, 20, QSizePolicy.Preferred, QSizePolicy.Minimum)
+
+        self.horizontalLayout_121.addItem(self.horizontalSpacer_37)
 
         self.detalhes_cartao_2.addWidget(self.dashboard_cards_2)
 
@@ -8651,7 +8660,7 @@ class Ui_MainWindow(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 1008, 472))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 140, 469))
         self.verticalLayout_72 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_72.setSpacing(0)
         self.verticalLayout_72.setObjectName(u"verticalLayout_72")
@@ -10779,13 +10788,29 @@ class Ui_MainWindow(object):
         self.frame_35 = QFrame(self.frame_9)
         self.frame_35.setObjectName(u"frame_35")
         self.frame_35.setMaximumSize(QSize(16777215, 500))
-        self.frame_35.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); \n"
+        self.frame_35.setStyleSheet(u"background-color: rgba(255, 255, 255,0);\n"
 "border:none;")
         self.frame_35.setFrameShape(QFrame.StyledPanel)
         self.frame_35.setFrameShadow(QFrame.Raised)
         self.verticalLayout_10 = QVBoxLayout(self.frame_35)
         self.verticalLayout_10.setObjectName(u"verticalLayout_10")
-        self.select_card = QComboBox(self.frame_35)
+        self.frame_100 = QFrame(self.frame_35)
+        self.frame_100.setObjectName(u"frame_100")
+        self.frame_100.setMinimumSize(QSize(0, 48))
+        self.frame_100.setFrameShape(QFrame.StyledPanel)
+        self.frame_100.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_122 = QHBoxLayout(self.frame_100)
+        self.horizontalLayout_122.setObjectName(u"horizontalLayout_122")
+        self.horizontalSpacer_38 = QSpacerItem(220, 20, QSizePolicy.Fixed, QSizePolicy.Minimum)
+
+        self.horizontalLayout_122.addItem(self.horizontalSpacer_38)
+
+        self.label_112 = QLabel(self.frame_100)
+        self.label_112.setObjectName(u"label_112")
+
+        self.horizontalLayout_122.addWidget(self.label_112)
+
+        self.select_card = QComboBox(self.frame_100)
         self.select_card.addItem("")
         self.select_card.addItem("")
         self.select_card.addItem("")
@@ -10798,14 +10823,21 @@ class Ui_MainWindow(object):
         self.select_card.setFont(font8)
         self.select_card.setLayoutDirection(Qt.LeftToRight)
         self.select_card.setStyleSheet(u"color: rgb(255, 255, 255);\n"
-"\n"
-"")
+"background-color: rgba(255, 255, 255,30);\n"
+"border-radius:5px;")
 
-        self.verticalLayout_10.addWidget(self.select_card)
+        self.horizontalLayout_122.addWidget(self.select_card)
+
+        self.horizontalSpacer_39 = QSpacerItem(220, 20, QSizePolicy.Fixed, QSizePolicy.Minimum)
+
+        self.horizontalLayout_122.addItem(self.horizontalSpacer_39)
+
+
+        self.verticalLayout_10.addWidget(self.frame_100)
 
         self.frame_39 = QFrame(self.frame_35)
         self.frame_39.setObjectName(u"frame_39")
-        self.frame_39.setStyleSheet(u"")
+        self.frame_39.setStyleSheet(u"background-color: rgba(255, 255, 255,0);")
         self.frame_39.setFrameShape(QFrame.StyledPanel)
         self.frame_39.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_49 = QHBoxLayout(self.frame_39)
@@ -10864,20 +10896,20 @@ class Ui_MainWindow(object):
 
         self.adclimite = QLineEdit(self.frame_10)
         self.adclimite.setObjectName(u"adclimite")
-        self.adclimite.setStyleSheet(u"color:rgb(0,0,0);\n"
-"border-radius: 10px;\n"
-"background-color: rgb(238, 238, 238);\n"
-"border: 1px solid  rgb(55, 55, 55);")
+        self.adclimite.setStyleSheet(u"border-radius: 0px;\n"
+"background-color:rgba(255,255,255,0);\n"
+"color:rgb(255, 255, 255);\n"
+"border-bottom : 1px solid rgba(255,255,255,30);")
         self.adclimite.setAlignment(Qt.AlignCenter)
 
         self.gridLayout.addWidget(self.adclimite, 0, 1, 1, 1)
 
         self.adctitular = QLineEdit(self.frame_10)
         self.adctitular.setObjectName(u"adctitular")
-        self.adctitular.setStyleSheet(u"color:rgb(0,0,0);\n"
-"border-radius: 10px;\n"
-"background-color: rgb(238, 238, 238);\n"
-"border: 1px solid  rgb(55, 55, 55);")
+        self.adctitular.setStyleSheet(u"border-radius: 0px;\n"
+"background-color:rgba(255,255,255,0);\n"
+"color:rgb(255, 255, 255);\n"
+"border-bottom : 1px solid rgba(255,255,255,30);")
         self.adctitular.setAlignment(Qt.AlignCenter)
 
         self.gridLayout.addWidget(self.adctitular, 1, 1, 1, 1)
@@ -10895,10 +10927,10 @@ class Ui_MainWindow(object):
 
         self.adcfechamento = QLineEdit(self.frame_10)
         self.adcfechamento.setObjectName(u"adcfechamento")
-        self.adcfechamento.setStyleSheet(u"color:rgb(0,0,0);\n"
-"border-radius: 10px;\n"
-"background-color: rgb(238, 238, 238);\n"
-"border: 1px solid  rgb(55, 55, 55);")
+        self.adcfechamento.setStyleSheet(u"border-radius: 0px;\n"
+"background-color:rgba(255,255,255,0);\n"
+"color:rgb(255, 255, 255);\n"
+"border-bottom : 1px solid rgba(255,255,255,30);")
         self.adcfechamento.setAlignment(Qt.AlignCenter)
 
         self.gridLayout.addWidget(self.adcfechamento, 6, 1, 1, 1)
@@ -10916,6 +10948,7 @@ class Ui_MainWindow(object):
 
         self.textcard = QLabel(self.frame_10)
         self.textcard.setObjectName(u"textcard")
+        self.textcard.setFont(font)
         self.textcard.setStyleSheet(u"border: 0px;\n"
 "")
         self.textcard.setTextFormat(Qt.AutoText)
@@ -10938,20 +10971,20 @@ class Ui_MainWindow(object):
 
         self.adcfinal = QLineEdit(self.frame_10)
         self.adcfinal.setObjectName(u"adcfinal")
-        self.adcfinal.setStyleSheet(u"color:rgb(0,0,0);\n"
-"border-radius: 10px;\n"
-"background-color: rgb(238, 238, 238);\n"
-"border: 1px solid  rgb(55, 55, 55);")
+        self.adcfinal.setStyleSheet(u"border-radius: 0px;\n"
+"background-color:rgba(255,255,255,0);\n"
+"color:rgb(255, 255, 255);\n"
+"border-bottom : 1px solid rgba(255,255,255,30);")
         self.adcfinal.setAlignment(Qt.AlignCenter)
 
         self.gridLayout.addWidget(self.adcfinal, 3, 1, 1, 1)
 
         self.adcvencimento = QLineEdit(self.frame_10)
         self.adcvencimento.setObjectName(u"adcvencimento")
-        self.adcvencimento.setStyleSheet(u"color:rgb(0,0,0);\n"
-"border-radius: 10px;\n"
-"background-color: rgb(238, 238, 238);\n"
-"border: 1px solid  rgb(55, 55, 55);")
+        self.adcvencimento.setStyleSheet(u"border-radius: 0px;\n"
+"background-color:rgba(255,255,255,0);\n"
+"color:rgb(255, 255, 255);\n"
+"border-bottom : 1px solid rgba(255,255,255,30);")
         self.adcvencimento.setAlignment(Qt.AlignCenter)
 
         self.gridLayout.addWidget(self.adcvencimento, 4, 1, 1, 1)
@@ -10972,7 +11005,7 @@ class Ui_MainWindow(object):
         self.frame_38 = QFrame(self.frame_35)
         self.frame_38.setObjectName(u"frame_38")
         self.frame_38.setMaximumSize(QSize(16777215, 50))
-        self.frame_38.setStyleSheet(u"")
+        self.frame_38.setStyleSheet(u"background-color: rgba(255, 255, 255,10);")
         self.frame_38.setFrameShape(QFrame.StyledPanel)
         self.frame_38.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_47 = QHBoxLayout(self.frame_38)
@@ -10987,28 +11020,29 @@ class Ui_MainWindow(object):
 "QPushButton{\n"
 "	\n"
 "\n"
+"	border-radius:10px;\n"
+"	color: rgb(255, 255, 255);\n"
 "\n"
-"	border-radius: 10px;\n"
 "\n"
-"	color:rgb(0,0,0);\n"
-"	background-color: rgb(238, 238, 238);\n"
+"	\n"
+"	background-color: rgb(46, 46, 46);\n"
 "\n"
-"	border: 1px solid  rgb(55, 55, 55);\n"
+"	border: 1px solid rgba(255,255,255,20);\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(255, 255, 255);\n"
-"	border: 2px solid  rgb(255, 255, 255);\n"
+"	background-color: rgb(53, 53, 53);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(121, 121, 121);\n"
-"	border: 2px solid  rgb(55, 55, 55);\n"
+"	background-color: rgb(31, 31, 31);\n"
+"\n"
 "}")
+        self.add_card_3.setIcon(icon27)
 
         self.horizontalLayout_47.addWidget(self.add_card_3)
 
@@ -11022,28 +11056,29 @@ class Ui_MainWindow(object):
 "QPushButton{\n"
 "	\n"
 "\n"
+"	border-radius:10px;\n"
+"	color: rgb(255, 255, 255);\n"
 "\n"
-"	border-radius: 10px;\n"
 "\n"
-"	color:rgb(0,0,0);\n"
-"	background-color: rgb(238, 238, 238);\n"
+"	\n"
+"	background-color: rgb(46, 46, 46);\n"
 "\n"
-"	border: 1px solid  rgb(55, 55, 55);\n"
+"	border: 1px solid rgba(255,255,255,20);\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(255, 255, 255);\n"
-"	border: 2px solid  rgb(255, 255, 255);\n"
+"	background-color: rgb(53, 53, 53);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(121, 121, 121);\n"
-"	border: 2px solid  rgb(55, 55, 55);\n"
+"	background-color: rgb(31, 31, 31);\n"
+"\n"
 "}")
+        self.remover_card_3.setIcon(icon19)
 
         self.horizontalLayout_47.addWidget(self.remover_card_3)
 
@@ -11056,28 +11091,29 @@ class Ui_MainWindow(object):
 "QPushButton{\n"
 "	\n"
 "\n"
+"	border-radius:10px;\n"
+"	color: rgb(255, 255, 255);\n"
 "\n"
-"	border-radius: 10px;\n"
 "\n"
-"	color:rgb(0,0,0);\n"
-"	background-color: rgb(238, 238, 238);\n"
+"	\n"
+"	background-color: rgb(46, 46, 46);\n"
 "\n"
-"	border: 1px solid  rgb(55, 55, 55);\n"
+"	border: 1px solid rgba(255,255,255,20);\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(255, 255, 255);\n"
-"	border: 2px solid  rgb(255, 255, 255);\n"
+"	background-color: rgb(53, 53, 53);\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
 "	\n"
 "	\n"
-"	background-color: rgb(121, 121, 121);\n"
-"	border: 2px solid  rgb(55, 55, 55);\n"
+"	background-color: rgb(31, 31, 31);\n"
+"\n"
 "}")
+        self.pushButton_23.setIcon(icon30)
 
         self.horizontalLayout_47.addWidget(self.pushButton_23)
 
@@ -11491,7 +11527,6 @@ class Ui_MainWindow(object):
         QWidget.setTabOrder(self.comboBox_3, self.lanca)
         QWidget.setTabOrder(self.lanca, self.cancela_lanca)
         QWidget.setTabOrder(self.cancela_lanca, self.scrollArea_5)
-        QWidget.setTabOrder(self.scrollArea_5, self.select_card)
 
         self.retranslateUi(MainWindow)
 
@@ -11533,7 +11568,7 @@ class Ui_MainWindow(object):
         self.enter_pass.setPlaceholderText(QCoreApplication.translate("MainWindow", u"   Senha", None))
         self.checkBox.setText(QCoreApplication.translate("MainWindow", u"Lembrar senha", None))
         self.buton_login.setText(QCoreApplication.translate("MainWindow", u"Entrar", None))
-        self.credits.setText(QCoreApplication.translate("MainWindow", u"   Home Application Ver: 1.15", None))
+        self.credits.setText(QCoreApplication.translate("MainWindow", u"   Home Application Ver: 1.16", None))
         self.minimize.setText("")
         self.maxmize.setText("")
         self.exit.setText("")
@@ -11981,6 +12016,7 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem47.setText(QCoreApplication.translate("MainWindow", u"Fechamento", None));
         ___qtablewidgetitem48 = self.table_active_cards.horizontalHeaderItem(6)
         ___qtablewidgetitem48.setText(QCoreApplication.translate("MainWindow", u"id", None));
+        self.label_112.setText(QCoreApplication.translate("MainWindow", u"Sele\u00e7\u00e3o de Banco", None))
         self.select_card.setItemText(0, QCoreApplication.translate("MainWindow", u"C6", None))
         self.select_card.setItemText(1, QCoreApplication.translate("MainWindow", u"NUBANK", None))
         self.select_card.setItemText(2, QCoreApplication.translate("MainWindow", u"BTG", None))
@@ -11989,14 +12025,14 @@ class Ui_MainWindow(object):
         self.select_card.setItemText(5, QCoreApplication.translate("MainWindow", u"BRADESCO", None))
         self.select_card.setItemText(6, QCoreApplication.translate("MainWindow", u"CAIXA ECONOMICA", None))
 
-        self.label_37.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:11pt; font-weight:600; color:#ffffff;\">Fechamento da Fatura:</span></p></body></html>", None))
+        self.label_37.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:11pt; font-weight:0; color:#ffffff;\">Fechamento da Fatura:</span></p></body></html>", None))
         self.adclimite.setPlaceholderText(QCoreApplication.translate("MainWindow", u"R$", None))
         self.adctitular.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Nome", None))
-        self.textcard_3.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:11pt; font-weight:600; color:#ffffff;\">Final do Cart\u00e3o</span></p></body></html>", None))
+        self.textcard_3.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:11pt; font-weight:0; color:#ffffff;\">Final do Cart\u00e3o</span></p></body></html>", None))
         self.adcfechamento.setPlaceholderText(QCoreApplication.translate("MainWindow", u"01", None))
-        self.textcard_2.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:11pt; font-weight:600; color:#ffffff;\">Titular</span></p></body></html>", None))
-        self.textcard.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:11pt; font-weight:600; color:#ffffff;\">Limite Total do Cartao</span></p></body></html>", None))
-        self.textcard_4.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:11pt; font-weight:600; color:#ffffff;\">Vencimento</span></p></body></html>", None))
+        self.textcard_2.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:11pt; font-weight:0; color:#ffffff;\">Titular</span></p></body></html>", None))
+        self.textcard.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:11pt; font-weight:0; color:#ffffff;\">Limite Total do Cartao</span></p></body></html>", None))
+        self.textcard_4.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:11pt; font-weight:0; color:#ffffff;\">Vencimento</span></p></body></html>", None))
         self.adcfinal.setPlaceholderText(QCoreApplication.translate("MainWindow", u"XXXX", None))
         self.adcvencimento.setPlaceholderText(QCoreApplication.translate("MainWindow", u"01", None))
         self.add_card_3.setText(QCoreApplication.translate("MainWindow", u"Adicionar", None))
