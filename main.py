@@ -262,11 +262,24 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.apaga_compra_3.installEventFilter(self)
         self.btn_if_card_2.installEventFilter(self)
         self.remover_card_3.installEventFilter(self)
+        
+        #EVENTS APP 
+        self.bar_window.installEventFilter(self)
 
         
     
     def eventFilter(self, obj, event):
-
+        
+            #EVENTS APP
+            if obj == self.bar_window and event.type() == QtCore.QEvent.MouseButtonDblClick:
+                if self.isMaximized():
+                    self.showNormal()
+                else:
+                    self.showMaximized()
+            
+            
+            #EVENTS BUTTONS AND WIDGETS
+            
             if obj == self.pushButton_8 and event.type() == QtCore.QEvent.MouseButtonPress:
                 btn = "conta"
                 return effects.Effetc_slides.grid_lateral_menu(self,btn)

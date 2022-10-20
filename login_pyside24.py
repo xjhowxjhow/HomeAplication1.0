@@ -15,7 +15,7 @@ class Ui_MainWindow(object):
         MainWindow.setStyleSheet(u"QMainWindow{\n"
 "	\n"
 "	\n"
-"	background-color:rgb(196, 196, 196);\n"
+"	background-color: rgba(255, 255, 255,0);\n"
 "	border-radius: 10px;\n"
 "}\n"
 "\n"
