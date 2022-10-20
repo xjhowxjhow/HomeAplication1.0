@@ -5,7 +5,9 @@
 Sobre: Meu Primeiro desafio a realizar fazendo este projeto que uni interface grafica com a Framework PySide2 + Sqlite
 Projeto inicialmente feito para conhecimento e desenvolvimento de estudos Universitario.
 
-Video exemplo: https://www.youtube.com/watch?v=ztg2hwXI1_M&t=19s
+Video exemplo: https://www.youtube.com/watch?v=ztg2hwXI1_M&t=19s 
+
+Video exemplo 2: nova interface https://www.youtube.com/watch?v=8hCQ1AKJnbc&lc=Ugzu7n6rci6rMz-q7nh4AaABAg
 
 Site do projeto: https://homeapplication.netlify.app/
 
