@@ -1,2 +1,2 @@
-VERSION: 1.16
-NOTES:  - Correção de bugs.
+VERSION: 1.17
+NOTES:  - Correcao de bugs.

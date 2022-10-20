@@ -26,11 +26,12 @@ import funcoes
 import atexit
 import requests
 
+
 from home_db_fun import Loading_screen_gif
 WINDOW_SIZE = 0
 TOGLE_STATUS = 80
 CARD_SELECTED = 0
-GLOBAL_VERSION = '1.16'
+GLOBAL_VERSION = '1.17'
 
 
 class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
@@ -734,28 +735,28 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         if win_status == 0:
             WINDOW_SIZE = 1 
             self.showFullScreen() 
-            self.extrato_cartao_0.horizontalHeader().setDefaultSectionSize(120)
-            self.extrato_cartao_0.verticalHeader().setDefaultSectionSize(40)
-            font8 = QFont()
-            font8.setFamily(u"Microsoft YaHei")
-            font8.setPointSize(12)
-            self.extrato_cartao_0.setFont(font8)
-            self.extrato_cartao_0.setIconSize(QSize(40, 40))
-            self.table_faturas_ind.horizontalHeader().setDefaultSectionSize(255)
-            self.extrato_cartao_0.setColumnWidth(1, 150)
+            # self.extrato_cartao_0.horizontalHeader().setDefaultSectionSize(120)
+            # self.extrato_cartao_0.verticalHeader().setDefaultSectionSize(40)
+            # font8 = QFont()
+            # font8.setFamily(u"Microsoft YaHei")
+            # font8.setPointSize(12)
+            # self.extrato_cartao_0.setFont(font8)
+            # self.extrato_cartao_0.setIconSize(QSize(40, 40))
+            # self.table_faturas_ind.horizontalHeader().setDefaultSectionSize(255)
+            # self.extrato_cartao_0.setColumnWidth(1, 150)
 
         else:
             WINDOW_SIZE = 0
             self.showNormal()
-            font8 = QFont()
-            font8.setFamily(u"Microsoft YaHei")
-            font8.setPointSize(10)
-            self.extrato_cartao_0.setFont(font8)
-            self.extrato_cartao_0.setIconSize(QSize(35, 35))
-            self.extrato_cartao_0.horizontalHeader().setDefaultSectionSize(100)
-            self.extrato_cartao_0.verticalHeader().setDefaultSectionSize(40)
-            self.table_faturas_ind.horizontalHeader().setDefaultSectionSize(189)
-            self.extrato_cartao_0.setColumnWidth(1, 150)
+            # font8 = QFont()
+            # font8.setFamily(u"Microsoft YaHei")
+            # font8.setPointSize(10)
+            # self.extrato_cartao_0.setFont(font8)
+            # self.extrato_cartao_0.setIconSize(QSize(35, 35))
+            # self.extrato_cartao_0.horizontalHeader().setDefaultSectionSize(100)
+            # self.extrato_cartao_0.verticalHeader().setDefaultSectionSize(40)
+            # self.table_faturas_ind.horizontalHeader().setDefaultSectionSize(189)
+            # self.extrato_cartao_0.setColumnWidth(1, 150)
 
     def mousePressEvent(self, event):
         self.offset = event.pos()
@@ -902,6 +903,7 @@ atexit.register(exit_handler)
 
 
 if __name__ == '__main__':
+    # os.environ["QT_FONT_DPI"] = "96"
     app = QtWidgets.QApplication(sys.argv)
     if not QSystemTrayIcon.isSystemTrayAvailable():
         QMessageBox.critical(None, "System Tray", "System tray was not detected!")
