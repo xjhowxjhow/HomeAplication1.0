@@ -1643,16 +1643,19 @@ class Alerts(Ui_MainWindow):
                     else:
                         return True
             if pago == False:
+                
                 if self.comboBox_11.currentText() == "" or self.comboBox_25.currentText() == "" or self.comboBox_27.currentText() == "" or self.comboBox_21.currentText() == "" or self.lineEdit_11.text() == "" or self.lineEdit_13.text() == "" or self.comboBox_22.currentText() == "" or self.comboBox_23.currentText() == "":
+                    
                     return False
                 else:
+                    
                     val = self.lineEdit_13.text()
+                    print("valor dando errado", val)
                     if Alerts._validador_int(val) == False:
-                        print ("error?????????????????????",Alerts._validador_int(val))
+                        
                         return False
                     else:
-                        if len(self.lineEdit_14.text()) == 2:
-                            return True
+                        return True
         
     def _val_new_lan_pass_or_not(self):
         recorrente = self.comboBox_23.currentText()
@@ -1717,8 +1720,10 @@ class Alerts(Ui_MainWindow):
         
         value = re.sub('[.,]', '', value)
         if value.isdigit():
+            print("passou")
             return True
         else:
+            print("nao passou")
             return False
         
     def _validador_new_bank(self):
