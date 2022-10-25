@@ -3,7 +3,7 @@
 class Category:
 
     def _saidas():
-        return ['Energia','Gás','Água','Luz','Telefone','Internet','Boletos','Servicos','Aluguel','Impostos','Veiculos','IPVA','IPTU','Esgoto','Outros']
+        return ['Energia','Gás','Água','Luz','Telefone','Internet','Boletos','Servicos','Aluguel','Impostos','Educação','Veiculos','IPVA','IPTU','Esgoto','Outros']
     
     def _entradas():
         return ['Salario','Rendimentos','Beneficios','Criptomoedas','Investimentos','Cheques','Transferencia','Depositos','Pagamentos','Bolsa','Vendas','Outros']
@@ -62,7 +62,8 @@ class Category:
             return ':/category_main/category_main/bolsa.png'
         elif icon == 'Vendas':
             return ':/category_main/category_main/vendas.png'
-
+        elif icon == 'Educação':
+            return ':/category_main/category_main/educa.png'
 
 class Payments_Type:
     
