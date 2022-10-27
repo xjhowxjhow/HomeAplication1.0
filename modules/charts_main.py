@@ -118,7 +118,7 @@ class Chart(QtCharts.QChartView):
         
         self.chart.addAxis(self.axisY, Qt.AlignLeft)
         self.series.attachAxis(self.axisY)
-    
+        return True
     
     def Update_Chart(self, data):
         
@@ -126,3 +126,5 @@ class Chart(QtCharts.QChartView):
         self.set1.replace(1,data[1])
         self.chart.update()
         self.chart.repaint()
+        
+        return True
