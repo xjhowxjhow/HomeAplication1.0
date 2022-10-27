@@ -510,27 +510,7 @@ class Return_Values_Conditions:
         # 8 = VALOR                                 table new_lancamento
         # 9 = STATUS                                table status_lancamento
         # 10 = SALDO                                table contas_bancarias ainda nao
-        
-        # cursor.execute("\
-        #             SELECT DISTINCT new_lancamento.id_lancamento,\
-        #                     new_lancamento.id_bank,\
-        #                     new_lancamento.tipo,\
-        #                     prioridade_value.prioridade,\
-        #                     new_lancamento.categoria,\
-        #                     new_lancamento.pagamento,\
-        #                     new_lancamento.valor,\
-        #                     status_lancamento.status_pago,\
-        #             		config_lancamento.recorrente_m_d_s_y,\
-        #             		config_lancamento.recorrente_dia\
-        #             FROM new_lancamento\
-        #             INNER JOIN prioridade_value\
-        #             ON new_lancamento.id_lancamento = prioridade_value.id_lancamento\
-        #             INNER JOIN status_lancamento\
-        #             ON new_lancamento.id_lancamento = status_lancamento.id_lancamento\
-        #             INNER JOIN config_lancamento\
-        #             ON new_lancamento.id_lancamento = config_lancamento.id_lancamento\
-        #             WHERE config_lancamento.recorrente_m_d_s_y = 'Mes'\
-        #             ORDER BY status_lancamento.status_pago DESC")
+
         cursor.execute("\
                         SELECT DISTINCT new_lancamento.id_lancamento,\
                                 new_lancamento.id_bank,\
