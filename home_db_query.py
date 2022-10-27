@@ -942,13 +942,6 @@ class Verify_status_payment:
             return False
         else:
             return "fatura"
-        # if dados[0][0] == 'Entrada':
-        #     return True
-        # elif dados[0][0] == 'Saida':
-        #     return False
-        # elif dados[0][0] == None or dados[0][0] == '' or dados[0][0] == ' ' or dados[0][0] == '[]':
-        #     print("ERRO AO VERIFICAR TIPO DE LANÇAMENTO")
-
 
         
         
@@ -1273,40 +1266,3 @@ class Query_Charts:
         
 
 
-#  SELECT  
- 
-# 			sum((SELECT DISTINCT 
-#                         sum(new_lancamento.valor)
-#                         FROM new_lancamento
-#                         INNER JOIN config_lancamento
-#                         ON new_lancamento.id_lancamento = config_lancamento.id_lancamento
-#                         WHERE config_lancamento.recorrente_m_d_s_y = 'Mes' and new_lancamento.tipo ='Saida' ))as Saida_recorrente,
-						
-# 			(SELECT sum(new_lancamento.valor)
-# 			from  new_lancamento
-# 			inner join config_lancamento
-# 			on new_lancamento.id_lancamento = config_lancamento.id_lancamento
-# 			where config_lancamento.id_lancamento = new_lancamento.id_lancamento and new_lancamento.tipo = 'Saida' AND strftime('%Y-%m', new_lancamento.data_lancamento) = '2022-11'  ) as Saida_n_recorrente,
-		
-# 			sum((SELECT DISTINCT 
-#                         sum(new_lancamento.valor)
-#                         FROM new_lancamento
-#                         INNER JOIN config_lancamento
-#                         ON new_lancamento.id_lancamento = config_lancamento.id_lancamento
-#                         WHERE config_lancamento.recorrente_m_d_s_y = 'Mes' and new_lancamento.tipo ='Entrada' ))as Entrada_recorrente,
- 
-# 			(SELECT sum(new_lancamento.valor)
-# 			from  new_lancamento
-# 			inner join config_lancamento
-# 			on new_lancamento.id_lancamento = config_lancamento.id_lancamento
-# 			where config_lancamento.id_lancamento = new_lancamento.id_lancamento and new_lancamento.tipo = 'Entrada' AND strftime('%Y-%m', new_lancamento.data_lancamento) = '2022-11'  ) as Entrada_n_recorrente
- 	    
-		
-
-
-		
-
-# from  new_lancamento
-# inner join config_lancamento
-# on new_lancamento.id_lancamento = config_lancamento.id_lancamento
-# where config_lancamento.id_lancamento = new_lancamento.id_lancamento and new_lancamento.tipo = 'Saida' AND strftime('%Y-%m', new_lancamento.data_lancamento) = '2022-11' 
