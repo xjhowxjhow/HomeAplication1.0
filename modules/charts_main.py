@@ -56,6 +56,11 @@ class Chart(QtCharts.QChartView):
         #seta fonte e cor
         self.chart.setTitleFont(font)
         self.chart.setTitleBrush(color)
+        #margin
+                #adjust layout
+        self.chart.layout().setContentsMargins(10, 10, 10, 10)
+        
+        #max height
         
 
 
@@ -85,7 +90,7 @@ class Chart(QtCharts.QChartView):
         self.set1.setBorderColor(QColor(254, 130, 139,255))
         self.set0.setLabelColor(QColor(255, 255, 255,255))
         self.set1.setLabelColor(QColor(255, 255, 255,255))
-
+        
         #height bar
         self.series.setBarWidth(0.3)
         self.series.setLabelsVisible(True)
@@ -114,10 +119,12 @@ class Chart(QtCharts.QChartView):
         self.axisY.setShadesColor(QColor(58, 62, 130, 255))
 
 
+
         
         
         self.chart.addAxis(self.axisY, Qt.AlignLeft)
         self.series.attachAxis(self.axisY)
+
         return True
     
     def Update_Chart(self, data):
@@ -126,5 +133,6 @@ class Chart(QtCharts.QChartView):
         self.set1.replace(1,data[1])
         self.chart.update()
         self.chart.repaint()
+        
         
         return True

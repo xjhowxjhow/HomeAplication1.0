@@ -48,7 +48,10 @@ class Group:
         Set_values_startup.set_banks_combobox_new_lan(self)
         mainpage.load_extrato_filter(self)
         Combobox_startup.default_combox_hidem(self)
-        
+        try:
+            Charts_Main.Update_Chart_E_S(self)
+        except:
+            pass
 
 
         return True
@@ -163,7 +166,8 @@ class mainpage(Ui_MainWindow):
                     home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Saida',get_ano,get_mes)
                     print("tipoooo",tipo)
 
-            mainpage.load_extrato_filter(self)
+            # mainpage.load_extrato_filter(self)
+            Group.execs(self)
             self.chart_gastos_all_2.setCurrentWidget(self.page_Tabe_main1)
             Set_values_startup._set_Saldo(self)
 

@@ -586,6 +586,7 @@ class Ui_MainWindow(object):
         self.pushButton.setObjectName(u"pushButton")
         self.pushButton.setMinimumSize(QSize(0, 0))
         self.pushButton.setFont(font)
+        self.pushButton.setFocusPolicy(Qt.NoFocus)
         self.pushButton.setStyleSheet(u"\n"
 "\n"
 "\n"
@@ -628,7 +629,7 @@ class Ui_MainWindow(object):
         self.pushButton_8.setMaximumSize(QSize(16777215, 16777215))
         self.pushButton_8.setFont(font)
         self.pushButton_8.setCursor(QCursor(Qt.PointingHandCursor))
-        self.pushButton_8.setFocusPolicy(Qt.ClickFocus)
+        self.pushButton_8.setFocusPolicy(Qt.NoFocus)
         self.pushButton_8.setLayoutDirection(Qt.LeftToRight)
         self.pushButton_8.setStyleSheet(u"\n"
 "\n"
@@ -671,6 +672,7 @@ class Ui_MainWindow(object):
         self.pushButton_10.setMinimumSize(QSize(0, 0))
         self.pushButton_10.setMaximumSize(QSize(16777215, 16777215))
         self.pushButton_10.setFont(font)
+        self.pushButton_10.setFocusPolicy(Qt.NoFocus)
         self.pushButton_10.setStyleSheet(u"\n"
 "\n"
 "\n"
@@ -712,6 +714,7 @@ class Ui_MainWindow(object):
         self.pushButton_9.setMinimumSize(QSize(0, 0))
         self.pushButton_9.setMaximumSize(QSize(16777215, 16777215))
         self.pushButton_9.setFont(font)
+        self.pushButton_9.setFocusPolicy(Qt.NoFocus)
         self.pushButton_9.setStyleSheet(u"\n"
 "\n"
 "\n"
@@ -753,6 +756,7 @@ class Ui_MainWindow(object):
         self.pushButton_11.setMinimumSize(QSize(0, 0))
         self.pushButton_11.setMaximumSize(QSize(16777215, 16777215))
         self.pushButton_11.setFont(font)
+        self.pushButton_11.setFocusPolicy(Qt.NoFocus)
         self.pushButton_11.setStyleSheet(u"\n"
 "\n"
 "\n"
@@ -794,6 +798,7 @@ class Ui_MainWindow(object):
         self.pushButton_15.setMinimumSize(QSize(0, 0))
         self.pushButton_15.setMaximumSize(QSize(16777215, 16777215))
         self.pushButton_15.setFont(font)
+        self.pushButton_15.setFocusPolicy(Qt.NoFocus)
         self.pushButton_15.setStyleSheet(u"\n"
 "\n"
 "\n"
@@ -834,6 +839,7 @@ class Ui_MainWindow(object):
         self.pushButton_16.setObjectName(u"pushButton_16")
         self.pushButton_16.setMinimumSize(QSize(0, 0))
         self.pushButton_16.setFont(font)
+        self.pushButton_16.setFocusPolicy(Qt.NoFocus)
         self.pushButton_16.setStyleSheet(u"\n"
 "\n"
 "\n"
@@ -879,6 +885,7 @@ class Ui_MainWindow(object):
         self.salvar_6.setMinimumSize(QSize(0, 0))
         self.salvar_6.setMaximumSize(QSize(16777215, 16777215))
         self.salvar_6.setFont(font)
+        self.salvar_6.setFocusPolicy(Qt.NoFocus)
         self.salvar_6.setStyleSheet(u"\n"
 "\n"
 "\n"
@@ -920,6 +927,7 @@ class Ui_MainWindow(object):
         self.salvar_5.setMinimumSize(QSize(0, 0))
         self.salvar_5.setMaximumSize(QSize(16777215, 16777215))
         self.salvar_5.setFont(font)
+        self.salvar_5.setFocusPolicy(Qt.NoFocus)
         self.salvar_5.setStyleSheet(u"QPushButton{\n"
 "\n"
 "\n"
@@ -957,6 +965,7 @@ class Ui_MainWindow(object):
         self.salvar_4.setMinimumSize(QSize(0, 0))
         self.salvar_4.setMaximumSize(QSize(16777215, 16777215))
         self.salvar_4.setFont(font)
+        self.salvar_4.setFocusPolicy(Qt.NoFocus)
         self.salvar_4.setStyleSheet(u"QPushButton{\n"
 "\n"
 "\n"
@@ -994,6 +1003,7 @@ class Ui_MainWindow(object):
         self.pushButton_18.setMinimumSize(QSize(0, 0))
         self.pushButton_18.setMaximumSize(QSize(16777215, 16777215))
         self.pushButton_18.setFont(font)
+        self.pushButton_18.setFocusPolicy(Qt.NoFocus)
         self.pushButton_18.setStyleSheet(u"\n"
 "\n"
 "\n"
@@ -1229,7 +1239,7 @@ class Ui_MainWindow(object):
         self.main_dasht_top_2 = QFrame(self.scrollAreaWidgetContents_9)
         self.main_dasht_top_2.setObjectName(u"main_dasht_top_2")
         self.main_dasht_top_2.setMinimumSize(QSize(200, 200))
-        self.main_dasht_top_2.setMaximumSize(QSize(16777215, 16777215))
+        self.main_dasht_top_2.setMaximumSize(QSize(16777215, 200))
         self.main_dasht_top_2.setStyleSheet(u"")
         self.main_dasht_top_2.setFrameShape(QFrame.StyledPanel)
         self.main_dasht_top_2.setFrameShadow(QFrame.Raised)
@@ -1526,7 +1536,7 @@ class Ui_MainWindow(object):
         self.entrada_saida_frame = QFrame(self.frame_52)
         self.entrada_saida_frame.setObjectName(u"entrada_saida_frame")
         self.entrada_saida_frame.setMinimumSize(QSize(0, 20))
-        self.entrada_saida_frame.setMaximumSize(QSize(16777215, 16777215))
+        self.entrada_saida_frame.setMaximumSize(QSize(16777215, 400))
         self.entrada_saida_frame.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); \n"
 "border: none;")
         self.entrada_saida_frame.setFrameShape(QFrame.StyledPanel)
@@ -1536,6 +1546,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_47.setObjectName(u"verticalLayout_47")
         self.verticalLayout_47.setContentsMargins(0, 0, 0, 0)
         self.chart_main_e_s = QHBoxLayout()
+        self.chart_main_e_s.setSpacing(0)
         self.chart_main_e_s.setObjectName(u"chart_main_e_s")
 
         self.verticalLayout_47.addLayout(self.chart_main_e_s)
@@ -1568,7 +1579,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.main_dash_midle_2.sizePolicy().hasHeightForWidth())
         self.main_dash_midle_2.setSizePolicy(sizePolicy)
         self.main_dash_midle_2.setMinimumSize(QSize(0, 0))
-        self.main_dash_midle_2.setMaximumSize(QSize(16777215, 10))
+        self.main_dash_midle_2.setMaximumSize(QSize(16777215, 1))
         self.main_dash_midle_2.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); \n"
 "\n"
 "border-bottom: 0px;\n"
@@ -2063,6 +2074,7 @@ class Ui_MainWindow(object):
         self.previus_month_2.setMinimumSize(QSize(80, 0))
         self.previus_month_2.setMaximumSize(QSize(120, 50))
         self.previus_month_2.setTabletTracking(False)
+        self.previus_month_2.setFocusPolicy(Qt.NoFocus)
         self.previus_month_2.setStyleSheet(u"\n"
 "\n"
 "QPushButton{\n"
@@ -2112,6 +2124,7 @@ class Ui_MainWindow(object):
         self.next_month_2.setObjectName(u"next_month_2")
         self.next_month_2.setMinimumSize(QSize(80, 0))
         self.next_month_2.setMaximumSize(QSize(120, 50))
+        self.next_month_2.setFocusPolicy(Qt.NoFocus)
         self.next_month_2.setStyleSheet(u"\n"
 "\n"
 "QPushButton{\n"
@@ -2319,7 +2332,7 @@ class Ui_MainWindow(object):
         self.scrollArea_7.setWidgetResizable(True)
         self.scrollAreaWidgetContents_7 = QWidget()
         self.scrollAreaWidgetContents_7.setObjectName(u"scrollAreaWidgetContents_7")
-        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 1458, 589))
+        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 1458, 598))
         self.scrollAreaWidgetContents_7.setStyleSheet(u"")
         self.verticalLayout_61 = QVBoxLayout(self.scrollAreaWidgetContents_7)
         self.verticalLayout_61.setSpacing(0)
@@ -2697,6 +2710,7 @@ class Ui_MainWindow(object):
         self.btn_if_card_2.setObjectName(u"btn_if_card_2")
         self.btn_if_card_2.setMinimumSize(QSize(0, 26))
         self.btn_if_card_2.setFont(font)
+        self.btn_if_card_2.setFocusPolicy(Qt.NoFocus)
         self.btn_if_card_2.setStyleSheet(u"\n"
 "\n"
 "QPushButton{\n"
@@ -2825,6 +2839,7 @@ class Ui_MainWindow(object):
         self.delet_pdf.setMinimumSize(QSize(0, 30))
         self.delet_pdf.setMaximumSize(QSize(113, 30))
         self.delet_pdf.setFont(font)
+        self.delet_pdf.setFocusPolicy(Qt.NoFocus)
         self.delet_pdf.setLayoutDirection(Qt.LeftToRight)
         self.delet_pdf.setStyleSheet(u"\n"
 "\n"
@@ -2866,6 +2881,7 @@ class Ui_MainWindow(object):
         self.download_pdf.setMinimumSize(QSize(0, 30))
         self.download_pdf.setMaximumSize(QSize(113, 30))
         self.download_pdf.setFont(font)
+        self.download_pdf.setFocusPolicy(Qt.NoFocus)
         self.download_pdf.setLayoutDirection(Qt.LeftToRight)
         self.download_pdf.setStyleSheet(u"\n"
 "\n"
@@ -2910,6 +2926,7 @@ class Ui_MainWindow(object):
         self.paga_fatura_3.setMinimumSize(QSize(0, 30))
         self.paga_fatura_3.setMaximumSize(QSize(16777215, 30))
         self.paga_fatura_3.setFont(font)
+        self.paga_fatura_3.setFocusPolicy(Qt.NoFocus)
         self.paga_fatura_3.setLayoutDirection(Qt.LeftToRight)
         self.paga_fatura_3.setStyleSheet(u"\n"
 "\n"
@@ -2951,6 +2968,7 @@ class Ui_MainWindow(object):
         self.edit_compra_3.setMinimumSize(QSize(0, 30))
         self.edit_compra_3.setMaximumSize(QSize(16777215, 30))
         self.edit_compra_3.setFont(font)
+        self.edit_compra_3.setFocusPolicy(Qt.NoFocus)
         self.edit_compra_3.setLayoutDirection(Qt.LeftToRight)
         self.edit_compra_3.setStyleSheet(u"\n"
 "\n"
@@ -2992,6 +3010,7 @@ class Ui_MainWindow(object):
         self.parcela_fatura_3.setMinimumSize(QSize(0, 30))
         self.parcela_fatura_3.setMaximumSize(QSize(16777215, 30))
         self.parcela_fatura_3.setFont(font)
+        self.parcela_fatura_3.setFocusPolicy(Qt.NoFocus)
         self.parcela_fatura_3.setLayoutDirection(Qt.LeftToRight)
         self.parcela_fatura_3.setStyleSheet(u"\n"
 "\n"
@@ -3033,6 +3052,7 @@ class Ui_MainWindow(object):
         self.apaga_compra_3.setMinimumSize(QSize(0, 30))
         self.apaga_compra_3.setMaximumSize(QSize(16777215, 30))
         self.apaga_compra_3.setFont(font)
+        self.apaga_compra_3.setFocusPolicy(Qt.NoFocus)
         self.apaga_compra_3.setLayoutDirection(Qt.LeftToRight)
         self.apaga_compra_3.setStyleSheet(u"\n"
 "\n"
@@ -3074,6 +3094,7 @@ class Ui_MainWindow(object):
         self.filter_dates_btn_3.setEnabled(True)
         self.filter_dates_btn_3.setMinimumSize(QSize(0, 30))
         self.filter_dates_btn_3.setFont(font)
+        self.filter_dates_btn_3.setFocusPolicy(Qt.NoFocus)
         self.filter_dates_btn_3.setStyleSheet(u"\n"
 "\n"
 "QPushButton{\n"
@@ -3392,7 +3413,7 @@ class Ui_MainWindow(object):
         self.scrollArea_11.setWidgetResizable(True)
         self.scrollAreaWidgetContents_11 = QWidget()
         self.scrollAreaWidgetContents_11.setObjectName(u"scrollAreaWidgetContents_11")
-        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, 0, 1453, 637))
+        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, -30, 1453, 637))
         self.horizontalLayout_58 = QHBoxLayout(self.scrollAreaWidgetContents_11)
         self.horizontalLayout_58.setSpacing(10)
         self.horizontalLayout_58.setObjectName(u"horizontalLayout_58")
