@@ -15,7 +15,7 @@ class Ui_MainWindow(object):
         MainWindow.setStyleSheet(u"QMainWindow{\n"
 "	\n"
 "	\n"
-"	background-color: rgba(255, 255, 255,0);\n"
+"background-color: rgba(255, 255, 255,0);\n"
 "	border-radius: 10px;\n"
 "}\n"
 "\n"
@@ -1240,7 +1240,7 @@ class Ui_MainWindow(object):
         self.frame_43 = QFrame(self.main_dasht_top_2)
         self.frame_43.setObjectName(u"frame_43")
         self.frame_43.setMinimumSize(QSize(80, 0))
-        self.frame_43.setMaximumSize(QSize(80, 16777215))
+        self.frame_43.setMaximumSize(QSize(80, 200))
         self.frame_43.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); \n"
 "border:1px solid rgba(255,255,255,40);")
         self.frame_43.setFrameShape(QFrame.StyledPanel)
@@ -1432,6 +1432,7 @@ class Ui_MainWindow(object):
         self.frame_51 = QFrame(self.main_dasht_top_2)
         self.frame_51.setObjectName(u"frame_51")
         self.frame_51.setMinimumSize(QSize(400, 200))
+        self.frame_51.setMaximumSize(QSize(400, 200))
         self.frame_51.setFont(font)
         self.frame_51.setStyleSheet(u"border:1px solid rgba(255,255,255,40);\n"
 "border-image:none;\n"
@@ -1511,119 +1512,50 @@ class Ui_MainWindow(object):
 
         self.frame_52 = QFrame(self.main_dasht_top_2)
         self.frame_52.setObjectName(u"frame_52")
-        self.frame_52.setMinimumSize(QSize(38, 100))
-        self.frame_52.setMaximumSize(QSize(16777215, 16777215))
-        self.frame_52.setStyleSheet(u"border:none;\n"
-"border-image:none;")
+        self.frame_52.setMinimumSize(QSize(400, 100))
+        self.frame_52.setMaximumSize(QSize(500, 200))
+        self.frame_52.setStyleSheet(u"border:1px solid rgba(255,255,255,40);\n"
+"border-image:none;\n"
+"background-color: rgba(255, 255, 255, 30); ")
         self.frame_52.setFrameShape(QFrame.StyledPanel)
         self.frame_52.setFrameShadow(QFrame.Raised)
         self.verticalLayout_120 = QVBoxLayout(self.frame_52)
         self.verticalLayout_120.setSpacing(0)
         self.verticalLayout_120.setObjectName(u"verticalLayout_120")
         self.verticalLayout_120.setContentsMargins(0, 0, 0, 0)
-        self.date_gui_5 = QFrame(self.frame_52)
-        self.date_gui_5.setObjectName(u"date_gui_5")
-        self.date_gui_5.setMinimumSize(QSize(0, 20))
-        self.date_gui_5.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); \n"
-"border:1px solid rgba(255,255,255,40);")
-        self.date_gui_5.setFrameShape(QFrame.StyledPanel)
-        self.date_gui_5.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_47 = QVBoxLayout(self.date_gui_5)
+        self.entrada_saida_frame = QFrame(self.frame_52)
+        self.entrada_saida_frame.setObjectName(u"entrada_saida_frame")
+        self.entrada_saida_frame.setMinimumSize(QSize(0, 20))
+        self.entrada_saida_frame.setMaximumSize(QSize(16777215, 16777215))
+        self.entrada_saida_frame.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); \n"
+"border: none;")
+        self.entrada_saida_frame.setFrameShape(QFrame.StyledPanel)
+        self.entrada_saida_frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_47 = QVBoxLayout(self.entrada_saida_frame)
+        self.verticalLayout_47.setSpacing(0)
         self.verticalLayout_47.setObjectName(u"verticalLayout_47")
-        self.label_75 = QLabel(self.date_gui_5)
-        self.label_75.setObjectName(u"label_75")
-        self.label_75.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); \n"
-"border:none;")
+        self.verticalLayout_47.setContentsMargins(0, 0, 0, 0)
+        self.chart_main_e_s = QHBoxLayout()
+        self.chart_main_e_s.setObjectName(u"chart_main_e_s")
 
-        self.verticalLayout_47.addWidget(self.label_75)
-
-        self.progressBar_2 = QProgressBar(self.date_gui_5)
-        self.progressBar_2.setObjectName(u"progressBar_2")
-        self.progressBar_2.setMaximumSize(QSize(16777215, 30))
-        self.progressBar_2.setStyleSheet(u"QProgressBar\n"
-"{\n"
-"    background: green;\n"
-"    color: black;\n"
-"    border-style: outset;\n"
-"	border:none;\n"
-"\n"
-"    border-radius: 7px;\n"
-"\n"
-"}\n"
-"QProgressBar::chunk\n"
-"{\n"
-"   		\n"
-"	background-color: rgb(92, 155, 179);\n"
-"	border-top-left-radius:7px;\n"
-"	 border-bottom-left-radius:7px;\n"
-"\n"
-"}")
-        self.progressBar_2.setValue(24)
-        self.progressBar_2.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout_47.addWidget(self.progressBar_2)
+        self.verticalLayout_47.addLayout(self.chart_main_e_s)
 
 
-        self.verticalLayout_120.addWidget(self.date_gui_5)
-
-        self.frame_53 = QFrame(self.frame_52)
-        self.frame_53.setObjectName(u"frame_53")
-        self.frame_53.setMaximumSize(QSize(1000, 16777215))
-        self.frame_53.setStyleSheet(u"background-color: rgba(255, 255, 255, 0);")
-        self.frame_53.setFrameShape(QFrame.StyledPanel)
-        self.frame_53.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_55 = QVBoxLayout(self.frame_53)
-        self.verticalLayout_55.setSpacing(0)
-        self.verticalLayout_55.setObjectName(u"verticalLayout_55")
-        self.verticalLayout_55.setContentsMargins(0, 0, 0, 0)
-        self.frame_54 = QFrame(self.frame_53)
-        self.frame_54.setObjectName(u"frame_54")
-        self.frame_54.setMinimumSize(QSize(0, 0))
-        self.frame_54.setStyleSheet(u"")
-        self.frame_54.setFrameShape(QFrame.StyledPanel)
-        self.frame_54.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_69 = QHBoxLayout(self.frame_54)
-        self.horizontalLayout_69.setSpacing(10)
-        self.horizontalLayout_69.setObjectName(u"horizontalLayout_69")
-        self.horizontalLayout_69.setContentsMargins(0, 10, 0, 0)
-        self.labelTitle_14 = QLabel(self.frame_54)
-        self.labelTitle_14.setObjectName(u"labelTitle_14")
-        self.labelTitle_14.setFont(font)
-        self.labelTitle_14.setLayoutDirection(Qt.LeftToRight)
-        self.labelTitle_14.setAutoFillBackground(False)
-        self.labelTitle_14.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); \n"
-"border:1px solid rgba(255,255,255,40);")
-        self.labelTitle_14.setFrameShape(QFrame.NoFrame)
-        self.labelTitle_14.setFrameShadow(QFrame.Plain)
-        self.labelTitle_14.setScaledContents(False)
-        self.labelTitle_14.setAlignment(Qt.AlignCenter)
-
-        self.horizontalLayout_69.addWidget(self.labelTitle_14)
-
-        self.label_43 = QLabel(self.frame_54)
-        self.label_43.setObjectName(u"label_43")
-        self.label_43.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); \n"
-"border:1px solid rgba(255,255,255,40);")
-
-        self.horizontalLayout_69.addWidget(self.label_43)
-
-        self.labelTitle_15 = QLabel(self.frame_54)
-        self.labelTitle_15.setObjectName(u"labelTitle_15")
-        self.labelTitle_15.setFont(font)
-        self.labelTitle_15.setStyleSheet(u"background-color: rgba(255, 255, 255, 30); \n"
-"border:1px solid rgba(255,255,255,40);")
-        self.labelTitle_15.setAlignment(Qt.AlignCenter)
-
-        self.horizontalLayout_69.addWidget(self.labelTitle_15)
-
-
-        self.verticalLayout_55.addWidget(self.frame_54)
-
-
-        self.verticalLayout_120.addWidget(self.frame_53)
+        self.verticalLayout_120.addWidget(self.entrada_saida_frame)
 
 
         self.horizontalLayout_65.addWidget(self.frame_52)
+
+        self.frame_53 = QFrame(self.main_dasht_top_2)
+        self.frame_53.setObjectName(u"frame_53")
+        self.frame_53.setMaximumSize(QSize(16777215, 200))
+        self.frame_53.setStyleSheet(u"border:1px solid rgba(255,255,255,40);\n"
+"border-image:none;\n"
+"background-color: rgba(255, 255, 255, 30); ")
+        self.frame_53.setFrameShape(QFrame.StyledPanel)
+        self.frame_53.setFrameShadow(QFrame.Raised)
+
+        self.horizontalLayout_65.addWidget(self.frame_53)
 
 
         self.verticalLayout_108.addWidget(self.main_dasht_top_2)
@@ -4967,7 +4899,7 @@ class Ui_MainWindow(object):
         self.scrollArea_12.setWidgetResizable(True)
         self.scrollAreaWidgetContents_12 = QWidget()
         self.scrollAreaWidgetContents_12.setObjectName(u"scrollAreaWidgetContents_12")
-        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 903, 902))
+        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 1463, 902))
         self.scrollAreaWidgetContents_12.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); \n"
 "")
         self.verticalLayout_112 = QVBoxLayout(self.scrollAreaWidgetContents_12)
@@ -4993,7 +4925,7 @@ class Ui_MainWindow(object):
         self.scrollArea_13.setWidgetResizable(True)
         self.scrollAreaWidgetContents_13 = QWidget()
         self.scrollAreaWidgetContents_13.setObjectName(u"scrollAreaWidgetContents_13")
-        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 894, 311))
+        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 1454, 311))
         self.horizontalLayout_115 = QHBoxLayout(self.scrollAreaWidgetContents_13)
         self.horizontalLayout_115.setSpacing(10)
         self.horizontalLayout_115.setObjectName(u"horizontalLayout_115")
@@ -7907,7 +7839,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 394, 90))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 972, 494))
         self.scrollAreaWidgetContents.setStyleSheet(u"background-color:rgba(255,255,255,0);")
         self.verticalLayout_53 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_53.setSpacing(0)
@@ -10668,7 +10600,7 @@ class Ui_MainWindow(object):
         self.scrollArea_5.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 520, 318))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 1450, 852))
         self.horizontalLayout_20 = QHBoxLayout(self.scrollAreaWidgetContents_5)
         self.horizontalLayout_20.setSpacing(10)
         self.horizontalLayout_20.setObjectName(u"horizontalLayout_20")
@@ -11562,7 +11494,7 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Home Application", None))
         self.actionSalvar_automaticamente.setText(QCoreApplication.translate("MainWindow", u"Salvar automaticamente", None))
         self.actionAtualizar_automaticamente.setText(QCoreApplication.translate("MainWindow", u"Atualizar automaticamente", None))
         self.actionAbrir_DB.setText(QCoreApplication.translate("MainWindow", u"Abrir DB", None))
@@ -11575,7 +11507,7 @@ class Ui_MainWindow(object):
         self.enter_pass.setPlaceholderText(QCoreApplication.translate("MainWindow", u"   Senha", None))
         self.checkBox.setText(QCoreApplication.translate("MainWindow", u"Lembrar senha", None))
         self.buton_login.setText(QCoreApplication.translate("MainWindow", u"Entrar", None))
-        self.credits.setText(QCoreApplication.translate("MainWindow", u"   Home Application Ver: 1.19", None))
+        self.credits.setText(QCoreApplication.translate("MainWindow", u"   Home Application Ver: 1.16", None))
         self.minimize.setText("")
         self.maxmize.setText("")
         self.exit.setText("")
@@ -11603,10 +11535,6 @@ class Ui_MainWindow(object):
         self.label_70.setText(QCoreApplication.translate("MainWindow", u"R$ 0,00", None))
         self.label_77.setText(QCoreApplication.translate("MainWindow", u"Agencia:", None))
         self.label_78.setText(QCoreApplication.translate("MainWindow", u"Conta:", None))
-        self.label_75.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt; color:#ffffff;\">Cart\u00f5es de Creditos</span></p></body></html>", None))
-        self.labelTitle_14.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" color:#ffffff;\">Limites Utilizados:</span></p><p><span style=\" color:#ffffff;\">R$0,00</span></p></body></html>", None))
-        self.label_43.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" color:#ffffff;\"> Faturas de: </span></p><p align=\"center\"><span style=\" color:#ffffff;\">R$0,00</span></p></body></html>", None))
-        self.labelTitle_15.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" color:#ffffff;\">Limites Disponiveis</span></p><p><span style=\" color:#ffffff;\">R$0,00</span></p></body></html>", None))
         self.name_bank_5.setText(QCoreApplication.translate("MainWindow", u"Selecione um Cart\u00e3o", None))
         self.label_51.setText(QCoreApplication.translate("MainWindow", u"Limite", None))
         self.label_52.setText("")

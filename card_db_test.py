@@ -710,7 +710,43 @@ class Main_page_values:
         
         
         
+    def _fatura_atual_all_CHART(anomes):
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
         
+        #ARGUMENTS:
+        lista_de_faturas = []
+        cards = Main_page_values._cards_ids_all()
+        index = 0
+        for i in cards:
+            card = 'extrato_cartao_%s'%(cards[index][0])
+            print("card escolhido",card)
+
+            #QUERY
+            cursor.execute("SELECT SUM (valor_transacao) FROM "+str(card)+" where strftime('%Y-%m', data_filter) = '"+anomes+"' GROUP BY status_payment  ")
+            result=cursor.fetchall()
+            print("result cvhart",result)
+            #NONE:
+
+            if not result:
+                format = '0.00'
+                lista_de_faturas.append(float(format))
+
+            else:
+
+            #FORMAT TO FLOAT-STRING:
+                format = result[0][0]
+                format=("{:.2f}".format(format))
+                lista_de_faturas.append(float(format))
+            index +=1
+        #RETURN:
+        soma = sum(lista_de_faturas)
+        format = soma
+        format=("{:.2f}".format(format))
+        
+        return str(format)
     def _todas_faturas_all(id,ano):
         #CONNECT DB
         a = (os.path.dirname(os.path.realpath(__file__)))

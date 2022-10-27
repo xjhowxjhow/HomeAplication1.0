@@ -2524,6 +2524,7 @@ class Main_page_Cards(Ui_MainWindow):
         thread.start()
 
 
+
     def _main_chart_all_faturas(self):
         
         def thead(self):   

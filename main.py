@@ -494,12 +494,14 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
             if obj == self.previus_month_2 and event.type() == QtCore.QEvent.MouseButtonPress:
                 action = "Previus"
                 home_db_fun.Dates_end_times.methodo_date_extrato(self,action)
-                return home_db_fun.mainpage.load_extrato_filter(self)
+                home_db_fun.mainpage.load_extrato_filter(self)
+                return home_db_fun.Charts_Main.Update_Chart_E_S(self)
                 
             if obj == self.next_month_2 and event.type() == QtCore.QEvent.MouseButtonPress:
                 action = "Next"
                 home_db_fun.Dates_end_times.methodo_date_extrato(self,action)
-                return home_db_fun.mainpage.load_extrato_filter(self)
+                home_db_fun.mainpage.load_extrato_filter(self)
+                return home_db_fun.Charts_Main.Update_Chart_E_S(self)
 
             if obj == self.paga_fatura_3 and event.type() == QtCore.QEvent.MouseButtonPress:
                 current_row = self.table.currentRow()
@@ -635,6 +637,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                     pass
                 # home_db_fun.Set_values_startup.set_values_table_bank(self)
                 home_db_fun.Group.execs(self)
+                home_db_fun.Charts_Main.Show_Chart(self)
                 self.update()
                 show_tray_message(self.ui, tray,titulo,mensagem)
             else:

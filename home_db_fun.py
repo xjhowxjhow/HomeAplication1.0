@@ -11,6 +11,8 @@ import card_db_fun
 from threading import Thread
 import calendar
 from frame_bank.card_frame_bank import CardFrameBank
+
+from modules.charts_main import Chart
 import locale
 import emoji
 import home_db_query
@@ -46,6 +48,8 @@ class Group:
         Set_values_startup.set_banks_combobox_new_lan(self)
         mainpage.load_extrato_filter(self)
         Combobox_startup.default_combox_hidem(self)
+        
+
 
         return True
 
@@ -2694,4 +2698,36 @@ class Remove_lancamentos(Ui_MainWindow):
             else:
                 pass
             
+        return True
+    
+    
+
+
+class Charts_Main(Ui_MainWindow):
+
+    def Show_Chart(self):
+        self.chart = Chart(self)
+        
+        mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
+        ano = self.label_72.text()
+        value = home_db_query.Query_Charts._Saidas_Entradas(ano,mes)
+        
+        #printa item do value
+        for i in range(len(value)):
+            print(value[i])
+        
+        layout = self.chart_main_e_s
+        #envia dados para o chart
+        self.chart.create_chart('Entradas e Saidas',value)
+        #adiciona no layout
+        layout.addWidget(self.chart)
+        #mostra
+        self.chart.show()
+        return True
+    
+    def Update_Chart_E_S(self):
+        mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
+        ano = self.label_72.text()
+        value = home_db_query.Query_Charts._Saidas_Entradas(ano,mes)
+        self.chart.Update_Chart(value)
         return True
