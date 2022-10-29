@@ -1,4 +1,5 @@
 
+from turtle import home
 from PySide2.QtCore import *
 from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2.QtCore import (QCoreApplication, QPropertyAnimation, QDate, QDateTime, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
@@ -74,7 +75,10 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.table.horizontalHeaderItem(0).setFlags(QtCore.Qt.ItemIsEnabled|QtCore.Qt.ItemIsSelectable)
         self.table.horizontalHeaderItem(2).setFlags(QtCore.Qt.ItemIsEnabled|QtCore.Qt.ItemIsSelectable)
         self.table.setStyleSheet("QWidget { color: #fffff8; border-radius:0px; } QHeaderView::section { background-color: rgb(53, 53, 53); border:none; width:45px; height: 50px; border-radius:0px; } QTableWidget { gridline-color: #fffff8; border-radius:0px; border-radius:0px; } QTableWidget QTableCornerButton::section { background-color: #646464; border-radius:0px; } QTableView:item { border-bottom: 0.5px solid qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 0), stop:0.45677 rgba(0, 0, 0, 0), stop:0.479846 rgba(255, 255, 255, 255), stop:0.50571 rgba(239, 236, 55, 0), stop:1 rgba(239, 236, 55, 0)); border-radius:0px; } QTableView::item:selected{ background-color:rgba(255, 255, 255,30); color: rgb(255, 255, 255); }")
+        self.extrato_cartao_0.setStyleSheet("QWidget { color: #fffff8; border-radius:0px; } QHeaderView::section { background-color: rgb(53, 53, 53); border:none; width:45px; height: 50px; border-radius:0px; } QTableWidget { gridline-color: #fffff8; border-radius:0px; border-radius:0px; } QTableWidget QTableCornerButton::section { background-color: #646464; border-radius:0px; } QTableView:item { border-bottom: 0.5px solid qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 0), stop:0.45677 rgba(0, 0, 0, 0), stop:0.479846 rgba(255, 255, 255, 255), stop:0.50571 rgba(239, 236, 55, 0), stop:1 rgba(239, 236, 55, 0)); border-radius:0px; } QTableView::item:selected{ background-color:rgba(255, 255, 255,30); color: rgb(255, 255, 255); }")
+        self.table_faturas_ind.setStyleSheet("QWidget { color: #fffff8; border-radius:0px; } QHeaderView::section { background-color: rgb(53, 53, 53); border:none; width:45px; height: 50px; border-radius:0px; } QTableWidget { gridline-color: #fffff8; border-radius:0px; border-radius:0px; } QTableWidget QTableCornerButton::section { background-color: #646464; border-radius:0px; } QTableView:item { border-bottom: 0.5px solid qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 0), stop:0.45677 rgba(0, 0, 0, 0), stop:0.479846 rgba(255, 255, 255, 255), stop:0.50571 rgba(239, 236, 55, 0), stop:1 rgba(239, 236, 55, 0)); border-radius:0px; } QTableView::item:selected{ background-color:rgba(255, 255, 255,30); color: rgb(255, 255, 255); }")
         self.table.horizontalHeader().sectionClicked.connect(self.filtro_table_header)
+        
         #StlypeSheet veritcal ScrollBar
      
         #HIDDEN TABELA
@@ -262,7 +266,9 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.apaga_compra_3.installEventFilter(self)
         self.btn_if_card_2.installEventFilter(self)
         self.remover_card_3.installEventFilter(self)
-        
+        self.frame_43.installEventFilter(self)
+        self.show_cards_main_2.installEventFilter(self)
+        self.hide_cards_main_3.installEventFilter(self)
         #EVENTS APP 
         self.bar_window.installEventFilter(self)
 
@@ -276,9 +282,25 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                     self.showNormal()
                 else:
                     self.showMaximized()
+            #MOUSE HOVER EVENT
+            if obj == self.frame_43 and event.type() == QtCore.QEvent.Enter:
+                event = 'enter'
+                return  effects.Hover_Event_Frames._btns_top_main(self,event)
             
-            
+            if obj == self.frame_43 and event.type() == QtCore.QEvent.Leave:
+                event = 'leave'
+                return  effects.Hover_Event_Frames._btns_top_main(self,event)
+
             #EVENTS BUTTONS AND WIDGETS
+            #btn dashboard main
+            if obj == self.show_cards_main_2 and event.type() == QtCore.QEvent.MouseButtonPress:
+                self.staked_bottom_main.setCurrentWidget(self.page_dashboard_btn_main)
+                effects.Enable_Slide._slide(self,self.staked_bottom_main)
+                return home_db_fun.Charts_Main.Update_Chart_E_S_GERAL(self)
+            #btn dashboard main volta para o main
+            if obj == self.hide_cards_main_3 and event.type() == QtCore.QEvent.MouseButtonRelease:
+                return self.staked_bottom_main.setCurrentWidget(self.main_dash_bottom_2Page1)
+            
             
             if obj == self.pushButton_8 and event.type() == QtCore.QEvent.MouseButtonPress:
                 btn = "conta"
@@ -449,34 +471,37 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
             if obj == self.table and event.type() == QtWidgets.QAbstractItemView.SelectRows:
                 current_row = self.table.currentRow()
                 current_column = self.table.currentColumn()
-                id = self.table.item(current_row, 1).text()
-                tipo = home_db_fun.Descricao_lancamento._verifi_is_credit_card(self,id) 
-
-                #PRINT CELL WIDGET TEXT
-                
-
-                id = self.table.item(current_row, 1).text()
-                id_bank = self.table.item(current_row, 2).text()
-                #SE FOR ENTRADA MUDA TEXTO BOTAO PAGAMENTO
-                home_db_fun.Descricao_lancamento.Change_text_btn_pagar_receber(self,id)
-                #CHAMA QUERY PARA PEGAR A DESCRCAO DO LANÇAMENTO
-                validador = home_db_fun.Descricao_lancamento.set_descricao_lancamento(self,id)
-                #SET TEXT DETALHES DO LANÇAMENTO:
-                
-                
-                self.frame_options_pdf.hide()
-                if validador== "fatura":
-                    home_db_fun.Descricao_lancamento.set_icon_desc(self,id)
-                else:
-                    self.frame_if_card_main.hide()
-                    self.label_if_card.hide()
-                
-                home_db_fun.Pdf_funtion.search_pdf(self,id,id_bank)
-                
-                if tipo == True:
-                    home_db_fun.Descricao_lancamento.set_detalhes_lancamneto_menu(self,id,id_bank,"fatura")
-                else:
-                    home_db_fun.Descricao_lancamento.set_detalhes_lancamneto_menu(self,id,id_bank,"lancamento")
+                try:
+                    id = self.table.item(current_row, 1).text()
+                    tipo = home_db_fun.Descricao_lancamento._verifi_is_credit_card(self,id) 
+    
+                    #PRINT CELL WIDGET TEXT
+                    
+    
+                    id = self.table.item(current_row, 1).text()
+                    id_bank = self.table.item(current_row, 2).text()
+                    #SE FOR ENTRADA MUDA TEXTO BOTAO PAGAMENTO
+                    home_db_fun.Descricao_lancamento.Change_text_btn_pagar_receber(self,id)
+                    #CHAMA QUERY PARA PEGAR A DESCRCAO DO LANÇAMENTO
+                    validador = home_db_fun.Descricao_lancamento.set_descricao_lancamento(self,id)
+                    #SET TEXT DETALHES DO LANÇAMENTO:
+                    
+                    
+                    self.frame_options_pdf.hide()
+                    if validador== "fatura":
+                        home_db_fun.Descricao_lancamento.set_icon_desc(self,id)
+                    else:
+                        self.frame_if_card_main.hide()
+                        self.label_if_card.hide()
+                    
+                    home_db_fun.Pdf_funtion.search_pdf(self,id,id_bank)
+                    
+                    if tipo == True:
+                        home_db_fun.Descricao_lancamento.set_detalhes_lancamneto_menu(self,id,id_bank,"fatura")
+                    else:
+                        home_db_fun.Descricao_lancamento.set_detalhes_lancamneto_menu(self,id,id_bank,"lancamento")
+                except:
+                    pass
 
 
 
@@ -637,7 +662,8 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                     pass
                 # home_db_fun.Set_values_startup.set_values_table_bank(self)
                 home_db_fun.Group.execs(self)
-                home_db_fun.Charts_Main.Show_Chart(self)
+                home_db_fun.Charts_Main._Active_sharts(self)
+                
                 self.update()
                 show_tray_message(self.ui, tray,titulo,mensagem)
             else:

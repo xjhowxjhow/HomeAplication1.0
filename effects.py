@@ -478,3 +478,51 @@ class Effetc_slides(Ui_MainWindow):
         if id == 'CAIXA ECONOMICA':
             icon = ":/menu/caixa-icon.png"
             return icon
+
+
+
+
+class Hover_Event_Frames(Ui_MainWindow):
+    
+    def _btns_top_main(self,event):
+        defaul = self.frame_43.frameGeometry().width()
+        
+        if event == 'enter':
+            maximum = 200
+            
+            self.animation = QPropertyAnimation(self.frame_43, b"minimumWidth")
+            self.animation.setDuration(1000)
+            self.animation.setStartValue(defaul)
+            self.animation.setEndValue(maximum)
+            self.animation.setEasingCurve(QEasingCurve.OutExpo)
+            self.animation.start()
+            #text
+            self.hide_cards_main_2.setText("     Function")
+            self.pushButton_24.setText("     Cartões")
+            self.show_cards_main_2.setText("   Dashboard")
+        else:
+            maximum = 80
+            
+            self.animation = QPropertyAnimation(self.frame_43, b"minimumWidth")
+            self.animation.setDuration(1000)
+            self.animation.setStartValue(defaul)
+            self.animation.setEndValue(maximum)
+            self.animation.setEasingCurve(QEasingCurve.OutExpo)
+            self.animation.start()
+
+            #text
+            self.hide_cards_main_2.setText("")
+            self.pushButton_24.setText("")
+            self.show_cards_main_2.setText("")
+        
+
+
+class Enable_Slide(Ui_MainWindow):
+
+    def _slide(self,stackedwidget_SET):
+        self.widget = stackedwidget_SET
+        self.widget.setTransitionDirection(QtCore.Qt.Vertical)
+        self.widget.setTransitionSpeed(200)
+        self.widget.setTransitionEasingCurve(QtCore.QEasingCurve.OutExpo)
+        self.widget.setSlideTransition(True)
+        return True

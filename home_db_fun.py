@@ -12,7 +12,7 @@ from threading import Thread
 import calendar
 from frame_bank.card_frame_bank import CardFrameBank
 
-from modules.charts_main import Chart
+from modules.charts_main import Chart,Chart_1_Dashboard_Main
 import locale
 import emoji
 import home_db_query
@@ -50,9 +50,13 @@ class Group:
         Combobox_startup.default_combox_hidem(self)
         try:
             Charts_Main.Update_Chart_E_S(self)
+
         except:
             pass
-
+        try:
+            Charts_Main.Update_Chart_E_S_GERAL(self)
+        except:
+            pass
 
         return True
 
@@ -2709,17 +2713,33 @@ class Remove_lancamentos(Ui_MainWindow):
 
 class Charts_Main(Ui_MainWindow):
 
+    def _Active_sharts(self):
+        layouts =[self.chart_main_e_s,self.cht_gastos_anual_lay]
+        #verify if chart inside
+        validation = []
+        for i in layouts:
+            print(i.count(),"contando layout chart")
+            if i.count() == 0:
+                validation.append(1)
+            else:
+                validation.append(0)
+        if 1 in validation:
+            Charts_Main.Show_Chart(self)
+            Charts_Main.Dasboard_main(self)
+        else:
+            return False
+
+
+
+
     def Show_Chart(self):
         self.chart = Chart(self)
-        
         mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
         ano = self.label_72.text()
         value = home_db_query.Query_Charts._Saidas_Entradas(ano,mes)
-        
         #printa item do value
         for i in range(len(value)):
             print(value[i])
-        
         layout = self.chart_main_e_s
         #envia dados para o chart
         self.chart.create_chart('Entradas e Saidas',value)
@@ -2727,6 +2747,7 @@ class Charts_Main(Ui_MainWindow):
         layout.addWidget(self.chart)
         #mostra
         self.chart.show()
+
         return True
     
     def Update_Chart_E_S(self):
@@ -2734,4 +2755,35 @@ class Charts_Main(Ui_MainWindow):
         ano = self.label_72.text()
         value = home_db_query.Query_Charts._Saidas_Entradas(ano,mes)
         self.chart.Update_Chart(value)
+        return True
+    
+    
+    def Dasboard_main(self):
+        #SLIDE PAGE
+
+        
+        
+        self.chart2 = Chart_1_Dashboard_Main(self)
+        
+        mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
+        ano = self.label_72.text()
+        value = home_db_query.Query_Charts._Saidas_Entradas_all(ano)
+        print(value)
+        #printa item do value
+
+        
+        layout =  self.cht_gastos_anual_lay
+        #envia dados para o chart
+        self.chart2.create_chart('Entradas e Saidas {}'.format(ano),value)
+        #adiciona no layout
+        layout.addWidget(self.chart2)
+        #mostra
+        self.chart2.show()
+        return True
+
+        
+    def Update_Chart_E_S_GERAL(self):
+        ano = self.label_72.text()
+        value = home_db_query.Query_Charts._Saidas_Entradas_all(ano)
+        self.chart2.Update_Chart_2(value)
         return True

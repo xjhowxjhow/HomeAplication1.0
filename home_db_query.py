@@ -1244,5 +1244,70 @@ class Query_Charts:
             return False
         
         
-
-
+    def _Saidas_Entradas_all(ano):
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        meses = ['01','02','03','04','05','06','07','08','09','10','11','12']
+        list = []
+        for mes in meses:
+        
+            cursor.execute(" SELECT  DISTINCT\
+		    	                        (SELECT\
+                                                    sum(new_lancamento.valor)\
+                                                    FROM new_lancamento\
+                                                    INNER JOIN config_lancamento\
+                                                    ON new_lancamento.id_lancamento = config_lancamento.id_lancamento\
+                                                    WHERE config_lancamento.recorrente_m_d_s_y = 'Mes' and new_lancamento.tipo ='Saida')as Saida_recorrente,\
+		    	                        (SELECT \
+		    	                        			sum(new_lancamento.valor)\
+		    	                        			from  new_lancamento\
+		    	                        			inner join config_lancamento\
+		    	                        			on new_lancamento.id_lancamento = config_lancamento.id_lancamento\
+		    	                        			where config_lancamento.id_lancamento = new_lancamento.id_lancamento and new_lancamento.tipo = 'Saida' AND  strftime('%Y-%m', new_lancamento.data_lancamento) = '"+str(ano)+"-"+str(mes)+"' ) as Saida_n_recorrente,\
+		    	                        (SELECT  \
+                                                    sum(new_lancamento.valor)\
+                                                    FROM new_lancamento\
+                                                    INNER JOIN config_lancamento\
+                                                    ON new_lancamento.id_lancamento = config_lancamento.id_lancamento\
+                                                    WHERE config_lancamento.recorrente_m_d_s_y = 'Mes' and new_lancamento.tipo ='Entrada' )as Entrada_recorrente,\
+		    	                        (SELECT \
+		    	                        			sum(new_lancamento.valor)\
+		    	                        			from  new_lancamento\
+		    	                        			inner join config_lancamento\
+		    	                        			on new_lancamento.id_lancamento = config_lancamento.id_lancamento\
+		    	                        			where config_lancamento.id_lancamento = new_lancamento.id_lancamento and new_lancamento.tipo = 'Entrada' AND  strftime('%Y-%m', new_lancamento.data_lancamento) = '"+str(ano)+"-"+str(mes)+"' ) as Entrada_n_recorrente\
+                            from  new_lancamento")
+    
+            
+            dados = cursor.fetchall()
+            
+            if dados:
+                saida_recorrente = dados[0][0]
+                saida_nao_recorrente = dados[0][1]
+                entrada_recorrente = dados[0][2]
+                entrada_nao_recorrente = dados[0][3]
+    
+                if saida_recorrente is None:
+                    saida_recorrente = 0
+                if saida_nao_recorrente is None:
+                    saida_nao_recorrente = 0
+                if entrada_recorrente is None:
+                    entrada_recorrente = 0
+                if entrada_nao_recorrente is None:
+                    entrada_nao_recorrente = 0
+                    
+                saida = float(saida_recorrente) + float(saida_nao_recorrente)
+                entrada = float(entrada_recorrente) + float(entrada_nao_recorrente)
+            #faturas 
+                anomes= str(ano)+"-"+str(mes)
+                faturas_soma = card_db_test.Main_page_values._fatura_atual_all_CHART(anomes)
+                print("FATURAS",faturas_soma)
+                saida = float(saida) + float(faturas_soma)
+                list.append([entrada,saida])
+            else:
+                list.append([0,0])
+        return list
+    
+           

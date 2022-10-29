@@ -37,7 +37,7 @@ import shutil
 
 #cria classe do grafico para setar no frame
 
-class Chart(QtCharts.QChartView):
+class Chart(QtCharts.QChartView):#GRAFICO BAR GASTOS MENSAL EXTRATO MAIN
     def __init__(self, parent=None):
         super(Chart, self).__init__(parent)
         self.chart = QtCharts.QChart()
@@ -66,7 +66,7 @@ class Chart(QtCharts.QChartView):
 
     
 #cria classe do grafico horizontal de barras para setar no frame
-    def create_chart(self, title, data):
+    def create_chart(self, title, data): #GRAFICO BAR GASTOS MENSAL EXTRATO MAIN
         self.chart.setTitle(title)
         self.set0 = QtCharts.QBarSet('Entradas')
         self.set1 = QtCharts.QBarSet('Saídas')
@@ -132,7 +132,95 @@ class Chart(QtCharts.QChartView):
         self.set0.replace(0,data[0])
         self.set1.replace(1,data[1])
         self.chart.update()
-        self.chart.repaint()
         
         
+        
+        return True
+    
+
+
+
+class Chart_1_Dashboard_Main(QtCharts.QChartView): #GRAFICO BAR GASTOS ANUAIS PAGE DASHBOARD MAIN
+    def __init__(self, parent=None):
+        super(Chart_1_Dashboard_Main, self).__init__(parent)
+        self.chart1 = QtCharts.QChart()
+        self.chart1.setAnimationOptions(QtCharts.QChart.SeriesAnimations)
+        self.setRenderHint(QPainter.Antialiasing)
+        self.chart1.setBackgroundRoundness(7)
+        self.chart1.setBackgroundBrush(QBrush(QColor(255, 255, 255,0)))
+        #font
+        font = QFont('Bahnschrift Light Condensed', 14)
+        #color
+        color = QColor(255, 255, 255, 255)
+        #seta fonte e cor
+        self.chart1.setTitleFont(font)
+        self.chart1.setTitleBrush(color)
+        self.chart1.setFont(QFont('Bahnschrift Light Condensed', 12))
+        self.chart1.setTitleFont(QFont('Bahnschrift Light Condensed', 12))
+
+        #adjust legend
+
+        self.chart1.legend().setVisible(True)
+        self.chart1.legend().setAlignment(Qt.AlignBottom)
+        self.chart1.legend().setBackgroundVisible(False)
+        self.chart1.legend().setFont(QFont('Bahnschrift Light Condensed', 12))
+        self.chart1.legend().setColor(QColor(255, 255, 255, 255))
+        self.setChart(self.chart1)
+    
+    def create_chart(self, title, data):
+        self.chart1.setTitle(title)
+        self.set_0 = QtCharts.QBarSet('entrada')
+        self.set_1 = QtCharts.QBarSet('saida')
+        
+        for i in range(0,12):
+            #[[0.0, 800.18], [0.0, 994.92], 
+            self.set_0.append(data[i][0])
+            self.set_1.append(data[i][1])
+        #border color
+        self.set_0.setColor(QColor(86, 202, 164,255))
+        self.set_1.setColor(QColor(254, 130, 139,255))
+        
+        self.set_0.setLabelFont(QFont('Bahnschrift Light Condensed', 13))
+        self.set_1.setLabelFont(QFont('Bahnschrift Light Condensed', 13))
+        self.set_0.setBorderColor(QColor(86, 202, 164,255))
+        self.set_1.setBorderColor(QColor(254, 130, 139,255))
+        
+        self.set_0.setLabelColor(QColor(255, 255, 255,255))
+        self.set_1.setLabelColor(QColor(255, 255, 255,255))
+
+        self.series1 = QtCharts.QStackedBarSeries()
+        self.series1.append(self.set_0)
+        self.series1.append(self.set_1)
+        self.series1.setLabelsVisible(True)
+        self.series1.setLabelsFormat("R$"+"@value")
+        
+        #label out of bar
+        self.series1.setLabelsPosition(QtCharts.QAbstractBarSeries.LabelsOutsideEnd)
+        
+        
+        mes = ('Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro')
+        axis = QtCharts.QBarCategoryAxis()
+        axis.append(mes)
+        axis.setGridLineVisible(False)
+        axis.setLineVisible(False)
+        axis.setLabelsFont(QFont('Bahnschrift Light Condensed', 12))
+        axis.setLabelsColor(QColor(255, 255, 255, 255))
+        self.chart1.createDefaultAxes()
+        self.chart1.setAxisX(axis, self.series1)
+        
+        self.chart1.addSeries(self.series1)
+
+
+
+
+    def Update_Chart_2(self, data):
+        print(data)
+        # meses
+
+        for index in range(12):
+            self.set_0.replace(index,data[index][0])
+            self.set_1.replace(index,data[index][1])
+        self.chart1.update()
+        
+        #change thema
         return True
