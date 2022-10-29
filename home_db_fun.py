@@ -2742,7 +2742,7 @@ class Charts_Main(Ui_MainWindow):
             print(value[i])
         layout = self.chart_main_e_s
         #envia dados para o chart
-        self.chart.create_chart('Entradas e Saidas',value)
+        self.chart.create_chart('Entradas e Saidas de '+self.label_67.text(),value)
         #adiciona no layout
         layout.addWidget(self.chart)
         #mostra
@@ -2754,7 +2754,7 @@ class Charts_Main(Ui_MainWindow):
         mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
         ano = self.label_72.text()
         value = home_db_query.Query_Charts._Saidas_Entradas(ano,mes)
-        self.chart.Update_Chart(value)
+        self.chart.Update_Chart(value,'Entradas e Saidas de '+self.label_67.text())
         return True
     
     
@@ -2765,8 +2765,8 @@ class Charts_Main(Ui_MainWindow):
         
         self.chart2 = Chart_1_Dashboard_Main(self)
         
-        mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
-        ano = self.label_72.text()
+        
+        ano = self.label_74.text()
         value = home_db_query.Query_Charts._Saidas_Entradas_all(ano)
         print(value)
         #printa item do value
@@ -2783,7 +2783,25 @@ class Charts_Main(Ui_MainWindow):
 
         
     def Update_Chart_E_S_GERAL(self):
-        ano = self.label_72.text()
+        ano = self.label_74.text()
         value = home_db_query.Query_Charts._Saidas_Entradas_all(ano)
-        self.chart2.Update_Chart_2(value)
+        self.chart2.Update_Chart_2(value,)
         return True
+    
+
+    def Update_Year_Filter(self,action):
+        
+        labe_y =self.label_74
+        
+        if action == "next":
+            ano = int(labe_y.text()) + 1
+            labe_y.setText(str(ano))
+            Charts_Main.Update_Chart_E_S_GERAL(self)
+        elif action == "previus":
+            ano = int(labe_y.text()) - 1
+            labe_y.setText(str(ano))
+            Charts_Main.Update_Chart_E_S_GERAL(self)
+        else:
+            pass
+        return True
+            

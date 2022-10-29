@@ -6410,12 +6410,12 @@ class Ui_MainWindow(object):
 "border:none;")
         self.frame_107.setFrameShape(QFrame.StyledPanel)
         self.frame_107.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_55 = QVBoxLayout(self.frame_107)
-        self.verticalLayout_55.setObjectName(u"verticalLayout_55")
+        self.horizontalLayout_71 = QHBoxLayout(self.frame_107)
+        self.horizontalLayout_71.setObjectName(u"horizontalLayout_71")
         self.cht_gastos_mes_lay = QVBoxLayout()
         self.cht_gastos_mes_lay.setObjectName(u"cht_gastos_mes_lay")
 
-        self.verticalLayout_55.addLayout(self.cht_gastos_mes_lay)
+        self.horizontalLayout_71.addLayout(self.cht_gastos_mes_lay)
 
 
         self.verticalLayout_124.addWidget(self.frame_107)
@@ -11443,8 +11443,7 @@ class Ui_MainWindow(object):
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Bahnschrift Light Condensed'; font-size:14pt; font-weight:24; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a name=\"KCA1_48\"></a><span style=\" font-size:12pt; font-weight:400;\">O</span><span style=\" font-size:12pt; font-weight:400;\"> Texas \u00e9 um dos 50 estados dos Estados Unidos, localizado na regi\u00e3o sul do pa\u00eds. Possui como limites o estado de Oklahoma ao norte, Novo M\u00e9xico ao oeste, \u2026</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-weight:400;\"><br /></p></body></html>", None))
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
         self.label_if_card.setText(QCoreApplication.translate("MainWindow", u"Cartao:", None))
         self.label_45.setText(QCoreApplication.translate("MainWindow", u"Fatura de ", None))
         self.btn_if_card_2.setText(QCoreApplication.translate("MainWindow", u"Ver cartao", None))

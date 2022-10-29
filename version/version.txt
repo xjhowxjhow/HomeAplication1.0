@@ -1,2 +1,2 @@
-VERSION: 1.19
-NOTES:  - Correcao de bugs.
+VERSION: 1.20
+NOTES:  - Correcao de bugs, Novos Graficos de visualizacao de despesas.

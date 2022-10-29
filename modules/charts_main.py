@@ -1,7 +1,6 @@
 
 import sqlite3
 import os.path
-from turtle import color
 import effects
 import os 
 import sys
@@ -33,6 +32,8 @@ from random import randint
 from login_pyside24 import Ui_MainWindow
 from PySide2.QtCharts import QtCharts
 import shutil
+
+
 
 
 #cria classe do grafico para setar no frame
@@ -127,8 +128,8 @@ class Chart(QtCharts.QChartView):#GRAFICO BAR GASTOS MENSAL EXTRATO MAIN
 
         return True
     
-    def Update_Chart(self, data):
-        
+    def Update_Chart(self, data,title):
+        self.chart.setTitle(title)
         self.set0.replace(0,data[0])
         self.set1.replace(1,data[1])
         self.chart.update()
@@ -149,14 +150,14 @@ class Chart_1_Dashboard_Main(QtCharts.QChartView): #GRAFICO BAR GASTOS ANUAIS PA
         self.chart1.setBackgroundRoundness(7)
         self.chart1.setBackgroundBrush(QBrush(QColor(255, 255, 255,0)))
         #font
-        font = QFont('Bahnschrift Light Condensed', 14)
+        font = QFont('Bahnschrift Light Condensed', 17)
         #color
         color = QColor(255, 255, 255, 255)
         #seta fonte e cor
         self.chart1.setTitleFont(font)
         self.chart1.setTitleBrush(color)
         self.chart1.setFont(QFont('Bahnschrift Light Condensed', 12))
-        self.chart1.setTitleFont(QFont('Bahnschrift Light Condensed', 12))
+        
 
         #adjust legend
 
@@ -169,6 +170,7 @@ class Chart_1_Dashboard_Main(QtCharts.QChartView): #GRAFICO BAR GASTOS ANUAIS PA
     
     def create_chart(self, title, data):
         self.chart1.setTitle(title)
+        self.chart1.setTitleFont(QFont('Bahnschrift Light Condensed', 16))
         self.set_0 = QtCharts.QBarSet('entrada')
         self.set_1 = QtCharts.QBarSet('saida')
         
@@ -213,9 +215,11 @@ class Chart_1_Dashboard_Main(QtCharts.QChartView): #GRAFICO BAR GASTOS ANUAIS PA
 
 
 
-    def Update_Chart_2(self, data):
+    def Update_Chart_2(self, data,title):
         print(data)
         # meses
+        self.chart1.setTitle(title)
+
 
         for index in range(12):
             self.set_0.replace(index,data[index][0])
@@ -224,3 +228,7 @@ class Chart_1_Dashboard_Main(QtCharts.QChartView): #GRAFICO BAR GASTOS ANUAIS PA
         
         #change thema
         return True
+    
+    
+
+

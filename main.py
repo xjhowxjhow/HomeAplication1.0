@@ -32,7 +32,7 @@ from home_db_fun import Loading_screen_gif
 WINDOW_SIZE = 0
 TOGLE_STATUS = 80
 CARD_SELECTED = 0
-GLOBAL_VERSION = '1.19'
+GLOBAL_VERSION = '1.20'
 
 
 class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
@@ -269,6 +269,8 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.frame_43.installEventFilter(self)
         self.show_cards_main_2.installEventFilter(self)
         self.hide_cards_main_3.installEventFilter(self)
+        self.next_month_4.installEventFilter(self)
+        self.previus_month_4.installEventFilter(self)
         #EVENTS APP 
         self.bar_window.installEventFilter(self)
 
@@ -292,13 +294,24 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                 return  effects.Hover_Event_Frames._btns_top_main(self,event)
 
             #EVENTS BUTTONS AND WIDGETS
+            if obj == self.next_month_4 and event.type() == QtCore.QEvent.MouseButtonPress:
+                action = 'next'
+                return home_db_fun.Charts_Main.Update_Year_Filter(self,action)
+            
+            if obj == self.previus_month_4 and event.type() == QtCore.QEvent.MouseButtonPress:
+                action = 'previus'
+                return home_db_fun.Charts_Main.Update_Year_Filter(self,action)
+            
             #btn dashboard main
             if obj == self.show_cards_main_2 and event.type() == QtCore.QEvent.MouseButtonPress:
                 self.staked_bottom_main.setCurrentWidget(self.page_dashboard_btn_main)
+                self.extrat_meses_2.setCurrentWidget(self.page_12)
                 effects.Enable_Slide._slide(self,self.staked_bottom_main)
+                effects.Enable_Slide._slide(self,self.extrat_meses_2)
                 return home_db_fun.Charts_Main.Update_Chart_E_S_GERAL(self)
             #btn dashboard main volta para o main
             if obj == self.hide_cards_main_3 and event.type() == QtCore.QEvent.MouseButtonRelease:
+                self.extrat_meses_2.setCurrentWidget(self.page_11)
                 return self.staked_bottom_main.setCurrentWidget(self.main_dash_bottom_2Page1)
             
             
