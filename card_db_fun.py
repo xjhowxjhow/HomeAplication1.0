@@ -57,39 +57,39 @@ class funcoes_cartao(Ui_MainWindow):
         self.label_42.setText(label_time)
         current_time = QTime.currentTime()
         conditions= int(current_time.toString('hh'))
-        
-        if conditions  > 0 and conditions < 4:
+
+        if conditions  >= 0 and conditions < 4:
             #page main
             self.label_41.setText("Olá, Boa noite"+emoji.emojize(" :noite_estrelada:", language="pt"))
-            self.frame_45.setStyleSheet(u"background-image: url(:/time/menu/time/night.png);background-repeat:no-repeat;background-position:center;")
+            self.frame_45.setStyleSheet(u"background-image: url(:/time/night.png);background-repeat:no-repeat;background-position:center;")
 
             #page cartao
             self.label_36.setText("Olá, Boa noite"+emoji.emojize(" :noite_estrelada:", language="pt"))
-            self.frame_34.setStyleSheet(u"background-image: url(:/time/menu/time/night.png);background-repeat:no-repeat;background-position:center;")
+            self.frame_34.setStyleSheet(u"background-image: url(:/time/night.png);background-repeat:no-repeat;background-position:center;")
 
         elif conditions  > 4 and conditions < 12:
             #page main:
             self.label_41.setText("Olá, Bom dia"+emoji.emojize(" :praia_e_guarda-sol:", language="pt"))
-            self.frame_45.setStyleSheet(u"background-image: url(:/time/menu/time/day.png);background-repeat:no-repeat;background-position:center;")
+            self.frame_45.setStyleSheet(u"background-image: url(:/time/day.png);background-repeat:no-repeat;background-position:center;")
             
             self.label_36.setText("Olá, Bom dia"+emoji.emojize(" :praia_e_guarda-sol:", language="pt"))
-            self.frame_34.setStyleSheet(u"background-image: url(:/time/menu/time/day.png);background-repeat:no-repeat;background-position:center;")
+            self.frame_34.setStyleSheet(u"background-image: url(:/time/day.png);background-repeat:no-repeat;background-position:center;")
         elif conditions >= 12 and conditions < 18:
             #page main:
             self.label_41.setText("Olá, Boa tarde"+emoji.emojize(" :nuvem:", language="pt"))
-            self.frame_45.setStyleSheet(u"background-image: url(:/time/menu/time/tarde.png);background-repeat:no-repeat;background-position:center;")
+            self.frame_45.setStyleSheet(u"background-image: url(:/time/tarde.png);background-repeat:no-repeat;background-position:center;")
             
             
             self.label_36.setText("Olá, Boa tarde"+emoji.emojize(" :nuvem:", language="pt"))
-            self.frame_34.setStyleSheet(u"background-image: url(:/time/menu/time/tarde.png);background-repeat:no-repeat;background-position:center;")
+            self.frame_34.setStyleSheet(u"background-image: url(:/time/tarde.png);background-repeat:no-repeat;background-position:center;")
         elif conditions >= 18 and conditions < 24:
             #page main:
             self.label_41.setText("Olá, Boa noite"+emoji.emojize(" :noite_estrelada:", language="pt"))
-            self.frame_45.setStyleSheet(u"background-image: url(:/time/menu/time/night.png);background-repeat:no-repeat;background-position:center;")
+            self.frame_45.setStyleSheet(u"background-image: url(:/time/night.png);background-repeat:no-repeat;background-position:center;")
             
             
             self.label_36.setText("Olá, Boa noite"+emoji.emojize(" :noite_estrelada:", language="pt"))
-            self.frame_34.setStyleSheet(u"background-image: url(:/time/menu/time/night.png);background-repeat:no-repeat;background-position:center;")
+            self.frame_34.setStyleSheet(u"background-image: url(:/time/night.png);background-repeat:no-repeat;background-position:center;")
 
     def _start_values(self): 
         def thead():

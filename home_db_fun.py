@@ -169,22 +169,21 @@ class mainpage(Ui_MainWindow):
                 else:
                     home_db_query.Saldos._pagar_lancamento(id_lancamento,id_bank,'Saida',get_ano,get_mes)
                     print("tipoooo",tipo)
-
-            # mainpage.load_extrato_filter(self)
-            Group.execs(self)
-            self.chart_gastos_all_2.setCurrentWidget(self.page_Tabe_main1)
-            Set_values_startup._set_Saldo(self)
-
             #VERIFY IF PDF EXISTS
             files_inseridos = self.listWidget_3.count()
             if files_inseridos > 0:
                 for i in range(files_inseridos):
                     if self.comboBox_23.currentText() == 'Sim':
-                        Pdf_funtion.copy_and_move_pdf_to_patch(self,"Recorrente",id_bank,id_lancamento)
+                        Pdf_funtion.copy_and_move_pdf_to_patch(self,"Recorrente",status_pago,id_bank,id_lancamento)
                     else:
-                        Pdf_funtion.copy_and_move_pdf_to_patch(self,"Unico",id_bank,id_lancamento)
+                        Pdf_funtion.copy_and_move_pdf_to_patch(self,"Unico",status_pago,id_bank,id_lancamento)
             else:
                 pass
+            # mainpage.load_extrato_filter(self)
+            Group.execs(self)
+            self.chart_gastos_all_2.setCurrentWidget(self.page_Tabe_main1)
+            Set_values_startup._set_Saldo(self)
+
         else:
             pass
         
@@ -2017,8 +2016,11 @@ class Pdf_funtion(Ui_MainWindow):
         else:
             return None
     
-    def copy_and_move_pdf_to_patch(self,tipo,id_bank,id_lancamento): # INSERE NO DB E MOVE O PDF PARA A PASTA PDF
+    def copy_and_move_pdf_to_patch(self,tipo,status_pago,id_bank,id_lancamento): # INSERE NO DB E MOVE O PDF PARA A PASTA PDF
         #get global var
+        
+        #PAGO OU NAO PAGO
+        
         global file_patch_pdf
         file = file_patch_pdf
         print(file,"file")
@@ -2052,8 +2054,21 @@ class Pdf_funtion(Ui_MainWindow):
                     os.rename(a+"/pdf/anexos/"+file_name, a+"/pdf/anexos/"+new_name)
                     #INSERT IN DB
                     get_file = a+"/pdf/anexos/"+new_name
-                    mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
-                    ano = self.label_72.text()
+                    if status_pago == "pago":
+                        #get mes e ano
+                        dateedit = self.lancamento_programado_2.date()
+                        mes = dateedit.month()
+                        ano = dateedit.year()
+                        print("pago")
+                    elif status_pago == "current_page":
+                        mes = Dates_end_times.convert_string_date_query(self,self.label_67.text())
+                        ano = self.label_72.text()
+                        print("insersao manual")
+                    else :
+                        dateedit = self.lancamento_programado.date()
+                        mes = dateedit.month()
+                        ano = dateedit.year()
+
                     home_db_query.Pdf.insert_pdf(id_lancamento,id_bank,get_file,ano,mes)
                     return True
             else:
@@ -2167,7 +2182,7 @@ class Pdf_funtion(Ui_MainWindow):
             self.listWidget_2.addItem(item)
             #INSERT IN DB
 
-            Pdf_funtion.copy_and_move_pdf_to_patch(self,tipo,id_bank,id_lancamento)
+            Pdf_funtion.copy_and_move_pdf_to_patch(self,tipo,'current_page',id_bank,id_lancamento)
 
             
             

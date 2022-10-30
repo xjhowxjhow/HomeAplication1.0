@@ -1,5 +1,3 @@
-
-from turtle import home
 from PySide2.QtCore import *
 from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2.QtCore import (QCoreApplication, QPropertyAnimation, QDate, QDateTime, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
@@ -32,7 +30,7 @@ from home_db_fun import Loading_screen_gif
 WINDOW_SIZE = 0
 TOGLE_STATUS = 80
 CARD_SELECTED = 0
-GLOBAL_VERSION = '1.20'
+GLOBAL_VERSION = '1.21'
 
 
 class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):

@@ -1404,7 +1404,7 @@ class Ui_MainWindow(object):
         self.frame_45 = QFrame(self.frame_44)
         self.frame_45.setObjectName(u"frame_45")
         self.frame_45.setMinimumSize(QSize(60, 0))
-        self.frame_45.setStyleSheet(u"background-image: url(:/time/menu/night.png);\n"
+        self.frame_45.setStyleSheet(u"background-image: url(:/time/night.png);\n"
 "background-repeat:no-repeat;\n"
 "background-position:center;\n"
 "")
@@ -3115,7 +3115,7 @@ class Ui_MainWindow(object):
         self.scrollArea_11.setWidgetResizable(True)
         self.scrollAreaWidgetContents_11 = QWidget()
         self.scrollAreaWidgetContents_11.setObjectName(u"scrollAreaWidgetContents_11")
-        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, -28, 1453, 637))
+        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, 0, 1453, 637))
         self.horizontalLayout_58 = QHBoxLayout(self.scrollAreaWidgetContents_11)
         self.horizontalLayout_58.setSpacing(10)
         self.horizontalLayout_58.setObjectName(u"horizontalLayout_58")
@@ -7668,7 +7668,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 972, 494))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 394, 90))
         self.scrollAreaWidgetContents.setStyleSheet(u"background-color:rgba(255,255,255,0);")
         self.verticalLayout_53 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_53.setSpacing(0)
@@ -8444,7 +8444,7 @@ class Ui_MainWindow(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 967, 469))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 140, 469))
         self.verticalLayout_72 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_72.setSpacing(0)
         self.verticalLayout_72.setObjectName(u"verticalLayout_72")
@@ -9425,7 +9425,7 @@ class Ui_MainWindow(object):
         self.frame_34 = QFrame(self.frame_25)
         self.frame_34.setObjectName(u"frame_34")
         self.frame_34.setMinimumSize(QSize(60, 0))
-        self.frame_34.setStyleSheet(u"background-image: url(:/time/menu/night.png);\n"
+        self.frame_34.setStyleSheet(u"background-image: url(:/time/night.png);\n"
 "background-repeat:no-repeat;\n"
 "background-position:center;\n"
 "")
@@ -11360,7 +11360,7 @@ class Ui_MainWindow(object):
         self.enter_pass.setPlaceholderText(QCoreApplication.translate("MainWindow", u"   Senha", None))
         self.checkBox.setText(QCoreApplication.translate("MainWindow", u"Lembrar senha", None))
         self.buton_login.setText(QCoreApplication.translate("MainWindow", u"Entrar", None))
-        self.credits.setText(QCoreApplication.translate("MainWindow", u"   Home Application Ver: 1.20", None))
+        self.credits.setText(QCoreApplication.translate("MainWindow", u"   Home Application Ver: 1.21", None))
         self.minimize.setText("")
         self.maxmize.setText("")
         self.exit.setText("")
