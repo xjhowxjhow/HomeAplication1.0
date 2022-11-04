@@ -2800,7 +2800,7 @@ class Charts_Main(Ui_MainWindow):
     def Update_Chart_E_S_GERAL(self):
         ano = self.label_74.text()
         value = home_db_query.Query_Charts._Saidas_Entradas_all(ano)
-        self.chart2.Update_Chart_2(value,)
+        self.chart2.Update_Chart_2(value,'Entradas e Saidas {}'.format(ano))
         return True
     
 
