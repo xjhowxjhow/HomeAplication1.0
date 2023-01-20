@@ -43,7 +43,7 @@ class funcoes_cartao(Ui_MainWindow):
         
         veify = home_db_query.Return_Values_Conditions._return_bank_id(str(id_card))
         if not veify:
-            funcoes_cartao.destroy_frame_card(self,id_card)
+            funcoes_cartao.destroy_frame_card(self)
             return True
         else:
             text = Texts_Erros.deletar_cartao_config()
@@ -591,7 +591,7 @@ class funcoes_cartao(Ui_MainWindow):
         thread = threading.Thread(target=thead())
         thread.start()
 
-    def destroy_frame_card(self,id_card): #NA PAG2 de config, ao remover um card, REMOVE DO DB, E REMOVE FRAME PAG 1 #T
+    def destroy_frame_card(self): #NA PAG2 de config, ao remover um card, REMOVE DO DB, E REMOVE FRAME PAG 1 #T
         def thead(self):
             linha_selecionada = self.table_active_cards.currentRow() 
             if linha_selecionada >=0:
@@ -602,15 +602,27 @@ class funcoes_cartao(Ui_MainWindow):
 
                     self.table_active_cards.removeRow(linha_selecionada)
 
+                    lista_ids_active = []
 
                     a = (os.path.dirname(os.path.realpath(__file__)))
                     banco = sqlite3.connect(''+a+'/bando_de_valores.db')
                     cursor = banco.cursor()
-                    cursor.execute("DELETE FROM card_active   WHERE id = "+str(id_card)+"")
 
-                    card_delet = id_card
-                    print(card_delet)
-                    input()
+                    cursor.execute("SELECT * FROM card_active")
+                    dadoslidos = cursor.fetchall()
+                    inde = 0
+                    for i in  dadoslidos:
+                        lista_ids_active.append(dadoslidos[inde])
+                        inde = inde +1
+                    rowcount = self.table_active_cards.rowCount()
+
+                    a = (os.path.dirname(os.path.realpath(__file__)))
+                    banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+                    cursor = banco.cursor()
+                    cursor.execute("DELETE FROM card_active   WHERE id = "+str(lista_ids_active[linha_selecionada][0])+"")
+
+                    card_delet = lista_ids_active[linha_selecionada][0]
+
                     #PEGAR O ID DA LINHA SELECIONADA AQUI NOVA FUNÇAO
 
                     iddb = 'extrato_cartao_%s'%(card_delet)

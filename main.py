@@ -621,7 +621,6 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
             if obj == self.remover_card_3 and event.type() == QtCore.QEvent.MouseButtonPress:
                 current_row = self.table_active_cards.currentRow()
                 id_bank = self.table_active_cards.item(current_row, 6).text()
-                print(id_bank)
                 #verifica se tem banco vinculado
                 return card_db_fun.funcoes_cartao.delete_card_if_bank_v(self,id_bank)
                 
