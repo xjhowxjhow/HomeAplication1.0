@@ -1,0 +1,2 @@
+VERSION: 1.22
+NOTES:  - Correcao de bugs, Novos Graficos de visualizacao de despesas.
