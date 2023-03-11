@@ -929,6 +929,7 @@ def show_message():
 # Show tray message when action_tray_message tray action is clicked
 #######################################################################
 def show_tray_message(self, tray: QSystemTrayIcon,titulo,mensagem):
+    print("show_tray_message")
     notificationTitle = titulo
     notificationMessage =mensagem
     icon = QIcon(u":/icons-cards/src-page-cartoes/urgencia.png")
