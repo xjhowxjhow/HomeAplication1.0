@@ -10,6 +10,8 @@ import calendar
 
 
 
+
+
 class Ui_db: # valores fixos
     
     def _titular(id):
@@ -824,6 +826,27 @@ class update_values:
         return True
         
     
+    
+    
+class Insert_Values:
+    def insert_despesas_cartao_xlsx(id,mes,ano,valor,descricao):
+        #CONNECT DB
+        a = (os.path.dirname(os.path.realpath(__file__)))
+        banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+        cursor = banco.cursor()
+        
+        #ARGUMENTS:
+        tabela ="extrato_cartao_%s"%(id)
+        colunas = ["data_filter","valor_transacao","descricao_transacao"]
+        valuess = [ano+"-"+mes+"-01",valor,descricao]
+        for i in range(len(colunas)):
+            cursor.execute("INSERT INTO "+str(tabela)+" ("+str(colunas[i])+") VALUES ('"+str(valuess[i])+"')")
+            banco.commit()
+        banco.commit()
+        banco.close()
+        
+        #RETURN:
+        return True
         
 # ['01', '04', '05', '06', '08', '11', '12', '13']
 # id = '284261'

@@ -10,6 +10,7 @@ from card_db_fun import Chart_one
 from datetime import datetime
 from frame_bank.card_frame_bank import CardFrameBank
 from source_ui.shadow import InitShadow ,set_shadow
+
 import card_db_fun
 import home_db_fun
 import  home_db_query
@@ -30,7 +31,7 @@ from home_db_fun import Loading_screen_gif
 WINDOW_SIZE = 0
 TOGLE_STATUS = 80
 CARD_SELECTED = 0
-GLOBAL_VERSION = '1.22'
+GLOBAL_VERSION = '1.23'
 
 
 class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
@@ -78,7 +79,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.table.horizontalHeader().sectionClicked.connect(self.filtro_table_header)
         
         #StlypeSheet veritcal ScrollBar
-     
+        
         #HIDDEN TABELA
         self.table.setColumnHidden(1, True)
         self.table.setColumnHidden(2, True)
@@ -271,6 +272,11 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.previus_month_4.installEventFilter(self)
         #EVENTS APP 
         self.bar_window.installEventFilter(self)
+        
+        #PLANILHAS MODELS
+        self.pushButton_29.installEventFilter(self)
+        self.pushButton_30.installEventFilter(self)
+        self.create_xlsx_file.installEventFilter(self)
 
         
     
@@ -413,7 +419,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                 return 0
 
             if obj == self.pushButton_12 and event.type() == QtCore.QEvent.MouseButtonPress:
-                return effects.efeitos_geral.style_sheet_main_cards(self)
+                return self.stacked_configcartao0.setCurrentWidget(self.options_top_xls)
             
             
             if obj == self.lanca and event.type() == QtCore.QEvent.MouseButtonPress:
@@ -624,9 +630,19 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                 #verifica se tem banco vinculado
                 return card_db_fun.funcoes_cartao.delete_card_if_bank_v(self,id_bank)
                 
-                 
+            # planilhas modulo
+            if obj == self.pushButton_29 and event.type() == QtCore.QEvent.MouseButtonPress:
+                return home_db_fun.Planilhas_Main.Open_and_Read(self)
+            
+            if obj == self.pushButton_30 and event.type() == QtCore.QEvent.MouseButtonPress:
+                return card_db_fun.funcoes_cartao._add_New_Lancamento_xlsx(self)
+            
+            if obj ==self.create_xlsx_file and event.type() == QtCore.QEvent.MouseButtonPress:
+                return home_db_fun.Planilhas_Main.Cria_Model_Xlsx(self)
             
             return super(MainWindow,self).eventFilter(obj, event)
+        
+        
 
 
     def campo_de_verificacao(self):

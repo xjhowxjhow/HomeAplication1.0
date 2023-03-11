@@ -81,3 +81,5 @@ class Texts_Erros:
         return "ATENÇÃO: Não é possivel deletar uma fatura por este meio.\n\nPara deletar uma fatura, vá na Aba Cartoes e delete pelo Extrato"
     def deletar_cartao_config():
         return "ATENÇÃO: Não é possivel deletar um cartão por este meio.\n\nPois o mesmo possui conta bancaria ativa.\n\nPara deletar este cartão vá para: \n Inicio>Contas bancarias no campo alterar"
+    def erro_importa_planilha(expetion):
+        return "ATENÇÃO: Não foi possivel importar a planilha.\n\nVerifique se o arquivo esta no formato .xlsx e se a planilha esta aberta\n\nVerifique se o arquivo contem as coulunas na seguinte ordem \n\n categoria,	transacao,	data,	operacao,	parcela,	valor\n\n Erro: "+str(expetion)

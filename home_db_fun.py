@@ -11,12 +11,12 @@ import card_db_fun
 from threading import Thread
 import calendar
 from frame_bank.card_frame_bank import CardFrameBank
-
 from modules.charts_main import Chart,Chart_1_Dashboard_Main
 import locale
 import emoji
 import home_db_query
 import random
+from modules.import_planilhas import Planilhas
 from frame_bank.card_frame_bank import CardFrameBank
 from source_ui.categories import Category,Payments_Type,Texts_Erros
 from PySide2.QtCore import *
@@ -1912,11 +1912,14 @@ class Alerts(Ui_MainWindow):
         ok_button.setFont(font3)
         
         #LABEL
-        label = QLabel(qdialog)
+        label = QPlainTextEdit(qdialog)
+        # bloqueia a edição do texto
+        label.setReadOnly(True)
         label.setGeometry(10,10,380,130)
         label.setStyleSheet("color: rgb(255, 255, 255); background-color:rgba(255,255,255,0); border:none;")
-        label.setText(text)
-        label.setAlignment(Qt.AlignCenter)
+        # seta o texto
+        label.setPlainText(text)
+        # label.setAlignment(Qt.AlignCenter)
         label.setFont(font3)
         qdialog.exec_()
         return qdialog.result()
@@ -2820,3 +2823,34 @@ class Charts_Main(Ui_MainWindow):
             pass
         return True
             
+            
+            
+            
+class Planilhas_Main(Ui_MainWindow):
+    
+    def Cria_Model_Xlsx(self):
+        # src/xlsxmodel/modelimportcards.xlsx
+        patch_model = os.path.join(os.path.dirname(__file__),'src','xlsxmodel','modelimportcards.xlsx')
+        copy_file = QFileDialog.getSaveFileName(self, 'Salvar Planilha', '','Excel (*.xlsx)')
+        if copy_file[0] != '':
+            shutil.copyfile(patch_model,copy_file[0])
+            Alerts.Alert_all_error(self,'Planilha criada com sucesso')
+           
+        else:
+            Alerts.Alert_all_error(self,'Ocorreu um erro ao criar a planilha')
+        
+        return True
+    
+    def Open_and_Read(self):
+        open_file =  Planilhas.Open_Xlsx(self)
+
+        if open_file == True:
+            
+            # seta os dados da tabela para o banco de dados
+            lines = self.table_view.rowCount()
+            colls = self.table_view.columnCount()
+            Alerts.Alert_all_error(self,'Planilha importada com sucesso\n\n Verifique se nao há nenhum campo vazio\n\n Verifique se a planilha esta no formato correto\n\n Formato Datas: dd/mm/aaaa\n\n Formato Valores: 0,00')
+        
+        else:
+            print("Erro ao abrir planilha")
+            Alerts.Alert_all_error(self,Texts_Erros.erro_importa_planilha(open_file))

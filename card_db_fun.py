@@ -12,6 +12,7 @@ import  home_db_query
 import calendar
 import locale
 import emoji
+import datetime
 from frame_bank.card_frame_bank import CardFrameBank
 from source_ui.categories import Texts_Erros
 from PySide2.QtCore import *
@@ -26,8 +27,7 @@ from time import sleep
 from random import randint
 from login_pyside24 import Ui_MainWindow
 from PySide2.QtCharts import QtCharts
-
-
+from home_db_fun import Alerts
 
 GLOBAL_SELECT_CARD_ADD = 0; 
 NUMERO_DE_CARTOES = NULL;
@@ -35,6 +35,120 @@ CARD_SELECTED = 0;
 EXTRATO_ATUAL = 0; 
 
 
+class Thread_Add_Despesas_Xlsx(QThread):
+    finnish = Signal(str)
+
+    
+    def __init__(self,table,card_id,row, label):
+        super().__init__()
+        self.table = table
+        self.card_id = card_id
+        self.row = row
+        self.label_gif = label
+        
+    def run(self):
+        self.Start_Loading_Text()
+        for i in range(self.row):
+            print('------------------')
+            print('\n')
+            categoria = self.table.item(i, 0).text()
+            transacao = self.table.item(i, 1).text()
+            data = self.table.item(i, 2).text()
+            operacao = self.table.item(i, 3).text()
+            parcela = self.table.item(i, 4).text()
+            valor = self.table.item(i, 5).text()
+            # adiciona no banco de dados
+            # print teste dados 
+            print('dados:')
+            print('\n')
+            print('categoria: '+str(categoria) + ' transacao: '+str(transacao)+' data: '+str(data)+' operacao: '+str(operacao)+' parcela: '+str(parcela)+' valor: '+str(valor))
+            # verifica parcelado 
+            if self.table.item(i, 4).text() == 'Avista':
+                parcela = 1
+                PARCELADO = False
+            else:
+                valor_transacao = self.table.item(i, 5).text()
+                valor = float(valor_transacao.replace(',','.')) / int(self.table.item(i, 4).text())
+                PARCELADO = True
+            print('dados_tratados:')
+            print('\n')
+            print('parcelado: '+str(PARCELADO))
+            print('valor: '+str(valor))
+            rand_id = randint(0, 999999)
+            stats_payment = 'pendente'
+            index_parcelas = 0
+            # # Prepare date
+            data_transacao_original = funcoes_cartao._data_br_to_eng(self, self.table.item(i, 2).text())
+            data_transacao = funcoes_cartao._data_br_to_eng(self, self.table.item(i, 2).text())
+            print('data transacao: '+str(data_transacao))
+            print('data transacao original: '+str(data_transacao_original))
+            fechamento = card_db_test.Ui_db._fechamento(self.card_id)
+            vs_data_transacao = data_transacao_original[8:10]
+            print('fechamento: '+str(fechamento))
+            print('dia_data_transacao: ' +str(vs_data_transacao))
+            proximo_fat = 1
+            parcelado_prox_fatura = False
+            if vs_data_transacao >= fechamento: 
+                proximo_fat = 2
+                parcelado_prox_fatura = True
+            else:
+                proximo_fat = 1
+                parcelado_prox_fatura = False
+            print('proximo_fat: '+str(proximo_fat))
+            print('parcelado_prox_fatura?: '+str(parcelado_prox_fatura))
+            # # Insert data
+            ind= 2
+            for i in range(int(parcela)):
+                soma_data = data_transacao
+                if parcelado_prox_fatura and ind == 2:
+                    proximo_fat = ind
+                    ind -= 1
+                else:
+                    proximo_fat = 1
+                # Calculate the transaction date based on the statement and installment date
+                data_e_hora_em_texto = soma_data
+                format_date = datetime.strptime(data_e_hora_em_texto, '%Y-%m-%d')
+                date = format_date.date()
+                soma_mes = relativedelta(months=+proximo_fat)
+                ab = date + soma_mes
+                data_transacao = str(ab)
+                soma_data = str(ab)
+                print('soma data: '+str(soma_data))
+                print('data transacao: '+str(data_transacao))
+                # Set the payment value and installment type
+                if PARCELADO == False:
+                    valor = valor
+                    qt_parcel = 'Avista'
+                else:
+                    valor = valor_transacao #resultado divido por parcela
+                    index_parcelas += 1
+                    qt_parcel = f"{index_parcelas}/{parcela}"
+                #  Insert data in the database
+                db = 'extrato_cartao_%s'%(self.card_id)
+                a = (os.path.dirname(os.path.realpath(__file__)))
+                banco = sqlite3.connect(''+a+'/bando_de_valores.db')
+                cursor = banco.cursor()
+                cursor.execute("INSERT INTO  "+db+" (categoria_transacao, nome_transacao, data_transacao, operacao, parcelas, valor_transacao, id, data_filter,status_payment) VALUES\
+                    ('"+categoria+"','"+transacao+"','"+data_transacao_original+"','"+operacao+"','"+qt_parcel+"','"+valor+"','"+str(rand_id)+"','"+data_transacao+"','"+stats_payment+"')")
+                banco.commit()
+            print('\n')
+            print('------------------')
+        self.finnish.emit('ok')
+        self.Stop_Loading_gif()
+        
+
+
+    def Start_Loading_Text(self):
+        print('start loading')
+
+        self.label_gif.show()
+    
+    def Stop_Loading_gif(self):
+        # dESTROY GIF
+        print('stop loading')
+        self.label_gif.setText('Importação Concluida')
+        sleep(1)
+        self.label_gif.setParent(None)
 
 class funcoes_cartao(Ui_MainWindow):
     
@@ -185,6 +299,74 @@ class funcoes_cartao(Ui_MainWindow):
         thread = threading.Thread(target=thead)
         thread.start()
 
+    def _add_New_Lancamento_xlsx(self): # MOVER PARA API ISSO AQ DEUS DO CEU
+        id = self.id_card_xlsx_cliked.text()
+        table = self.tableWidget_2
+
+
+        
+        
+        
+        errors = False
+
+        row = table.rowCount()
+        if row == 0:
+            errors = True
+
+        
+        for i in range(row):
+            for j in range(6):
+                if table.item(i, j) is None or table.item(i, j).text() == '':
+                    errors = True
+                    Alerts.Alert_all_error(self,'Preencha todos os campos da linha '+str(i+1))
+                    break
+                elif funcoes_cartao._validador_data(self,table.item(i, 2).text()) == False:
+                    errors = True
+                    print('data invalida')
+                    Alerts.Alert_all_error(self,'Data invalida na linha '+str(i+1))
+                    break
+                elif funcoes_cartao._validador_int(table.item(i, 5).text()) == False:
+                    errors = True
+                    Alerts.Alert_all_error(self,'Valor invalido na linha '+str(i+1))
+                    break
+        
+        if errors ==True:
+            pass
+            return False
+        
+        PARCELADO = False
+
+        if errors ==False:
+            # chama thread para adicionar
+            label_gif_test = QLabel(self)
+            label_gif_test.setGeometry(795,500, 300, 50)
+            label_gif_test.setStyleSheet("background-color: rgb(10, 10, 10); border:1px solid rgba(255,255,255,40); color: rgb(255, 255, 255); border-radius: 10px; font-family: 'Segoe UI'; font-size: 12px;")
+            label_gif_test.setText('Importando Dados Por Favor aguarde...')
+            label_gif_test.setAlignment(Qt.AlignCenter)
+            #center
+            self.thread =  Thread_Add_Despesas_Xlsx(table,id,row,label_gif_test)
+            self.thread.finnish.connect(funcoes_cartao.finish_import_xlsx(self))
+            self.thread.start()
+            
+            
+
+    def finish_import_xlsx(self):
+        # limpa tabela
+
+        
+        self.stacked_configcartao0.setCurrentWidget(self.page_extrato)
+        today = datetime.today().strftime('%m%Y')
+        # home_db_fun.mainpage.load_extrato_filter(self)
+        funcoes_cartao.carrega_extrato_mes(self,str(today))
+        funcoes_cartao._Values_Individual(self)
+        funcoes_cartao.icontable_extrato(self)
+        Main_page_Cards._top_main_values_update(self)
+        Main_page_Cards._middle_main_values_update(self)
+        funcoes_cartao.group_main(self)
+        try:
+            self.grafico_categoria.setParent(None)
+        except:
+            pass
 
     def _addRow(self): #TODO ADICIONA NOVA LINHA NO EXTRATO CARTAO #NTS
         def thead(self):
@@ -290,7 +472,6 @@ class funcoes_cartao(Ui_MainWindow):
                     stats_payment = 'pendente'
                     
                     if PARCELADO == False:
-                        
                         valor = label_3
                         qt_parcel = 'Avista'
                     else:
@@ -298,8 +479,6 @@ class funcoes_cartao(Ui_MainWindow):
                         valor =resultado_float
                         index_parcelas = index_parcelas +1 
                         qt_parcel = str("%s/%s"%(index_parcelas,parcelas))
-                         
-        
                     self.extrato_cartao_0.setItem(rowPosition , 1, QtWidgets.QTableWidgetItem(categoria_transacao))
                     self.extrato_cartao_0.setItem(rowPosition , 2, QtWidgets.QTableWidgetItem(nome_transacao))
                     self.extrato_cartao_0.setItem(rowPosition , 3, QtWidgets.QTableWidgetItem(data_transacao_original)) # data original para ui dia da compra
@@ -312,9 +491,7 @@ class funcoes_cartao(Ui_MainWindow):
                     
                     
                     
-
                     # TODO COPIA DE FUNÇÃO SALVA EXTRATO
-
                     
                     iddb = 'extrato_cartao_%s (id)'%(card)
                     db = 'extrato_cartao_%s'%(card)
@@ -381,6 +558,7 @@ class funcoes_cartao(Ui_MainWindow):
 
     def icontable_extrato(self): # TODO MUDA ICONES QTABLEWIDGET
         def theard():
+                print('icones table')
                 try:                
                     rowPosition = self.extrato_cartao_0.rowCount()
                     #TODO 16 CATEGORIAS
@@ -409,9 +587,10 @@ class funcoes_cartao(Ui_MainWindow):
                                 __qtablewidgetitem7900 = QtWidgets.QTableWidgetItem()
                                 __qtablewidgetitem7900.setIcon(icone)
                                 self.extrato_cartao_0.setItem(row, 0, QtWidgets.QTableWidgetItem(__qtablewidgetitem7900))
-                except:
+
+                except Exception as e:
+                    print(e)
                     pass
-                    
 
         thread = threading.Thread(target=theard)
         thread.start()
@@ -1315,6 +1494,8 @@ class funcoes_cartao(Ui_MainWindow):
                 
                 global EXTRATO_ATUAL
                 EXTRATO_ATUAL = index
+                # IDENTIFICAÇÃO PARA PLANILHAS ID DO CARTAO ESCOLHIDO
+                self.id_card_xlsx_cliked.setText(str(index))
                 execut = lambda:effects.efeitos_geral.expandecomprascartao(self)
                 effects.efeitos_geral.expandecomprascartao(self)
                 mes = datetime.today().strftime('%m%Y')
@@ -2529,7 +2710,7 @@ class Main_page_Cards(Ui_MainWindow):
         
         def thead(self):   
             id = '284261'
-            ano = self.label_2.text()
+            ano = str(datetime.now().year)
             # self.layout = QVBoxLayout(self)
             font3 = QFont()
             font3.setFamily(u"Bahnschrift Light Condensed")

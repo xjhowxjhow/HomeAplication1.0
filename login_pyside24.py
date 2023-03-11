@@ -6684,7 +6684,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 1450, 852))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 96, 415))
         self.scrollAreaWidgetContents_2.setStyleSheet(u"background-color: rgba(255, 255, 255, 0);")
         self.horizontalLayout_15 = QHBoxLayout(self.scrollAreaWidgetContents_2)
         self.horizontalLayout_15.setSpacing(0)
@@ -6709,7 +6709,7 @@ class Ui_MainWindow(object):
         self.scrollArea_4.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 440, 852))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_3 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_3.setSpacing(20)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
@@ -7284,6 +7284,9 @@ class Ui_MainWindow(object):
 "	background-color: rgb(31, 31, 31);\n"
 "\n"
 "}")
+        icon38 = QIcon()
+        icon38.addFile(u":/backgroud/excel.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.pushButton_12.setIcon(icon38)
         self.pushButton_12.setIconSize(QSize(30, 30))
 
         self.horizontalLayout_17.addWidget(self.pushButton_12)
@@ -7668,7 +7671,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 394, 90))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 394, 424))
         self.scrollAreaWidgetContents.setStyleSheet(u"background-color:rgba(255,255,255,0);")
         self.verticalLayout_53 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_53.setSpacing(0)
@@ -7696,7 +7699,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_44.setContentsMargins(0, 0, 0, 0)
         self.stacked_configcartao0 = QStackedWidget(self.frame_32)
         self.stacked_configcartao0.setObjectName(u"stacked_configcartao0")
-        self.stacked_configcartao0.setMinimumSize(QSize(0, 90))
+        self.stacked_configcartao0.setMinimumSize(QSize(0, 0))
         self.stacked_configcartao0.setStyleSheet(u"background-color: rgba(255, 255, 255, 0); \n"
 "")
         self.stacked_configcartao0.setFrameShape(QFrame.StyledPanel)
@@ -9224,6 +9227,272 @@ class Ui_MainWindow(object):
         self.horizontalLayout_24.addWidget(self.tabWidget)
 
         self.stacked_configcartao0.addWidget(self.charts_indvidual)
+        self.page_10 = QWidget()
+        self.page_10.setObjectName(u"page_10")
+        self.verticalLayout_55 = QVBoxLayout(self.page_10)
+        self.verticalLayout_55.setObjectName(u"verticalLayout_55")
+        self.main_frame_xls = QFrame(self.page_10)
+        self.main_frame_xls.setObjectName(u"main_frame_xls")
+        self.main_frame_xls.setFrameShape(QFrame.StyledPanel)
+        self.main_frame_xls.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_130 = QVBoxLayout(self.main_frame_xls)
+        self.verticalLayout_130.setSpacing(0)
+        self.verticalLayout_130.setObjectName(u"verticalLayout_130")
+        self.verticalLayout_130.setContentsMargins(0, 0, 0, 0)
+        self.options_top_xls = QFrame(self.main_frame_xls)
+        self.options_top_xls.setObjectName(u"options_top_xls")
+        self.options_top_xls.setMaximumSize(QSize(16777215, 50))
+        self.options_top_xls.setFrameShape(QFrame.StyledPanel)
+        self.options_top_xls.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_125 = QHBoxLayout(self.options_top_xls)
+        self.horizontalLayout_125.setObjectName(u"horizontalLayout_125")
+        self.label_43 = QLabel(self.options_top_xls)
+        self.label_43.setObjectName(u"label_43")
+
+        self.horizontalLayout_125.addWidget(self.label_43)
+
+        self.horizontalSpacer_43 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_125.addItem(self.horizontalSpacer_43)
+
+        self.id_card_xlsx_cliked = QLabel(self.options_top_xls)
+        self.id_card_xlsx_cliked.setObjectName(u"id_card_xlsx_cliked")
+        self.id_card_xlsx_cliked.setMaximumSize(QSize(0, 0))
+
+        self.horizontalLayout_125.addWidget(self.id_card_xlsx_cliked)
+
+        self.label_51 = QLabel(self.options_top_xls)
+        self.label_51.setObjectName(u"label_51")
+
+        self.horizontalLayout_125.addWidget(self.label_51)
+
+        self.pushButton_29 = QPushButton(self.options_top_xls)
+        self.pushButton_29.setObjectName(u"pushButton_29")
+        self.pushButton_29.setMinimumSize(QSize(150, 30))
+        self.pushButton_29.setFont(font)
+        self.pushButton_29.setCursor(QCursor(Qt.PointingHandCursor))
+        self.pushButton_29.setStyleSheet(u"\n"
+"\n"
+"QPushButton{\n"
+"	\n"
+"\n"
+"	border-radius:10px;\n"
+"	color: rgb(255, 255, 255);\n"
+"\n"
+"\n"
+"	\n"
+"background-color:rgba(255,255,255,10);\n"
+"\n"
+"border: 1px solid rgba(255,255,255,20);\n"
+"border-radius:7px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"	\n"
+"	\n"
+"background-color:rgba(255,255,255,30);\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"	\n"
+"	\n"
+"background-color:rgba(255,255,255,70);\n"
+"\n"
+"}")
+        icon39 = QIcon()
+        icon39.addFile(u":/custom-icons/customs-icons/cil-folder-open.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.pushButton_29.setIcon(icon39)
+
+        self.horizontalLayout_125.addWidget(self.pushButton_29)
+
+
+        self.verticalLayout_130.addWidget(self.options_top_xls)
+
+        self.frame_table_xls = QFrame(self.main_frame_xls)
+        self.frame_table_xls.setObjectName(u"frame_table_xls")
+        self.frame_table_xls.setFrameShape(QFrame.StyledPanel)
+        self.frame_table_xls.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_126 = QHBoxLayout(self.frame_table_xls)
+        self.horizontalLayout_126.setObjectName(u"horizontalLayout_126")
+        self.tableWidget_2 = QTableWidget(self.frame_table_xls)
+        if (self.tableWidget_2.columnCount() < 6):
+            self.tableWidget_2.setColumnCount(6)
+        __qtablewidgetitem38 = QTableWidgetItem()
+        self.tableWidget_2.setHorizontalHeaderItem(0, __qtablewidgetitem38)
+        __qtablewidgetitem39 = QTableWidgetItem()
+        self.tableWidget_2.setHorizontalHeaderItem(1, __qtablewidgetitem39)
+        __qtablewidgetitem40 = QTableWidgetItem()
+        self.tableWidget_2.setHorizontalHeaderItem(2, __qtablewidgetitem40)
+        __qtablewidgetitem41 = QTableWidgetItem()
+        self.tableWidget_2.setHorizontalHeaderItem(3, __qtablewidgetitem41)
+        __qtablewidgetitem42 = QTableWidgetItem()
+        self.tableWidget_2.setHorizontalHeaderItem(4, __qtablewidgetitem42)
+        __qtablewidgetitem43 = QTableWidgetItem()
+        self.tableWidget_2.setHorizontalHeaderItem(5, __qtablewidgetitem43)
+        self.tableWidget_2.setObjectName(u"tableWidget_2")
+        self.tableWidget_2.setStyleSheet(u"QWidget {\n"
+"	\n"
+"    color: #fffff8;\n"
+"	border-radius:0px;\n"
+"\n"
+"\n"
+"\n"
+"}\n"
+"\n"
+"QHeaderView::section {\n"
+"    background-color: rgb(53, 53, 53);\n"
+"    font-size: 11;\n"
+"	border:none;\n"
+"	width:45px;\n"
+"	height: 50px;\n"
+"\n"
+"	border-radius:0px;\n"
+"\n"
+"\n"
+"}\n"
+"\n"
+"QTableWidget {\n"
+"    gridline-color: #fffff8;\n"
+"    font-size: 11pt;\n"
+"	border-radius:0px;\n"
+"	border-radius:0px;\n"
+"\n"
+"\n"
+"\n"
+"}\n"
+"\n"
+"QTableWidget QTableCornerButton::section {\n"
+"    background-color: #646464;\n"
+"	border-radius:0px;\n"
+"\n"
+"\n"
+"}\n"
+"\n"
+"QTableView:item {\n"
+"  border-bottom: 0.5px solid qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 0), stop:0.45677 rgba(0, 0, 0, 0), stop:0.479846 rgba(255, 255, 255, 255), stop:0.50571 rgba(239, 236, 55, 0), stop:1 rgba(239, 236, 55, 0));\n"
+"	border-radius:0px;\n"
+"\n"
+"}\n"
+"\n"
+"QTableView::item:selected{\n"
+"	\n"
+"	background-color: rgb(92, 155, 179);\n"
+"	color: rgb(255, 255, 255);\n"
+"\n"
+"}\n"
+"")
+        self.tableWidget_2.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tableWidget_2.setShowGrid(False)
+        self.tableWidget_2.setSortingEnabled(True)
+        self.tableWidget_2.setWordWrap(True)
+        self.tableWidget_2.setCornerButtonEnabled(True)
+        self.tableWidget_2.horizontalHeader().setCascadingSectionResizes(False)
+        self.tableWidget_2.horizontalHeader().setProperty("showSortIndicator", True)
+        self.tableWidget_2.horizontalHeader().setStretchLastSection(True)
+        self.tableWidget_2.verticalHeader().setVisible(False)
+
+        self.horizontalLayout_126.addWidget(self.tableWidget_2)
+
+
+        self.verticalLayout_130.addWidget(self.frame_table_xls)
+
+        self.botton_options_xls = QFrame(self.main_frame_xls)
+        self.botton_options_xls.setObjectName(u"botton_options_xls")
+        self.botton_options_xls.setMinimumSize(QSize(0, 70))
+        self.botton_options_xls.setMaximumSize(QSize(16777215, 70))
+        self.botton_options_xls.setFrameShape(QFrame.StyledPanel)
+        self.botton_options_xls.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_127 = QHBoxLayout(self.botton_options_xls)
+        self.horizontalLayout_127.setObjectName(u"horizontalLayout_127")
+        self.horizontalSpacer_44 = QSpacerItem(621, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_127.addItem(self.horizontalSpacer_44)
+
+        self.pushButton_31 = QPushButton(self.botton_options_xls)
+        self.pushButton_31.setObjectName(u"pushButton_31")
+        self.pushButton_31.setMinimumSize(QSize(150, 30))
+        self.pushButton_31.setFont(font)
+        self.pushButton_31.setCursor(QCursor(Qt.PointingHandCursor))
+        self.pushButton_31.setStyleSheet(u"\n"
+"\n"
+"QPushButton{\n"
+"	\n"
+"\n"
+"	border-radius:10px;\n"
+"	color: rgb(255, 255, 255);\n"
+"\n"
+"\n"
+"	\n"
+"background-color:rgba(255,255,255,10);\n"
+"\n"
+"border: 1px solid rgba(255,255,255,20);\n"
+"border-radius:7px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"	\n"
+"	\n"
+"background-color:rgba(255,255,255,30);\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"	\n"
+"	\n"
+"background-color:rgba(255,255,255,70);\n"
+"\n"
+"}")
+        icon40 = QIcon()
+        icon40.addFile(u":/custom-icons/customs-icons/cil-action-undo.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.pushButton_31.setIcon(icon40)
+
+        self.horizontalLayout_127.addWidget(self.pushButton_31)
+
+        self.pushButton_30 = QPushButton(self.botton_options_xls)
+        self.pushButton_30.setObjectName(u"pushButton_30")
+        self.pushButton_30.setMinimumSize(QSize(150, 30))
+        self.pushButton_30.setFont(font)
+        self.pushButton_30.setCursor(QCursor(Qt.PointingHandCursor))
+        self.pushButton_30.setStyleSheet(u"\n"
+"\n"
+"QPushButton{\n"
+"	\n"
+"\n"
+"	border-radius:10px;\n"
+"	color: rgb(255, 255, 255);\n"
+"\n"
+"\n"
+"	\n"
+"background-color:rgba(255,255,255,10);\n"
+"\n"
+"border: 1px solid rgba(255,255,255,20);\n"
+"border-radius:7px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"	\n"
+"	\n"
+"background-color:rgba(255,255,255,30);\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"	\n"
+"	\n"
+"background-color:rgba(255,255,255,70);\n"
+"\n"
+"}")
+        icon41 = QIcon()
+        icon41.addFile(u":/custom-icons/customs-icons/cil-vertical-align-bottom.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.pushButton_30.setIcon(icon41)
+
+        self.horizontalLayout_127.addWidget(self.pushButton_30)
+
+
+        self.verticalLayout_130.addWidget(self.botton_options_xls)
+
+
+        self.verticalLayout_55.addWidget(self.main_frame_xls)
+
+        self.stacked_configcartao0.addWidget(self.page_10)
 
         self.verticalLayout_44.addWidget(self.stacked_configcartao0)
 
@@ -9258,7 +9527,7 @@ class Ui_MainWindow(object):
         self.scrollArea_8.setWidgetResizable(True)
         self.scrollAreaWidgetContents_8 = QWidget()
         self.scrollAreaWidgetContents_8.setObjectName(u"scrollAreaWidgetContents_8")
-        self.scrollAreaWidgetContents_8.setGeometry(QRect(0, 0, 987, 875))
+        self.scrollAreaWidgetContents_8.setGeometry(QRect(0, 0, 454, 875))
         self.scrollAreaWidgetContents_8.setStyleSheet(u"background-color:rgba(255,255,255,0);")
         self.verticalLayout_14 = QVBoxLayout(self.scrollAreaWidgetContents_8)
         self.verticalLayout_14.setSpacing(10)
@@ -9772,18 +10041,18 @@ class Ui_MainWindow(object):
         self.table_faturas_ind_3 = QTableWidget(self.datalhed_fatura_mother_4)
         if (self.table_faturas_ind_3.columnCount() < 4):
             self.table_faturas_ind_3.setColumnCount(4)
-        __qtablewidgetitem38 = QTableWidgetItem()
-        __qtablewidgetitem38.setTextAlignment(Qt.AlignCenter);
-        self.table_faturas_ind_3.setHorizontalHeaderItem(0, __qtablewidgetitem38)
-        __qtablewidgetitem39 = QTableWidgetItem()
-        __qtablewidgetitem39.setTextAlignment(Qt.AlignCenter);
-        self.table_faturas_ind_3.setHorizontalHeaderItem(1, __qtablewidgetitem39)
-        __qtablewidgetitem40 = QTableWidgetItem()
-        __qtablewidgetitem40.setTextAlignment(Qt.AlignCenter);
-        self.table_faturas_ind_3.setHorizontalHeaderItem(2, __qtablewidgetitem40)
-        __qtablewidgetitem41 = QTableWidgetItem()
-        __qtablewidgetitem41.setTextAlignment(Qt.AlignCenter);
-        self.table_faturas_ind_3.setHorizontalHeaderItem(3, __qtablewidgetitem41)
+        __qtablewidgetitem44 = QTableWidgetItem()
+        __qtablewidgetitem44.setTextAlignment(Qt.AlignCenter);
+        self.table_faturas_ind_3.setHorizontalHeaderItem(0, __qtablewidgetitem44)
+        __qtablewidgetitem45 = QTableWidgetItem()
+        __qtablewidgetitem45.setTextAlignment(Qt.AlignCenter);
+        self.table_faturas_ind_3.setHorizontalHeaderItem(1, __qtablewidgetitem45)
+        __qtablewidgetitem46 = QTableWidgetItem()
+        __qtablewidgetitem46.setTextAlignment(Qt.AlignCenter);
+        self.table_faturas_ind_3.setHorizontalHeaderItem(2, __qtablewidgetitem46)
+        __qtablewidgetitem47 = QTableWidgetItem()
+        __qtablewidgetitem47.setTextAlignment(Qt.AlignCenter);
+        self.table_faturas_ind_3.setHorizontalHeaderItem(3, __qtablewidgetitem47)
         self.table_faturas_ind_3.setObjectName(u"table_faturas_ind_3")
         self.table_faturas_ind_3.setFont(font9)
         self.table_faturas_ind_3.setStyleSheet(u"QWidget {\n"
@@ -10148,9 +10417,9 @@ class Ui_MainWindow(object):
 "	color: rgb(255, 255, 255);\n"
 "\n"
 "}")
-        icon38 = QIcon()
-        icon38.addFile(u":/menu/menu/edit.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.pushButton_21.setIcon(icon38)
+        icon42 = QIcon()
+        icon42.addFile(u":/menu/menu/edit.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.pushButton_21.setIcon(icon42)
         self.pushButton_21.setIconSize(QSize(20, 30))
 
         self.horizontalLayout_32.addWidget(self.pushButton_21)
@@ -10217,7 +10486,7 @@ class Ui_MainWindow(object):
 "	color: rgb(255, 255, 255);\n"
 "\n"
 "}")
-        self.pushButton_22.setIcon(icon38)
+        self.pushButton_22.setIcon(icon42)
         self.pushButton_22.setIconSize(QSize(20, 30))
 
         self.horizontalLayout_45.addWidget(self.pushButton_22)
@@ -10452,7 +10721,7 @@ class Ui_MainWindow(object):
         self.scrollArea_5.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 1450, 852))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 520, 318))
         self.horizontalLayout_20 = QHBoxLayout(self.scrollAreaWidgetContents_5)
         self.horizontalLayout_20.setSpacing(10)
         self.horizontalLayout_20.setObjectName(u"horizontalLayout_20")
@@ -10474,20 +10743,20 @@ class Ui_MainWindow(object):
         self.table_active_cards = QTableWidget(self.frame_9)
         if (self.table_active_cards.columnCount() < 7):
             self.table_active_cards.setColumnCount(7)
-        __qtablewidgetitem42 = QTableWidgetItem()
-        self.table_active_cards.setHorizontalHeaderItem(0, __qtablewidgetitem42)
-        __qtablewidgetitem43 = QTableWidgetItem()
-        self.table_active_cards.setHorizontalHeaderItem(1, __qtablewidgetitem43)
-        __qtablewidgetitem44 = QTableWidgetItem()
-        self.table_active_cards.setHorizontalHeaderItem(2, __qtablewidgetitem44)
-        __qtablewidgetitem45 = QTableWidgetItem()
-        self.table_active_cards.setHorizontalHeaderItem(3, __qtablewidgetitem45)
-        __qtablewidgetitem46 = QTableWidgetItem()
-        self.table_active_cards.setHorizontalHeaderItem(4, __qtablewidgetitem46)
-        __qtablewidgetitem47 = QTableWidgetItem()
-        self.table_active_cards.setHorizontalHeaderItem(5, __qtablewidgetitem47)
         __qtablewidgetitem48 = QTableWidgetItem()
-        self.table_active_cards.setHorizontalHeaderItem(6, __qtablewidgetitem48)
+        self.table_active_cards.setHorizontalHeaderItem(0, __qtablewidgetitem48)
+        __qtablewidgetitem49 = QTableWidgetItem()
+        self.table_active_cards.setHorizontalHeaderItem(1, __qtablewidgetitem49)
+        __qtablewidgetitem50 = QTableWidgetItem()
+        self.table_active_cards.setHorizontalHeaderItem(2, __qtablewidgetitem50)
+        __qtablewidgetitem51 = QTableWidgetItem()
+        self.table_active_cards.setHorizontalHeaderItem(3, __qtablewidgetitem51)
+        __qtablewidgetitem52 = QTableWidgetItem()
+        self.table_active_cards.setHorizontalHeaderItem(4, __qtablewidgetitem52)
+        __qtablewidgetitem53 = QTableWidgetItem()
+        self.table_active_cards.setHorizontalHeaderItem(5, __qtablewidgetitem53)
+        __qtablewidgetitem54 = QTableWidgetItem()
+        self.table_active_cards.setHorizontalHeaderItem(6, __qtablewidgetitem54)
         self.table_active_cards.setObjectName(u"table_active_cards")
         self.table_active_cards.setMinimumSize(QSize(0, 0))
         self.table_active_cards.setMaximumSize(QSize(16777215, 16777215))
@@ -11113,6 +11382,98 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_117.addWidget(self.frame_103)
 
+        self.frame_108 = QFrame(self.page_6)
+        self.frame_108.setObjectName(u"frame_108")
+        self.frame_108.setGeometry(QRect(30, 450, 451, 161))
+        self.frame_108.setStyleSheet(u"background-color:rgba(255,255,255,30);")
+        self.frame_108.setFrameShape(QFrame.StyledPanel)
+        self.frame_108.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_137 = QVBoxLayout(self.frame_108)
+        self.verticalLayout_137.setSpacing(10)
+        self.verticalLayout_137.setObjectName(u"verticalLayout_137")
+        self.label_113 = QLabel(self.frame_108)
+        self.label_113.setObjectName(u"label_113")
+        self.label_113.setMaximumSize(QSize(16777215, 40))
+
+        self.verticalLayout_137.addWidget(self.label_113)
+
+        self.frame_109 = QFrame(self.frame_108)
+        self.frame_109.setObjectName(u"frame_109")
+        self.frame_109.setStyleSheet(u"background-color:rgba(255,255,255,0);")
+        self.frame_109.setFrameShape(QFrame.StyledPanel)
+        self.frame_109.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_138 = QVBoxLayout(self.frame_109)
+        self.verticalLayout_138.setSpacing(0)
+        self.verticalLayout_138.setObjectName(u"verticalLayout_138")
+        self.verticalLayout_138.setContentsMargins(0, 0, 0, 0)
+        self.frame_110 = QFrame(self.frame_109)
+        self.frame_110.setObjectName(u"frame_110")
+        self.frame_110.setFrameShape(QFrame.StyledPanel)
+        self.frame_110.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_72 = QHBoxLayout(self.frame_110)
+        self.horizontalLayout_72.setObjectName(u"horizontalLayout_72")
+        self.options_top_xls_2 = QFrame(self.frame_110)
+        self.options_top_xls_2.setObjectName(u"options_top_xls_2")
+        self.options_top_xls_2.setMaximumSize(QSize(16777215, 50))
+        self.options_top_xls_2.setFrameShape(QFrame.StyledPanel)
+        self.options_top_xls_2.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_128 = QHBoxLayout(self.options_top_xls_2)
+        self.horizontalLayout_128.setObjectName(u"horizontalLayout_128")
+        self.label_52 = QLabel(self.options_top_xls_2)
+        self.label_52.setObjectName(u"label_52")
+
+        self.horizontalLayout_128.addWidget(self.label_52)
+
+        self.horizontalSpacer_45 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_128.addItem(self.horizontalSpacer_45)
+
+        self.create_xlsx_file = QPushButton(self.options_top_xls_2)
+        self.create_xlsx_file.setObjectName(u"create_xlsx_file")
+        self.create_xlsx_file.setMinimumSize(QSize(150, 30))
+        self.create_xlsx_file.setFont(font)
+        self.create_xlsx_file.setCursor(QCursor(Qt.PointingHandCursor))
+        self.create_xlsx_file.setStyleSheet(u"\n"
+"\n"
+"QPushButton{\n"
+"	\n"
+"\n"
+"	border-radius:10px;\n"
+"	color: rgb(255, 255, 255);\n"
+"\n"
+"\n"
+"	\n"
+"background-color:rgba(255,255,255,10);\n"
+"\n"
+"border: 1px solid rgba(255,255,255,20);\n"
+"border-radius:7px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"	\n"
+"	\n"
+"background-color:rgba(255,255,255,30);\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"	\n"
+"	\n"
+"background-color:rgba(255,255,255,70);\n"
+"\n"
+"}")
+        self.create_xlsx_file.setIcon(icon39)
+
+        self.horizontalLayout_128.addWidget(self.create_xlsx_file)
+
+
+        self.horizontalLayout_72.addWidget(self.options_top_xls_2)
+
+
+        self.verticalLayout_138.addWidget(self.frame_110)
+
+
+        self.verticalLayout_137.addWidget(self.frame_109)
+
         self.stackedWidget_2.addWidget(self.page_6)
         self.page_7 = QWidget()
         self.page_7.setObjectName(u"page_7")
@@ -11169,9 +11530,9 @@ class Ui_MainWindow(object):
         self.pushButton_4.setObjectName(u"pushButton_4")
         self.pushButton_4.setFont(font)
         self.pushButton_4.setStyleSheet(u"color: rgb(255, 255, 255);")
-        icon39 = QIcon()
-        icon39.addFile(u":/menu/devs.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.pushButton_4.setIcon(icon39)
+        icon43 = QIcon()
+        icon43.addFile(u":/menu/devs.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.pushButton_4.setIcon(icon43)
         self.pushButton_4.setIconSize(QSize(40, 40))
 
         self.verticalLayout_58.addWidget(self.pushButton_4)
@@ -11179,9 +11540,9 @@ class Ui_MainWindow(object):
         self.pushButton_5 = QPushButton(self.frame_23)
         self.pushButton_5.setObjectName(u"pushButton_5")
         self.pushButton_5.setStyleSheet(u"color: rgb(255, 255, 255);")
-        icon40 = QIcon()
-        icon40.addFile(u":/menu/academy.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.pushButton_5.setIcon(icon40)
+        icon44 = QIcon()
+        icon44.addFile(u":/menu/academy.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.pushButton_5.setIcon(icon44)
         self.pushButton_5.setIconSize(QSize(40, 40))
 
         self.verticalLayout_58.addWidget(self.pushButton_5)
@@ -11215,9 +11576,9 @@ class Ui_MainWindow(object):
 "	background-color: rgb(121, 121, 121);\n"
 "	border: 2px solid  rgb(55, 55, 55);\n"
 "}")
-        icon41 = QIcon()
-        icon41.addFile(u":/menu/git.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.pushButton_6.setIcon(icon41)
+        icon45 = QIcon()
+        icon45.addFile(u":/menu/git.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.pushButton_6.setIcon(icon45)
         self.pushButton_6.setIconSize(QSize(40, 40))
 
         self.verticalLayout_58.addWidget(self.pushButton_6)
@@ -11338,9 +11699,9 @@ class Ui_MainWindow(object):
         self.stacked_configcartao0.setCurrentIndex(0)
         self.stack_extrato_pages.setCurrentIndex(0)
         self.pushButton_17.setDefault(False)
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(0)
         self.chart_gastos_all.setCurrentIndex(0)
-        self.stackedWidget_25.setCurrentIndex(0)
+        self.stackedWidget_25.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -11360,7 +11721,7 @@ class Ui_MainWindow(object):
         self.enter_pass.setPlaceholderText(QCoreApplication.translate("MainWindow", u"   Senha", None))
         self.checkBox.setText(QCoreApplication.translate("MainWindow", u"Lembrar senha", None))
         self.buton_login.setText(QCoreApplication.translate("MainWindow", u"Entrar", None))
-        self.credits.setText(QCoreApplication.translate("MainWindow", u"   Home Application Ver: 1.21", None))
+        self.credits.setText(QCoreApplication.translate("MainWindow", u"   Home Application Ver: 1.23", None))
         self.minimize.setText("")
         self.maxmize.setText("")
         self.exit.setText("")
@@ -11605,7 +11966,7 @@ class Ui_MainWindow(object):
         self.nova_despesa.setText(QCoreApplication.translate("MainWindow", u"   Nova Despesa", None))
         self.pushButton_14.setText(QCoreApplication.translate("MainWindow", u"   DashBoard", None))
         self.faturas.setText(QCoreApplication.translate("MainWindow", u"   Faturas", None))
-        self.pushButton_12.setText(QCoreApplication.translate("MainWindow", u"function", None))
+        self.pushButton_12.setText(QCoreApplication.translate("MainWindow", u"   Importar XLSX", None))
         self.line_d.setInputMask("")
         self.line_d.setText("")
         self.line_d.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Dia", None))
@@ -11739,6 +12100,24 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_7), QCoreApplication.translate("MainWindow", u"Grafico de gastos neste cart\u00e3o por Categoria", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_8), QCoreApplication.translate("MainWindow", u"Evolu\u00e7\u00e3o de faturas", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_9), QCoreApplication.translate("MainWindow", u"Grafico de gastos neste cart\u00e3o por Data", None))
+        self.label_43.setText(QCoreApplication.translate("MainWindow", u"Abrir Planilha", None))
+        self.id_card_xlsx_cliked.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.label_51.setText("")
+        self.pushButton_29.setText(QCoreApplication.translate("MainWindow", u" Open", None))
+        ___qtablewidgetitem38 = self.tableWidget_2.horizontalHeaderItem(0)
+        ___qtablewidgetitem38.setText(QCoreApplication.translate("MainWindow", u"Categoria", None));
+        ___qtablewidgetitem39 = self.tableWidget_2.horizontalHeaderItem(1)
+        ___qtablewidgetitem39.setText(QCoreApplication.translate("MainWindow", u"Transacao", None));
+        ___qtablewidgetitem40 = self.tableWidget_2.horizontalHeaderItem(2)
+        ___qtablewidgetitem40.setText(QCoreApplication.translate("MainWindow", u"Data", None));
+        ___qtablewidgetitem41 = self.tableWidget_2.horizontalHeaderItem(3)
+        ___qtablewidgetitem41.setText(QCoreApplication.translate("MainWindow", u"Operacao", None));
+        ___qtablewidgetitem42 = self.tableWidget_2.horizontalHeaderItem(4)
+        ___qtablewidgetitem42.setText(QCoreApplication.translate("MainWindow", u"Parcela", None));
+        ___qtablewidgetitem43 = self.tableWidget_2.horizontalHeaderItem(5)
+        ___qtablewidgetitem43.setText(QCoreApplication.translate("MainWindow", u"Valor", None));
+        self.pushButton_31.setText(QCoreApplication.translate("MainWindow", u" Limpar", None))
+        self.pushButton_30.setText(QCoreApplication.translate("MainWindow", u"  Importar", None))
         self.hide_cards_main.setText("")
         self.show_cards_main.setText("")
         self.pushButton_20.setText("")
@@ -11754,14 +12133,14 @@ class Ui_MainWindow(object):
         self.label_54.setText("")
         self.label_55.setText(QCoreApplication.translate("MainWindow", u"Vencimento", None))
         self.label_56.setText("")
-        ___qtablewidgetitem38 = self.table_faturas_ind_3.horizontalHeaderItem(0)
-        ___qtablewidgetitem38.setText(QCoreApplication.translate("MainWindow", u"Cartao", None));
-        ___qtablewidgetitem39 = self.table_faturas_ind_3.horizontalHeaderItem(1)
-        ___qtablewidgetitem39.setText(QCoreApplication.translate("MainWindow", u"Situa\u00e7\u00e3o da fatura", None));
-        ___qtablewidgetitem40 = self.table_faturas_ind_3.horizontalHeaderItem(2)
-        ___qtablewidgetitem40.setText(QCoreApplication.translate("MainWindow", u"Valor da fatura", None));
-        ___qtablewidgetitem41 = self.table_faturas_ind_3.horizontalHeaderItem(3)
-        ___qtablewidgetitem41.setText(QCoreApplication.translate("MainWindow", u"Ir para", None));
+        ___qtablewidgetitem44 = self.table_faturas_ind_3.horizontalHeaderItem(0)
+        ___qtablewidgetitem44.setText(QCoreApplication.translate("MainWindow", u"Cartao", None));
+        ___qtablewidgetitem45 = self.table_faturas_ind_3.horizontalHeaderItem(1)
+        ___qtablewidgetitem45.setText(QCoreApplication.translate("MainWindow", u"Situa\u00e7\u00e3o da fatura", None));
+        ___qtablewidgetitem46 = self.table_faturas_ind_3.horizontalHeaderItem(2)
+        ___qtablewidgetitem46.setText(QCoreApplication.translate("MainWindow", u"Valor da fatura", None));
+        ___qtablewidgetitem47 = self.table_faturas_ind_3.horizontalHeaderItem(3)
+        ___qtablewidgetitem47.setText(QCoreApplication.translate("MainWindow", u"Ir para", None));
         self.chart_gastos_all.setTabText(self.chart_gastos_all.indexOf(self.tab_14), QCoreApplication.translate("MainWindow", u"Evolu\u00e7\u00e3o de faturas", None))
         self.chart_gastos_all.setTabText(self.chart_gastos_all.indexOf(self.tab_15), QCoreApplication.translate("MainWindow", u"Maiores gastos", None))
         self.label_40.setText(QCoreApplication.translate("MainWindow", u"Fun\u00e7\u00e3o em desenvolvimento", None))
@@ -11783,20 +12162,20 @@ class Ui_MainWindow(object):
         self.label_21.setText(QCoreApplication.translate("MainWindow", u"total", None))
         self.chart_gastos_all.setTabText(self.chart_gastos_all.indexOf(self.tab_13), QCoreApplication.translate("MainWindow", u"Limite de Gastos", None))
         self.chart_gastos_all.setTabText(self.chart_gastos_all.indexOf(self.tab), QCoreApplication.translate("MainWindow", u"Alertas", None))
-        ___qtablewidgetitem42 = self.table_active_cards.horizontalHeaderItem(0)
-        ___qtablewidgetitem42.setText(QCoreApplication.translate("MainWindow", u"Cartao", None));
-        ___qtablewidgetitem43 = self.table_active_cards.horizontalHeaderItem(1)
-        ___qtablewidgetitem43.setText(QCoreApplication.translate("MainWindow", u"Titular", None));
-        ___qtablewidgetitem44 = self.table_active_cards.horizontalHeaderItem(2)
-        ___qtablewidgetitem44.setText(QCoreApplication.translate("MainWindow", u"Limite", None));
-        ___qtablewidgetitem45 = self.table_active_cards.horizontalHeaderItem(3)
-        ___qtablewidgetitem45.setText(QCoreApplication.translate("MainWindow", u"Final do cartao", None));
-        ___qtablewidgetitem46 = self.table_active_cards.horizontalHeaderItem(4)
-        ___qtablewidgetitem46.setText(QCoreApplication.translate("MainWindow", u"Vencimento", None));
-        ___qtablewidgetitem47 = self.table_active_cards.horizontalHeaderItem(5)
-        ___qtablewidgetitem47.setText(QCoreApplication.translate("MainWindow", u"Fechamento", None));
-        ___qtablewidgetitem48 = self.table_active_cards.horizontalHeaderItem(6)
-        ___qtablewidgetitem48.setText(QCoreApplication.translate("MainWindow", u"id", None));
+        ___qtablewidgetitem48 = self.table_active_cards.horizontalHeaderItem(0)
+        ___qtablewidgetitem48.setText(QCoreApplication.translate("MainWindow", u"Cartao", None));
+        ___qtablewidgetitem49 = self.table_active_cards.horizontalHeaderItem(1)
+        ___qtablewidgetitem49.setText(QCoreApplication.translate("MainWindow", u"Titular", None));
+        ___qtablewidgetitem50 = self.table_active_cards.horizontalHeaderItem(2)
+        ___qtablewidgetitem50.setText(QCoreApplication.translate("MainWindow", u"Limite", None));
+        ___qtablewidgetitem51 = self.table_active_cards.horizontalHeaderItem(3)
+        ___qtablewidgetitem51.setText(QCoreApplication.translate("MainWindow", u"Final do cartao", None));
+        ___qtablewidgetitem52 = self.table_active_cards.horizontalHeaderItem(4)
+        ___qtablewidgetitem52.setText(QCoreApplication.translate("MainWindow", u"Vencimento", None));
+        ___qtablewidgetitem53 = self.table_active_cards.horizontalHeaderItem(5)
+        ___qtablewidgetitem53.setText(QCoreApplication.translate("MainWindow", u"Fechamento", None));
+        ___qtablewidgetitem54 = self.table_active_cards.horizontalHeaderItem(6)
+        ___qtablewidgetitem54.setText(QCoreApplication.translate("MainWindow", u"id", None));
         self.label_112.setText(QCoreApplication.translate("MainWindow", u"Sele\u00e7\u00e3o de Banco", None))
         self.select_card.setItemText(0, QCoreApplication.translate("MainWindow", u"C6", None))
         self.select_card.setItemText(1, QCoreApplication.translate("MainWindow", u"NUBANK", None))
@@ -11829,6 +12208,9 @@ class Ui_MainWindow(object):
         self.label_110.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt; color:#ffffff;\">Efeitos de Sombras</span></p><p align=\"center\"><span style=\" font-size:12pt; color:#ffffff;\">(Dependendo do Hardware, pode causar lentid\u00e3o necess\u00e1rio reiniciar! )</span></p></body></html>", None))
         self.shadow_true.setText(QCoreApplication.translate("MainWindow", u"Sim", None))
         self.shadow_false.setText(QCoreApplication.translate("MainWindow", u"Nao", None))
+        self.label_113.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" color:#ffffff;\">Criar Modelo de Importa\u00e7\u00e3o de planilhas (Cartao)</span></p></body></html>", None))
+        self.label_52.setText(QCoreApplication.translate("MainWindow", u"Clique para Criar", None))
+        self.create_xlsx_file.setText(QCoreApplication.translate("MainWindow", u"Salvar", None))
         self.pushButton_4.setText(QCoreApplication.translate("MainWindow", u"Desenvolvido por Jhonatan Deni", None))
         self.pushButton_5.setText(QCoreApplication.translate("MainWindow", u"Estudante de Analise e desenvolvimento de Sistemas", None))
         self.pushButton_6.setText(QCoreApplication.translate("MainWindow", u"GitHub", None))
