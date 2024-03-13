@@ -49,22 +49,22 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         
         
 
-        # SOMBRAS PARA FRAMES
+        # SHADOWS FOR FRAMES
         set_shadow.sets(self)
  
 
         
-        #NOTIFICAÇÃO SE CLICADA ACTION
+        # NOTIFICATION IF CLICKED ACTION
         tray.messageClicked.connect(lambda: messageClicked(self))
         action_hide.triggered.connect(lambda: self.hide())
         action_show.triggered.connect(lambda: self.showNormal())
         
-        #FONTE DA TABELA MENU
+        # MENU TABLE SOURCE
         self.font = QFont()
         self.font.setFamily(u"Bahnschrift Light Condensed")
         self.font.setPointSize(14)
         
-        #CONFIGURANDO A TABELA
+        # SETTING UP THE TABLE
         self.table = self.tableWidget
         self.table.verticalHeader().setVisible(False)
         self.table.setSelectionBehavior(QAbstractItemView.SelectRows)
@@ -80,34 +80,34 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         
         #StlypeSheet veritcal ScrollBar
         
-        #HIDDEN TABELA
+        # HIDDEN TABLE
         self.table.setColumnHidden(1, True)
         self.table.setColumnHidden(2, True)
         self.table.setColumnHidden(11, True)
         
         self.table.setColumnHidden(4, True)
-        #TAMANHO DAS COLUNAS
-        #CHECK
+        # COLUMNS SIZE
+        # CHECK
         self.table.setColumnWidth(0, 25)
-        #COLUNA ICONE
+        # ICON COLUMN
         self.table.setColumnWidth(3, 60)
-        #COLUNA DATA
+        # DATE COLUMN
         self.table.setColumnWidth(5, 100)
-        #COLUNA PRIORIDADE
+        # PRIORITY COLUMN
         self.table.setColumnWidth(6, 150)
-        #COLUNA CATEGORIA
+        # CATEGORY COLUMN
         self.table.setColumnWidth(7, 170)
-        #COLUNA PAGAMENTO:
+        # PAYMENT COLUMN
         self.table.setColumnWidth(8, 150)
-        #COLUNA VALOR
+        # VALUE COLUMN
         self.table.setColumnWidth(9, 300)
-        #COLUNA SATUS
+        # STATUS COLUMN
         self.table.setColumnWidth(10, 80)
-        #COLUNA CATEGORIA TABELA CARTAO 
+        # COLUMN CATEGORY TABLE CARD 
         self.extrato_cartao_0.setColumnWidth(1, 150)
         
         
-        #CONFIGURANDO CONTA SE TIVER CARDAO DE CREDITO
+        # SETTING UP YOUR ACCOUNT IF YOU HAVE A CREDIT CARD
         self.comboBox_24.currentIndexChanged.connect(lambda:home_db_fun.mainpage._event_change_stakecard(self))
         self.comboBox_25.currentIndexChanged.connect(lambda:home_db_fun.mainpage._categorias_entra_said(self))
         self.comboBox_22.currentIndexChanged.connect(lambda:home_db_fun.Combobox_startup.show_programar_date(self))
@@ -115,9 +115,9 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.comboBox_23.currentIndexChanged.connect(lambda:home_db_fun.Combobox_startup.show_recorrencia_options(self))
         self.comboBox_26.currentIndexChanged.connect(lambda:home_db_fun.Combobox_startup.show_set_dia_recorrencia(self))
         
-        #PDF VIWER:
+        # PDF VIEWER:
         self.listWidget_2.itemDoubleClicked.connect(lambda:home_db_fun.mainpage.open_pdf(self))
-        #OCULTOS AS COLUNAS E BOTOES TABELA MENU
+        # HIDDEN COLUMNS AND MENU TABLE BUTTONS
         
         
         self.frame_if_card_main.hide()
@@ -146,21 +146,21 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         self.nova_despesa.clicked.connect(lambda:self.stacked_configcartao0.setCurrentWidget(self.page_new_lancamento))
         effects.Effetc_slides.menu_card(self)
         
-        #OCULTA COLUNA ID DE EXTRATO CARTAO
-        self.extrato_cartao_0.setColumnHidden(7, True) # COLUNA ID OCULTADA
-        self.extrato_cartao_0.setColumnHidden(8, True) # SOMA DATA PARA FILTRO OCULTADA
-        self.extrato_cartao_0.setColumnHidden(9, True) # STATUS DO PAGAMENTO PARA FILTRO OCULTADA
-        self.table_faturas_ind_3.setColumnHidden(3, True) # COLUNA ID OCULTADA
-        self.table_active_cards.setColumnHidden(6, True) # COLUNA ID OCULTADA
+        # HIDE CARD STATEMENT ID COLUMN
+        self.extrato_cartao_0.setColumnHidden(7, True) # HIDDEN ID COLUMN
+        self.extrato_cartao_0.setColumnHidden(8, True) # SUM DATE FOR HIDDEN FILTER
+        self.extrato_cartao_0.setColumnHidden(9, True) # PAYMENT STATUS FOR HIDDEN FILTER
+        self.table_faturas_ind_3.setColumnHidden(3, True) # HIDDEN ID COLUMN
+        self.table_active_cards.setColumnHidden(6, True) # HIDDEN ID COLUMN
         
         
-        #TABLE DE BANCOS ATIVOS OCULTA
+        #TABLE OF HIDDEN ACTIVE BANKS
         
-        self.table_active_banks.setColumnHidden(0, True) # COLUNA ID OCULTADA
-        self.table_active_banks.setColumnHidden(1, True) # COLUNA SALDO INICIAL
-        self.table_active_banks.setColumnHidden(6, True) # COLUNA  ID CREDIT CARD
+        self.table_active_banks.setColumnHidden(0, True) # HIDDEN ID COLUMN
+        self.table_active_banks.setColumnHidden(1, True) # OPENING BALANCE COLUMN
+        self.table_active_banks.setColumnHidden(6, True) # ID CREDIT CARD COLUMN
         
-        #selecação do linha interia
+        #entire row selection
         self.table_active_banks.setSelectionBehavior(QAbstractItemView.SelectRows)
         
         self.table_faturas_ind_3.horizontalHeader().setVisible(True)
@@ -212,7 +212,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         
         
         card_db_fun.Main_page_Cards._itemlist_metas(self)
-        #FILTRO DE EVENTOS#
+        #EVENT FILTER#
         
         self.pushButton_8.installEventFilter(self)
         self.pushButton_9.installEventFilter(self)
@@ -273,7 +273,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         #EVENTS APP 
         self.bar_window.installEventFilter(self)
         
-        #PLANILHAS MODELS
+        #SPREADSHEET TEMPLATES
         self.pushButton_29.installEventFilter(self)
         self.pushButton_30.installEventFilter(self)
         self.create_xlsx_file.installEventFilter(self)
@@ -313,7 +313,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                 effects.Enable_Slide._slide(self,self.staked_bottom_main)
                 effects.Enable_Slide._slide(self,self.extrat_meses_2)
                 return home_db_fun.Charts_Main.Update_Chart_E_S_GERAL(self)
-            #btn dashboard main volta para o main
+            #btn dashboard main goes back to main
             if obj == self.hide_cards_main_3 and event.type() == QtCore.QEvent.MouseButtonRelease:
                 self.extrat_meses_2.setCurrentWidget(self.page_11)
                 return self.staked_bottom_main.setCurrentWidget(self.main_dash_bottom_2Page1)
@@ -356,7 +356,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
             
             if obj == self.pushButton_3 and event.type() == QtCore.QEvent.MouseButtonPress:
                 
-                #TODO VOLTA  FILTRO NEXT E PREV MESES
+                #TODO RETURN FILTER NEXT AND PREV MONTHS
                 self.extrat_meses.setCurrentWidget(self.page_2)
                 self.stack_extrato_pages.setCurrentWidget(self.extrato_cards_dbs)
                 mes = card_db_fun.funcoes_cartao._mes2(self)
@@ -365,11 +365,11 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                 return card_db_fun.funcoes_cartao.carrega_extrato_mes(self,mes)
 
             if obj == self.pushButton_2 and event.type() == QtCore.QEvent.MouseButtonPress:
-                #TODO FILTRA COMPRA
+                #TODO PURCHASE FILTER
                 return card_db_fun.funcoes_cartao._search_compras(self)
 
             if obj == self.compras and event.type() == QtCore.QEvent.MouseButtonPress:
-                #TODO  COMPRAS MENU DIREITO
+                #TODO  SHOPPING RIGHT MENU
                 card_db_fun.funcoes_cartao._return_mes_string(self)
                 card_db_fun.funcoes_cartao._current_date(self,"none")
                 self.extrat_meses.setCurrentWidget(self.page_2)
@@ -378,13 +378,13 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
 
 
             if obj == self.faturas and event.type() == QtCore.QEvent.MouseButtonPress:
-                #TODO  COMPRAS MENU DIREITO
+                #TODO  SHOPPING RIGHT MENU
                 self.extrat_meses.setCurrentWidget(self.page_8)
                 return self.stacked_configcartao0.setCurrentWidget(self.page_Faturas)
             
 
             if obj == self.next_month_3 and event.type() == QtCore.QEvent.MouseButtonPress:
-                #TODO  COMPRAS MENU DIREITO
+                #TODO  SHOPPING RIGHT MENU
                 objects = self.page_8
 
                 acao = "Next"
@@ -395,16 +395,16 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
 
 
             if obj == self.previus_month_3 and event.type() == QtCore.QEvent.MouseButtonPress:
-                #TODO  COMPRAS MENU DIREITO
+                #TODO  SHOPPING RIGHT MENU
                 objects = self.page_8
-                acao = "Previus"
+                acao = "Previous"
                 effects.Effetc_slides.grid_filter(self,acao,objects)
-                card_db_fun.funcoes_cartao._filter_year_faturas(self,"Previus")
+                card_db_fun.funcoes_cartao._filter_year_faturas(self,"Previous")
                 return card_db_fun.funcoes_cartao._faturas(self)
             
             
             if obj == self.paga_fatura and event.type() == QtCore.QEvent.MouseButtonPress:
-                #TODO  COMPRAS MENU DIREITO
+                #TODO  SHOPPING RIGHT MENU
                 card_db_fun.funcoes_cartao._pagar_fatura(self)
                 card_db_fun.funcoes_cartao._faturas(self)
                 card_db_fun.funcoes_cartao._current_date(self,"none")
@@ -413,7 +413,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                 return card_db_fun.funcoes_cartao._Values_Individual(self)
             
             if obj == self.filter_dates_btn and event.type() == QtCore.QEvent.MouseButtonPress:
-                #TODO  COMPRAS MENU DIREITO
+                #TODO  SHOPPING RIGHT MENU
                 self.extrat_meses.setCurrentWidget(self.extrat_mesesPage1)
                 self.extrat_meses.setStyleSheet("border-radius:7px; background-color: rgba(0, 0, 0,0); ")
                 return 0
@@ -446,7 +446,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                 return self.detalhes_cartao.setCurrentWidget(self.detalhes_cartaoPage1)
             
             
-            #todo Animation cards grid
+            #TODO Animation cards grid
             if obj == self.hide_cards_main and event.type() == QtCore.QEvent.MouseButtonPress:
                 return effects.Effetc_slides._hide_group_cards(self)
             if obj == self.hide_cards_det and event.type() == QtCore.QEvent.MouseButtonPress:
@@ -497,11 +497,11 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
     
                     id = self.table.item(current_row, 1).text()
                     id_bank = self.table.item(current_row, 2).text()
-                    #SE FOR ENTRADA MUDA TEXTO BOTAO PAGAMENTO
+                    #IF ENTRY CHANGE TEXT PAYMENT BUTTON
                     home_db_fun.Descricao_lancamento.Change_text_btn_pagar_receber(self,id)
-                    #CHAMA QUERY PARA PEGAR A DESCRCAO DO LANÇAMENTO
+                    #CALL QUERY TO GET THE RELEASE DESCRIPTION
                     validador = home_db_fun.Descricao_lancamento.set_descricao_lancamento(self,id)
-                    #SET TEXT DETALHES DO LANÇAMENTO:
+                    #SET TEXT RELEASE DETAILS:
                     
                     
                     self.frame_options_pdf.hide()
@@ -530,7 +530,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                 
                 return home_db_fun.mainpage._new_lancamento(self)
             
-            # TODO EXTRATO MENU PRINCIPAL
+            # TODO EXTRACT MAIN MENU
             
             
             if obj == self.previus_month_2 and event.type() == QtCore.QEvent.MouseButtonPress:
@@ -557,7 +557,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                     return home_db_fun.Pagamento._receber_lancamento(self)
                  
             if obj == self.download_pdf_2 and event.type() == QtCore.QEvent.MouseButtonPress:                
-                    #SELECIONAR PDF PAR ASALVAR NO LANCAMENTO
+                    #SELECT PDF TO SAVE AT LAUNCH
                 return home_db_fun.Pdf_funtion.open_pdf(self)
             
             
@@ -576,17 +576,17 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                 effects.Effetc_slides._add_banks_credits(self)
                 return self.stackedWidgetadc_2.setCurrentWidget(self.page_config_creduts)
             
-            #DETALHES LANCAMENTO:
+            #LAUNCH DETAILS:
             if obj == self.parcela_fatura_3 and event.type() == QtCore.QEvent.MouseButtonPress:
                 effects.Effetc_slides._detalhes_lancamento_slide(self)
                 return self.stackedWidget_58.setCurrentWidget(self.stackedWidget_detalhes_lancamento)
             
-            #VOLTA MENU DETALHJES LANCAMENTOI:
+            #BACK MENU LAUNCH DETAILS:
             if obj == self.paga_fatura_4 and event.type() == QtCore.QEvent.MouseButtonPress:
                 effects.Effetc_slides._detalhes_lancamento_slide(self)
                 return self.stackedWidget_58.setCurrentWidget(self.stackedWidget_resumo_extrato)
             
-            #SE APERTAR DELETE APAGA O O ITEM SELECIONADO DO PDFS PARA LANÇAMENTOS
+            #PRESSING DELETE DELETES THE SELECTED ITEM FROM THE PDF FOR RELEASES
             if obj == self.listWidget_3 and event.type() == QtCore.QEvent.KeyPress:
                 if event.key() == QtCore.Qt.Key_Delete:
                     return self.listWidget_3.takeItem(self.listWidget_3.currentRow()) 
@@ -614,7 +614,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                     
                 return home_db_fun.Table_Banks_Remove_Update._remove_table_banks(self,id_bank,id_card)
             
-            if obj == self.apaga_compra_3 and event.type() == QtCore.QEvent.MouseButtonPress: #TODO APAGA LANCAMENTO
+            if obj == self.apaga_compra_3 and event.type() == QtCore.QEvent.MouseButtonPress: #TODO DELETE LAUNCH
                 current_row = self.table.currentRow()
                 id = self.table.item(current_row, 1).text()
                 id_bank = self.table.item(current_row, 2).text()
@@ -627,10 +627,10 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
             if obj == self.remover_card_3 and event.type() == QtCore.QEvent.MouseButtonPress:
                 current_row = self.table_active_cards.currentRow()
                 id_bank = self.table_active_cards.item(current_row, 6).text()
-                #verifica se tem banco vinculado
+                #check if you have a linked bank
                 return card_db_fun.funcoes_cartao.delete_card_if_bank_v(self,id_bank)
                 
-            # planilhas modulo
+            # module spreadsheets
             if obj == self.pushButton_29 and event.type() == QtCore.QEvent.MouseButtonPress:
                 return home_db_fun.Planilhas_Main.Open_and_Read(self)
             
@@ -654,17 +654,17 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
             self.pop_error.show()
             self.texto_error.setText(mensagem)
 
-        #TODO CHECA USUARIO AINDA FAZER CONEXAO COM DB
+        #TODO CHECK USER STILL MAKE CONNECTION TO DB
         if not self.enter_user.text():
             usuario = "Usuario nao encontrato"
         else:
             usuario = ""
-        #TODO CHECA SENHA 
+        #TODO CHECK PASSWORD
         if not self.enter_pass.text():
             senha = " Senha nao encontrada"
         else:
             senha = ""
-        # checar usuario
+        # check user
 
         if usuario + senha != '':
             text = usuario + senha
@@ -711,12 +711,12 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
             text = text + "  Usuario salvo"
             Aparecer_menssagem(text)
 
-    #TODO APOS CHECK LOGIN, ABRE A MAIN:
+    #TODO AFTER CHECK LOGIN, OPEN THE MAIN:
     def shows(self):
         self.stackedWidget.setCurrentIndex(1)
         self.stacked_configcartao0.setCurrentIndex(0)
         
-    #TODO SE CLICAR EM DESLOGAR
+    #TODO IF YOU CLICK ON LOGOUT
     def desloga(self):
         self.stackedWidget.setCurrentIndex(0)
         self.texto_error.setText("Sistema Deslogado, Até Mais!")
@@ -724,7 +724,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
 
 
     def filtro_table_header(self, logicalIndex):
-        #FUNCAO TEMPORARIO AQUI DPS PARA HOME DB FUN
+        #TEMPORARY FUNCTION HERE DPS FOR HOME DB FUN
         icon4 = QIcon()
         
         if logicalIndex >1:
@@ -766,14 +766,14 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
         cp = QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
         self.move(qr.topLeft())
-    #TODO TESTE ANIMCAÇÃO MENU EXPANDIDO
+    #TODO ANIMATION TEST EXPANDED MENU
     def toggleMenu(self):
         global TOGLE_STATUS
         STATUS = TOGLE_STATUS
         duration = 500 
         if STATUS == 80:
                 
-                #TODO ANIMAÇÃO EXPANDINDO
+                #TODO EXPANDING ANIMATION
                 self.animation = QPropertyAnimation(self.menu, b"minimumWidth")
                 self.animation.setDuration(duration)
                 self.animation.setStartValue(80)
@@ -784,7 +784,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
                 TOGLE_STATUS = 150
 
 
-        else:  #TODO ANIMAÇÃO RETRAINDO maximumHeight
+        else:  #TODO ANIMATION RETRACTING maximumHeight
                 self.animation = QPropertyAnimation(self.menu, b"minimumWidth")
                 self.animation.setDuration(duration)
                 self.animation.setStartValue(250)
@@ -830,7 +830,7 @@ class MainWindow(Ui_MainWindow,QtWidgets.QMainWindow):
     def mousePressEvent(self, event):
         self.offset = event.pos()
 
-    #MOVE JANELA
+    #MOVE WINDOW
     def mouseMoveEvent(self, event):
         try:
             if WINDOW_SIZE == 0:
@@ -887,7 +887,7 @@ def messageClicked(self):
         show_message()
 
 #######################################################################
-# SO VAI APARECER SE TIVER ATUALIZAÇÃO
+# IT WILL ONLY APPEAR IF THERE IS AN UPDATE
 #######################################################################
 def show_message():
     resposta = requests.get('https://raw.githubusercontent.com/xjhowxjhow/HomeAplication1.0/main/version/version.txt')
